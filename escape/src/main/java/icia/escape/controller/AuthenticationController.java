@@ -3,6 +3,7 @@ package icia.escape.controller;
 import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -12,48 +13,90 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-
+import icia.escape.authentication.AddMember;
 import icia.escape.authentication.Login;
 import icia.escape.beans.Members;
 import icia.escape.beans.Stores;
+import icia.escape.beans.UploadFiles;
 
-@Controller
+@RestController
 public class AuthenticationController {
 	
 	@Autowired
 	Login log;
+	@Autowired
+	AddMember am;
 	
 	private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 	
-	
+	/*메인페이지 이동*/
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView accessform() {
-		return log.backController(0);
+		return log.memberController("0");
 	}
 	
+	/*새로운 페이지 이동*/
 	@PostMapping("/GetNewPage")
 	public ModelAndView getNewPage(@ModelAttribute Members mem) {
-		System.out.println("야야야");
-		return log.backController(1, mem);
+		return log.memberController("1", mem);
 	}
 	
+	/*사용자 로그인*/
 	@PostMapping("/LogInMember")
 	public ModelAndView logInMember(@ModelAttribute Members mem) {
-		
-		return log.backController(2, mem);
+		return log.memberController("M1", mem);
 	}
+	
+	/*업체 로그인*/
 	@PostMapping("/LogInStore")
 	public ModelAndView logInStore(@ModelAttribute Stores sr) {
-		return log.backController1(1, sr);
+		return log.storeController("S1", sr);
 	}
-//	@RequestMapping(value = "/Access", method = RequestMethod.POST)
+	
+	/*사용자 로그아웃*/
+	@PostMapping("/LogOutMember")
+	public ModelAndView logOutMember(@ModelAttribute Members mem) {
+		return log.memberController("M2", mem);
+	}
+	
+	/*업체 로그아웃*/
+	@PostMapping("/LogOutStore")
+	public ModelAndView logOutStore(@ModelAttribute Stores sr) {
+		return log.storeController("S2", sr);
+	}
+	
+	/*사용자 회원가입 :아이디 중복 체크*/
+	@PostMapping(value= "/CheckMemberId",  produces="application/json; charset=UTF-8")
+	public  String checkMemberId(Model model, @RequestBody List<Members> mem) {
+		am.backController("M3",model.addAttribute("memberId", mem.get(0)));
+		return model.getAttribute("msg").toString();
+	}
+	/*사용자 회원가입 : 회원 정보 저장*/
+	@PostMapping(value="/MemberSignUp" , produces="application/json; charset=UTF-8")
+	public  ModelAndView memberSignUp(Model model, @RequestBody List<Members> mem) {
+		return am.backController("M4",model.addAttribute("memberData", mem.get(0)));
+	}
+	/*업체 회원가입 :아이디 중복 체크*/
+	@PostMapping(value= "/CheckStoreId",  produces="application/json; charset=UTF-8")
+	public  String checkStoreId(Model model, @RequestBody List<Stores> sr) {
+		am.backController("S3",model.addAttribute("storeId", sr.get(0)));
+		return model.getAttribute("msg").toString();
+	}
+	/*업체 회원가입 : 회원 정보 저장*/
+	@PostMapping(value="/StoreSignUp", produces="application/json; charset=UTF-8")
+	public ModelAndView storeSignUp(Model model, @RequestBody List<Stores> sr) {
+		return am.backController("S4",model.addAttribute("storeData", sr.get(0)));
+	}
+	
+	//	@RequestMapping(value = "/Access", method = RequestMethod.POST)
 //	public ModelAndView access(@ModelAttribute Employee emp) {
 //		return auth.BackController(2, emp);
 //	}

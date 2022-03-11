@@ -9,15 +9,14 @@ public class Stores {
 	String srId;
 	String srPassword;
 	String srName;
-	String srClassification;
-	String srBussinessCode;
-	String srPostCode;
-	String srAddress;
-	String srContents;
+	String srPost;
+	String srDetails;
 	String srImage;
-	String srPhone;
+	String srNumber;
 	String srEmail;
-	String stCode;
+	String srCfCode;
 	String publicIp;
+	String stCode;
+	String srAddress;
     
 }

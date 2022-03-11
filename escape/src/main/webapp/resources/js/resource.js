@@ -1,6 +1,8 @@
 
+ 
+
 /* 로그인/회원가입 페이지 이동 */
-function getLogInPage(pageName){
+function getNewPage(pageName){
  const form = makeForm("","GetNewPage","Post");
  const page = makeInputElement("hidden", "pageName", pageName, "");
  form.appendChild(page);
@@ -9,7 +11,7 @@ function getLogInPage(pageName){
 
 }
 
-/*사용자 로그인하기*/
+/*사용자 로그인 form 생성*/
 function logInMember() {
 	const form = document.getElementsByName("logInForm")[0];
 	
@@ -32,6 +34,7 @@ function logInMember() {
 	form.submit();
 }
 
+/*업체 로그인 form 생성*/ 
 function logInStore() {
 	const form = document.getElementsByName("logInForm")[0];
 	
@@ -54,13 +57,44 @@ function logInStore() {
 	form.submit();
 }
 
+/*사용자 로그아웃*/
+function logOutMember(pMmId,pPublicIp,pMmCode){
+	const form = makeForm("", "LogOutMember", "post");
+	const publicIp = makeInputElement("hidden", "publicIp", pPublicIp, "");
+	const mmId = makeInputElement("hidden", "mmId", pMmId, "");
+	const mmCode = makeInputElement("hidden", "mmCode", pMmCode, "");
+	form.appendChild(publicIp);
+	form.appendChild(mmId);
+	form.appendChild(mmCode);
+	document.body.appendChild(form);
+	form.submit();
+	
+	
+}
+/* 업체 로그아웃*/
+function logOutStore(pSrId,pPublicIp,pSrCode){
+	const form = makeForm("", "LogOutStore", "post");
+	const publicIp = makeInputElement("hidden", "publicIp", pPublicIp, "");
+	const srId = makeInputElement("hidden", "srId", pSrId, "");
+	const srCode = makeInputElement("hidden", "srCode", pSrCode, "");
+	form.appendChild(publicIp);
+	form.appendChild(srId);
+	form.appendChild(srCode);
+	document.body.appendChild(form);
+	form.submit();
+}  
+
 let publicIp;
 
-function initPage() {
+function getPublic() {
 	/* publicIp 조회 후 저장 */
-	getAjaxJson("http://api.ipify.org", "format=json", "getPublicIp", "GET")
+	getAjaxJson("https://api.ipify.org","format=json","getPublicIp", "GET");
 }
 
+function initPage(msg) {
+	if(msg != ""){alert(msg);}
+	
+}
 function getPublicIp(pIp) {
 	publicIp = pIp.ip;
 }
@@ -97,7 +131,7 @@ function init(objName) {
 		}
 	}
 	
-	/*JsonData 가져오기*/
+/*JsonData 가져오기*/
 function getAjaxJson(action, clientData, fn, method) {
    let ajax = new XMLHttpRequest();
    ajax.onreadystatechange = function() {
