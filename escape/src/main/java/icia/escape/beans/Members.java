@@ -12,7 +12,7 @@ public class Members {
     String mmName;
     String mmPostCode;
     String mmAddress;
-    String mmPhone;
+    String mmNumber;
     String publicIp;
     String pageName;
     String stCode;
