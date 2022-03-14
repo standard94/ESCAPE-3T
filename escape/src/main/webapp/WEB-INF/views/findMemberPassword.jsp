@@ -7,7 +7,7 @@
 <title>회원가입초기페이지</title>
 </head>
 <script src="resources/js/resource.js"></script>
-<script src="resources/js/SignUp.js"></script>
+<script src="resources/js/signUp.js"></script>
 
 <style>
 @font-face {
@@ -149,7 +149,7 @@ button {
 	width: 3%;
 	height: 4%;
 	position: absolute;
-	right: 17%;
+	right: 28%;
 	top: 25%;
 }
 
@@ -164,7 +164,7 @@ button {
 	width: 3%;
 	height: 4%;
 	position: absolute;
-	right: 15%;
+	right: 26%;
 	top: 25%;
 }
 
@@ -172,11 +172,34 @@ button {
 	width: 6%;
 	height: 4%;
 	position: absolute;
-	right: 10.5%;
+	right: 22%;
 	top: 25%;
 }
 
 .login2-1 {
+	font-family: TmonMonsori;
+	font-size: 140%;
+	color: #CBCBCB;
+	cursor: pointer;
+}
+
+#arrow2 {
+	width: 3%;
+	height: 4%;
+	position: absolute;
+	right: 20%;
+	top: 25%;
+}
+
+#find {
+	width: 10%;
+	height: 4%;
+	position: absolute;
+	right: 11.5%;
+	top: 25%;
+}
+
+.find {
 	font-family: TmonMonsori;
 	font-size: 140%;
 	color: #000000;
@@ -194,12 +217,12 @@ button {
 	height: 86.9%;
 }
 
-#membertype {
+#inputId {
 	width: 10%;
 	height: 2%;
 	position: absolute;
 	left: 26.25%;
-	top: 33%;
+	top: 37%;
 	box-shadow: 3px 3px 10px #566270;
 	background-color: #292929;
 	color: #ebedec;
@@ -208,32 +231,75 @@ button {
 	
 }
 
-.membertype{
-	font-family: TmonMonsori;
-	font-size: 110%;
+#inputEmail {
+	width: 10%;
+	height: 2%;
+	position: absolute;
+	left: 26.25%;
+	top: 44%;
+	box-shadow: 3px 3px 10px #566270;
+	background-color: #292929;
 	color: #ebedec;
-	margin: 5%;
+	padding: 1%;
 	text-align:center;
 }
 
-#type {
-	width: 35%;
+#modalEmail {
+	float:left;
+	width: 10%;
+	height: 5%;
+	left: 26.25%;
+	top: 12%;
+	background-color: #292929;
+	color: #ebedec;
+	padding: 1%;
+	text-align:center;
+	margin : 0% 0% 0% 12%;
+}
+
+#modalMent {
+	width: 100%;
 	height: 2%;
+	left: 26.25%;
+	top: 1%;
+	color: #292929;
+	text-align:center;
+	font-size : 30pt;
+	margin : 0% 0% 10% 0%;
+}
+
+#typeId {
+	width: 35%;
+	height: 1.6%;
 	position: absolute;
 	left: 38.25%;
-	top: 33%;
+	top: 37%;
 	box-shadow: 3px 3px 10px #566270;
-	background-color: #ebedec;
 	color: #292929;
 	padding: 1%;
 	text-align:left;
 }
 
-.type {
-	font-family: TmonMonsori;
-	font-size: 110%;
+#typeEmail {
+	width: 35%;
+	height: 1.6%;
+	position: absolute;
+	left: 38.25%;
+	top: 44%;
+	box-shadow: 3px 3px 10px #566270;
 	color: #292929;
-	margin: 5%;
+	padding: 1%;
+	text-align:left;
+}
+
+#typeModEmail {
+	float:left;
+	width: 60%;
+	height: 4.4%;
+	left: 38.25%;
+	top: 12%;
+	color: #292929;
+	padding: 1%;
 	text-align:left;
 }
 
@@ -248,46 +314,6 @@ button {
 	font-weight: bold;
 }
 
-#addmember_insidebox {
-	position: absolute;
-	top: 53%;
-	left: 8%;
-	width: 80%;
-	height: 30%;
-}
-
-#addmemberbox {
-	font-family: 'Pretendard-Regular';
-	width: 57.2%;
-	height: 40%;
-	padding: 2%;
-	text-align: left;
-	margin: 1% 0% 1% 25%;
-	background-color: #ebedec;
-	position: ablsolute;
-	top: 20%;
-	left: 5%;
-	color: #292929;
-	border : 1px solid #292929;
-}
-
-#addmemberbox1{
-	font-family: 'Pretendard-Regular';
-	padding: 5%;
-	text-align: center;
-}
-
-#key{
-	width:3%;
-	height:3%;
-}
-
-#addmemberline{
-	border-bottom: 2px solid #292929;
-	padding : 1% 0% 0% 0%;
-}
-
-
 #loginpage_btn {
 	font-family: 'Pretendard-Regular';
 	box-shadow: 3px 3px 10px #566270;
@@ -296,13 +322,40 @@ button {
 	text-align: center;
 	background-color: #292929;
 	position:absolute;
-	bottom : 16%;
+	bottom : 40%;
 	left: 46.5%;
 	color: #ebedec;
 	cursor: pointer;  
 	padding : 1% 0% 0% 0%;
 }
 
+#sendMail {
+	font-family: 'Pretendard-Regular';
+	box-shadow: 3px 3px 10px #566270;
+	width: 8%;
+	height: 6%;
+	text-align: center;
+	background-color: #292929;
+	position:absolute;
+	bottom : 60%;
+	left: 40%;
+	color: #ebedec;
+	cursor: pointer;  
+}
+
+#modal_close_btn {
+	font-family: 'Pretendard-Regular';
+	box-shadow: 3px 3px 10px #566270;
+	width: 8%;
+	height: 6%;
+	text-align: center;
+	background-color: #292929;
+	position:absolute;
+	bottom : 60%;
+	left: 50%;
+	color: #ebedec;
+	cursor: pointer;  
+}
 
 
 #bottom {
@@ -315,7 +368,24 @@ button {
 	position:absolute; left:0.2%;
 }
 </style>
-<body onLoad="init('${objName}'),initPage('${msg}')">
+<style>
+        #modal {
+          display: none;
+          position:relative;
+          width:100%;
+          height:100%;
+          z-index:1;
+        }
+        
+        #modal .modal_content {
+          width:1000px;
+          height:300px;
+          margin:10px auto;
+          padding:60px 10px;
+          background:#fff;
+        }   
+</style> 
+<body onLoad="init('${objName}')">
 	<form name="logInForm" action="LogInMember" method="post">
 		<div id="basic">
 			<div id="top">
@@ -332,30 +402,31 @@ button {
 			
 			<div id="mid1">
 				<div id="line1"></div>
-				<div id="login2"><span class="login2">회원가입 (SIGNUP)</span></div>
+				<div id="login2"><span class="login2">비밀번호찾기 (Find Password)</span></div>
 				<div id="home"><span class="home" onClick="">홈</span></div>
 				<div id="arrow"><span class="home">></span></div>
-				<div id="login2-1"><span class="login2-1">회원가입</span></div>
+				<div id="login2-1"><span class="login2-1">로그인</span></div>
+				<div id="arrow2"><span class="home">></span></div>
+				<div id="find"><span class="find">비밀번호찾기</span></div>
 				<div id="line2"></div>
+				<div id="modal">
+   					<div class="modal_content">
+        				<div id="modalMent">가입하신 이메일로 비밀번호 변경 메일이 전송됩니다.</div>
+        				<div id="modalEmail"><span class="modalEmail">이메일</span></div>
+					<input id="typeModEmail" readOnly/><br><br><br>
+        				<button type="button" id="sendMail" onClick="sendMemberEmail('typeId','typeEmail')">메일 보내기</button>
+        				<button type="button" id="modal_close_btn">취소</button>
+       			</div>
+       			</div>
 					
+					<div id="inputId"><span class="inputId">아이디</span></div>
+					<input id="typeId" />
+					<div id="inputEmail"><span class="inputEmail">이메일</span></div>
+					<input id="typeEmail"/>
 					
-					<div id="membertype"><span class="membertype">회원유형</span></div>
-					<div id="type"><span class="type">업체</span></div>
-					
-					<div id="login_type">
-						<div id="addmemberbox">
-						<div class="login_type1" onClick="getNewPage('memberLogIn')">
-						<img id="key" src='resources/images/key.png'/><span>&nbsp;&nbsp;회원가입완료</span>
-						<div id = "addmemberline"></div>
-						<div id = "addmemberbox1"><span id = "addmemberbox1">업체 유형 회원가입이 완료되었습니다.<br>앞으로 여기가 좋을 지도의 많은 서비스를 이용해 주시기 바랍니다.<br><br>
-						여기가 좋을 지도 아이디 :</span><span id="storeId">${storeInfo.srId}</span>
-						
-						</div>
-						</div>
-						</div>
-					</div>
-						<div id="loginpage_btn" onClick="getNewPage('storeLogIn')">로그인하기</div>
+						<div id="loginpage_btn" onClick="checkEmail('typeEmail')">보내기</div>
 				</div>
+			
 			
 			
 			<div id="bottom">
@@ -365,5 +436,13 @@ button {
 			</div>
 		</div>
 	</form>
+	
+	<script>
+    
+   
+    document.getElementById("modal_close_btn").onclick = function() {
+        document.getElementById("modal").style.display="none";
+    }   
+</script>
 </body>
 </html>

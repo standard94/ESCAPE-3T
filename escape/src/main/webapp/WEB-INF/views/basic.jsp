@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/topBottom.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/medium.css" />
 
-<body onLoad = "getPublic()">
+<body onLoad = "getPublic(),initPage('${msg}')">
 	
 		
 		<div id="basic">
@@ -23,9 +23,9 @@
 		 			<div id="notice"><span class="top_menu" onClick="">공지사항</span></div>
 		 			<div id="shop"><span class="top_menu" onClick="">장바구니</span></div>
 				</div>
-				<img id="list" src='resources/images/list.png'/>
+				<img id="list" onClick="openModal(this)" src='resources/images/list.png'/>
 			</div>
-		
+		   
 			<div id="mid">
 				<div id="line1"></div>
 				<div id="box2">
@@ -61,6 +61,16 @@
 				<div id="nate2"><span class="nate">사업자 등록번호: 123-81-21968｜통신판매업신고: 연수 1655호｜개인정보 보호책임자 : NATE</span></div>
 				<div id="nate3"><span class="nate">문의 : handaeng1220@gmail.com</span></div>
 				<div id="nate4"><span class="nate">㈜CHILDNATE의 사전 서면동의 없이 여기 좋을 지도 사이트(PC, 모바일, 앱)의 일체의 정보, 콘텐츠 및 UI 등을 상업적 목적으로 전재, 전송, 스크래핑 등 무단 사용할 수 없습니다.</span></div>
+			</div>
+			
+			<div class="container" id="container">
+			<div id="fishingBox"></div>
+			
+			<div id="campingBox"></div>
+			
+			<div id="myPageBox"></div>
+			
+			<div id="csCenterBox"></div>
 			</div>
 		</div>
 	
