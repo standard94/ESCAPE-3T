@@ -7,7 +7,7 @@
 <title>로그인페이지</title>
 </head>
 <script src="resources/js/resource.js"></script>
-<script src="resources/js/logIn.js"></script>
+<script src="resources/js/signUp.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/css/logInDisplay.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/topBottom.css" />
 
@@ -19,7 +19,7 @@
 </script>
 
 <body onLoad = "getPublic()">
-<form name="logInForm" action="LogInMember" method="post">
+
 		<div id="basic">
 			<div id="top">
 				<div id="logo"/></div>
@@ -51,7 +51,7 @@
 					<div id="input">
 						<div id="id"><input class="input_id" type="text" name="mmId" placeholder="ID" /></div>
 						<div id="pw"><input class="input_pw" type="password" name="mmPassword" placeholder="PW" /></div>
-						<div id="find" onClick=""><span id="id_pw_find"><a href="">아이디/비밀번호 찾기</a></span></div>		
+						<div id="find" ><span id="id_pw_find" onClick="getNewPage('findMemberInfo')"><a href="javascript:void(0);">아이디/비밀번호 찾기</a></span></div>		
 						<div id="login3"onClick="logInMember()">로그인</div>
 						<div id="join" onClick="getNewPage('signUp')">회원가입</div>
 					</div>
@@ -63,6 +63,6 @@
 				<div id="nate3"><span class="nate">문의 : handaeng1220@gmail.com</span></div>
 			</div>
 		</div>
-	</form>
+	
 </body>
 </html>

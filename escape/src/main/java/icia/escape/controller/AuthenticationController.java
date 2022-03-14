@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import icia.escape.authentication.AddMember;
+import icia.escape.authentication.FindInformation;
 import icia.escape.authentication.Login;
 import icia.escape.beans.Members;
 import icia.escape.beans.Stores;
@@ -34,6 +35,8 @@ public class AuthenticationController {
 	Login log;
 	@Autowired
 	AddMember am;
+	@Autowired
+	FindInformation fi;
 	
 	private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 	
@@ -49,6 +52,7 @@ public class AuthenticationController {
 		return log.memberController("1", mem);
 	}
 	
+	/****************************로그인********************************/
 	/*사용자 로그인*/
 	@PostMapping("/LogInMember")
 	public ModelAndView logInMember(@ModelAttribute Members mem) {
@@ -61,6 +65,7 @@ public class AuthenticationController {
 		return log.storeController("S1", sr);
 	}
 	
+	/****************************로그아웃********************************/
 	/*사용자 로그아웃*/
 	@PostMapping("/LogOutMember")
 	public ModelAndView logOutMember(@ModelAttribute Members mem) {
@@ -72,7 +77,7 @@ public class AuthenticationController {
 	public ModelAndView logOutStore(@ModelAttribute Stores sr) {
 		return log.storeController("S2", sr);
 	}
-	
+	/****************************회원가입********************************/
 	/*사용자 회원가입 :아이디 중복 체크*/
 	@PostMapping(value= "/CheckMemberId",  produces="application/json; charset=UTF-8")
 	public  String checkMemberId(Model model, @RequestBody List<Members> mem) {
@@ -94,6 +99,51 @@ public class AuthenticationController {
 	@PostMapping(value="/StoreSignUp", produces="application/json; charset=UTF-8")
 	public ModelAndView storeSignUp(Model model, @RequestBody List<Stores> sr) {
 		return am.backController("S4",model.addAttribute("storeData", sr.get(0)));
+	}
+	/****************************아이디 찾기********************************/
+	/*사용자 아이디 찾기*/
+	@PostMapping("/FindMemberId")
+	public ModelAndView findMemberId(@ModelAttribute Members mem) {
+		return fi.memberController("M5", mem);
+	}
+	
+	/*업체 아이디 찾기*/
+	@PostMapping("/FindStoreId")
+	public ModelAndView findStoreId(@ModelAttribute Stores sr) {
+		return fi.storeController("S5", sr);
+	}
+	
+	/*******************************비밀번호 찾기*************************/
+	/*사용자 비밀번호 찾기 : 이메일 전송*/
+	@PostMapping("/SendMemberEmail")
+	public ModelAndView sendMemberEmail(@ModelAttribute Members mem) {
+		System.out.println(mem);
+		return fi.memberController("M6", mem);
+	}
+	/*사용자 비밀번호 찾기 : 비밀번호 변경 Form*/
+	@RequestMapping(value ="/MemberAuth", method = {RequestMethod.GET})
+	public ModelAndView memberAuth(@ModelAttribute Members mem ) {
+		return fi.memberController("M7", mem);
+	}
+	/*사용자 비밀번호 찾기 : 비밀번호 변경*/
+	@PostMapping("/UpdMemberPwd")
+	public ModelAndView updMemberPwd(@ModelAttribute Members mem) {
+		return fi.memberController("M8", mem);
+	}
+	/*업체 비밀번호 찾기 : 이메일 전송*/
+	@PostMapping("SendStoreEmail")
+	public ModelAndView sendStoreEmail(@ModelAttribute Stores sr) {
+		return fi.storeController("S6", sr);
+	}
+	/*업체 비밀번호 찾기 : 비밀번호 변경 Form*/
+	@PostMapping("/StoreAuth")
+	public ModelAndView storeAuth(@ModelAttribute Stores sr) {
+		return fi.storeController("S7", sr);
+	}
+	/*업체 비밀번호 찾기 : 비밀번호 변경*/
+	@PostMapping("/UpdStorePwd")
+	public ModelAndView updStorePwd(@ModelAttribute Stores sr) {
+		return fi.storeController("S8", sr);
 	}
 	
 	//	@RequestMapping(value = "/Access", method = RequestMethod.POST)

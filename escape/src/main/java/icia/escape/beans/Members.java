@@ -16,4 +16,5 @@ public class Members {
     String publicIp;
     String pageName;
     String stCode;
+    String authCode;
 }

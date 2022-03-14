@@ -7,7 +7,7 @@
 <title>회원가입초기페이지</title>
 </head>
 <script src="resources/js/resource.js"></script>
-<script src="resources/js/SignUp.js"></script>
+<script src="resources/js/signUp.js"></script>
 
 <style>
 @font-face {
@@ -149,7 +149,7 @@ button {
 	width: 3%;
 	height: 4%;
 	position: absolute;
-	right: 17%;
+	right: 23%;
 	top: 25%;
 }
 
@@ -164,7 +164,7 @@ button {
 	width: 3%;
 	height: 4%;
 	position: absolute;
-	right: 15%;
+	right: 21%;
 	top: 25%;
 }
 
@@ -172,11 +172,33 @@ button {
 	width: 6%;
 	height: 4%;
 	position: absolute;
-	right: 10.5%;
+	right: 16.5%;
 	top: 25%;
 }
 
 .login2-1 {
+	font-family: TmonMonsori;
+	font-size: 140%;
+	color: #CBCBCB;
+}
+
+#arrow1-1 {
+	width: 3%;
+	height: 4%;
+	position: absolute;
+	right: 15.5%;
+	top: 25%;
+}
+
+#login2-2 {
+	width: 6%;
+	height: 4%;
+	position: absolute;
+	right: 11%;
+	top: 25%;
+}
+
+.login2-2 {
 	font-family: TmonMonsori;
 	font-size: 140%;
 	color: #000000;
@@ -194,69 +216,18 @@ button {
 	height: 86.9%;
 }
 
-#membertype {
-	width: 10%;
-	height: 2%;
+#information_input {
 	position: absolute;
-	left: 26.25%;
-	top: 33%;
-	box-shadow: 3px 3px 10px #566270;
-	background-color: #292929;
-	color: #ebedec;
-	padding: 1%;
-	text-align:center;
-	
-}
-
-.membertype{
-	font-family: TmonMonsori;
-	font-size: 110%;
-	color: #ebedec;
-	margin: 5%;
-	text-align:center;
-}
-
-#type {
-	width: 35%;
-	height: 2%;
-	position: absolute;
-	left: 38.25%;
-	top: 33%;
-	box-shadow: 3px 3px 10px #566270;
-	background-color: #ebedec;
-	color: #292929;
-	padding: 1%;
-	text-align:left;
-}
-
-.type {
-	font-family: TmonMonsori;
-	font-size: 110%;
-	color: #292929;
-	margin: 5%;
-	text-align:left;
-}
-
-#login_type {
-	position: absolute;
-	top: 41%;
-	left: 6.2%;
-	width: 80%;
+	top: 35%;
+	left: 17.25%;
+	width: 60%;
 	height: 60%;
 	font-family: 'Pretendard-Regular';
 	font-size: 110%;
 	font-weight: bold;
 }
 
-#addmember_insidebox {
-	position: absolute;
-	top: 53%;
-	left: 8%;
-	width: 80%;
-	height: 30%;
-}
-
-#addmemberbox {
+#inputInfo {
 	font-family: 'Pretendard-Regular';
 	width: 57.2%;
 	height: 40%;
@@ -269,26 +240,47 @@ button {
 	left: 5%;
 	color: #292929;
 	border : 1px solid #292929;
+	box-shadow: 3px 3px 10px #566270;
 }
 
-#addmemberbox1{
-	font-family: 'Pretendard-Regular';
-	padding: 5%;
+#inputInfoLine{
+	border-bottom: 2px solid #292929;
+	padding : 0.5% 0% 0% 0%;
+	width : 50%;
+	position : absolute;
+	left:30.5%;
+}
+
+#infoLinebox{
+	font-family: 'Pretendard-Regular'
 	text-align: center;
 }
 
-#key{
-	width:3%;
-	height:3%;
+.input_name{
+	width : 45%;
+	height : 10%;
+	border:1px solid #000000;
+	font-size:100%;
+	text-align:left;
+	color:#CBCBCB;
+	position : absolute;
+	top:17%;
+	left:32.9%;
 }
 
-#addmemberline{
-	border-bottom: 2px solid #292929;
-	padding : 1% 0% 0% 0%;
+.input_email{
+	width : 45%;
+	height : 10%;
+	border:1px solid #000000;
+	font-size:100%;
+	text-align:left;
+	color:#CBCBCB;
+	position : absolute;
+	top:30%;
+	left:32.9%;
 }
 
-
-#loginpage_btn {
+#idsearch_btn {
 	font-family: 'Pretendard-Regular';
 	box-shadow: 3px 3px 10px #566270;
 	width: 8%;
@@ -296,14 +288,12 @@ button {
 	text-align: center;
 	background-color: #292929;
 	position:absolute;
-	bottom : 16%;
+	bottom : 26%;
 	left: 46.5%;
 	color: #ebedec;
 	cursor: pointer;  
 	padding : 1% 0% 0% 0%;
 }
-
-
 
 #bottom {
 	font-size:7pt;
@@ -314,8 +304,9 @@ button {
 	color:#FFFFFF;
 	position:absolute; left:0.2%;
 }
+
 </style>
-<body onLoad="init('${objName}'),initPage('${msg}')">
+<body onLoad="init('${objName}')">
 	<form name="logInForm" action="LogInMember" method="post">
 		<div id="basic">
 			<div id="top">
@@ -332,30 +323,25 @@ button {
 			
 			<div id="mid1">
 				<div id="line1"></div>
-				<div id="login2"><span class="login2">회원가입 (SIGNUP)</span></div>
+				<div id="login2"><span class="login2">아이디찾기 (Find ID)</span></div>
 				<div id="home"><span class="home" onClick="">홈</span></div>
 				<div id="arrow"><span class="home">></span></div>
-				<div id="login2-1"><span class="login2-1">회원가입</span></div>
+				<div id="login2-1"><span class="login2-1">로그인</span></div>
+				<div id="arrow1-1"><span class="home">></span></div>
+				<div id="login2-2"><span class="login2-2">아이디찾기</span></div>
 				<div id="line2"></div>
 					
-					
-					<div id="membertype"><span class="membertype">회원유형</span></div>
-					<div id="type"><span class="type">업체</span></div>
-					
-					<div id="login_type">
-						<div id="addmemberbox">
-						<div class="login_type1" onClick="getNewPage('memberLogIn')">
-						<img id="key" src='resources/images/key.png'/><span>&nbsp;&nbsp;회원가입완료</span>
-						<div id = "addmemberline"></div>
-						<div id = "addmemberbox1"><span id = "addmemberbox1">업체 유형 회원가입이 완료되었습니다.<br>앞으로 여기가 좋을 지도의 많은 서비스를 이용해 주시기 바랍니다.<br><br>
-						여기가 좋을 지도 아이디 :</span><span id="storeId">${storeInfo.srId}</span>
-						
-						</div>
+					<div id="information_input">
+						<div id="inputInfo">
+			 			
+						<div id = "inputInfoLine"><span id = "infoLinebox">가입하신 아이디의 이름과 이메일을 적어주세요.</span></div>
+						<div id="name"><input class="input_name" type="text" id="srName"  name="srName" placeholder="이름" /></div>
+						<div id="email"><input class="input_email" type="text" id="srEmail" name="srEmail" placeholder="이메일" /></div>
 						</div>
 						</div>
 					</div>
-						<div id="loginpage_btn" onClick="getNewPage('storeLogIn')">로그인하기</div>
-				</div>
+						<div id="idsearch_btn" onClick="findStoreId('srName','srEmail')">조회하기</div>
+				
 			
 			
 			<div id="bottom">
@@ -363,7 +349,7 @@ button {
 				<div id="nate2"><span class="nate">사업자 등록번호: 123-81-21968｜통신판매업신고: 연수 1655호｜개인정보 보호책임자 : NATE</span></div>
 				<div id="nate3"><span class="nate">문의 : handaeng1220@gmail.com</span></div>
 			</div>
-		</div>
+			</div>
 	</form>
 </body>
 </html>

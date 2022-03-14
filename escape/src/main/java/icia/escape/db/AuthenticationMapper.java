@@ -21,6 +21,10 @@ public interface AuthenticationMapper {
 	public int checkMemberId(Members mem);
 	public int insMember(Members mem);
 	public String checkMemberCode(Members mem);
+	public String findMemberId(Members mem);
+	public String checkMember(Members mem);
+	public int updMmPassword(Members mem);
+	
 	/*Stores*/
 	public Stores isStores(Stores sr);
 	public int isStoresAccess(Stores sr);
@@ -30,4 +34,9 @@ public interface AuthenticationMapper {
 	public int checkStoreId(Stores sr);
 	public int insStore(Stores sr);
 	public String checkStoreCode(Stores sr);
+	public String findStoreId(Stores sr);
+	public String checkStore(Stores sr);
+	public int updSrPassword(Stores sr);
+	
+	
 	}

@@ -3,6 +3,7 @@
 
 /* 로그인/회원가입 페이지 이동 */
 function getNewPage(pageName){
+
  const form = makeForm("","GetNewPage","Post");
  const page = makeInputElement("hidden", "pageName", pageName, "");
  form.appendChild(page);
@@ -137,8 +138,6 @@ function getAjaxJson(action, clientData, fn, method) {
    ajax.onreadystatechange = function() {
       if (ajax.readyState == 4 && ajax.status == 200) {
          window[fn](JSON.parse(ajax.responseText));
-			
-         
       }
 
    };
@@ -157,4 +156,16 @@ function getAjaxJson(action, clientData, fn, method) {
    /*send 하기 전엔 state값 2, status 값은 없음*/
    /*send 누르면 state가 3으로 변함*/
    
+}
+
+/* Modal Dialog*/
+function openModal(obj){
+	let container = document.getElementById("container");
+	container.style.filter = "alpha(Opacity=50)";
+	container.style.display = "block";
+} 
+
+function closeModal(){
+	let container = document.getElementById("container");
+	container.style.display = "none";
 }

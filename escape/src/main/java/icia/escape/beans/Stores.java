@@ -18,5 +18,6 @@ public class Stores {
 	String publicIp;
 	String stCode;
 	String srAddress;
+	String authCode;
     
 }

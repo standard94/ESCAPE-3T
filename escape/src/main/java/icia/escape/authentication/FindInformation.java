@@ -20,6 +20,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.servlet.ModelAndView;
 
+import icia.escape.beans.Members;
 import icia.escape.beans.Stores;
 import icia.escape.db.AuthenticationMapper;
 import icia.escape.utils.Encryption;
@@ -30,7 +31,7 @@ public class FindInformation {
 	private ModelAndView mav;
 
 	@Autowired
-	private AuthenticationMapper om;
+	private AuthenticationMapper am;
 	@Autowired
 	private ProjectUtils pu;
 	@Autowired
@@ -50,94 +51,101 @@ public class FindInformation {
 
 	}
 
-	public ModelAndView BackController(int serviceData, Stores... emp) {
+	public ModelAndView memberController(String serviceCode, Members... mem) {
 
-		if (emp.length == 0) {
-			switch (serviceData) {
-			case 1:
-				accessform();
-				break;
-			}
+		switch (serviceCode) {
+		case "M5":
+			findMemberId(mem[0]);
+			break;
+		case "M6":
+			sendMemberEmail(mem[0]);
+			break;
+		case "M7":
+			memberAuth(mem[0]);
+			break;	
+		case "M8":
+			modMem(mem[0]);
+			break;	
+		}
+		
+		return mav;
+	}
+	
+	public ModelAndView storeController(String serviceCode, Stores... sr) {
 
-		} else {
-			switch (serviceData) {
-			case 2:
-				accessCtl(emp[0]);
-				break;
-			case 3:
-				accessOut(emp[0]);
-				break;
-			case 4:
-				accessRefreshCtl(emp[0]);
-				break;
-			case 5:
-				sendEmail(emp[0]);
-				break;
-			case 6:
-				authEmail(emp[0]);
-				break;
-			case 7:
-				modPassword(emp[0]);
-				break;
-			}
+		switch (serviceCode) {
+		case "S5":
+			findStoreId(sr[0]);
+			break;
+		case "S6":
+			sendStoresEmail(sr[0]);
+			break;
+		case "S7":
+			storeAuth(sr[0]);
+			break;	
+		case "S8":
+			modStore(sr[0]);
+			break;		
 		}
 		return mav;
 	}
     
-	private void modPassword(Stores emp) {
-		boolean tran = false;
-		String message = "패스워드 변경 실패";
-		String page = "password";
-		// update
-		// propagation , isolation 설정
-		this.setTransactionConf(this.dtmdf.PROPAGATION_REQUIRED,this.dtmdf.ISOLATION_READ_COMMITTED,false);
-		//emp.setEmPassWord(this.enc.encode(emp.getEmPassWord()));
-		if(this.convertToBool(this.om.updPassword(emp))){
-			tran = true;
-			message = "패스워드가 안전하게 변경되었습니다. 로그인 후 서비스를 이용해 주세요.";
-			page = "index";
-		}
-		this.setTransactionEND(tran);
-		
-		this.mav.addObject("msg",message);
-		this.mav.setViewName(page);
-		
+	//사용자 아이디 찾기
+	private void findMemberId(Members mem) {
+	 String page = "findMemberId";
+	 if(this.am.findMemberId(mem) != null){
+		 this.mav.addObject("memberId", this.am.findMemberId(mem));
+		 page = "resultMemberId";
+	 }else {
+		 this.mav.addObject("msg", "회원정보를 찾을 수 없습니다.");
+	 }
+	 
+	 this.mav.setViewName(page);
 	}
 	
-	private void authEmail(Stores emp) {
-		String code = null;
-		this.mav.addObject("msg", "변경할 패스워드를 입력해주세요~");
-		
-		try {
-			code = this.enc.aesDecode(emp.getAuthCode(), "changePWD");
-		} catch (Exception e) {e.printStackTrace();}
-		
-		this.mav.addObject("seCode", code.substring(0,code.indexOf(":")));
-		this.mav.addObject("emCode", code.substring(code.indexOf(":")+1));
-		this.mav.setViewName("modPassword");
-	} 
+	//업체 아이디 찾기
+	private void findStoreId(Stores sr) {
+	 String page = "findStoreId";
+	 
+	 if(this.am.findStoreId(sr) != null) {
+		 this.mav.addObject("storeId", this.am.findStoreId(sr));
+		 page = "resultStoreId";
+	 }else {
+		 this.mav.addObject("msg", "회원정보를 찾을 수 없습니다.");
+	 }
+	 
+	 this.mav.setViewName(page);
+	 
+	}
 	
-	private void sendEmail(Stores emp) {
-		/* 해당사원의 Email 일치 여부 확인 : DATABASE 작업 
-		 * stCode, elCode, email
-		 * */
-		
-		/* Email Info */
+	
+	//사용자 비밀번호 찾기 :: 회원 유효성 체크 --> 이메일 전송
+	private void sendMemberEmail(Members mem) {
+		System.out.println(mem);
+		/*Email Info*/
 		boolean isSendMail = false;
 		String message = "등록된 정보와 일치하지 않습니다.";
-		String page = "password";
+		String page = "findMemberPassword";
 		
-		if(this.convertToBool(this.om.isMember(emp))) {
-			String auth = emp.getSeCode() + ":" + emp.getEmCode();
-			try {
-				auth = this.enc.aesEncode(auth, "changePWD");
-			} catch (Exception e) {e.printStackTrace();}
-			/* Email Info */
-			String subject = "Modify Your Password";
-			String contents = "<a href='http://192.168.0.100/EmailAuth?authCode=" + auth + "'>인증 작업을 위해 이동해 주세요</a>";
+		if((this.am.checkMember(mem)!= null)) {
+			mem.setMmName(this.am.checkMember(mem));
+			String memberInfo = mem.getMmId() + ":" + mem.getMmName();
 			
-			String from = "secuandb4@naver.com";
-			String to = emp.getEmail();
+			try {
+				this.enc.aesEncode(memberInfo, "changePWD");
+			} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException
+					| NoSuchPaddingException | InvalidAlgorithmParameterException | IllegalBlockSizeException
+					| BadPaddingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			/*EmailInfo*/
+			String subject = "비밀번호를 변경해주세요/ 여기가 좋을 지도";
+			String contents = "<a href='http://192.168.0.169/MemberAuth?authCode="+ memberInfo +"'>인증작업을 위해 이동해주세요</a>";
+		
+			String from = "iciabeju@naver.com";
+			String to = mem.getMmEmail();
 			
 			/* Creation MimeMessage */
 			MimeMessage mail = javaMail.createMimeMessage();
@@ -152,9 +160,12 @@ public class FindInformation {
 				isSendMail = true;
 			} catch (MessagingException e) {isSendMail = false; e.printStackTrace();}
 				message = isSendMail? "Mail이 발송되었습니다. 패스워드 변경 후 접속하시기 바랍니다.":"메일 발송 실패!";
-				page = "index";
+				page = "basic";
 			
 		}
+			
+		/*이메일 저장*/
+		this.mav.addObject("mmEmail", mem.getMmEmail());
 		/* message 작성*/
 		this.mav.addObject( "msg", message);
 		
@@ -162,109 +173,132 @@ public class FindInformation {
 		this.mav.setViewName(page);
 	}
 	
-	private void accessform() {
-
-		try {
-			if (this.pu.getAttribute("AccessInfo") != null) {
-				pu.setAttribute("AccessInfo", mav.getModel().get("AccessInfo"));
-				mav.setViewName("main");
-			} else {
-				mav.setViewName("index");
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	private void accessRefreshCtl(Stores emp) {
-		String page = "redirect:/";
-		String message = "다시 로그인 해주세요";
-		
+	//사용자 비밀번호 찾기 : Email 변경 Form
+	private void memberAuth(Members mem) {
+		System.out.println(mem.getAuthCode());
+		String code = null;
+		this.mav.addObject("msg", "변경할 패스워드를 입력해주세요~");
 		
 		try {
-			if((Stores)pu.getAttribute("sessionInfo") != null) {
-				/* DB Access Log Check */
-				this.mav.addObject("AccessInfo", this.om.isAccessInfo(emp));
-				page = "main";
-				message = "새로고침 하셨습니다.";
-			}
+			code = this.enc.aesDecode(mem.getAuthCode(), "changePWD");
 		} catch (Exception e) {e.printStackTrace();}
-		this.mav.addObject("msg", message);
+		
+		this.mav.addObject("mmId", code.substring(0,code.indexOf(":")));
+		this.mav.addObject("mmName", code.substring(code.indexOf(":")+1));
+		this.mav.setViewName("newMemPw");
+	} 
+	
+	//사용자 비밀번호 찾기 : 비밀번호 변경
+	private void modMem(Members mem) {
+		boolean tran = false;
+		String message = "패스워드 변경 실패";
+		String page = "newMemPw";
+		// update
+		// propagation , isolation 설정
+		this.setTransactionConf(this.dtmdf.PROPAGATION_REQUIRED,this.dtmdf.ISOLATION_READ_COMMITTED,false);
+		mem.setMmPassword((this.enc.encode(mem.getMmPassword())));
+		if(this.convertToBool(this.am.updMmPassword(mem))){
+			tran = true;
+			message = "패스워드가 안전하게 변경되었습니다. 로그인 후 서비스를 이용해 주세요.";
+			page = "memberLogIn";
+		}
+		this.setTransactionEND(tran);
+		
+		this.mav.addObject("msg",message);
+		this.mav.setViewName(page);
+		
+	}
+	
+	//업체 비밀번호 찾기 :: 회원 유효성 체크 --> 이메일 전송
+	private void sendStoresEmail(Stores sr) {
+		
+		/*Email Info*/
+		boolean isSendMail = false;
+		String message = "등록된 정보와 일치하지 않습니다.";
+		String page = "findStorePassword";
+		
+		if((this.am.checkStore(sr)!= null)) {
+			sr.setSrName(this.am.checkStore(sr));
+			String storeInfo = sr.getSrId() + ":" + sr.getSrName();
+			
+			try {
+				this.enc.aesEncode(storeInfo, "changePWD");
+			} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException
+					| NoSuchPaddingException | InvalidAlgorithmParameterException | IllegalBlockSizeException
+					| BadPaddingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			/*EmailInfo*/
+			String subject = "비밀번호를 변경해주세요/ 여기가 좋을 지도";
+			String contents = "<a href='http://localhost/storeAuth?authCode="+ storeInfo +"'>인증작업을 위해 이동해주세요</a>";
+		
+			String from = "iciabeju@naver.com";
+			String to = sr.getSrEmail();
+			
+			/* Creation MimeMessage */
+			MimeMessage mail = javaMail.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mail, "UTF-8");
+			
+			try {
+				helper.setFrom(from);
+				helper.setTo(to);
+				helper.setSubject(subject);
+				helper.setText(contents, true);
+				javaMail.send(mail);
+				isSendMail = true;
+			} catch (MessagingException e) {isSendMail = false; e.printStackTrace();}
+				message = isSendMail? "Mail이 발송되었습니다. 패스워드 변경 후 접속하시기 바랍니다.":"메일 발송 실패!";
+				page = "basic";
+			
+		}
+		/*이메일 저장*/
+		this.mav.addObject("srEmail", sr.getSrEmail());
+		/* message 작성*/
+		this.mav.addObject( "msg", message);
+		
+		/* page */
 		this.mav.setViewName(page);
 	}
 	
-	private void accessCtl(Stores emp) {
-		boolean isAccessCheck = false;
-		String page = "redirect:/";
-		String message = "로그인 정보를 확인해 주세요.";
-        
-		/*
-		 * DB Log-in :: myBatis 로그인 성공 : AccessHistory - Insert - Commit -->
-		 * isAccessCheck = true;
-		 */
+	//업체 비밀번호 찾기 : Email 변경 Form
+	private void storeAuth(Stores sr) {
+		String code = null;
+		this.mav.addObject("msg", "변경할 패스워드를 입력해주세요~");
+		
 		try {
-			String pwd;
-			if ((pwd = this.om.isEmployee(emp)) != null) {
-					if (enc.matches(emp.getEmPassWord(), pwd)) {
-						emp.setStCode(9);
-//						try {
-//							emp.setPublicIp(enc.aesEncode(emp.getPublicIp(), emp.getSeCode() + ":" + emp.getEmName()));
-//						} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException
-//								| NoSuchPaddingException | InvalidAlgorithmParameterException
-//								| IllegalBlockSizeException | BadPaddingException e) {
-//							e.printStackTrace();
-//						}
-						
-						if (this.convertToBool(this.om.insAccessHistory(emp))) {
-							isAccessCheck = true;
-							message = "정상적으로 로그인 하셨습니다.";
-						}else {
-							message = "네트워크가 불안합니다. 잠시 후 다시 와라짜증나니까";
-						}
-					}
-				}
-				if (isAccessCheck) {
-					this.mav.addObject("AccessInfo", this.om.isAccessInfo(emp));
-					pu.setAttribute("AccessInfo", mav.getModel().get("AccessInfo"));
-					page = "main";
-				}
-
+			code = this.enc.aesDecode(sr.getAuthCode(), "changePWD");
 		} catch (Exception e) {e.printStackTrace();}
-
-		this.mav.addObject("msg", message);
-		mav.setViewName(page);
-	}
-
-	private void accessOut(Stores emp) {
-		String page = "redirect:/";
-		this.mav.getModel().remove("msg");
-		this.mav.getModel().remove("AccessInfo");
-
-		/*
-		 * DB Log-in :: myBatis 로그아웃 : AccessHistory - Insert - Commit --> isAccessCheck
-		 * = true;
-		 */
-
-		try {
-
-			emp.setStCode(-9);
-//			emp.setPublicIp(enc.aesEncode(emp.getPublicIp(), emp.getSeCode() + ":" + emp.getEmName()));
-
-			this.om.insAccessHistory(emp);
-//		} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException | NoSuchPaddingException
-//				| InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException e) {
-//			e.printStackTrace();
-		} finally {
-			try {
-				pu.removeAttribute("AccessInfo");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		
+		this.mav.addObject("srId", code.substring(0,code.indexOf(":")));
+		this.mav.addObject("srName", code.substring(code.indexOf(":")+1));
+		this.mav.setViewName("newSrPw");
+	} 
+	
+	//업체 비밀번호 찾기 : 비밀번호 변경
+	private void modStore(Stores sr) {
+		boolean tran = false;
+		String message = "패스워드 변경 실패";
+		String page = "newSrPw";
+		// update
+		// propagation , isolation 설정
+		this.setTransactionConf(this.dtmdf.PROPAGATION_REQUIRED,this.dtmdf.ISOLATION_READ_COMMITTED,false);
+		sr.setSrPassword((this.enc.encode(sr.getSrPassword())));
+		if(this.convertToBool(this.am.updSrPassword(sr))){
+			tran = true;
+			message = "패스워드가 안전하게 변경되었습니다. 로그인 후 서비스를 이용해 주세요.";
+			page = "storeLogIn";
 		}
-		mav.setViewName(page);
+		this.setTransactionEND(tran);
+		
+		this.mav.addObject("msg",message);
+		this.mav.setViewName(page);
+		
 	}
+	
+	
+	
 
 	public boolean convertToBool(int value) {
 		return (value > 0) ? true : false;

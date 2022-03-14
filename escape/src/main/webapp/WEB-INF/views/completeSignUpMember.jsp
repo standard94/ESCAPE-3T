@@ -315,7 +315,7 @@ button {
 	position:absolute; left:0.2%;
 }
 </style>
-<body onLoad="init('${objName}')">
+<body onLoad="init('${objName}',initPage('${msg}'))">
 	<form name="logInForm" action="LogInMember" method="post">
 		<div id="basic">
 			<div id="top">
