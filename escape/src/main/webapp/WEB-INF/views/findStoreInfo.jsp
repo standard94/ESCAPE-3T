@@ -6,61 +6,38 @@
 <meta charset="UTF-8">
 <title>Store Id/Password찾기</title>
 </head>
-<link rel="stylesheet" type="text/css" href="resources/css/findIdPassword.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/findIdPasswordStore.css" />
 <script src="resources/js/resource.js"></script>
-<script src="resources/js/signUp.js"></script>
 <body>
 	<body>
 	<form name="logInForm" action="LogInMember" method="post">
 		<div id="basic">
 			<div id="top">
-				<div id="logo" /></div>
-				<div id="search">
-					<input id="searchFont" type="text" name="" placeholder="" /><input
-						id="searchZoom" type="button" value="SEARCH" />
-				</div>
+				<div id="logo"/></div>
+				<div id="search"><input id="searchFont" type="text"  name="" placeholder="" /><input id="searchZoom" type="button" value="SEARCH"/></div>
 				<div id="box1">
-					<div id="login1">
-						<span class="top_menu" onClick="getNewPage('memberLogIn')" >로그인/</span><span class="top_menu"  onClick="getNewPage('signUp')">회원가입</span>
-					</div>
-					<div id="notice">
-						<span class="top_menu" onClick="">공지사항</span>
-					</div>
-					<div id="shop">
-						<span class="top_menu" onClick="">장바구니</span>
-					</div>
+		 			<div id="login1"><span class="top_menu" onClick="getNewPage('memberLogIn')">로그인/</span><span
+						class="top_menu" onClick="getNewPage('signUp')">회원가입</span></div>
+		 			<div id="notice"><span class="top_menu" onClick="">공지사항</span></div>
+		 			<div id="shop"><span class="top_menu" onClick="">장바구니</span></div>
 				</div>
-				<img id="list" src='resources/images/list.png' />
+				<img id="list" src='resources/images/list.png'/>
 			</div>
 
 			<div id="mid1">
-				<div id="line1"></div>
-				<div id="login2">
-					<span class="login2">아이디/패스워드 찾기 (FIND ID/PASSWORD)</span>
-				</div>
+				<div id="login2"><span class="login2">아이디/패스워드 찾기 (FIND ID/PASSWORD)</span></div>
 				
-				<div id="home">
-					<span class="home" onClick="getNewPage('basic')">홈</span>
-				</div>
-				<div id="arrow">
-					<span class="home">></span>
-				</div>
-				<div id="login2-1">
-					<span class="login2-1">아이디/패스워드 찾기</span>
-				</div>
+				<div id="home"><span class="home" onClick="getNewPage('basic')">홈</span></div>
+				<div id="arrow"><span class="home">></span></div>
+				<div id="login2-1"><span class="login2-1">로그인</span></div>
+				<div id="arrow1-1"><span class="home">></span></div>
+				<div id="login2-2"><span class="login2-2">아이디/패스워드 찾기</span></div>
 				<div id="line2"></div>
 				
-				<div id="login_type">
-					<div id="search1">
-						<div id="searchMember">
-							<span onClick="getNewPage('findMemberInfo')">사용자</span>
-						</div>
-					
-						<div id="searchStore">
-							<span onClick="getNewPage('findStoreInfo')">업체</span>
-						</div>
-					</div>
-					
+				<div id="user"><span class="user" onClick="getNewPage('findIdPasswordMember')">일반사용자</span></div>
+				<div id="owner"><span class="owner"onClick="getNewPage('findIdPasswordStore')">업체사장님</span></div>
+				
+				<div id="login_type">	
 					<div id="memberlogin_btn">
 						<div class="login_type1" onClick="getNewPage('findStoreId')">
 							<span>아이디 찾기<br></span>
