@@ -270,7 +270,7 @@ button {
 	text-align:center;
 }
 
-#typeId {
+#mmId {
 	width: 35%;
 	height: 1.6%;
 	position: absolute;
@@ -282,7 +282,7 @@ button {
 	text-align:left;
 }
 
-#typeName {
+#mmName {
 	width: 35%;
 	height: 1.6%;
 	position: absolute;
@@ -294,7 +294,7 @@ button {
 	text-align:left;
 }
 
-#typeNewPw {
+#pwd {
 	width: 35%;
 	height: 1.5%;
 	position: absolute;
@@ -306,7 +306,7 @@ button {
 	text-align:left;
 }
 
-#typeCheckPw {
+#pwdCheck {
 	width: 35%;
 	height: 1.5%;
 	position: absolute;
@@ -373,7 +373,7 @@ button {
           border:2px solid #666;
         }   
 </style> 
-<body onLoad="init('${objName}')">
+<body onLoad="init('${objName}'),initPage('${msg}')">
 	<form name="logInForm" action="LogInMember" method="post">
 		<div id="basic">
 			<div id="top">
@@ -399,15 +399,15 @@ button {
 				<div id="line2"></div>
 					
 					<div id="inputId"><span>회원아이디</span></div>
-					<input id="typeId" readOnly>
+					<input id="mmId" value="${mmId}" readOnly />
 					<div id="inputName"><span>회원이름</span></div>
-					<input id="typeName" readOnly>
+					<input id="mmName" value="${mmName}" readOnly />
 					<div id="inputNewPw"><span>새비밀번호</span></div>
-					<input id="typeNewPw">
+					<input id="pwd" name="pwd"  />
 					<div id="inputCheckPw"><span>새비밀번호 확인</span></div>
-					<input id="typeCheckPw">
+					<input id="pwdCheck" name="pwdCheck" onchange="comparePassword()"/><span id="checkResult"></span>
 					
-						<div id="loginpage_btn" onClick="">변경하기</div>
+						<div id="loginpage_btn" onClick="updMemberPwd('mmId','pwd','pwdCheck')">변경하기</div>
 				</div>
 			
 			
@@ -421,13 +421,7 @@ button {
 	</form>
 	
 	<script>
-    document.getElementById("loginpage_btn").onclick = function() {
-        document.getElementById("modal").style.display="block";
-    }
-   
-    document.getElementById("modal_close_btn").onclick = function() {
-        document.getElementById("modal").style.display="none";
-    }   
+    
 </script>
 </body>
 </html>

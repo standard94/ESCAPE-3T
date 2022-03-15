@@ -51,13 +51,13 @@
    </select>
    
    <!-- 사용자 유효성 -->
-   <select id="checkMember" parameterType="icia.escape.beans.Members" resultType="String">
-   	SELECT MM_NAME AS MMNAME FROM MM WHERE MM_ID = #{mmId} AND MM_EMAIL = #{mmEmail}
+   <select id="checkMember" parameterType="icia.escape.beans.Members" resultType="icia.escape.beans.Members">
+   	SELECT MM_CODE AS MMCODE ,MM_NAME AS MMNAME, MM_NUMBER AS MMNUMBER FROM MM WHERE MM_ID = #{mmId} AND MM_EMAIL = #{mmEmail}
    </select>
    
    <!-- 사용자 비밀번호 변경 -->
    <update id="updMmPassword" parameterType="icia.escape.beans.Members">
-   		UPDATE MM SET MM_PASSWORD = #{mmPassword} WHERE MM_CODE = #{mmCode}
+   		UPDATE MM SET MM_PASSWORD = #{mmPassword} WHERE MM_ID = #{mmId} AND MM_CODE = #{mmCode}
    </update>
    
    
@@ -111,17 +111,13 @@
    </select>
    
    <!-- 사용자 유효성 -->
-   <select id="checkStore" parameterType="icia.escape.beans.Stores" resultType="String">
-   	SELECT SR_NAME AS SR_NAME FROM SR WHERE SR_ID = #{srId} AND SR_EMAIL = #{srEmail}
+   <select id="checkStore" parameterType="icia.escape.beans.Stores" resultType="icia.escape.beans.Stores">
+   	SELECT SR_POST AS SRPOST, SR_NUMBER AS SRNUMBER, SR_NAME AS SRNAME FROM SR WHERE SR_ID = #{srId} AND SR_EMAIL = #{srEmail}
    </select>
    
     <!-- 업체 비밀번호 변경 -->
    <update id="updSrPassword" parameterType="icia.escape.beans.Stores">
-   		UPDATE SR SET SR_PASSWORD = #{srPassword} WHERE SR_CODE = #{srCode}
+   		UPDATE SR SET SR_PASSWORD = #{srPassword} WHERE SR_CODE = #{srCode} AND SR_ID = #{srId}
    </update>
-   
-   <select id="getCampingList" parameterType="icia.escape.beans.Maps" resultType="icia.escape.beans.Maps">
-      SELECT MA_MMCODE AS MAMMCODE, MA_POST AS MAPOST, MA_ADDRESS AS MAADDRESS, MA_CFCODE AS MACFCODE FROM MA
-    </select>
    
 </mapper>

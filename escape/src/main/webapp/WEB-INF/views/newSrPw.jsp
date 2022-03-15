@@ -7,7 +7,7 @@
 <title>회원가입초기페이지</title>
 </head>
 <script src="resources/js/resource.js"></script>
-<script src="resources/js/SignUp.js"></script>
+<script src="resources/js/signUp.js"></script>
 
 <style>
 @font-face {
@@ -270,7 +270,7 @@ button {
 	text-align:center;
 }
 
-#typeId {
+#srId {
 	width: 35%;
 	height: 1.6%;
 	position: absolute;
@@ -282,7 +282,7 @@ button {
 	text-align:left;
 }
 
-#typeName {
+#srName {
 	width: 35%;
 	height: 1.6%;
 	position: absolute;
@@ -294,7 +294,7 @@ button {
 	text-align:left;
 }
 
-#typeNewPw {
+#pwd {
 	width: 35%;
 	height: 1.5%;
 	position: absolute;
@@ -306,7 +306,7 @@ button {
 	text-align:left;
 }
 
-#typeCheckPw {
+#pwdCheck {
 	width: 35%;
 	height: 1.5%;
 	position: absolute;
@@ -373,7 +373,7 @@ button {
           border:2px solid #666;
         }   
 </style> 
-<body onLoad="init('${objName}')">
+<body onLoad="init('${objName}'),initPage('${msg}')">
 	<form name="logInForm" action="LogInMember" method="post">
 		<div id="basic">
 			<div id="top">
@@ -399,15 +399,15 @@ button {
 				<div id="line2"></div>
 					
 					<div id="inputId"><span>회원아이디</span></div>
-					<input id="typeId" readOnly>
+					<input id="srId" readOnly/>
 					<div id="inputName"><span>회원이름</span></div>
-					<input id="typeName" readOnly>
+					<input id="srName" readOnly/>
 					<div id="inputNewPw"><span>새비밀번호</span></div>
-					<input id="typeNewPw">
+					<input id="pwd" />
 					<div id="inputCheckPw"><span>새비밀번호 확인</span></div>
-					<input id="typeCheckPw">
+					<input id="pwdCheck" onchange="comparePassword()" />
 					
-						<div id="loginpage_btn" onClick="">변경하기</div>
+						<div id="loginpage_btn" onClick="updStorePwd('srId','pwd','pwdCheck')">변경하기</div>
 				</div>
 			
 			
