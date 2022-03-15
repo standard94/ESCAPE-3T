@@ -120,4 +120,8 @@
    		UPDATE SR SET SR_PASSWORD = #{srPassword} WHERE SR_CODE = #{srCode}
    </update>
    
+   <select id="getCampingList" parameterType="icia.escape.beans.Maps" resultType="icia.escape.beans.Maps">
+      SELECT MA_MMCODE AS MAMMCODE, MA_POST AS MAPOST, MA_ADDRESS AS MAADDRESS, MA_CFCODE AS MACFCODE FROM MA
+    </select>
+   
 </mapper>

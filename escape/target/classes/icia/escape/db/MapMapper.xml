@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="icia.escape.db.MapMapper">
+
+  <!-- 사용자 로그인 : 비밀번호 유효성 체크 -->
+  <select id="getCampingList" parameterType="icia.escape.beans.Maps" resultType="icia.escape.beans.Maps">
+      SELECT MA_MMCODE AS MAMMCODE, MA_POST AS MAPOST, MA_ADDRESS AS MAADDRESS, MA_CFCODE AS MACFCODE FROM MA
+   </select>
+   
+</mapper>
