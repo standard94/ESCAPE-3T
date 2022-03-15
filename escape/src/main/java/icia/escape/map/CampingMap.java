@@ -47,7 +47,6 @@ public class CampingMap {
 		return mav;
 	}
 	public void getCampingList(Model model) {
-		System.out.println(model.addAttribute("campingList", mm.getCampingList((Maps)model.getAttribute(""))));
 		model.addAttribute("campingList", mm.getCampingList((Maps)model.getAttribute("")));
 	}
 }

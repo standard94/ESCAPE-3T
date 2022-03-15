@@ -38,7 +38,6 @@ public class MapController {
 	/*새로운 페이지 이동*/
 	@PostMapping(value= "/GetCampingList", produces="application/json; charset=UTF-8")
 	public List<Maps> getCampingList(Model model, @RequestBody List<Maps> map) {
-		System.out.println("11");
 		cm.backController("0", model.addAttribute("map", ""));
 		return (List<Maps>)model.getAttribute("campingList");
 	}
