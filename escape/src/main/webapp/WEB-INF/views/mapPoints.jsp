@@ -134,11 +134,6 @@ function setPoint(list){
 	});
 	}
 }
-
-
-
-
-    
 </script>
 
 </body>
