@@ -19,6 +19,7 @@
 		destroy-method="close">
 		<constructor-arg ref="nateDBCP"></constructor-arg>
 	</bean>
+
 	<bean id="nateSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="nateDS"></property>

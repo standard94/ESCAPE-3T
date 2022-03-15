@@ -3,14 +3,17 @@ package icia.escape.db;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import icia.escape.beans.Stores;
 import icia.escape.beans.Camping;
+import icia.escape.beans.Maps;
 import icia.escape.beans.Members;
 import icia.escape.beans.Orders;
 import icia.escape.beans.OrderDetail;
 
+@Mapper
 public interface AuthenticationMapper {
 	/*Members*/
 	public Members isMember(Members mem);
