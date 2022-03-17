@@ -29,7 +29,7 @@
 
 <link rel="stylesheet" type="text/css" href="resources/css/mapPoints.css" />
 <script src="resources/js/resource.js"></script>
-<body onLoad="getCampingList('C001', '1000'),getCampingPage('11','10','C001', '1000'),chooseCampingList('1','10','C001','1000'),init('${objName}')"/>
+<body onLoad="getCampingList('C001', '1000'),getCampingPage('1','10','C001', '1000'),chooseCampingList('1','10','C001','1000'),init('${objName}')"/>
 
 	<div id="basic">
 		<div id="top">
@@ -55,9 +55,9 @@
 					</div>
 					
 					<div id="listPoints">
-						<div id="mySideStore" onClick="getCampingList('C003', '1000')">카라반</div>
-						<div id="fishingPoint" onClick="getCampingList('C002', '1000')">클램핑</div>
-						<div id="camping" onClick="getCampingList('C001', '1000')">캠핑</div>
+						<div id="mySideStore" onClick="delrecord();getCampingList('C003', '1000');getCampingPage('1','10','C003', '1000');chooseCampingList('1','10','C003','1000');">카라반</div>
+						<div id="fishingPoint" onClick="delrecord();getCampingList('C002', '1000');getCampingPage('1','10','C002', '1000');chooseCampingList('1','10','C002','1000');">클램핑</div>
+						<div id="camping" onClick="delrecord();getCampingList('C001', '1000');getCampingPage('1','10','C001', '1000');chooseCampingList('1','10','C001','1000');">캠핑</div>
 						<div id="glamping" onClick="">낚시 포인트</div>
 						<div id="caravan" onClick="">내 주변 업체</div>
 					</div>
@@ -342,32 +342,51 @@
 
 	
 
-	function alertPage(jsonData) {
-
+	function alertPage(jsonData){
+		
 		let page = document.getElementById("campingPage");
 		let pageInfo = "";
-		let startPage = jsonData.startPage - 1;
+		let startPage = jsonData.startPage-1;
 		let endPage = jsonData.endPage + 1;
-		if (jsonData.prev != false) {
-			pageInfo = "<li class=pageInfo_btn_prev value="+startPage+">이전</li>";
-
+		if(jsonData.prev != false){
+		
+		 pageInfo = "<div class='pageInfo_btn_prev'><li onClick =\"delrecord();getCampingPage('"+startPage+"','10','"+jsonData.cpCaCode+"','"+jsonData.cpMaCfCode+"');chooseCampingList('"+startPage+"','10','"+jsonData.cpCaCode+"','"+jsonData.cpMaCfCode+"');\" >이전</li></div>";
+		
+		}else{
+		pageInfo = "<div id='pageInfo_btn_prev_hold'><li>이전</li></div>"
 		}
-		for (i = jsonData.startPage; i < jsonData.endPage + 1; i++) {
-			pageInfo += "<li class=pageInfo_btn value="+i+">" + i + "</li>";
+		
+		for(i=jsonData.startPage; i<jsonData.endPage+1; i++){
+			if(i==jsonData.pageNumber){
+			pageInfo += "<div class='pageInfo_btn_selected' style='width:4%;' ><li onClick =\"delrecord();getCampingPage('"+i+"','10','"+jsonData.cpCaCode+"','"+jsonData.cpMaCfCode+"');chooseCampingList('"+i+"','10','"+jsonData.cpCaCode+"','"+jsonData.cpMaCfCode+"');\">"+i+"</li></div>";	
+			}else if(i!==jsonData.pageNumber){
+			pageInfo += "<div class='pageInfo_btn' style='width:4%;'><li onClick =\"delrecord();getCampingPage('"+i+"','10','"+jsonData.cpCaCode+"','"+jsonData.cpMaCfCode+"');chooseCampingList('"+i+"','10','"+jsonData.cpCaCode+"','"+jsonData.cpMaCfCode+"');\">"+i+"</li></div>";
+			}
+			
 		}
-		if (jsonData.next != false) {
-			pageInfo += "<li class=pageInfo_btn_next value="+endPage+">다음</li>";
+		if(jsonData.next != false){
+			pageInfo += "<div class='pageInfo_btn_next'><li onClick =\"delrecord();getCampingPage('"+i+"','10','"+jsonData.cpCaCode+"','"+jsonData.cpMaCfCode+"');chooseCampingList('"+i+"','10','"+jsonData.cpCaCode+"','"+jsonData.cpMaCfCode+"');\" );'>다음</li></div>";
 		}
 		page.innerHTML = pageInfo;
-
+		
+	}
+	/* 모든 record 삭제하기*/
+	function delrecord(){
+		const div = document.getElementById("campingList");
+		while(div.hasChildNodes()){
+			div.removeChild(div.firstChild);
+	     }
+	     
+	      
 	}
 	const columnName = [ "cpImage", "cpName", "cpNumber", "haName", "thName","maAddress" ];
 	let column;
 	let n = 0;
 	let cpList;
 	function getLeftCampingList(jsonData) {
+		
 		const div = document.getElementById("campingList");
-
+		
 		for (let x = 0; x < jsonData.length; x++) {
 			let cpList = createDiv("cpList", "cpList");
 			for (let i = 0; i < 6; i++) {
