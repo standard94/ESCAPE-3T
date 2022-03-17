@@ -68,6 +68,7 @@ public class CampingMap {
 	}
 	/*캠핑장 페이지 개수 불러오기*/
 	public void getCampingPage(Model model) {
+		
 		/* 시작 페이지 */
 	    int startPage; 
 	    /* 끝 페이지 */
