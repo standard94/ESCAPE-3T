@@ -136,7 +136,7 @@ public class AuthenticationController {
 		return fi.storeController("S6", sr);
 	}
 	/*업체 비밀번호 찾기 : 비밀번호 변경 Form*/
-	@RequestMapping(value="/StoreAuth", method= {RequestMethod.GET})
+	@PostMapping("/StoreAuth")
 	public ModelAndView storeAuth(@ModelAttribute Stores sr) {
 		return fi.storeController("S7", sr);
 	}

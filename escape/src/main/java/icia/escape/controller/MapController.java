@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import icia.escape.authentication.FindInformation;
 import icia.escape.authentication.Login;
+import icia.escape.beans.Camping;
 import icia.escape.beans.Maps;
 import icia.escape.beans.Members;
 import icia.escape.beans.Stores;
@@ -37,10 +38,24 @@ public class MapController {
 	
 	/*새로운 페이지 이동*/
 	@PostMapping(value= "/GetCampingList", produces="application/json; charset=UTF-8")
-	public List<Maps> getCampingList(Model model, @RequestBody List<Maps> map) {
-		System.out.println("11");
-		cm.backController("0", model.addAttribute("map", ""));
-		return (List<Maps>)model.getAttribute("campingList");
+	   public List<Camping> getCampingList(Model model, @RequestBody List<Camping> cp) {
+	      cm.backController("C0", model.addAttribute("camping", cp.get(0)));
+	      return (List<Camping>)model.getAttribute("campingList");
+	   }
+	
+	/*캠핑장 페이지 개수*/
+	@PostMapping(value="/GetCampingPage", produces="application/json; charset=UTF-8")
+	public Camping getCampingPage(Model model, @RequestBody List<Camping> cp) {
+		cm.backController("C1",model.addAttribute("camping", cp.get(0)));
+		return (Camping)model.getAttribute("campingPage");
+		
+	}
+	/*캠핑장 페이지 개수*/
+	@PostMapping(value="/ChooseCampingList", produces="application/json; charset=UTF-8")
+	public List<Camping> chooseCampingList(Model model, @RequestBody List<Camping> cp) {
+		cm.backController("C2",model.addAttribute("camping", cp.get(0)));
+		return (List<Camping>)model.getAttribute("campingList");
+		
 	}
 	
 }

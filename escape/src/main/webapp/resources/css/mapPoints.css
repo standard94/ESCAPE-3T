@@ -93,7 +93,7 @@
 	}
 
 .top_menu {
-	font-family:TmonMonsori;
+	font-family: 'Pretendard-Regular';
 	font-size: 12pt;
 	cursor : pointer;
 	}
@@ -110,15 +110,14 @@
 /*----------------------------mid------------------------------------*/
 
 #mid{
-	font-family:TmonMonsori;
+	font-family: 'Pretendard-Regular';
 	border:3px solid #292929;
 	width:99.3%;
 	height:91.8%;
 }
 
 #leftList{
-	font-family:TmonMonsori;
-	border:3px solid #FF0000;
+	font-family: 'Pretendard-Regular';
 	width:30%;
 	height:99.7%;
 	float:left;
@@ -131,7 +130,120 @@
 	background-color:#ffffff;
 	}
 
-/*------------------filterling----------------*/
+#listButton{
+	margin :0 0 4% 14%;
+	width:100%;
+	height:3%;
+}
+
+#image{
+	width:97%;
+	height:97%;
+}
+
+.cpList{
+	width:98%;
+	height:22%;
+	
+}
+
+.cpList .cpImage{
+	width:50%;
+	height:98%;
+	float:left;
+}
+
+.cpList .cpName{
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:1% 0% 0% 50%;
+}
+
+.cpList .cpNumber{
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:1% 0% 0% 50%;
+}
+
+.cpList .haName{
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:1% 0% 0% 50%;
+}
+
+.cpList .thName{
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:1% 0% 0% 50%;
+}
+
+.cpList .maAddress{
+	text-align:right;
+	width:50%;
+	height:23%;
+	margin:1% 0% 0% 50%;
+}
+
+.container {
+        overflow: auto;
+      }
+/*------------------button----------------*/
+li{
+	list-style:none;
+}
+ul{
+	list-style:none;
+	padding-left:0px;
+}
+
+/*이전 버튼*/
+.pageInfo_btn_prev{
+	float:left;
+	padding : 1% 1% 1% 1%;
+	
+	background-color:#FFCD36;
+	
+}
+.pageInfo_btn_prev:hover{
+	font-weight: bold;
+	background-color:#CCA63D;
+	color:#050099;
+}
+/*선택한 페이지 버튼*/
+.pageInfo_btn_selected{
+	float:left;
+	padding : 1% 1% 1% 1%;
+	background-color:#BDBDBD;
+}
+.pageInfo_btn_selected:hover{
+	color:#050099;
+}
+/*페이지 버튼*/
+.pageInfo_btn{
+	float:left;
+	padding : 1% 1% 1% 1%;
+	
+}
+.pageInfo_btn:hover{
+	background-color:#D5D5D5;
+	color:#050099;
+}
+/*다음 버튼*/
+.pageInfo_btn_next{
+	float:left;
+	padding : 1% 1% 1% 1%;
+	
+	background-color:#FFCD36;
+}
+.pageInfo_btn_next:hover{
+font-weight: bold;
+	background-color:#CCA63D;
+	color:#050099;
+}
 
 
 
@@ -139,87 +251,81 @@
 
 
 
-
-
-
-
-/*---------------------------------------------*/
+/*------------------filterling-----------------*/
 
 #listFilter{
-	border:3px solid #292929;
 	width:99.6%;
 	height:4%;
 }
 
 #listPoints{
-	border:3px solid #292929;
-	font-family:TmonMonsori;
+	border:1px solid #292929;
+	font-family: 'Pretendard-Regular';
 	width:99.6%;
 	height:8%;
 }
 
 #mySideStore{
-	font-family:TmonMonsori;
+	font-family: 'Pretendard-Regular';
 	width:18.8%;
 	height:63%;
 	text-align:center;
-	font-size:15pt;
+	font-size:14pt;
 	padding:4.7% 0% 0% 0%;
 	float:right;
 }
 
 #fishingPoint{
-	font-family:TmonMonsori;
+	font-family: 'Pretendard-Regular';
 	width:18.8%;
 	height:63%;
 	text-align:center;
-	font-size:15pt;
+	font-size:14pt;
 	padding:4.7% 0% 0% 0%;
 	float:right;
 }
 
 #camping{
-	font-family:TmonMonsori;
+	font-family: 'Pretendard-Regular';
 	width:18.8%;
 	height:63%;
 	text-align:center;
-	font-size:15pt;
+	font-size:14pt;
 	padding:4.7% 0% 0% 0%;
 	float:right;
 }
 
 #glamping{
-	font-family:TmonMonsori;
+	font-family: 'Pretendard-Regular';
 	width:18.8%;
 	height:60%;
 	text-align:center;
-	font-size:15pt;
+	font-size:14pt;
 	padding:4.7% 0% 0% 0%;
 	float:right;
 }
 
 #caravan{
-	font-family:TmonMonsori;
+	font-family: 'Pretendard-Regular';
 	width:18.8%;
 	height:60%;
 	text-align:right;
-	font-size:15pt;
+	font-size:14pt;
 	padding:4.7% 0% 0% 0%;
+	margin : 0 0 0 3%;
 }
 
 #campingList{
-	border:3px solid #4374D9;
 	width:99.6%;
-	height:86%;
+	height:80%;
 }
 
 
-
-
+/*-----------------------------campingList---------------------------------*/
 
 
 #map{
-	font-family:TmonMonsori;
+	font-family: 'Pretendard-Regular';
 	border:3px solid #292929;
 	width:69.3%;
 	height:91.5%;
