@@ -69,7 +69,8 @@
 				<div id="campingList" class="container">	
 				</div>
 			</div>
-			
+			<div id="rightview" class="shadow">
+			</div>
 			
    	 	<div id="map"></div>
     		
@@ -82,10 +83,10 @@
 		
 		
 		<div id="bottom">
-			<div id="store_info"><span class="end">여기가 좋을 지도¿ CS NUMBER : 1644 - 3681</span></div>
-			<div id="nate2"><span class="nate">사업자 등록번호: 123-81-21968｜통신판매업신고: 연수 1655호｜개인정보 보호책임자 : NATE</span></div>
-			<div id="nate3"><span class="nate">문의 : handaeng1220@gmail.com</span></div>
-		</div>
+         <div id="bottom_store">여기가 좋을 지도¿</div>
+         <div id="bottom_store2">CS NUMBER : 1644 - 3681｜사업자 등록번호: 123-81-21968｜통신판매업신고: 연수 1655호｜개인정보 보호책임자 : NATE</div>
+         <div id="bottom_store3">문의 : handaeng1220@gmail.com</div>
+      </div>
 		
 	</div>
 <script type="text/javascript"
@@ -160,17 +161,17 @@
 	var markers = [];
 
 	function setPoint(list) {
-		console.log(list)
+		console.log(list);
 		for (let n = 0; n < list.length; n++) {
 			geocoder.addressSearch(list[n].maAddress,
 					function(result, status) {
 						// 정상적으로 검색이 완료됐으면 
 						if (status === kakao.maps.services.Status.OK) {
-
+								
 							// 마커 하나를 지도위에 표시합니다 
 							addMarker(new kakao.maps.LatLng(result[0].y,
 									result[0].x), list[n].cpName,
-									list[n].maAddress, list[n].cpNumber);
+									list[n].maAddress, list[n].cpNumber, list[n].cpImage, new kakao.maps.LatLng(parseFloat(result[0].y)+0.11, parseFloat(result[0].x)+0.23));
 						}
 					});
 		}
@@ -179,7 +180,7 @@
 
 	var clickedoverlay = null;
 
-	function addMarker(position, name, address, phone) {
+	function addMarker(position, name, address, phone, img, wishPos) {
 		var imageSrc = 'resources/images/camping.png', // 마커이미지의 주소입니다    
 		imageSize = new kakao.maps.Size(28, 28) // 마커이미지의 크기입니다
 
@@ -230,18 +231,9 @@
 		placeName.innerHTML = name
 		placeName.style.cssText = 'float:left;font-weight:bold;';
 
-		var placeAddImg = document.createElement("div")
-		placeAddImg.style.cssText = 'width:110px; height:110px; background: red; float:left; margin:10px';
-		/* var placeAddImg = document.createElement("img") */
-		/* placeAddImg.setAttribute("src", require("@/assets/map/add.png")) */
-		/*  placeAddImg.addEventListener("click", () => {
-		   const wishPlace = {
-		     placeName: place.name,
-		     placeCategory: place.category_num,
-		     placeUrl: place.kakao_url,
-		   }
-		   this.addWishPlace(wishPlace)
-		 }) */
+		var placeAddImg = document.createElement("img")
+	      placeAddImg.style.cssText = 'width:110px; height:110px; background: red; float:left; margin:10px';
+	      placeAddImg.src = "resources/images/"+img
 
 		var placePhone = document.createElement("div")
 		placePhone.className = "place-phone"
@@ -260,14 +252,35 @@
 		placeZoom.onclick = function() {
 			//overlay.setMap(null);
 		};
-		var placeModal = document.createElement("div")
-		placeModal.innerHTML = "상세정보 열기 >"
-		placeModal.className = "place-desc"
-		placeModal.style.cssText = 'float:right; background: white; color:black; width:120px; height:24px; border: 1px solid black; font-size:12pt; padding:3px 10px'
-		placeModal.onclick = function() {
-			//overlay.setMap(null);
+		
+		var placeDetail = document.createElement("div")
+		placeDetail.innerHTML = "상세정보 열기 >"
+		placeDetail.className = "place-desc"
+		placeDetail.id = "place1"
+		placeDetail.style.cssText = 'float:right; background: white; color:black; width:120px; height:24px; border: 1px solid black; font-size:12pt; padding:3px 10px; display:block;'
+		placeDetail.onclick = function openPanel() {
+			const element = document.getElementById('rightview');
+			element.style.right = '0%';
+			const deplace = document.getElementById('deplace1');
+			deplace.style.display = "block";
+			const place = document.getElementById('place1');
+			place.style.display = "none";
+		}
+		
+		var deplaceDetail = document.createElement("div")
+		deplaceDetail.innerHTML = "상세정보 닫기 <"
+		deplaceDetail.className = "deplace-desc"
+		deplaceDetail.id = "deplace1"
+		deplaceDetail.style.cssText = 'float:right; background: white; color:black; width:120px; height:24px; border: 1px solid black; font-size:12pt; padding:3px 10px; display:none;'
+		deplaceDetail.onclick = function closePanel() {
+			const element = document.getElementById('rightview');
+			element.style.right = '-33%';
+			const place = document.getElementById('place1');
+			place.style.display = "block";
+			const deplace = document.getElementById('deplace1');
+			deplace.style.display = "none";
 		};
-
+		
 		/* placeUrl.href = place.kakao_url */
 
 		var closeBtn = document.createElement('div');
@@ -281,7 +294,7 @@
 		placeHead.append(placeName, closeBtn)
 		placeBody.append(placeAddImg, placeInfo, placeFooter)
 		placeInfo.append(placeAddress, placePhone)
-		placeFooter.append(placeModal, placeZoom)
+		placeFooter.append(placeDetail,deplaceDetail, placeZoom)
 		overlay.setContent(placeContent)
 
 		kakao.maps.event.addListener(marker, 'click', function() {
@@ -290,7 +303,7 @@
 			}
 			overlay.setMap(map);
 			clickedoverlay = overlay;
-			map.setCenter(position);
+			map.setCenter(wishPos);
 		});
 
 	}
@@ -379,31 +392,31 @@
 	     
 	      
 	}
-	const columnName = [ "cpImage", "cpName", "cpNumber", "haName", "thName","maAddress" ];
-	let column;
-	let n = 0;
-	let cpList;
-	function getLeftCampingList(jsonData) {
-		
-		const div = document.getElementById("campingList");
-		
-		for (let x = 0; x < jsonData.length; x++) {
-			let cpList = createDiv("cpList", "cpList");
-			for (let i = 0; i < 6; i++) {
-				column = createDiv(columnName[i], "cpList " + columnName[i]);
-				column.innerHTML = (i == 0) ? "<img id='image' src=resources/images/"+jsonData[x].cpImage+"/>"
-						: (i == 1) ? jsonData[x].cpName
-								: (i == 2) ? jsonData[x].cpNumber
-										: (i == 3) ? jsonData[x].haName
-												: (i == 4) ? jsonData[x].thName
-														: jsonData[x].maAddress;
-				cpList.appendChild(column);
-			}
-			div.appendChild(cpList);
-		}
+	const columnName = [ "cpImage", "cpName", "maAddress", "haName", "thName","cpNumber" ];
+	   let column;
+	   let n = 0;
+	   let cpList;
+	   function getLeftCampingList(jsonData) {
+	      
+	      const div = document.getElementById("campingList");
+	      
+	      for (let x = 0; x < jsonData.length; x++) {
+	         let cpList = createDiv("cpList", "cpList");
+	         for (let i = 0; i < 6; i++) {
+	            column = createDiv(columnName[i], "cpList " + columnName[i]);
+	            column.innerHTML = (i == 0) ? "<img id='image' src=resources/images/"+jsonData[x].cpImage+"/>"
+	                  : (i == 1) ? jsonData[x].cpName
+	                        : (i == 2) ? jsonData[x].maAddress
+	                              : (i == 3) ? jsonData[x].haName
+	                                    : (i == 4) ? "#"+jsonData[x].thName
+	                                          : "☎"+jsonData[x].cpNumber;
+	            cpList.appendChild(column);
+	         }
+	         div.appendChild(cpList);
+	      }
 
-		setPoint(jsonData);
-	}
+	      setPoint(jsonData);
+	   }
 
 	function createDiv(name, className) {
 		const div = document.createElement("div"); // <div></div>
