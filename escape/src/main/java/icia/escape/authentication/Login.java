@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.servlet.ModelAndView;
+
+
 import icia.escape.beans.Members;
 import icia.escape.beans.Stores;
 import icia.escape.db.AuthenticationMapper;
@@ -64,6 +66,10 @@ public class Login {
 			case "1":
 				getNewPage(mem[0]);
 				break;
+			case "2":
+				getNewPageMember(mem[0]);
+				break;
+			
 			case "M1":
 				logInMember(mem[0]);
 				break;
@@ -75,10 +81,15 @@ public class Login {
 		return mav;
 	}
 	
+	
+
 	/*업체 관련된 METHOD 연결*/
 	public ModelAndView storeController(String serviceCode, Stores... sr) {
 
 		switch(serviceCode) {
+		case "3":
+			getNewPageStore(sr[0]);
+			break;
 		case "S1":
 			logInStore(sr[0]);
 			break;
@@ -117,11 +128,7 @@ public class Login {
 
 					if(isAccessCheck) {
 						try {
-							/*메인페이지에서 보여줄 아이디 저장*/
-							this.mav.addObject("userInfo", this.am.getMemberInfo(mem));
-							pu.setAttribute("userInfo", mav.getModel().get("userInfo"));
-							
-							/*사용자 IP 저장*/
+							/*사용자 정보 저장*/
 							this.mav.addObject("accessInfo", this.am.getMemberAccessInfo(mem));
 							pu.setAttribute("sessionInfo", mav.getModel().get("accessInfo"));
 							page = "memberMain";
@@ -164,11 +171,8 @@ public class Login {
 
 					if(isAccessCheck) {
 						try {
-							/*메인페이지에서 보여줄 아이디 저장*/
-							this.mav.addObject("userInfo", this.am.getStoreInfo(sr));
-							pu.setAttribute("userInfo", mav.getModel().get("userInfo"));
 							
-							/*업체 IP 저장*/
+							/*업체 정보 저장*/
 							this.mav.addObject("accessInfo", this.am.getStoreAccessInfo(sr));
 							pu.setAttribute("sessionInfo", mav.getModel().get("accessInfo"));
 							page = "storeMain";
@@ -199,7 +203,7 @@ public class Login {
 			e.printStackTrace();
 		}finally {
 			try {pu.removeAttribute("sessionInfo"); 
-			     pu.removeAttribute("userInfo");} catch(Exception e) {e.printStackTrace();}
+			     } catch(Exception e) {e.printStackTrace();}
 		}
 
 		mav.setViewName(page);
@@ -220,7 +224,7 @@ public class Login {
 			e.printStackTrace();
 		}finally {
 			try {pu.removeAttribute("sessionInfo");
-				 pu.removeAttribute("userInfo");} catch(Exception e) {e.printStackTrace();}
+				 } catch(Exception e) {e.printStackTrace();}
 		}
 
 		mav.setViewName(page);
@@ -230,12 +234,49 @@ public class Login {
 	/*페이지 이동*/
 	private void getNewPage(Members mem) {
 		String page = mem.getPageName();
+		;
 		this.mav.setViewName(page);
+		
 	}
-
+	/*업체 페이지 이동*/
+	private void getNewPageStore(Stores sr) {
+		String page = sr.getPageName();
+		this.mav.addObject("sessionInfo", this.am.getStoreInfo(sr));
+		this.mav.setViewName(page);
+		
+	}
+	/*사용자 페이지 이동*/
+	private void getNewPageMember(Members mem) {
+		String page = mem.getPageName();
+		this.mav.addObject("sessionInfo", this.am.getMemberInfo(mem));
+		this.mav.setViewName(page);
+		
+	}
 	/*첫 메인화면*/
 	private void basicPage() {
-		this.mav.setViewName("basic");
+		String page = "basic";
+		String message = "";
+		try {
+			Members mem;
+			Stores sr;
+			if((mem = (Members)pu.getAttribute("accessInfo")) != null) {
+				this.mav.addObject("sessionInfo", this.am.getMemberAccessInfo(mem));
+				
+				page = "memberMain";
+				message = "새로운 탭";
+			}else if((sr = (Stores)pu.getAttribute("accessInfo")) != null) {
+				this.mav.addObject("sessionInfo", this.am.getStoreAccessInfo(sr));
+				
+				page = "storeMain";
+				message = "새로운 탭";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		mav.addObject("msg", message);
+		mav.setViewName(page);
+		this.mav.setViewName(page);
 
 	}
 

@@ -4,17 +4,20 @@ import lombok.Data;
 
 @Data
 public class Fishing {
-	private String goCode;
-	private String goCacode;
-	private String goName;
-	private int goCost;
-	private int goPrice;
-	private int goStocks;
-	private int goDiscount;
-	private int goStcode;
-	private String goStname;
-	private String goCaname;
-	private int goQuantity;
-	private String goStatus;
-	private String goImgLoc;
+	
+	private String fpMaMmCode;
+	private String fpMaCfCode;
+	private String fpCaCode;
+	private String fpMaPost;
+	private String fpThCode;
+	private String fpGeCode;
+	private String fpFiCode;
+	private String fpCode;
+	private String fpTitle;
+	private String fpContents;
+	private String fpDate;
+	private int fpView;
+	private String fpImage;
 }
+
+

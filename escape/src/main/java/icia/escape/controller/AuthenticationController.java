@@ -51,7 +51,16 @@ public class AuthenticationController {
 	public ModelAndView getNewPage(@ModelAttribute Members mem) {
 		return log.memberController("1", mem);
 	}
-	
+	/*사용자 페이지 이동*/
+	@PostMapping("/GetNewPageMember")
+	public ModelAndView getNewPageMember(@ModelAttribute Members mem) {
+		return log.memberController("2", mem);
+	}
+	/*업체 페이지 이동*/
+	@PostMapping("/GetNewPageStore")
+	public ModelAndView getNewPageStore(@ModelAttribute Stores sr) {
+		return log.storeController("3", sr);
+	}
 	/****************************로그인********************************/
 	/*사용자 로그인*/
 	@PostMapping("/LogInMember")
@@ -117,7 +126,6 @@ public class AuthenticationController {
 	/*사용자 비밀번호 찾기 : 이메일 전송*/
 	@PostMapping("/SendMemberEmail")
 	public ModelAndView sendMemberEmail(@ModelAttribute Members mem) {
-		System.out.println(mem);
 		return fi.memberController("M6", mem);
 	}
 	/*사용자 비밀번호 찾기 : 비밀번호 변경 Form*/
@@ -136,13 +144,14 @@ public class AuthenticationController {
 		return fi.storeController("S6", sr);
 	}
 	/*업체 비밀번호 찾기 : 비밀번호 변경 Form*/
-	@PostMapping("/StoreAuth")
+	@RequestMapping(value="/StoreAuth", method = {RequestMethod.GET})
 	public ModelAndView storeAuth(@ModelAttribute Stores sr) {
 		return fi.storeController("S7", sr);
 	}
 	/*업체 비밀번호 찾기 : 비밀번호 변경*/
 	@PostMapping("/UpdStorePwd")
 	public ModelAndView updStorePwd(@ModelAttribute Stores sr) {
+		
 		return fi.storeController("S8", sr);
 	}
 	

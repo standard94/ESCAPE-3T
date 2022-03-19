@@ -12,6 +12,40 @@ function getNewPage(pageName){
 
 }
 
+/*사용자로그인 기록, 페이지 이동*/
+function getNewPageMember(pMmId,pPageName){
+const form = makeForm("","GetNewPageMember","Post");
+const mmId = makeInputElement("hidden","mmId",pMmId,"");
+const pageName = makeInputElement("hidden","pageName",pPageName,"");
+form.appendChild(mmId);
+form.appendChild(pageName);
+document.body.appendChild(form);
+form.submit();
+
+}
+
+/*업체 로그인 기록, 페이지 이동*/
+function getNewPageStore(pSrId,pPageName){
+const form = makeForm("","GetNewPageStore","Post");
+const srId = makeInputElement("hidden","srId",pSrId,"");
+const pageName= makeInputElement("hidden","pageName",pPageName,"");
+
+form.appendChild(srId);
+form.appendChild(pageName);
+document.body.appendChild(form);
+form.submit();
+}
+let publicIp;
+
+function getPublic() {
+	/* publicIp 조회 후 저장 */
+	getAjaxJson("https://api.ipify.org","format=json","getPublicIp", "GET");
+}
+
+function getPublicIp(pIp) {
+	publicIp = pIp.ip;
+}
+
 /*사용자 로그인 form 생성*/
 function logInMember() {
 	const form = document.getElementsByName("logInForm")[0];
@@ -85,20 +119,13 @@ function logOutStore(pSrId,pPublicIp,pSrCode){
 	form.submit();
 }  
 
-let publicIp;
 
-function getPublic() {
-	/* publicIp 조회 후 저장 */
-	getAjaxJson("https://api.ipify.org","format=json","getPublicIp", "GET");
-}
 
 function initPage(msg) {
 	if(msg != ""){alert(msg);}
 	
 }
-function getPublicIp(pIp) {
-	publicIp = pIp.ip;
-}
+
 
 function isEmpty(obj) {
 	let check = true;
