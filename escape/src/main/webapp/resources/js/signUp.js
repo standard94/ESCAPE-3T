@@ -268,8 +268,10 @@ function sendMemberEmail(pMmId,pMmEmail){
 
 /*업체 비밀번호 찾기 : 이메일 전송*/
 function sendStoreEmail(pSrId,pSrEmail){
-	const srId = document.getElementById(pSrId).value;
-	const srEmail = document.getElementById(pSrEmail).value;
+	const srId1 = document.getElementById(pSrId).value;
+	const srEmail1 = document.getElementById(pSrEmail).value;
+	const srId = makeInputElement("hidden","srId",srId1,"");
+	const srEmail = makeInputElement("hidden","srEmail",srEmail1,"");
 	const form = makeForm("","SendStoreEmail","post");
 	
 	form.appendChild(srId);
@@ -279,7 +281,50 @@ function sendStoreEmail(pSrId,pSrEmail){
 		
 } 
 
-
+/*사용자 비밀번호 변경*/
+function updMemberPwd(pMmId,pMmPassword,pMmPasswordCheck){
+	const mmId1 = document.getElementById(pMmId).value;
+	const mmPassword1 = document.getElementById(pMmPassword).value;
+	const pwCheck = document.getElementById(pMmPasswordCheck).value;
+	const mmId = makeInputElement("hidden","mmId",mmId1,"");
+	const mmPassword = makeInputElement("hidden","mmEmail",mmPassword1,"");
+	
+	const form = makeForm("","UpdMemberPwd","post");
+	
+	if(mmPassword1!='' && pwCheck!=''){
+		if(mmPassword1 == pwCheck){
+			
+		form.appendChild(mmId);
+		form.appendChild(mmPassword);
+		document.body.appendChild(form);
+		form.submit();
+		}
+	}
+}
+/*업체 비밀번호 변경*/
+function updStorePwd(pSrId,pSrPassword,pSrPasswordCheck){
+	
+	const srId1 = document.getElementsByName(pSrId)[0].value;
+	const srPassword1 = document.getElementsByName(pSrPassword)[0].value;
+	const pwCheck = document.getElementsByName(pSrPasswordCheck)[0].value;
+	
+	const srId = makeInputElement("hidden","srId",srId1,"");
+	const srPassword = makeInputElement("hidden","srPassword",srPassword1,"");
+	
+	const form = makeForm("","UpdStorePwd","post");
+	if(srPassword1!='' && pwCheck!=''){
+		if(srPassword1 == pwCheck){
+			
+		form.appendChild(srId);
+		form.appendChild(srPassword);
+		document.body.appendChild(form);
+		form.submit();
+		
+		}
+	}
+	
+	
+}
 /******************************************************************************************************/
 function fromJsonToJson(action, clientData, fn, content) {
 

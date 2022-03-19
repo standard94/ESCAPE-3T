@@ -31,4 +31,18 @@
    WHERE CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode}
    </select>
    
+
+<!-- 낚시포인트 등록 : DB에 저장 -->
+<select parameterType="icia.escape.beans.Fishing" id="insFishing">
+INSERT INTO FP(FP_MAMMCODE, FP_MACFCODE, FP_CACODE, FP_THCODE, FP_GECODE, FP_FICODE, FP_CODE, FP_TITLE, FP_CONTENTS, FP_VIEW, FP_DATE, FP_MAPOST, FP_IMAGE)
+VALUES(#{fpMaMmCode}, #{fpMaCfCode}, #{fpCaCode}, #{fpThCode}, #{fpGeCode}, #{fpFiCode}, #{fpCode}, #{fpTitle}, #{fpContents}, #{fpView}, #{fpDate}, #{fpMaPost}, #{fpImage}) 
+</select>
+<!-- 낚시포인트 등록 : 게시물 MAXCODE불러오기 -->
+<select resultType="String" parameterType="icia.escape.beans.Fishing" id="checkFishingCode">
+SELECT MAX(FP_CODE)AS FPCODE FROM FP 
+</select>
+
+<update parameterType="icia.escape.beans.Fishing" id="updFishing">
+UPDATE FP SET FP_TITLE = #{fpTitle}, FP_CONTENTS =#{fpContents} WHERE FP_MACFCODE = #{fpMaCfCode} AND FP_CACODE = #{fpCaCode} AND FP_CODE = #{fpCode}
+ </update>
 </mapper>

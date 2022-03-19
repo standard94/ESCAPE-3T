@@ -46,11 +46,12 @@
 		<div id="mid">
 			<div id="leftList">
 				<div id="listFilter"><input id="insert" type="button" value="등록" onClick=""/>
-					<label for="job">필터링</label> 
+					<label for="job"></label> 
 		<select id="job" name="job" size="1">
-			<option value="">눌러봅시당</option>
+			<option value="">전체</option>
 			<option value="조회순">조회순</option>
-			<option value="조아요순">조아요순</option>
+			<option value="조아요순">좋아요순</option>
+			<option value="조아요순">찜순</option>
 		</select>
 					</div>
 					

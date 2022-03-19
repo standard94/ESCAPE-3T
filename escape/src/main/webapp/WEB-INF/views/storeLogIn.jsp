@@ -25,8 +25,8 @@ function mouseLeave(obj){
    
 </script>
 
-<body onLoad = "getPublic()">
-<form name="logInForm" action="LogInMember" method="post">
+<body onLoad = "getPublic(),initPage('${msg}')">
+<form name="logInForm" action="LogInStore" method="post">
 		<div id="basic">
 			<div id="top">
 				<div id="logo"/></div>
@@ -55,8 +55,8 @@ function mouseLeave(obj){
 						<div id="storelogin_btn" ><div id="login_type2" class="divButton" onClick="getNewPage('storeLogIn')" >업체 로그인</div></div>
 					</div>
 					<div id="input">
-						<div id="id"><input class="input_id" type="text" name="mmId" placeholder="ID" /></div>
-						<div id="pw"><input class="input_pw" type="password" name="mmPassword" placeholder="PW" /></div>
+						<div id="id"><input class="input_id" type="text" name="srId" placeholder="ID" /></div>
+						<div id="pw"><input class="input_pw" type="password" name="srPassword" placeholder="PW" /></div>
 						<div id="find" ><span id="id_pw_find"onClick="getNewPage('findStoreInfo')"><a href="javascript:void(0);">아이디/비밀번호 찾기</a></span></div>		
 						<div id="login3"onClick="logInStore()">로그인</div>
 						<div id="join" onClick="getNewPage('signUp')">회원가입</div>

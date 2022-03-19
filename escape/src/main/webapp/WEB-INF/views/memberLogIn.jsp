@@ -18,8 +18,8 @@
 	}
 </script>
 
-<body onLoad = "getPublic()">
-
+<body onLoad = "getPublic(),initPage('${msg}')">
+<form name="logInForm" action="LogInMember" method="post">
 		<div id="basic">
 			<div id="top">
 				<div id="logo"/></div>
@@ -63,6 +63,6 @@
 				<div id="nate3"><span class="nate">문의 : handaeng1220@gmail.com</span></div>
 			</div>
 		</div>
-	
+	</form>
 </body>
 </html>

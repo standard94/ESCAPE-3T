@@ -1,6 +1,7 @@
 package icia.escape.authentication;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -121,18 +122,22 @@ public class FindInformation {
 	
 	//사용자 비밀번호 찾기 :: 회원 유효성 체크 --> 이메일 전송
 	private void sendMemberEmail(Members mem) {
-		System.out.println(mem);
+		
 		/*Email Info*/
 		boolean isSendMail = false;
 		String message = "등록된 정보와 일치하지 않습니다.";
 		String page = "findMemberPassword";
 		
-		if((this.am.checkMember(mem)!= null)) {
-			mem.setMmName(this.am.checkMember(mem));
-			String memberInfo = mem.getMmId() + ":" + mem.getMmName();
+		if(this.convertToBool(this.am.checkMemberId(mem))) {
+			mem.setMmCode(((Members)this.am.checkMember(mem)).getMmCode());
+			mem.setMmName(((Members)this.am.checkMember(mem)).getMmName());
+			mem.setMmNumber(((Members)this.am.checkMember(mem)).getMmNumber());
+			
+			String memberInfo = mem.getMmCode() + ":" + mem.getMmName() + "&" + mem.getMmId() + "!" + mem.getMmNumber() + mem.getMmEmail();
 			
 			try {
-				this.enc.aesEncode(memberInfo, "changePWD");
+				memberInfo = this.enc.aesEncode(memberInfo, "changePWD");
+				
 			} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException
 					| NoSuchPaddingException | InvalidAlgorithmParameterException | IllegalBlockSizeException
 					| BadPaddingException e) {
@@ -175,16 +180,18 @@ public class FindInformation {
 	
 	//사용자 비밀번호 찾기 : Email 변경 Form
 	private void memberAuth(Members mem) {
-		System.out.println(mem.getAuthCode());
 		String code = null;
+		
 		this.mav.addObject("msg", "변경할 패스워드를 입력해주세요~");
 		
 		try {
+			
 			code = this.enc.aesDecode(mem.getAuthCode(), "changePWD");
+			
 		} catch (Exception e) {e.printStackTrace();}
 		
-		this.mav.addObject("mmId", code.substring(0,code.indexOf(":")));
-		this.mav.addObject("mmName", code.substring(code.indexOf(":")+1));
+		this.mav.addObject("mmId", code.substring(code.indexOf("&")+1,code.indexOf("!")));
+		this.mav.addObject("mmName", code.substring(code.indexOf(":")+1,code.indexOf("&")));
 		this.mav.setViewName("newMemPw");
 	} 
 	
@@ -193,10 +200,12 @@ public class FindInformation {
 		boolean tran = false;
 		String message = "패스워드 변경 실패";
 		String page = "newMemPw";
+		
 		// update
 		// propagation , isolation 설정
 		this.setTransactionConf(this.dtmdf.PROPAGATION_REQUIRED,this.dtmdf.ISOLATION_READ_COMMITTED,false);
 		mem.setMmPassword((this.enc.encode(mem.getMmPassword())));
+		mem.setMmCode(((Members)this.am.getMemberInfo(mem)).getMmCode());
 		if(this.convertToBool(this.am.updMmPassword(mem))){
 			tran = true;
 			message = "패스워드가 안전하게 변경되었습니다. 로그인 후 서비스를 이용해 주세요.";
@@ -217,12 +226,17 @@ public class FindInformation {
 		String message = "등록된 정보와 일치하지 않습니다.";
 		String page = "findStorePassword";
 		
-		if((this.am.checkStore(sr)!= null)) {
-			sr.setSrName(this.am.checkStore(sr));
-			String storeInfo = sr.getSrId() + ":" + sr.getSrName();
+		if(this.convertToBool(this.am.checkStoreId(sr))) {
+			sr.setSrPost(((Stores)this.am.checkStore(sr)).getSrPost());
+			sr.setSrCode(((Stores)this.am.checkStore(sr)).getSrCode());
+			sr.setSrName(((Stores)this.am.checkStore(sr)).getSrName());
+			sr.setSrNumber(((Stores)this.am.checkStore(sr)).getSrNumber());
+			
+			String storeInfo = sr.getSrPost() + sr.getSrCode() + ":" + sr.getSrId() + "&" + sr.getSrName() +"!"+ sr.getSrNumber() + sr.getSrEmail();
 			
 			try {
-				this.enc.aesEncode(storeInfo, "changePWD");
+				storeInfo = this.enc.aesEncode(storeInfo, "changePWD");
+				
 			} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException
 					| NoSuchPaddingException | InvalidAlgorithmParameterException | IllegalBlockSizeException
 					| BadPaddingException e) {
@@ -232,7 +246,7 @@ public class FindInformation {
 			
 			/*EmailInfo*/
 			String subject = "비밀번호를 변경해주세요/ 여기가 좋을 지도";
-			String contents = "<a href='http://localhost/storeAuth?authCode="+ storeInfo +"'>인증작업을 위해 이동해주세요</a>";
+			String contents = "<a href='http://192.168.0.169/StoreAuth?authCode="+ storeInfo +"'>인증작업을 위해 이동해주세요</a>";
 		
 			String from = "iciabeju@naver.com";
 			String to = sr.getSrEmail();
@@ -264,6 +278,7 @@ public class FindInformation {
 	
 	//업체 비밀번호 찾기 : Email 변경 Form
 	private void storeAuth(Stores sr) {
+		
 		String code = null;
 		this.mav.addObject("msg", "변경할 패스워드를 입력해주세요~");
 		
@@ -271,19 +286,22 @@ public class FindInformation {
 			code = this.enc.aesDecode(sr.getAuthCode(), "changePWD");
 		} catch (Exception e) {e.printStackTrace();}
 		
-		this.mav.addObject("srId", code.substring(0,code.indexOf(":")));
-		this.mav.addObject("srName", code.substring(code.indexOf(":")+1));
+		
+		this.mav.addObject("srId", code.substring(code.indexOf(":")+1,code.indexOf("&")));
+		this.mav.addObject("srName", code.substring(code.indexOf("&")+1,code.indexOf("!")));
 		this.mav.setViewName("newSrPw");
 	} 
 	
 	//업체 비밀번호 찾기 : 비밀번호 변경
 	private void modStore(Stores sr) {
 		boolean tran = false;
+		
 		String message = "패스워드 변경 실패";
 		String page = "newSrPw";
 		// update
 		// propagation , isolation 설정
 		this.setTransactionConf(this.dtmdf.PROPAGATION_REQUIRED,this.dtmdf.ISOLATION_READ_COMMITTED,false);
+	    sr.setSrCode(((Stores)this.am.getStoreInfo(sr)).getSrCode());
 		sr.setSrPassword((this.enc.encode(sr.getSrPassword())));
 		if(this.convertToBool(this.am.updSrPassword(sr))){
 			tran = true;
