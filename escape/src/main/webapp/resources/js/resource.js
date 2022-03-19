@@ -11,6 +11,30 @@ function getNewPage(pageName){
  form.submit();
 
 }
+
+/*사용자로그인 기록, 페이지 이동*/
+function getNewPageMember(pMmId,pPageName){
+const form = makeForm("","GetNewPageMember","Post");
+const mmId = makeInputElement("hidden","mmId",pMmId,"");
+const pageName = makeInputElement("hidden","pageName",pPageName,"");
+form.appendChild(mmId);
+form.appendChild(pageName);
+document.body.appendChild(form);
+form.submit();
+
+}
+
+/*업체 로그인 기록, 페이지 이동*/
+function getNewPageStore(pSrId,pageName){
+const form = makeForm("","GetNewPageStore","Post");
+const srId = makeInputElement("hidden","srId",pSrId,"");
+const pageName = makeInputElement("hidden","pageName",pPageName,"");
+
+form.appendChild(srId);
+form.appendChild(pageName);
+document.body.appendChild(form);
+form.submit();
+}
 let publicIp;
 
 function getPublic() {

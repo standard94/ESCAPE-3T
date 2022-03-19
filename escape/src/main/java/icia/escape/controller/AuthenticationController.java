@@ -51,7 +51,16 @@ public class AuthenticationController {
 	public ModelAndView getNewPage(@ModelAttribute Members mem) {
 		return log.memberController("1", mem);
 	}
-	
+	/*사용자 페이지 이동*/
+	@PostMapping("/GetNewPageMember")
+	public ModelAndView getNewPageMember(@ModelAttribute Members mem) {
+		return log.memberController("2", mem);
+	}
+	/*업체 페이지 이동*/
+	@PostMapping("/GetNewPageStore")
+	public ModelAndView getNewPageStore(@ModelAttribute Stores sr) {
+		return log.storeController("3", sr);
+	}
 	/****************************로그인********************************/
 	/*사용자 로그인*/
 	@PostMapping("/LogInMember")
