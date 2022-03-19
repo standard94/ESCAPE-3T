@@ -21,7 +21,7 @@
 
   <!-- 사용자 로그인 : 회원 로그기록 가져오기 -->
   <select id="getMemberAccessInfo" parameterType = "icia.escape.beans.Members" resultType = "icia.escape.beans.Members">
-      SELECT PUBLICIP FROM ACCESSINFO WHERE MMCODE = #{mmCode}
+      SELECT PUBLICIP,MMID,MMCODE FROM ACCESSINFO WHERE MMCODE = #{mmCode}
     </select>
 	
 	<!-- 사용자 로그인 : 회원 정보 가져오기 -->
@@ -51,8 +51,8 @@
    </select>
    
    <!-- 사용자 유효성 -->
-   <select id="checkMember" parameterType="icia.escape.beans.Members" resultType="String">
-   	SELECT MM_NAME AS MMNAME FROM MM WHERE MM_ID = #{mmId} AND MM_EMAIL = #{mmEmail}
+   <select id="checkMember" parameterType="icia.escape.beans.Members" resultType="icia.escape.beans.Members">
+   	SELECT MM_NAME AS MMNAME, MM_CODE AS MMCODE,MM_NUMBER AS MMNUMBER FROM MM WHERE MM_ID = #{mmId} AND MM_EMAIL = #{mmEmail}
    </select>
    
    <!-- 사용자 비밀번호 변경 -->
@@ -79,7 +79,7 @@
    
    <!-- 업체 로그인 : 업체 로그기록 가져오기-->
     <select id="getStoreAccessInfo" parameterType = "icia.escape.beans.Stores" resultType = "icia.escape.beans.Stores">
-      SELECT PUBLICIP AS PUBLICIP FROM ACCESSINFO2 WHERE SRCODE = #{srCode}
+      SELECT PUBLICIP,SRID,SRCODE AS PUBLICIP FROM ACCESSINFO2 WHERE SRCODE = #{srCode}
     </select>
     
     <!-- 업체 정보 가져오기 -->
@@ -111,8 +111,8 @@
    </select>
    
    <!-- 사용자 유효성 -->
-   <select id="checkStore" parameterType="icia.escape.beans.Stores" resultType="String">
-   	SELECT SR_NAME AS SR_NAME FROM SR WHERE SR_ID = #{srId} AND SR_EMAIL = #{srEmail}
+   <select id="checkStore" parameterType="icia.escape.beans.Stores" resultType="icia.escape.beans.Stores">
+   	SELECT SR_NAME AS SRNAME, SR_CODE AS SRCODE ,SR_NUMBER AS SRNUMBER, SR_POST AS SRPOST FROM SR WHERE SR_ID = #{srId} AND SR_EMAIL = #{srEmail}
    </select>
    
     <!-- 업체 비밀번호 변경 -->
@@ -120,8 +120,6 @@
    		UPDATE SR SET SR_PASSWORD = #{srPassword} WHERE SR_CODE = #{srCode}
    </update>
    
-   <select id="getCampingList" parameterType="icia.escape.beans.Maps" resultType="icia.escape.beans.Maps">
-      SELECT MA_MMCODE AS MAMMCODE, MA_POST AS MAPOST, MA_ADDRESS AS MAADDRESS, MA_CFCODE AS MACFCODE FROM MA
-    </select>
+ 
    
 </mapper>

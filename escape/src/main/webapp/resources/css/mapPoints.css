@@ -99,7 +99,7 @@
 #box1 {
    width:35.5%;
    height:3.4%;
-   position:absolute; top:1.7%;
+   position:absolute; top:2.2%;
    left:57.5%;
    }
       
@@ -130,16 +130,18 @@
    }
 
 .top_menu {
+	margin-top : 3%;
    font-family: 'Pretendard-Regular';
-   font-size: 12pt;
+   font-size: 13pt;
    cursor : pointer;
    }
    
 #list {
-   width:4.4%;
+   width:4%;
    height:4.8%;
    position:absolute;
    left:93.5%;
+   top:1%;
    background-color:#a2a9af;
    cursor : pointer;
    }

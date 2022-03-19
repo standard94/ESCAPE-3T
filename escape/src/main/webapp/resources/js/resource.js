@@ -11,6 +11,16 @@ function getNewPage(pageName){
  form.submit();
 
 }
+let publicIp;
+
+function getPublic() {
+	/* publicIp 조회 후 저장 */
+	getAjaxJson("https://api.ipify.org","format=json","getPublicIp", "GET");
+}
+
+function getPublicIp(pIp) {
+	publicIp = pIp.ip;
+}
 
 /*사용자 로그인 form 생성*/
 function logInMember() {
@@ -85,20 +95,13 @@ function logOutStore(pSrId,pPublicIp,pSrCode){
 	form.submit();
 }  
 
-let publicIp;
 
-function getPublic() {
-	/* publicIp 조회 후 저장 */
-	getAjaxJson("https://api.ipify.org","format=json","getPublicIp", "GET");
-}
 
 function initPage(msg) {
 	if(msg != ""){alert(msg);}
 	
 }
-function getPublicIp(pIp) {
-	publicIp = pIp.ip;
-}
+
 
 function isEmpty(obj) {
 	let check = true;
