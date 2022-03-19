@@ -25,10 +25,10 @@ form.submit();
 }
 
 /*업체 로그인 기록, 페이지 이동*/
-function getNewPageStore(pSrId,pageName){
+function getNewPageStore(pSrId,pPageName){
 const form = makeForm("","GetNewPageStore","Post");
 const srId = makeInputElement("hidden","srId",pSrId,"");
-const pageName = makeInputElement("hidden","pageName",pPageName,"");
+const pageName= makeInputElement("hidden","pageName",pPageName,"");
 
 form.appendChild(srId);
 form.appendChild(pageName);
