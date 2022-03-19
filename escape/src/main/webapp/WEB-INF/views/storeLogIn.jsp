@@ -29,7 +29,7 @@ function mouseLeave(obj){
 <form name="logInForm" action="LogInStore" method="post">
 		<div id="basic">
 			<div id="top">
-				<div id="logo"/></div>
+				<div id="logo" onClick="getNewPage('basic')">여기가 좋을 지도¿</div>
 				<div id="search"><input id="searchFont" type="text"  name="" placeholder="" /><input id="searchZoom" class="divButton" type="button" value="SEARCH" /></div>
 				<div id="box1">
 		 			<div id="login1"><span class="top_menu" onClick="getNewPage('memberLogIn')" >로그인/</span><span class="top_menu"  onClick="getNewPage('signUp')">회원가입</span></div>

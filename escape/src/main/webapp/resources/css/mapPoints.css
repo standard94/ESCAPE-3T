@@ -65,7 +65,14 @@
    width:12.5%;
    height:3%;
    position:absolute;
+   color : #EAEAEA;
+	font-size:18pt;
+	font-weight : bolder;
+	cursor:pointer;
    }
+  #logo:hover{
+  color:#FFFFB4;
+  }
 #search {
    width:44.5%;
    height:2.3%;
