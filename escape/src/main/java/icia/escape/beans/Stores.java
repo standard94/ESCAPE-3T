@@ -19,5 +19,6 @@ public class Stores {
 	String stCode;
 	String srAddress;
 	String authCode;
+	String pageName;
     
 }

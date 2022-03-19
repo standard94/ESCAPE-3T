@@ -66,6 +66,10 @@ public class Login {
 			case "1":
 				getNewPage(mem[0]);
 				break;
+			case "2":
+				getNewPageMember(mem[0]);
+				break;
+			
 			case "M1":
 				logInMember(mem[0]);
 				break;
@@ -77,10 +81,15 @@ public class Login {
 		return mav;
 	}
 	
+	
+
 	/*업체 관련된 METHOD 연결*/
 	public ModelAndView storeController(String serviceCode, Stores... sr) {
 
 		switch(serviceCode) {
+		case "3":
+			getNewPageStore(sr[0]);
+			break;
 		case "S1":
 			logInStore(sr[0]);
 			break;
@@ -225,9 +234,24 @@ public class Login {
 	/*페이지 이동*/
 	private void getNewPage(Members mem) {
 		String page = mem.getPageName();
+		;
 		this.mav.setViewName(page);
+		
 	}
-
+	/*업체 페이지 이동*/
+	private void getNewPageStore(Stores sr) {
+		String page = sr.getPageName();
+		this.mav.addObject("sessionInfo", this.am.getStoreInfo(sr));
+		this.mav.setViewName(page);
+		
+	}
+	/*사용자 페이지 이동*/
+	private void getNewPageMember(Members mem) {
+		String page = mem.getPageName();
+		this.mav.addObject("sessionInfo", this.am.getMemberInfo(mem));
+		this.mav.setViewName(page);
+		
+	}
 	/*첫 메인화면*/
 	private void basicPage() {
 		String page = "basic";
