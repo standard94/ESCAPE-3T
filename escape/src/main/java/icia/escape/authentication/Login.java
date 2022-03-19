@@ -241,14 +241,14 @@ public class Login {
 	/*업체 페이지 이동*/
 	private void getNewPageStore(Stores sr) {
 		String page = sr.getPageName();
-		this.mav.addObject("sessionInfo", this.am.getStoreAccessInfo(sr));
+		this.mav.addObject("sessionInfo", this.am.getStoreInfo(sr));
 		this.mav.setViewName(page);
 		
 	}
 	/*사용자 페이지 이동*/
 	private void getNewPageMember(Members mem) {
 		String page = mem.getPageName();
-		this.mav.addObject("sessionInfo", this.am.getMemberAccessInfo(mem));
+		this.mav.addObject("sessionInfo", this.am.getMemberInfo(mem));
 		this.mav.setViewName(page);
 		
 	}
