@@ -57,10 +57,17 @@ public class CampingMap {
 			break;	
 		case "C2":
 			chooseCampingList(model);
-			break;		
+			break;
+		case "C3":
+			findCampingDetail(model);
+			break;
 			
 		}
 		return mav;
+	}
+	
+	public void findCampingDetail(Model model) {
+		model.addAttribute("campingList",this.mm.findCampingDetail((Camping)model.getAttribute("camping")));
 	}
 	
 	public void chooseCampingList(Model model) {

@@ -215,6 +215,12 @@
 			overlay.setMap(map);
 			clickedoverlay = overlay;
 			map.setCenter(wishPos);
+			
+			// 현재 지도의 레벨을 얻어옵니다
+		    var level = map.getLevel(); 
+		    
+		    // 지도를 1레벨 올립니다 (지도가 축소됩니다)
+		    map.setLevel(9);
 		});
 
 	}
@@ -318,14 +324,17 @@
 							// 마커 하나를 지도위에 표시합니다 
 							getLeftCampingList(new kakao.maps.LatLng(result[0].y,
 									result[0].x), list[x].cpImage, list[x].cpName,
-									list[x].maAddress, list[x].haName, list[x].thName, list[x].cpNumber, new kakao.maps.LatLng(parseFloat(result[0].y)+0.11, parseFloat(result[0].x)+0.23));
+									list[x].maAddress, list[x].haName, list[x].thName, list[x].cpNumber,
+									list[x].cpCaCode, list[x].cpMaCfCode, list[x].cpCode,
+									new kakao.maps.LatLng(parseFloat(result[0].y)+0.11, parseFloat(result[0].x)+0.23));
+							console.log(list);
 						}
 					});
 		}
 		
 	}
 	   
-	function getLeftCampingList(mPos, cpI, cpN, maA, haN, thN, cpNb, wishPos) {
+	function getLeftCampingList(mPos, cpI, cpN, maA, haN, thN, cpNb, cpCa, cpMa, cpCd, wishPos) {
 	    const div = document.getElementById("campingList");
 		let cpList = createDiv("cpList", "cpList");
 		for (let i = 0; i < 6; i++) {
@@ -346,16 +355,92 @@
 	        makeOverlay(cpN, cpI, cpNb, maA, overlay2);
 	        cpList.onclick = function() {
 	    		if (clickedoverlay) {
+	    			findCampingDetail(cpCa, cpMa, cpCd);
 	    			clickedoverlay.setMap(null);
 	    		}
 	    		overlay2.setMap(map);
 	    		clickedoverlay = overlay2;
 	    		map.setCenter(wishPos);
+	    		
+	    		// 현재 지도의 레벨을 얻어옵니다
+	    	    var level = map.getLevel(); 
+	    	    
+	    	    // 지도를 1레벨 올립니다 (지도가 축소됩니다)
+	    	    map.setLevel(9);
 	    	};
 	    }
 		div.appendChild(cpList);
 	   }
 
+	//특정 캠핑장 상세정보값 보내기
+	function findCampingDetail(pCpCaCode, pCpMaCfCode, pcpCode) {
+		let jsonData = [];
+		jsonData.push({
+			cpCode : pcpCode,
+			cpCaCode : pCpCaCode,
+			cpMaCfCode : pCpMaCfCode
+		});
+		const clientData = JSON.stringify(jsonData);
+		getAjaxJson("findCampingDetail", clientData, "getCampingDetail");
+	}
+	
+	function getCampingDetail(detail){
+		
+		var panel = document.getElementById('rightview');
+		
+		var placeContent = document.createElement("div")
+		placeContent.className = "place-content"
+		placeContent.id = "place-content"
+		placeContent.style.cssText = 'background: white; width:100%; height:20%; box-shadow: 3px 3px 10px #566270; border-radius: 5px;';
+
+		var placeHead = document.createElement("div")
+		placeHead.className = "place-head"
+		placeHead.style.cssText = 'height:20px; background: black; color:white; border: 1px solid black; border-radius: 5px 5px 0px 0px; padding : 10px 10px';
+
+		var placeBody = document.createElement("div")
+		placeBody.className = "place-body"
+		placeBody.style.cssText = 'width:450px; height:180px; background: white; border: 1px solid white; border-radius: 0px 0px 5px 5px;';
+
+		var placeInfo = document.createElement("div")
+		placeInfo.className = "place-info"
+		placeInfo.style.cssText = 'background: white; width:300px; height:110px; float:left; margin:10px 0px';
+
+		var placeFooter = document.createElement("div")
+		placeFooter.className = "place-footer"
+		placeFooter.style.cssText = 'background: white; width:420px; height:30px; float:left; margin:5px 0px 0px 0px; padding:5px 15px'
+
+		var placeName = document.createElement("div")
+		placeName.innerHTML = detail[0].cpName
+		placeName.style.cssText = 'float:left;font-weight:bold;';
+
+		var placeAddImg = document.createElement("img")
+	      placeAddImg.style.cssText = 'width:110px; height:110px; background: red; float:left; margin:10px';
+	      placeAddImg.src = "resources/images/"+ detail[0].cpImage
+
+		var placePhone = document.createElement("div")
+		placePhone.className = "place-phone"
+		placePhone.innerHTML = "☎ " + detail[0].cpNumber
+		placePhone.style.cssText = 'color:blue; font-size:10pt;';
+
+		var placeAddress = document.createElement("div")
+		placeAddress.className = "place-address"
+		placeAddress.innerHTML = detail[0].maAddress
+		placeAddress.style.cssText = ' font-weight:bold;font-size:11pt';
+
+		var closeBtn = document.createElement('div');
+		closeBtn.innerHTML = 'X';
+		closeBtn.style.cssText = 'float:right; background: black; color:white;'
+		closeBtn.onclick = function() {
+			overlay.setMap(null);
+		};
+
+		placeContent.append(placeHead, placeBody)
+		placeHead.append(placeName, closeBtn)
+		placeBody.append(placeAddImg, placeInfo)
+		placeInfo.append(placeAddress, placePhone)
+		panel.append(placeContent)
+	}
+	
 	function createDiv(name, className) {
 		const div = document.createElement("div"); // <div></div>
 		div.setAttribute("name", name); // <div name=""></div>

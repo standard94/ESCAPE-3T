@@ -56,6 +56,13 @@ public class MapController {
 		
 	}
 	
+	/*새로운 페이지 이동*/
+	@PostMapping(value= "/findCampingDetail", produces="application/json; charset=UTF-8")
+	   public List<Camping> findCampingList(Model model, @RequestBody List<Camping> cp) {
+	      cm.backController("C3", model.addAttribute("camping", cp.get(0)));     
+	      return (List<Camping>)model.getAttribute("campingList");
+	   }
+	
 	/*낚시터 정보 등록*/
 	@PostMapping(value="/InsFishing", produces="application/json; charset=UTF-8")
 	public ModelAndView insFishing(Model model, @RequestBody List<Fishing> fs) {
