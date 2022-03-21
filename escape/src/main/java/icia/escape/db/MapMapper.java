@@ -13,6 +13,7 @@ public interface MapMapper {
 	/*지도 :: 캠핑리스트 불러오기*/
 	public List<Camping> getCampingList(Camping cp);
 	public List<Camping> getCampingRecord(Camping cp);
+	public List<Camping>findCampingDetail(Camping cp);
 	public int countCampingList(Camping cp);
 	/*Fishing*/
 	public int insFishing(Fishing fs);

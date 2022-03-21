@@ -127,48 +127,42 @@
 
 #regForm{
 	float: left;
-	background-color:#FFFFFF;
-	margin : 0 0 0 17%;
+	background-color:red;
 	width : 65%;
 	height: 99.8%;
 }
-#regFormBack{
-	width:86%;
-	height: 10%;
-	margin : 2% 0 0 7%;
-	background-color:#BDBDBD;
-	border-radius:5px;
+
+#sideBar{
+	float: left;
+	background-color:green;
+	width : 17%;
+	height: 99.8%;
 }
-#selectType{
-	width : 70%;
-	height :40%;
-	margin : 2% 0 0 20%;
-	
+
+#sideContents{
+	background-color:blue;
+	width : 100%;
+	height: 30%;
 }
-#selectType2{
-	width : 99%;
-	height :22%;
-	margin :0% 0 0 20%;
+
+#sideTitle{
+	background-color:black;
+	width : 100%;
+	height: 30%;
+	color: white;
+	font-size: 80pt;
 }
-#bigType{
-	margin-left:37%;
+
+#sideMiddleBar1{
+	background-color: yellow;
+	width : 100%;
+	height: 30%;	
 }
-.typeClass {
-  width: 11%;
-  height: 69%;
-  background: url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png') calc(100% - 5px) center no-repeat;
-  background-color:#FFFFFF;
-  background-size: 20px;
-  padding: 5px 30px 0 10px;
-  border-radius: 2px;
-  border : 1px solid #8C8C8C;
-  font-weight: bold;
-  outline: 0 none;
-  font-size:12pt;
-  
-}
-.typeClass option {
-  padding: 3px 0;
+
+#sideMiddleBar2{
+	background-color: pink;
+	width : 100%;
+	height: 30%;	
 }
 
 #title{
@@ -179,80 +173,6 @@
 	font-size:12pt;
 }
 
-#filterForm{
-	width : 92%;
-	height :23%;
-	margin: 3% 0 0% 6.5%;
-	overflow:auto; 
-	overflow-x:hidden; 
-}
-
-#filterForm::-webkit-scrollbar {
-    width: 15px;
-  }
-#filterForm::-webkit-scrollbar-thumb {
-	height: 30%;
-    background-color: #F2CB61;
-    border-radius: 8px;
-    background-clip: padding-box;
-    border: 2px solid ;
-  }
-#filterForm::-webkit-scrollbar-track {
-    background-color: #8C8C8C;
-    border-radius: 10px;
-    box-shadow: inset 0px 0px 5px white;
-}
-
-
-.select_btn_themespan,.select_btn_genrespan,.select_btn_fishspan{
-border: 2px solid #BDBDBD;
-border-radius:4px;
-background: none;
-margin: 0.2% 0 0 0.5%;
-width:18%;
-height:7%;
-font-size:11pt;
-}
-.select_btn_themespan:active,.select_btn_genrespan:active{
-border: 1px solid #8C8C8C ;
-background-color: #FAECC5;
-}
-
-.select_btn_themespan._value,.select_btn_genrespan._value,.select_btn_fishspan._value{
-border: 2px solid #BDBDBD;
-border-radius:4px;
-background-color: #E8DAB3;
-margin: 0.2% 0 0 0.5%;
-width:18%;
-height:7%;
-font-size:11pt;
-}
-
-.filterName{
-	background: linear-gradient(  45deg ,#CEA73D, #E0B94F, #F2CB61 );
-	color:#292929;
-	width:94%;
-	font-size:13pt;
-}
-#mapDiv{
-	width : 100%;
-	height :24%;
-}
-#detail{
-	width: 86%;
-	height: 5%;
-	margin : 1% 0 0 7%;
-	background: linear-gradient(  45deg ,#CEA73D, #E0B94F, #F2CB61 );
-	font-size:13pt;
-	color:#292929;
-}
-
-#setPost{
-	float:left;
-	margin : 1% 0 0 7%;
-	width : 9%;
-	height :7%;
-}
 #maPost{
 	width: 90%;
 	height:78%;
