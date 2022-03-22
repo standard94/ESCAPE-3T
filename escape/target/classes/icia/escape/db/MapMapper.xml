@@ -6,12 +6,17 @@
 
 	<!-- 캠핑 : 캠핑장 지도 리스트 -->
 	<select id="getCampingList"
-		parameterType="icia.escape.beans.Camping"
-		resultType="icia.escape.beans.Camping">
-		SELECT CPIMAGE, CPNAME, CPNUMBER, HANAME, THNAME, MAADDRESS
-		FROM CAMPINGLIST
-		WHERE CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode}
-	</select>
+      parameterType="icia.escape.beans.Camping"
+      resultType="icia.escape.beans.Camping">
+      SELECT ROWNUMBER, CPMAMMCODE, CPMACFCODE, CPCACODE, CPCODE, CPHACODE, CPTHCODE, CPMAPOST, CPNAME, CPNUMBER,
+                        CPCONTENTS, CPFACILITY, CFNAME, HANAME, THNAME, MAADDRESS, CPIMAGE
+    FROM(SELECT ROWNUM AS ROWNUMBER, CPMAMMCODE, CPMACFCODE, CPCACODE, CPCODE, CPHACODE, CPTHCODE, CPMAPOST, CPNAME, CPNUMBER,
+                        CPCONTENTS, CPFACILITY, CFNAME, HANAME, THNAME, MAADDRESS, CPIMAGE
+                  
+                FROM CAMPINGLIST WHERE CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode}) 
+                
+    WHERE CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode}
+   </select>
 
 	<!-- 캠핑 : 캠핑장 지도 리스트 10개 단위로 쪼개기 -->
 	<select id="getCampingRecord"

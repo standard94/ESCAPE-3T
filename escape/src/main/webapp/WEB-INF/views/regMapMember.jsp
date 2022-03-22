@@ -230,9 +230,7 @@
      				</div>
      			</div>	
      					
-     					
      				
-     			
      			<div id="mapDiv">
      				<h3 id="detail">지도에 정확한 위치를 입력해주세요</h3>
      				<div id="setPost"><input id="maPost" type="text" placeholder="우편번호" readOnly/></div>
@@ -240,14 +238,13 @@
      				<div id="maPoints"></div>
      			</div>
      			
-     			<div id="contents">
-     				<input type="file" id="putImage" value="사진 첨부" onClick=""/>
-     				<div id="contents2"><textarea class="postContents"name="postContents" maxlength="1000" placeholder="내용을 입력해주세요"></textarea></div>
-     			</div>
+     			
+     				<textarea rows="8" cols="30" id="postContents" name="postContents" style ="display : none;"></textarea>
+     			
      			
      			<div id="buttonDiv">
      				<button type="button" id="regFp" onClick="insFishing()" >등록</button>
-     				<button type="button" id="cancel" onClick="getNewPageMember('${sessionInfo.mmId}','mapPoints')">취소</button>
+     				<button type="button" id="cancel" onClick="getNewPageMember('${sessionInfo.mmId}','mapPoints_member')">취소</button>
      			</div>
      		</div>
 		</div>
@@ -261,6 +258,17 @@
 	</div>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=83c735083178ecf82197f105cee12951&libraries=services"></script>
+	
+<script type="text/javascript" src="resources/se2/smarteditor2-2.10.0/workspace/static/js/service/HuskyEZCreator.js" charset="UTF-8"></script>
+<script type="text/javascript">
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+ oAppRef: oEditors,
+ elPlaceHolder: "postContents",
+ sSkinURI: "../resources/se2/smarteditor2-2.10.0/workspace/static/SmartEditor2Skin.html",
+ fCreator: "createSEditor2"
+});
+</script>
 <script>
 function insertDiv(result){
 	//찾은 우편번호와 주소 입력할 칸
