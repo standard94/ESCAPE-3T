@@ -10,6 +10,7 @@ import icia.escape.beans.Maps;
 @Mapper
 public interface MapMapper {
 
+
 	/*지도 :: 캠핑리스트 불러오기*/
 	public List<Camping> getCampingList(Camping cp);
 	public List<Camping> getCampingRecord(Camping cp);
@@ -18,4 +19,5 @@ public interface MapMapper {
 	/*Fishing*/
 	public int insFishing(Fishing fs);
 	public String checkFishingCode(Fishing fs);
+	public int insMap(Fishing fs);
 }

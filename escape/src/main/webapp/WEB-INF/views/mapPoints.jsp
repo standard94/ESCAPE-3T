@@ -57,7 +57,7 @@
 					
 					<div id="listPoints">
 						<div id="mySideStore" onClick="delrecord();getCampingList('C003', '1000');getCampingPage('1','10','C003', '1000');chooseCampingList('1','10','C003','1000');">카라반</div>
-						<div id="fishingPoint" onClick="delrecord();getCampingList('C002', '1000');getCampingPage('1','10','C002', '1000');chooseCampingList('1','10','C002','1000');">클램핑</div>
+						<div id="fishingPoint" onClick="delrecord();getCampingList('C002', '1000');getCampingPage('1','10','C002', '1000');chooseCampingList('1','10','C002','1000');">글램핑</div>
 						<div id="camping" onClick="delrecord();getCampingList('C001', '1000');getCampingPage('1','10','C001', '1000');chooseCampingList('1','10','C001','1000');">캠핑</div>
 						<div id="glamping" onClick="">낚시 포인트</div>
 						<div id="caravan" onClick="">내 주변 업체</div>
@@ -75,14 +75,8 @@
 			
    	 	<div id="map"></div>
     		
-     
 		</div>
-				
-				
-				
-		
-		
-		
+
 		<div id="bottom">
          <div id="bottom_store">여기가 좋을 지도¿</div>
          <div id="bottom_store2">CS NUMBER : 1644 - 3681｜사업자 등록번호: 123-81-21968｜통신판매업신고: 연수 1655호｜개인정보 보호책임자 : NATE</div>
@@ -90,6 +84,7 @@
       </div>
 		
 	</div>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=83c735083178ecf82197f105cee12951&libraries=services"></script>
 <script>
@@ -160,6 +155,14 @@
 	var geocoder = new kakao.maps.services.Geocoder();
 
 	var markers = [];
+	
+	var mks = [];
+	
+	function setMarkers(map) {
+	    for (var i = 0; i < mks.length; i++) {
+	        mks[i].setMap(map);
+	    }            
+	}
 
 	function setPoint(list) {
 		for (let n = 0; n < list.length; n++) {
@@ -171,7 +174,9 @@
 							// 마커 하나를 지도위에 표시합니다 
 							addMarker(new kakao.maps.LatLng(result[0].y,
 									result[0].x), list[n].cpName,
-									list[n].maAddress, list[n].cpNumber, list[n].cpImage, new kakao.maps.LatLng(parseFloat(result[0].y)+0.11, parseFloat(result[0].x)+0.23));
+									list[n].maAddress, list[n].cpNumber, list[n].cpImage,
+									list[n].cpCaCode, list[n].cpMaCfCode, list[n].cpCode,
+									new kakao.maps.LatLng(parseFloat(result[0].y)+0.11, parseFloat(result[0].x)+0.23));
 						}
 					});
 		}
@@ -180,7 +185,7 @@
 
 	var clickedoverlay = null;
 
-	function addMarker(position, name, address, phone, img, wishPos) {
+	function addMarker(position, name, address, phone, img, cpC, cpM, cp, wishPos) {
 		var imageSrc = 'resources/images/camping.png', // 마커이미지의 주소입니다    
 		imageSize = new kakao.maps.Size(28, 28) // 마커이미지의 크기입니다
 
@@ -212,6 +217,7 @@
 			if (clickedoverlay) {
 				clickedoverlay.setMap(null);
 			}
+			findCampingDetail(cpC, cpM, cp);
 			overlay.setMap(map);
 			clickedoverlay = overlay;
 			map.setCenter(wishPos);
@@ -224,7 +230,117 @@
 		});
 
 	}
+	
+	if (navigator.geolocation) {
 
+		// GeoLocation을 이용해서 접속 위치를 얻어옵니다
+		navigator.geolocation.getCurrentPosition(function(position) {
+
+			var lat = position.coords.latitude, // 위도
+			lon = position.coords.longitude; // 경도
+			
+			var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다		
+			searchAddrFromCoords(locPosition, function(result, status) {
+			        if (status === kakao.maps.services.Status.OK) {
+			        	displayMarker1(locPosition, result[0].address_name)
+			        	}   
+			    });
+			// 마커와 인포윈도우를 표시합니다
+			
+		});
+
+	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+		var locPosition = new kakao.maps.LatLng(33.450701, 126.570667), message = '시스템 오류 : 주소를 찾을 수 없습니다.'
+
+		displayMarker1(locPosition, message);
+	}
+
+	function searchAddrFromCoords(coords, callback) {
+	    // 좌표로 행정동 주소 정보를 요청합니다
+	    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+	}
+	
+	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+	function displayMarker1(locPosition, message) {
+
+		setMarkers(null);  
+		
+		// 마커를 생성합니다
+		var marker1 = new kakao.maps.Marker({
+			map : map,
+			position : locPosition
+		});
+		
+		map.setCenter(locPosition);
+		
+		// 생성된 마커를 배열에 추가합니다
+	    mks.push(marker1);
+		
+		document.getElementById("mp").innerText = message;
+		
+		// 현재 지도의 레벨을 얻어옵니다
+	    var level = map.getLevel(); 
+	    
+	    // 지도를 1레벨 올립니다 (지도가 축소됩니다)
+	    map.setLevel(9);
+	}
+	
+	//내 위치 변경 버튼 생성
+	var changeMyPoint = document.createElement("div")
+	changeMyPoint.id = "cmp"
+	changeMyPoint.innerHTML = "내 위치 변경"
+	changeMyPoint.style.cssText = 'z-index:2; color:white; position : absolute; background: #292929; width:6%; height:2.5%; padding:0.2% 1%;'
+	changeMyPoint.onclick = function() {
+		
+		//다음 주소 찾기 창 생성
+		var findMyPoint = document.createElement("div")
+		findMyPoint.id = "fmp"
+		findMyPoint.style.cssText = 'z-index:1; background: white; position : absolute; top:3.2%; width:38%; height: 58%;'
+		mapContainer.appendChild(findMyPoint)
+		
+		//다음 주소 찾기 창 닫기 버튼 생성
+		var cmpClose = document.createElement("div")
+		cmpClose.id = "mp"
+		cmpClose.innerHTML = "X"
+		cmpClose.style.cssText = 'z-index:2; color:white; position : absolute; bottom:100%; right:0%; background: red; width:2.1%; height:4.4%; padding: 0.5% 2.3%;'
+		cmpClose.onclick = function() {
+			mapContainer.removeChild(mapContainer.lastChild);
+		}
+		findMyPoint.appendChild(cmpClose)
+		
+		//다음 주소 찾기 div내 구성
+		new daum.Postcode({
+	        oncomplete: function(data) {
+	        	
+	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+	            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	            var roadAddr = data.roadAddress; // 도로명 주소 변수
+	            var jibunAddr = data.jibunAddress; // 지번 주소 변수
+	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	           
+	            mapContainer.removeChild(mapContainer.lastChild);
+	            
+	            geocoder.addressSearch(data.address,
+						function(result, status) {
+							// 정상적으로 검색이 완료됐으면 
+							if (status === kakao.maps.services.Status.OK) {
+								// 마커 하나를 지도위에 표시합니다 
+								displayMarker1(new kakao.maps.LatLng(result[0].y,
+										result[0].x), result[0].address.address_name);
+							}
+						});
+	        }
+	    }).embed(findMyPoint);
+	};
+	mapContainer.appendChild(changeMyPoint)
+	
+	var myPoint = document.createElement("div")
+		myPoint.id = "mp"
+		myPoint.style.cssText = 'z-index:2; color:white; opacity : 0.9; position : absolute; left:8%; background: black; width:25.5%; height:2.5%; padding:0.2% 1%;'
+		mapContainer.appendChild(myPoint)
+		
 	// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
 	var mapTypeControl = new kakao.maps.MapTypeControl();
 
@@ -235,42 +351,6 @@
 	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 	var zoomControl = new kakao.maps.ZoomControl();
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-
-	if (navigator.geolocation) {
-
-		// GeoLocation을 이용해서 접속 위치를 얻어옵니다
-		navigator.geolocation.getCurrentPosition(function(position) {
-
-			var lat = position.coords.latitude, // 위도
-			lon = position.coords.longitude; // 경도
-
-			var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-			message = '<div style="padding:5px;">현재위치</div>'; // 인포윈도우에 표시될 내용입니다
-
-			// 마커와 인포윈도우를 표시합니다
-			displayMarker1(locPosition, message);
-
-		});
-
-	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-
-		var locPosition = new kakao.maps.LatLng(33.450701, 126.570667), message = 'geolocation을 사용할수 없어요..'
-
-		displayMarker1(locPosition, message);
-	}
-
-	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
-	function displayMarker1(locPosition, message) {
-
-		// 마커를 생성합니다
-		var marker1 = new kakao.maps.Marker({
-			map : map,
-			position : locPosition
-		});
-		map.setCenter(locPosition);
-	}
-
-	
 
 	function alertPage(jsonData){
 		
@@ -292,14 +372,13 @@
 			}else if(i!==jsonData.pageNumber){
 			pageInfo += "<div class='pageInfo_btn' style='width:4%;'><li onClick =\"delrecord();getCampingPage('"+i+"','10','"+jsonData.cpCaCode+"','"+jsonData.cpMaCfCode+"');chooseCampingList('"+i+"','10','"+jsonData.cpCaCode+"','"+jsonData.cpMaCfCode+"');\">"+i+"</li></div>";
 			}
-			
 		}
 		if(jsonData.next != false){
 			pageInfo += "<div class='pageInfo_btn_next'><li onClick =\"delrecord();getCampingPage('"+i+"','10','"+jsonData.cpCaCode+"','"+jsonData.cpMaCfCode+"');chooseCampingList('"+i+"','10','"+jsonData.cpCaCode+"','"+jsonData.cpMaCfCode+"');\" );'>다음</li></div>";
 		}
 		page.innerHTML = pageInfo;
-		
 	}
+	
 	/* 모든 record 삭제하기*/
 	function delrecord(){
 		const div = document.getElementById("campingList");
@@ -309,10 +388,10 @@
 	     
 	      
 	}
+	
 	const columnName = [ "cpImage", "cpName", "maAddress", "haName", "thName","cpNumber" ];
 	   let column;
 	   let n = 0;
-	   let cpList;
 	   
 	function getPoint(list){
 		for (let x = 0; x < list.length; x++) {
@@ -320,18 +399,15 @@
 					function(result, status) {
 						// 정상적으로 검색이 완료됐으면 
 						if (status === kakao.maps.services.Status.OK) {
-								
 							// 마커 하나를 지도위에 표시합니다 
 							getLeftCampingList(new kakao.maps.LatLng(result[0].y,
 									result[0].x), list[x].cpImage, list[x].cpName,
 									list[x].maAddress, list[x].haName, list[x].thName, list[x].cpNumber,
 									list[x].cpCaCode, list[x].cpMaCfCode, list[x].cpCode,
 									new kakao.maps.LatLng(parseFloat(result[0].y)+0.11, parseFloat(result[0].x)+0.23));
-							console.log(list);
 						}
 					});
 		}
-		
 	}
 	   
 	function getLeftCampingList(mPos, cpI, cpN, maA, haN, thN, cpNb, cpCa, cpMa, cpCd, wishPos) {
@@ -354,8 +430,8 @@
 	        
 	        makeOverlay(cpN, cpI, cpNb, maA, overlay2);
 	        cpList.onclick = function() {
+	        	findCampingDetail(cpCa, cpMa, cpCd);
 	    		if (clickedoverlay) {
-	    			findCampingDetail(cpCa, cpMa, cpCd);
 	    			clickedoverlay.setMap(null);
 	    		}
 	    		overlay2.setMap(map);
@@ -385,60 +461,112 @@
 	}
 	
 	function getCampingDetail(detail){
-		
-		var panel = document.getElementById('rightview');
-		
-		var placeContent = document.createElement("div")
-		placeContent.className = "place-content"
-		placeContent.id = "place-content"
-		placeContent.style.cssText = 'background: white; width:100%; height:20%; box-shadow: 3px 3px 10px #566270; border-radius: 5px;';
-
-		var placeHead = document.createElement("div")
-		placeHead.className = "place-head"
-		placeHead.style.cssText = 'height:20px; background: black; color:white; border: 1px solid black; border-radius: 5px 5px 0px 0px; padding : 10px 10px';
-
-		var placeBody = document.createElement("div")
-		placeBody.className = "place-body"
-		placeBody.style.cssText = 'width:450px; height:180px; background: white; border: 1px solid white; border-radius: 0px 0px 5px 5px;';
-
-		var placeInfo = document.createElement("div")
-		placeInfo.className = "place-info"
-		placeInfo.style.cssText = 'background: white; width:300px; height:110px; float:left; margin:10px 0px';
-
-		var placeFooter = document.createElement("div")
-		placeFooter.className = "place-footer"
-		placeFooter.style.cssText = 'background: white; width:420px; height:30px; float:left; margin:5px 0px 0px 0px; padding:5px 15px'
-
-		var placeName = document.createElement("div")
-		placeName.innerHTML = detail[0].cpName
-		placeName.style.cssText = 'float:left;font-weight:bold;';
-
-		var placeAddImg = document.createElement("img")
-	      placeAddImg.style.cssText = 'width:110px; height:110px; background: red; float:left; margin:10px';
-	      placeAddImg.src = "resources/images/"+ detail[0].cpImage
-
-		var placePhone = document.createElement("div")
-		placePhone.className = "place-phone"
-		placePhone.innerHTML = "☎ " + detail[0].cpNumber
-		placePhone.style.cssText = 'color:blue; font-size:10pt;';
-
-		var placeAddress = document.createElement("div")
-		placeAddress.className = "place-address"
-		placeAddress.innerHTML = detail[0].maAddress
-		placeAddress.style.cssText = ' font-weight:bold;font-size:11pt';
-
-		var closeBtn = document.createElement('div');
-		closeBtn.innerHTML = 'X';
-		closeBtn.style.cssText = 'float:right; background: black; color:white;'
-		closeBtn.onclick = function() {
-			overlay.setMap(null);
-		};
-
-		placeContent.append(placeHead, placeBody)
-		placeHead.append(placeName, closeBtn)
-		placeBody.append(placeAddImg, placeInfo)
-		placeInfo.append(placeAddress, placePhone)
-		panel.append(placeContent)
+		 console.log(detail)
+	   	
+	   var panel = document.getElementById('rightview');
+	   
+	   var cacode = detail[0].cpCaCode
+	   var mobile = detail[0].cpNumber
+	   var admobile = null;
+	   
+	   if(cacode = "C001"){
+		   cacode = "유료캠핑장"
+	   }else if(cacode = "C002"){
+		   cacode = "글램핑"
+	   }else if(cacode = "C003"){
+		   cacode = "카라반"
+	   }else if(cacode = "C004"){
+		   cacode = "낚시터"
+	   }else if(cacode = "C005"){
+		   cacode = "대어자랑"
+	   }else {
+		   cacode = "분류설정이필요합니다."
+	   }
+	  			
+	   if(mobile != null){
+			var admobile = mobile.substring(0,3) + "-" + mobile.substring(3,7) + "-" + mobile.substring(7)
+	   }else {
+		   var admobile = "번호정보 업데이트중"
+	   }
+	   
+      if(panel.hasChildNodes()){
+         panel.removeChild(panel.lastChild);
+      }
+      
+	  var rightViewInfo = document.createElement("div")
+	  rightViewInfo.className = "Info"
+	  rightViewInfo.id = "InfoBox"
+	  rightViewInfo.style.cssText = 'border: 4px dashed #bcbcbc; width:95.5%; height:97%; margin: 10px ;'
+	  
+	  var head = document.createElement("div")
+	  head.className = "Head"
+      head.id = "HeadBox"
+      
+      var content = document.createElement("div")
+      content.className = "Content"
+      content.id = "ContentBox"
+      content.style.csstext = 'font-size: 12px; font-family: roboto,Noto Sans KR,malgun gothic,dotum,gothic; font-weight: 400; -webkit-font-smoothing: antialiased; word-break: break-all;height: 97%;overflow: hidden;letter-spacing: -0.01em;'
+	  
+      var title = document.createElement("div")
+      title.className = "Title"
+      title.id = "TitleBox"
+      title.innerHTML = detail[0].cpName
+      title.style.cssText = 'font-size: 26px; font-weight: bold; letter-spacing: -1px;padding: 0; width:90%; margin: 3% 1% 0% 5%; color: #25a5f0;height: 5%;line-height: 40px;border-bottom: 2px #25a5f0 solid;'
+    	
+      var category = document.createElement("div")
+      category.className = "Category"
+      category.id = "CategoryBox"
+      category.innerHTML = cacode
+      category.style.cssText = 'position: absolute; right: 7.5%; top: 5.5%; font-size: 15px; font-weight: bold;'
+	   
+      var locIcon = document.createElement("div")
+      locIcon.className = "LocIcon"
+      locIcon.id = "LocIconBox"
+      locIcon.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
+      locIcon.style.cssText = 'background: url(resources/images/ico_addr.png) no-repeat; position: absolute; left:6%; top:10%;'
+      
+      var division = document.createElement("div")
+      division.className = "Division"
+      division.id = "DivisionBox"
+      division.innerHTML = detail[0].haName
+      division.style.cssText = 'position: absolute; left:9.5%; top:10%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
+      
+      var address = document.createElement("div")
+      address.className = "Address"
+      address.id = "AddressBox"
+      address.innerHTML = " > " + detail[0].maAddress
+      address.style.cssText = 'position: absolute; left:17%; top:10.2%; width:65%'
+      
+      var postbox = document.createElement("div")
+      postbox.className = "PostBox"
+      postbox.id = "PostBox"
+      postbox.innerHTML = "우편번호"
+      postbox.style.cssText = 'position: absolute; left:9.5%; top:13%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
+      
+      var post = document.createElement("div")
+      post.className = "Post"
+      post.id = "Post"
+      post.innerHTML = " - " + detail[0].cpMaPost
+      post.style.cssText = 'position: absolute; left:22%; top:13%; width:40%'
+      
+      var numberbox = document.createElement("div")
+      numberbox.className = "NumberBox"
+      numberbox.id = "NumberBox"
+      numberbox.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
+      numberbox.style.cssText = 'background: url(resources/images/ico_tel.png) no-repeat; position: absolute; left:6%; top:18%;'
+      
+      var number = document.createElement("div")
+      number.className = "Number"
+      number.id = "Number"
+      number.innerHTML = admobile
+      number.style.cssText = 'position: absolute; left:10%; top:17.9%; width:60%'
+      
+      
+      rightViewInfo.append(head,content)
+  	  head.append(title, category)
+  	  content.append(locIcon,division,address,postbox,post,numberbox,number)
+  	  
+      panel.append(rightViewInfo)
 	}
 	
 	function createDiv(name, className) {
@@ -495,34 +623,34 @@
 		placeZoom.onclick = function() {
 			//overlay.setMap(null);
 		};
-		
+				
 		var placeDetail = document.createElement("div")
-		placeDetail.innerHTML = "상세정보 열기 >"
-		placeDetail.className = "place-desc"
-		placeDetail.id = "place1"
-		placeDetail.style.cssText = 'float:right; background: white; color:black; width:120px; height:24px; border: 1px solid black; font-size:12pt; padding:3px 10px; display:block;'
-		placeDetail.onclick = function openPanel() {
-			const element = document.getElementById('rightview');
-			element.style.right = '0%';
-			const deplace = document.getElementById('deplace1');
-			deplace.style.display = "block";
-			const place = document.getElementById('place1');
-			place.style.display = "none";
-		}
-		
-		var deplaceDetail = document.createElement("div")
-		deplaceDetail.innerHTML = "상세정보 닫기 <"
-		deplaceDetail.className = "deplace-desc"
-		deplaceDetail.id = "deplace1"
-		deplaceDetail.style.cssText = 'float:right; background: white; color:black; width:120px; height:24px; border: 1px solid black; font-size:12pt; padding:3px 10px; display:none;'
-		deplaceDetail.onclick = function closePanel() {
-			const element = document.getElementById('rightview');
-			element.style.right = '-33%';
-			const place = document.getElementById('place1');
-			place.style.display = "block";
-			const deplace = document.getElementById('deplace1');
-			deplace.style.display = "none";
-		};
+			placeDetail.innerHTML = "상세정보 열기 >"
+			placeDetail.className = "place-desc"
+			placeDetail.id = "place1"
+			placeDetail.style.cssText = 'float:right; background: white; color:black; width:120px; height:24px; border: 1px solid black; font-size:12pt; padding:3px 10px; dispaly:block;'
+			placeDetail.onclick = function openPanel() {
+				const element = document.getElementById('rightview');
+				element.style.right = '0%';
+				const deplace = document.getElementById('deplace1');
+				deplace.style.display = "block";
+				const place = document.getElementById('place1');
+				place.style.display = "none";
+			}
+			
+			var deplaceDetail = document.createElement("div")
+				deplaceDetail.innerHTML = "상세정보 닫기 <"
+				deplaceDetail.className = "deplace-desc"
+				deplaceDetail.id = "deplace1"
+				deplaceDetail.style.cssText = 'float:right; background: white; color:black; width:120px; height:24px; border: 1px solid black; font-size:12pt; padding:3px 10px; display:none;'
+				deplaceDetail.onclick = function closePanel() {
+					const element = document.getElementById('rightview');
+					element.style.right = '-33%';
+					const place = document.getElementById('place1');
+					place.style.display = "block";
+					const deplace = document.getElementById('deplace1');
+					deplace.style.display = "none";
+				}
 		
 		/* placeUrl.href = place.kakao_url */
 

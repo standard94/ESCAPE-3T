@@ -13,25 +13,32 @@ function getNewPage(pageName){
 }
 
 /*사용자로그인 기록, 페이지 이동*/
-function getNewPageMember(pMmId,pPageName){
+function getNewPageMember(pMmId,pPageName,pPublicIp, pMmCode){
 const form = makeForm("","GetNewPageMember","Post");
 const mmId = makeInputElement("hidden","mmId",pMmId,"");
 const pageName = makeInputElement("hidden","pageName",pPageName,"");
+const publicIp = makeInputElement("hidden","publicIp",pPublicIp,"");
+const mmCode = makeInputElement("hidden","mmCode",pMmCode,"");
 form.appendChild(mmId);
 form.appendChild(pageName);
+form.appendChild(publicIp);
+form.appendChild(mmCode);
 document.body.appendChild(form);
 form.submit();
 
 }
 
 /*업체 로그인 기록, 페이지 이동*/
-function getNewPageStore(pSrId,pPageName){
+function getNewPageStore(pSrId,pPageName,pPublicIp, pSrCode){
 const form = makeForm("","GetNewPageStore","Post");
 const srId = makeInputElement("hidden","srId",pSrId,"");
 const pageName= makeInputElement("hidden","pageName",pPageName,"");
-
+const publicIp = makeInputElement("hidden","publicIp",pPublicIp,"");
+const srCode = makeInputElement("hidden","srCode",pSrCode,"");
 form.appendChild(srId);
 form.appendChild(pageName);
+form.appendChild(publicIp);
+form.appendChild(srCode);
 document.body.appendChild(form);
 form.submit();
 }

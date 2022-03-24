@@ -13,7 +13,9 @@
 
 <link rel="stylesheet" type="text/css" href="resources/css/campingRental.css" />
 <script src="resources/js/resource.js"></script>
-<body onLoad="getCampingList('C001', '1000'),getCampingPage('1','10','C001', '1000'),chooseCampingList('1','10','C001','1000'),init('${objName}')"/>
+<script src="resources/js/rentalGoods.js"></script>
+
+<body onLoad=""/>
 
 	<div id="basic">
 		<div id="top">
@@ -32,11 +34,66 @@
 		<div id="mid">
 			<div id="sideBar">
      			<div id="sideContents">
-     				<div id="sideTitle">Rental</div>
-     				<div id="sideMiddleBar1"></div>
-     				<div id="sideMiddleBar2"></div>
+     				<div id="sideTitle">
+     					<div id = "inTitle">RENTAL</div>
+     				</div>
+     				<div id="campingBar" class="menuTop" onClick ="openCloseMenu('a')">
+     					<div class="text1" >캠핑 장비
+     						<div class="triangle" ></div>
+     					</div>
+     				</div>
+     				<div id="campingItem" style="display:block">
+	     				<div id="cpMenu1" class="cpMenu" >
+	     					<div class="textLocation">캠핑 패키지</div>
+	     				</div>
+	     				<div id="cpMenu2" class="cpMenu" >
+	     					<div class="textLocation">텐트</div>
+	     				</div>
+	     				<div id="cpMenu3" class="cpMenu" >
+	     					<div class="textLocation">타프</div>
+	     				</div>
+	     				<div id="cpMenu4" class="cpMenu" >
+	     					<div class="textLocation">매트/침낭</div>
+	     				</div>
+	     				<div id="cpMenu5" class="cpMenu" >
+	     					<div class="textLocation">테이블/체어</div>
+	     					</div>
+	     				<div id="cpMenu6" class="cpMenu" >
+	     					<div class="textLocation">바베큐용품</div>
+	     				</div>
+	     				<div id="cpMenu7" class="cpMenu" >
+	     					<div class="textLocation">기타용품</div>
+	     				</div>
+     				</div>
+     				
+     				<div id="fishingBar" class="menuTop" onClick ="openCloseMenu('b')">
+     					<div class="text1">낚시 장비
+     						<div class="triangle"></div>
+     					</div>
+     				</div>
+     				<div id="fishingItem" style="display:none">
+	     				<div id="fiMenu1" class="fiMenu" >
+	     					<div class="textLocation" >바다 장비</div>
+	     				</div>
+	     				<div id="fiMenu2" class="fiMenu" >
+	     					<div class="textLocation" >민물/중층 장비</div>
+	     				</div>
+	     				<div id="fiMenu3" class="fiMenu" >
+	     					<div class="textLocation" >루어 장비</div>
+	     				</div>
+	     				<div id="fiMenu4" class="fiMenu" >
+	     					<div class="textLocation" >릴</div>
+	     				</div>
+	     				<div id="fiMenu5" class="fiMenu" >
+	     					<div class="textLocation" >줄(라인)</div>
+	     				</div>
+	     				<div id="fiMenu6" class="fiMenu" >
+	     					<div class="textLocation" >기타용품</div>
+	     				</div>
+     				</div>
      			</div>
      		</div>
+     		
      		<div id="regForm">
      			
      		</div>
@@ -49,121 +106,7 @@
       </div>
 		
 	</div>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=83c735083178ecf82197f105cee12951&libraries=services"></script>
-<script>
-function changeFilter(i){
-		
-	if(i==1){
-		document.getElementById("filterGenre2").style.display = "none";
-		document.getElementById("filterFish2").style.display = "none";
-		document.getElementById("filterGenre3").style.display = "none";
-		document.getElementById("filterFish3").style.display = "none";
-		const genre = document.getElementById("filterGenre"+i);
-		const fish = document.getElementById("filterFish"+i);
-		
-		genre.style.display = "";
-		fish.style.display="";
-	
-	}else if(i==2){
-		document.getElementById("filterGenre1").style.display = "none";
-		document.getElementById("filterFish1").style.display = "none";
-		document.getElementById("filterGenre3").style.display = "none";
-		document.getElementById("filterFish3").style.display = "none";
-		const genre = document.getElementById("filterGenre"+i);
-		const fish = document.getElementById("filterFish"+i);
-		
-		genre.style.display = "";
-		fish.style.display="";
-	}else{
-		document.getElementById("filterGenre1").style.display = "none";
-		document.getElementById("filterFish1").style.display = "none";
-		document.getElementById("filterGenre2").style.display = "none";
-		document.getElementById("filterFish2").style.display = "none";
-		const genre = document.getElementById("filterGenre"+i);
-		const fish = document.getElementById("filterFish"+i);
-		
-		genre.style.display = "";
-		fish.style.display="";
-	}
-	
-}
-var mapContainer = document.getElementById('maPoints'), // 지도를 표시할 div 
-mapOption = {
-    center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-    level: 1 // 지도의 확대 레벨
-};  
 
-//지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-//주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
-	var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
-    infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
-
-// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
-searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-
-
-// 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
-        if (status === kakao.maps.services.Status.OK) {
-        	
-            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
-            detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
-            
-            var content = '<div class="bAddr">' +
-                            '<span class="title">법정동 주소정보</span>' + 
-                            detailAddr + 
-                        '</div>';
-
-            // 마커를 클릭한 위치에 표시합니다 
-            marker.setPosition(mouseEvent.latLng);
-            marker.setMap(map);
-
-            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-            infowindow.setContent(content);
-            infowindow.open(map, marker);
-        }   
-    });
-});
-
-// 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'idle', function() {
-    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-});
-
-function searchAddrFromCoords(coords, callback) {
-    // 좌표로 행정동 주소 정보를 요청합니다
-    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
-}
-
-function searchDetailAddrFromCoords(coords, callback) {
-    // 좌표로 법정동 상세 주소 정보를 요청합니다
-    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-}
-
-//찾은 우편번호와 주소 입력할 칸
-const postCode = document.getElementById('maPost');
-const address = document.getElementById('maAddress');
-// 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
-function displayCenterInfo(result, status) {
-    if (status === kakao.maps.services.Status.OK) {
-        var infoDiv = document.getElementById('centerAddr');
-
-        for(var i = 0; i < result.length; i++) {
-            // 행정동의 region_type 값은 'H' 이므로
-            if (result[i].region_type === 'H') {
-                infoDiv.innerHTML = result[i].address_name;
-                address.innerHTML = result[i].address_name;
-                break;
-            }
-        }
-    }    
-}
-</script>
 
 </body>
 

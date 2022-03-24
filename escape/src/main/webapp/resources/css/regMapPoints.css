@@ -276,11 +276,6 @@ font-size:11pt;
 	height:83%;
 	margin :1% 1.2% 1% 7%;
 }
-#contents{
-	width : 100%;
-	height :30%;
-	margin-top : 3%;
-}
 
 #putImage{
 	float:left;
@@ -304,37 +299,8 @@ font-size:11pt;
 	box-shadow: none;
 	
 }
-#contents2{
-	float: left;
-	width : 86%;
-	height :85%;
-	margin : 1% 2% 1% 7%;
-}
-.postContents{
-	overflow:auto; 
-	overflow-x:hidden;
-	width:99%;
-	height:97.9%;
-	font-size:13pt;
-	font-family: 'Pretendard-Regular';
 
-}
 
-.postContents::-webkit-scrollbar {
-    width: 15px;
-  }
-.postContents::-webkit-scrollbar-thumb {
-	height: 30%;
-    background-color: #F2CB61;
-    border-radius: 8px;
-    background-clip: padding-box;
-    border: 2px solid ;
-}
-.postContents::-webkit-scrollbar-track {
-    background-color: #8C8C8C;
-    border-radius: 10px;
-    box-shadow: inset 0px 0px 5px white;
-}
 #buttonDiv{
 	width : 100%;
 	height :3%;

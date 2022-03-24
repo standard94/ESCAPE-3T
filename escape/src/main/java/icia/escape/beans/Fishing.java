@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class Fishing {
-	
 	private String fpMaMmCode;
 	private String fpMaCfCode;
 	private String fpCaCode;
@@ -18,6 +17,8 @@ public class Fishing {
 	private String fpDate;
 	private int fpView;
 	private String fpImage;
+	private String maAddress;
+	private String content;
 }
 
 
