@@ -18,7 +18,7 @@
 
 	<div id="basic">
 		<div id="top">
-			<div id="logo" onClick="getNewPage('basic')">여기가 좋을 지도¿</div>
+			<div id="logo" onClick="getNewPageMember('${sessionInfo.mmId}','memberMain','${sessionInfo.publicIp}','${sessionInfo.mmCode}')">여기가 좋을 지도¿</div>
 				<div id="search"><input id="searchFont" type="text"  name="" placeholder="" /><input id="searchZoom" class="divButton" type="button" value="SEARCH" onMouseOver="changeColor1(this)" onMouseOut="changeColor2(this)"/></div>
 				<div id="box1">
 		 			<div id="login1"><span class="top_menu" >${sessionInfo.mmId}님</span>
@@ -54,7 +54,7 @@
      			<div id="filterForm">
      				<div id="filterCategory">
      					<h2 class ="filterName">CATEGORY</h2>
-     					<button type="button" class="select_btn_themespan"  value="T005" onClick="changeFilter('1')">#민물</button>
+     					<button type="button" class="select_btn_themespan _value"  value="T005" onClick="changeFilter('1')">#민물</button>
      					<button type="button" class="select_btn_themespan"  value="T006" onClick="changeFilter('2')">#바다워킹</button>
      					<button type="button" class="select_btn_themespan"  value="T007" onClick="changeFilter('3')">#바다선상</button>
      				</div>
@@ -239,12 +239,12 @@
      			</div>
      			
      			
-     				<textarea rows="8" cols="30" id="postContents" name="postContents" style ="display : none;"></textarea>
+     				<textarea rows="5" cols="10" id="postContents" name="postContents" style="display:none;"></textarea>
      			
      			
      			<div id="buttonDiv">
-     				<button type="button" id="regFp" onClick="insFishing()" >등록</button>
-     				<button type="button" id="cancel" onClick="getNewPageMember('${sessionInfo.mmId}','mapPoints_member')">취소</button>
+     				<button type="button" id="regFp" onClick="insFishing('${sessionInfo.mmCode}')" >등록</button>
+     				<button type="button" id="cancel" onClick="getNewPageMember('${sessionInfo.mmId}','mapPoints_member','${sessionInfo.publicIp}','${sessionInfo.mmCode}')">취소</button>
      			</div>
      		</div>
 		</div>
@@ -259,17 +259,37 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=83c735083178ecf82197f105cee12951&libraries=services"></script>
 	
-<script type="text/javascript" src="resources/se2/smarteditor2-2.10.0/workspace/static/js/service/HuskyEZCreator.js" charset="UTF-8"></script>
+<script type="text/javascript" src="resources/se2/js/HuskyEZCreator.js" charset="UTF-8"></script>
 <script type="text/javascript">
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
  elPlaceHolder: "postContents",
- sSkinURI: "../resources/se2/smarteditor2-2.10.0/workspace/static/SmartEditor2Skin.html",
+ sSkinURI: "resources/se2/SmartEditor2Skin.html",
  fCreator: "createSEditor2"
+// 	 htParams : {
+//          // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+//          bUseToolbar : false,             
+//          // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+//          bUseVerticalResizer : false,     
+//          // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+//          bUseModeChanger : false         
+// 	 }	
 });
 </script>
+
+
 <script>
+function submitPost(){
+	oEditors.getById["postContents"].exec("UPDATE_CONTENTS_FIELD",[])
+	let content = document.getElementById("postContents").value;
+	
+	if(content == ''){
+		alert("내용을 입력해주세요");
+		oEditors.getById("postContents").exec("FOCUS");
+		return
+	}
+}
 function insertDiv(result){
 	//찾은 우편번호와 주소 입력할 칸
 	const postCode = document.getElementById('maPost');

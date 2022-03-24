@@ -14,6 +14,7 @@ import icia.escape.authentication.FindInformation;
 import icia.escape.authentication.Login;
 import icia.escape.beans.Camping;
 import icia.escape.beans.Fishing;
+import icia.escape.beans.Maps;
 import icia.escape.map.CampingMap;
 import icia.escape.map.FishingMap;
 
@@ -63,10 +64,13 @@ public class MapController {
 	      return (List<Camping>)model.getAttribute("campingList");
 	   }
 	
+	
 	/*낚시터 정보 등록*/
 	@PostMapping(value="/InsFishing", produces="application/json; charset=UTF-8")
-	public ModelAndView insFishing(Model model, @RequestBody List<Fishing> fs) {
-		return fsm.backController("F1",model.addAttribute("fishing", fs.get(0)));
+	public Fishing insFishing(Model model, @RequestBody List<Fishing> fs) {
+		 fsm.backController("F1",model.addAttribute("fishing", fs.get(0)));
+		 System.out.println((Fishing)model.getAttribute("fishingList"));
+		return (Fishing)model.getAttribute("fishingList");
 	}
 	
 }

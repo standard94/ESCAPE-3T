@@ -6,17 +6,12 @@
 
 	<!-- 캠핑 : 캠핑장 지도 리스트 -->
 	<select id="getCampingList"
-      parameterType="icia.escape.beans.Camping"
-      resultType="icia.escape.beans.Camping">
-      SELECT ROWNUMBER, CPMAMMCODE, CPMACFCODE, CPCACODE, CPCODE, CPHACODE, CPTHCODE, CPMAPOST, CPNAME, CPNUMBER,
-                        CPCONTENTS, CPFACILITY, CFNAME, HANAME, THNAME, MAADDRESS, CPIMAGE
-    FROM(SELECT ROWNUM AS ROWNUMBER, CPMAMMCODE, CPMACFCODE, CPCACODE, CPCODE, CPHACODE, CPTHCODE, CPMAPOST, CPNAME, CPNUMBER,
-                        CPCONTENTS, CPFACILITY, CFNAME, HANAME, THNAME, MAADDRESS, CPIMAGE
-                  
-                FROM CAMPINGLIST WHERE CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode}) 
-                
-    WHERE CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode}
-   </select>
+		parameterType="icia.escape.beans.Camping"
+		resultType="icia.escape.beans.Camping">
+		SELECT CPIMAGE, CPNAME, CPNUMBER, HANAME, THNAME, MAADDRESS
+		FROM CAMPINGLIST
+		WHERE CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode}
+	</select>
 
 	<!-- 캠핑 : 캠핑장 지도 리스트 10개 단위로 쪼개기 -->
 	<select id="getCampingRecord"
@@ -52,26 +47,25 @@
 		WHERE CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode} AND CPCODE = #{cpCode}
 	</select>
 
-
+	<!-- map table 주소저장 -->
+	<insert parameterType="icia.escape.beans.Fishing" id="insMap" >
+		INSERT INTO MA(MA_MMCODE, MA_POST, MA_ADDRESS, MA_CFCODE) VALUES (#{fpMaMmCode}, #{fpMaPost}, #{maAddress}, #{fpMaCfCode})
+		
+	</insert>
+	
 	<!-- 낚시포인트 등록 : DB에 저장 -->
-	<select parameterType="icia.escape.beans.Fishing"
-		id="insFishing">
-		INSERT INTO FP(FP_MAMMCODE, FP_MACFCODE, FP_CACODE, FP_THCODE, FP_GECODE,
-		FP_FICODE, FP_CODE, FP_TITLE, FP_CONTENTS, FP_VIEW, FP_DATE,
-		FP_MAPOST, FP_IMAGE)
-		VALUES(#{fpMaMmCode}, #{fpMaCfCode}, #{fpCaCode}, #{fpThCode}, #{fpGeCode}, #{fpFiCode},
-		#{fpCode}, #{fpTitle}, #{fpContents}, #{fpView}, #{fpDate},
-		#{fpMaPost}, #{fpImage})
-	</select>
+	<insert parameterType="icia.escape.beans.Fishing" id="insFishing">
+		INSERT INTO FP(FP_MAMMCODE, FP_MACFCODE, FP_CACODE, FP_THCODE, FP_GECODE,FP_FICODE,FP_MAPOST, FP_CODE, FP_TITLE, FP_CONTENTS, FP_VIEW, FP_DATE, FP_IMAGE)
+		      VALUES(#{fpMaMmCode},  #{fpMaCfCode}, #{fpCaCode}, #{fpThCode}, #{fpGeCode}, #{fpFiCode}, #{fpMaPost}, #{fpCode}, #{fpTitle}, #{content}, DEFAULT, SYSDATE, DEFAULT)
+	</insert>
 	
 	<!-- 낚시포인트 등록 : 게시물 MAXCODE불러오기 -->
-	<select resultType="String"
-		parameterType="icia.escape.beans.Fishing" id="checkFishingCode">
+	<select resultType="String" parameterType="icia.escape.beans.Fishing" id="checkFishingCode">
 		SELECT MAX(FP_CODE)AS FPCODE FROM FP
 	</select>
 
-	<update parameterType="icia.escape.beans.Fishing"
-		id="updFishing">
+	<!-- 게시물 수정 -->
+	<update parameterType="icia.escape.beans.Fishing" id="updFishing">
 		UPDATE FP SET FP_TITLE = #{fpTitle}, FP_CONTENTS =#{fpContents} WHERE
 		FP_MACFCODE = #{fpMaCfCode} AND FP_CACODE = #{fpCaCode} AND FP_CODE =
 		#{fpCode}
