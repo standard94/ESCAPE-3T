@@ -36,8 +36,8 @@ function createSEditor2(elIRField, htParams, elSeAppContainer){
 	}
 
 	var htDimension = {
-		nMinHeight:205,
-		nMinWidth:parseInt(elIRField.style.minWidth, 10)||570,
+		nMinHeight:400,
+		nMinWidth:parseInt(elIRField.style.minWidth, 10)||1000,
 		nHeight:elIRField.style.height||elIRField.offsetHeight,
 		nWidth:elIRField.style.width||elIRField.offsetWidth
 	};
@@ -73,8 +73,8 @@ function createSEditor2(elIRField, htParams, elSeAppContainer){
 	oEditor.registerPlugin(new nhn.husky.SE2M_ColorPalette(elAppContainer));				// 색상 팔레트
 	oEditor.registerPlugin(new nhn.husky.SE2M_FontColor(elAppContainer));					// 글자색
 	oEditor.registerPlugin(new nhn.husky.SE2M_BGColor(elAppContainer));						// 글자배경색
-	//oEditor.registerPlugin(new nhn.husky.SE2M_FontNameWithLayerUI(elAppContainer, aAdditionalFontList));	// 글꼴종류
-	//oEditor.registerPlugin(new nhn.husky.SE2M_FontSizeWithLayerUI(elAppContainer));			// 글꼴크기
+	oEditor.registerPlugin(new nhn.husky.SE2M_FontNameWithLayerUI(elAppContainer, aAdditionalFontList));	// 글꼴종류
+	oEditor.registerPlugin(new nhn.husky.SE2M_FontSizeWithLayerUI(elAppContainer));			// 글꼴크기
 	
 	oEditor.registerPlugin(new nhn.husky.SE2M_LineStyler());								 
 	oEditor.registerPlugin(new nhn.husky.SE2M_ExecCommand(oWYSIWYGIFrame));
@@ -96,7 +96,7 @@ function createSEditor2(elIRField, htParams, elSeAppContainer){
 	
 	oEditor.registerPlugin(new nhn.husky.SE2B_CSSLoader());									// CSS lazy load
 	if(window.frameElement){
-		//oEditor.registerPlugin(new nhn.husky.SE_OuterIFrameControl(elAppContainer, 100));
+	oEditor.registerPlugin(new nhn.husky.SE_OuterIFrameControl(elAppContainer, 100));
 	}
 	
 	oEditor.registerPlugin(new nhn.husky.SE_ToolbarToggler(elAppContainer, htParams.bUseToolbar));

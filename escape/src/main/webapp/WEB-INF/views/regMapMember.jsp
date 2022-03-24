@@ -239,7 +239,7 @@
      			</div>
      			
      			
-     				<textarea rows="5" cols="10" id="postContents" name="postContents" style="display:none;"></textarea>
+     			<div id="posting"><textarea id="postContents" name="postContents" style="margin-left:10%"></textarea></div>
      			
      			
      			<div id="buttonDiv">
