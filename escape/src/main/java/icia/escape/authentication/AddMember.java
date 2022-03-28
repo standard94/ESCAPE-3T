@@ -57,10 +57,12 @@ public class AddMember {
 			case "S4":
 				storeSignUp(model);
 				break;
+		
 			}
 		}return mav;
 	}
-
+	
+	
 	//사용자 회원가입 : 아이디 중복 체크
 	private void checkMemberId(Model model) {
 		String message = "이미 사용된 아이디입니다. 다른 아이디를 입력해주세요.";
@@ -183,7 +185,6 @@ public class AddMember {
 		
 		this.mav.setViewName(page);
 	}
-	
 	
 	//Transaction PROPAGATION
 	private void setTransactionConf(int propa, int iso, boolean isRead) {

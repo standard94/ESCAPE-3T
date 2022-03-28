@@ -35,7 +35,7 @@
 					<div id="camping_rental"><span onClick="getNewPage('campingRental')"><img id="camping_rental1" src='resources/images/sleeping-bag.png' onMouseOver="this.src='resources/images/campingEquipment1.png'" onmouseout="this.src='resources/images/sleeping-bag.png'"/></span></div>
 					<div id="fishing_rental"><span onClick=""><img id="fishing_rental1" src='resources/images/fishing-baits.png' onMouseOver="this.src='resources/images/fishingEquipment1.png'" onmouseout="this.src='resources/images/fishing-baits.png'"/></span></div>
 					<div id="fishing_community"><span onClick=""><img id="fishing_community1" src='resources/images/big-fish.png' onMouseOver="this.src='resources/images/bigFishing1.png'" onmouseout="this.src='resources/images/big-fish.png'"/></span></div>
-					<div id="rental"><span onClick=""><img id="rental1" src='resources/images/location.png' onMouseOver="this.src='resources/images/rentalPlace1.png'" onmouseout="this.src='resources/images/location.png'"/></span></div>
+					<div id="rental"><span onClick="getNewPage('storeInfoPage')"><img id="rental1" src='resources/images/location.png' onMouseOver="this.src='resources/images/rentalPlace1.png'" onmouseout="this.src='resources/images/location.png'"/></span></div>
 					<div id="camping_community"><span onClick=""><img id="camping_community1" src='resources/images/fire.png' onMouseOver="this.src='resources/images/campingKnowHowTip1.png'" onmouseout="this.src='resources/images/fire.png'"/></span></div>
 				</div>
 				<div id="line2"></div>

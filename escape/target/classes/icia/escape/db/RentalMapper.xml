@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="icia.escape.db.RentalMapper">
+
+<!-- 낚시 렌탈업체 리스트 카운트 -->
+<select resultType="int" parameterType="icia.escape.beans.Stores" id="getFishingStoreListCount">
+SELECT COUNT(*) FROM NATECHILDREN.STORES WHERE SR_CFCODE = #{srCfCode} 
+</select>
+
+<!-- 낚시 렌탈업체 리스트 10개 불러오기 -->
+<select resultType="icia.escape.beans.Stores" parameterType="icia.escape.beans.Stores" id="getFishingStoreList">
+<![CDATA[
+	SELECT ROWNUMBER, SRCFCODE, SRCODE, SRNAME, SRNUMBER, SRDETAILS, SRIMAGE, SRADDRESS
+	FROM   (SELECT ROWNUMBER, SRCFCODE, SRCODE, SRNAME, SRNUMBER, SRDETAILS, SRIMAGE, SRADDRESS
+                  
+    FROM (SELECT ROWNUM AS ROWNUMBER, SR_CFCODE AS SRCFCODE, SR_CODE AS SRCODE, SR_NAME AS SRNAME, SR_NUMBER AS SRNUMBER, SR_DETAILS AS SRDETAILS, SR_IMAGE AS SRIMAGE, SR_ADDRESS AS SRADDRESS
+			FROM NATECHILDREN.STORES
+			WHERE SR_CFCODE = #{srCfCode})
+    WHERE ROWNUMBER <= #{pageNumber} * #{amount} )
+                
+	WHERE ROWNUMBER > (#{pageNumber}-1) *  #{amount}
+	]]>
+</select>
+
+<!-- 모든 업체 : 분류,카테고리별 상품 수 카운트 -->
+<select id="countGoodsList" resultType="int">
+		SELECT COUNT(*)
+		FROM GOODSLIST
+		WHERE CFCODE = #{cfCode} AND CACODE = #{caCode}
+</select>
+
+<!-- 특정 업체 : 분류,카테고리별 상품 수 카운트 -->
+<select id="countStoreGoodsList" resultType="int">
+		SELECT COUNT(*)
+		FROM GOODSLIST
+		WHERE CFCODE = #{cfCode} AND CACODE = #{caCode} AND SRCODE = #{srCode}
+</select>
+
+<!-- 모든 업체의 상품 리스트 불러오기 -->
+<select id="getAllStoreGoods" parameterType = "icia.escape.beans.Goods" resultType = "icia.escape.beans.Goods">
+ <![CDATA[
+SELECT ROWNUMBER, CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
+FROM	(SELECT ROWNUMBER ,CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
+                  
+        FROM (SELECT ROWNUM AS ROWNUMBER ,CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
+              FROM GOODSLIST 
+              WHERE CFCODE = #{cfCode} AND CACODE = #{caCode})
+        WHERE ROWNUMBER <= #{pageNumber} * #{amount} )
+                
+WHERE ROWNUMBER > (#{pageNumber}-1) *  #{amount}
+]]>
+</select>
+
+<!-- 특정 업체의 상품 리스트 불러오기 -->
+<select id="getStoreGoods" parameterType = "icia.escape.beans.Goods" resultType = "icia.escape.beans.Goods">
+<![CDATA[
+SELECT ROWNUMBER, CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
+FROM	(SELECT ROWNUMBER ,CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
+                  
+        FROM (SELECT ROWNUM AS ROWNUMBER ,CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
+              FROM GOODSLIST 
+              WHERE CFCODE = #{cfCode} AND CACODE = #{caCode} AND SRCODE = #{srCode})
+        WHERE ROWNUMBER <= #{pageNumber} * #{amount} )
+                
+WHERE ROWNUMBER > (#{pageNumber}-1) *  #{amount}
+]]>
+</select>
+
+<!-- 같은 분류,카테고리의 다른 업체 상품 리스트 -->
+<select id="getSameTypeGoods" parameterType = "icia.escape.beans.Goods" resultType = "icia.escape.beans.Goods">
+<![CDATA[
+SELECT ROWNUMBER, CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
+FROM	(SELECT ROWNUMBER ,CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
+                  
+        FROM (SELECT ROWNUM AS ROWNUMBER ,CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
+              FROM GOODSLIST 
+              WHERE CFCODE = #{cfCode} AND CACODE = #{caCode} AND SRCODE != #{srCode})
+        WHERE ROWNUMBER <= #{pageNumber} * #{amount} )
+                
+WHERE ROWNUMBER > (#{pageNumber}-1) *  #{amount}
+    ]]>
+</select>
+
+<!-- 특정 업체의 특정 상품 -->
+<select id="getThatStoreThatGoods" parameterType = "icia.escape.beans.Goods" resultType = "icia.escape.beans.Goods">
+SELECT CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
+FROM GOODSLIST
+WHERE CFCODE = #{cfCode} AND SRCODE = #{srCode} AND CACODE = #{caCode} AND GOCODE = #{goCode}
+</select>
+
+<!-- 이 업체의 다른 상품들 -->
+<select id="getThatStoreOtherGoods" parameterType = "icia.escape.beans.Goods" resultType = "icia.escape.beans.Goods">
+SELECT CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
+FROM GOODSLIST
+WHERE SRCODE =  #{srCode} AND GOCODE !=  #{goCode}
+</select>
+
+</mapper>

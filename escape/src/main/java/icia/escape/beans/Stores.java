@@ -21,4 +21,11 @@ public class Stores {
 	String authCode;
 	String pageName;
     
+	int pageNumber;
+	int amount;
+	int startPage;
+	int endPage;
+	boolean prev;
+	boolean next;
+	int realEnd;
 }

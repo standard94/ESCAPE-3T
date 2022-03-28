@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import icia.escape.beans.Camping;
 import icia.escape.beans.Fishing;
 import icia.escape.beans.Maps;
+import icia.escape.beans.Stores;
 
 @Mapper
 public interface MapMapper {
@@ -16,8 +17,12 @@ public interface MapMapper {
 	public List<Camping> getCampingRecord(Camping cp);
 	public List<Camping>findCampingDetail(Camping cp);
 	public int countCampingList(Camping cp);
+	
 	/*Fishing*/
 	public int insFishing(Fishing fs);
 	public String checkFishingCode(Fishing fs);
 	public int insMap(Fishing fs);
+	/*Store*/
+	public List<Stores> getStoreList(Stores sr);
+	public List<Stores> getStoreDetail(Stores sr);
 }
