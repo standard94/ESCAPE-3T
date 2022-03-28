@@ -32,7 +32,7 @@
 	<context:component-scan base-package="icia.escape.rental" />
 	<context:component-scan base-package="icia.escape.controller" />
 	<context:component-scan base-package="icia.escape.utils" />
-	<context:component-scan base-package="icia.escape.rentals" />
+	<context:component-scan base-package="icia.escape.rental" />
 	<context:component-scan base-package="icia.escape.mypage" />
 	<context:component-scan base-package="icia.escape.map" />
 	<context:component-scan base-package="icia.escape.beans" />

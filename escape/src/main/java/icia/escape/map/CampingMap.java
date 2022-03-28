@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import icia.escape.beans.Camping;
 import icia.escape.beans.Maps;
 import icia.escape.beans.Members;
+import icia.escape.beans.Stores;
 import icia.escape.db.MapMapper;
 import icia.escape.utils.Encryption;
 import icia.escape.utils.ProjectUtils;
@@ -49,6 +50,12 @@ public class CampingMap {
 	public ModelAndView  backController(String serviceCode, Model model) {
 		
 		switch(serviceCode) {
+		case "S0":
+	         getStoreList(model);
+	         break;
+	    case "S1":
+	         getStoreDetail(model);
+	         break;
 		case "C0":
 			getCampingList(model);
 			break;	
@@ -59,17 +66,27 @@ public class CampingMap {
 			chooseCampingList(model);
 			break;
 		case "C3":
-			findCampingDetail(model);
-			break;
+	         findCampingDetail(model);
+	         break;
 			
 		}
 		return mav;
 	}
-	
+	/*캠핑 상세정보 불러오기*/
 	public void findCampingDetail(Model model) {
-		model.addAttribute("campingList",this.mm.findCampingDetail((Camping)model.getAttribute("camping")));
-	}
+	      model.addAttribute("campingList",this.mm.findCampingDetail((Camping)model.getAttribute("camping")));
+	   }
 	
+	/*업체 리스트 불러오기*/
+	   public void getStoreList(Model model) {
+	      model.addAttribute("storeList", mm.getStoreList((Stores)model.getAttribute("Store")));
+	   }
+	 
+	/*업체 정보 불러오기*/
+	   public void getStoreDetail(Model model) {
+	      model.addAttribute("storeDetail", mm.getStoreDetail((Stores)model.getAttribute("Stores")));
+	   }
+	   
 	public void chooseCampingList(Model model) {
 		model.addAttribute("campingList",this.mm.getCampingRecord((Camping)model.getAttribute("camping")));
 	}

@@ -131,6 +131,105 @@
 	border : 1px solid #000000;	
 }
 
+#topForm{
+	width:100%;
+	height : 5%;
+}
+#leftTitle{
+	float:left;
+	width:30%;
+	height:80%;
+}
+#subTitle{
+	width:50%;
+	height:30%;
+}
+.txt{
+	font-size: 16pt;
+}
+#storeName{
+	margin : 7% 0 0 20%;
+	color:#8C8C8C;
+	font-weight:bold;
+
+}
+#arrow1,#category{
+	margin : 7% 0 0 2%;
+	color:#BDBDBD;
+}
+
+#rentalGoods{
+	margin : 15% 0 4% 20%;
+	width:99.8;
+	font-size: 20pt;
+	color :#292929;
+	font-weight:bold;
+	text-decoration-line : solid;
+	text-decoration-color: #292929;
+	text-decoration: underline;
+	text-underline-position: under;
+}
+/******오른쪽 검색*****/
+
+#rightTitle{
+	float:left;
+	margin-left:10%;
+	width:60%;
+	height:100%;
+	
+}
+
+#rightTop{
+	float:left;
+	width:100%;
+	height:50%;
+}
+
+/*---------------등록,필터-------------------- */
+
+
+#job {
+	float:left;
+  margin: 8% 0 2% 22%;
+  width: 15%;
+  height: 80%;
+  background: url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png') calc(100% - 5px) center no-repeat;
+  background-size: 20px;
+  border-radius: 2px;
+  outline: 0 none;
+  color:#000000;
+}
+#job option {
+  padding: 3px 0;
+}
+
+#searchText{
+	margin : 8% 2% 0 2%;
+	float:left;
+	width:30%;
+	height:70%;
+	 
+}
+#searchClick{
+	margin-top:8%;
+	float:left;
+	width:10%;
+	height:80%;
+	
+	
+}
+#middleForm{
+	float:left;
+	width:100%;
+	height : 67%;
+}
+#bottomForm{
+	float:left;
+	width:100%;
+	height : 25%;
+	margin-top:5%;
+	background-color:green;
+}
 #sideBar{
 	float: left;
 	width : 17%;
@@ -169,7 +268,23 @@
 	text-align:center;
 	
 }
+#listDiv{
+	width:99.8%;
+	height : 80%;
+}
 
+
+#goodsList{
+	margin : 1% 1% 0% 1%;
+	width: 99.8%;
+	height : 90%;
+}
+
+#pageDiv{
+	width: 50%;
+	height : 10%;
+	margin-left : 30%;
+}
 .menuTop{
 	margin :0 0 0 2%;
 	width:95%;
@@ -214,14 +329,172 @@
 }
 .textLocation{
 	margin : 4% 0 4% 0;
-	
+	cursor : pointer;
 }
 
 
 .text1{
 	width:74%;
-
 	margin : 4% 0 0 17%;
+}
+#postContents{
+	display:none;
+
+}
+
+.textLocation._value{
+	background-color:#FFCD36;
+}
+/*---------------리스트-------------------*/
+.bigDiv1,.bigDiv7,.bigDiv2,.bigDiv8,.bigDiv4,.bigDiv5,.bigDiv0,.bigDiv3,.bigDiv6{
+	margin : 3% 0% 0% 5%;
+	width:25%;
+	height:25%;
+	float:left; 
+}
+
+
+#goImage{
+	width:99.8%;
+	height :99.8%;
+	border : 5px solid #292929;
+	margin-bottom:0.4%;
+}
+
+.gdListsrCode, .gdListgoCode, .gdListcfCode, .gdListcaCode {
+	display:none;
+}
+.gdListimage{
+	margin-left : 10%;
+	width:80%;
+	height:30%;
+	margin-bottom:0.4%;
+}
+	
+
+.gdListrentPrice{
+	margin-left : 15%;
+	width:30%;
+	float:left;
+	margin-bottom:2%;
+
+}
+.gdListsrName,.gdListgoName{
+	margin-left : 15%;
+	margin-bottom:0.4%;
+}
+.gdListstCode{
+	float:left;
+	background-color: #292929;
+	color:#FFFFFF;
+	width:15%;
+	height:20%;
+	text-align:center;
+	border-radius : 3px;
+	font-size:10pt;
+	margin-bottom:2%;
+	
+}
+.gdListdiscount{
+	float:left;
+	width:25%;
+	margin-bottom:2%;
+}
+
+
+button {
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  width:30%;
+	height:10%;
+  
+}
+#btnCart{
+	float:left;
+	margin: 0 2% 0 18%;
+	
+}
+#btnBuy{
+	float:left;
+	margin: 0% 0% 0% 5%;
+	
+}
+button:hover{
+	background-color:#292929;
+	color:#FFCD36;
+	
+}
+/*------------------button----------------*/
+li{
+   list-style:none;
+}
+ul{
+   list-style:none;
+   padding-left:0px;
+   text-align:center;
+}
+#goodsPage{
+
+	width:90%;
+	text-align:center;
+}
+/*이전 버튼*/
+.pageInfo_btn_prev{
+	margin-top : 5%;
+   float:left;
+   padding : 1% 1% 1% 1%;
+   
+   background-color:#FFCD36;
+   
+}
+.pageInfo_btn_prev:hover{
+   font-weight: bold;
+   background-color:#CCA63D;
+   color:#050099;
+}
+
+#pageInfo_btn_prev_hold{
+	margin-top : 7%;
+   float:left;
+   padding : 1% 1% 1% 1%;
+   background-color:#FFCD36;
+}
+/*선택한 페이지 버튼*/
+.pageInfo_btn_selected{
+	margin-top : 7%;
+   float:left;
+   padding : 1% 1% 1% 1%;
+   background-color:#BDBDBD;
+}
+.pageInfo_btn_selected:hover{
+   color:#050099;
+}
+/*페이지 버튼*/
+.pageInfo_btn{
+	margin-top : 7%;
+   float:left;
+   padding : 1% 1% 1% 1%;
+   
+}
+.pageInfo_btn:hover{
+   background-color:#D5D5D5;
+   color:#050099;
+}
+/*다음 버튼*/
+.pageInfo_btn_next{
+	margin-top : 7%;
+   float:left;
+   padding : 1% 1% 1% 1%;
+   
+   background-color:#FFCD36;
+}
+.pageInfo_btn_next:hover{
+font-weight: bold;
+   background-color:#CCA63D;
+   color:#050099;
 }
 
 /*-----------------------------bottom---------------------------------*/

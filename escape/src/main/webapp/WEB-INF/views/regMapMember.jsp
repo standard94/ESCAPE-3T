@@ -76,7 +76,7 @@
      				
      				<div id="filterGenre2" style="display:none;">
      				<h2 class ="filterName" >GENRE</h2>
-     					<button type="button" class="select_btn_genrespan" value="G001">라인|매듭|공통</button>
+     					<button type="button" class="select_btn_genrespan" value="G001">라인|매듭| 공통</button>
 						<button type="button" class="select_btn_genrespan" value="G010">기타</button>
      					<button type="button" class="select_btn_genrespan" value="G011">광어루어</button>
      					<button type="button" class="select_btn_genrespan" value="G012">쇼어루어</button>
@@ -259,27 +259,30 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=83c735083178ecf82197f105cee12951&libraries=services"></script>
 	
-<script type="text/javascript" src="resources/se2/js/HuskyEZCreator.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../resources/se2/js/HuskyEZCreator.js" charset="UTF-8"></script>
 <script type="text/javascript">
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
  elPlaceHolder: "postContents",
- sSkinURI: "resources/se2/SmartEditor2Skin.html",
+ sSkinURI: "../resources/se2/SmartEditor2Skin.html",
+ 
  fCreator: "createSEditor2"
-// 	 htParams : {
-//          // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-//          bUseToolbar : false,             
-//          // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-//          bUseVerticalResizer : false,     
-//          // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-//          bUseModeChanger : false         
-// 	 }	
+	
 });
+
+
 </script>
 
 
 <script>
+//textArea에 이미지 첨부
+function pasteHTML(filepath){
+    var sHTML = "<img src="<%=request.getContextPath()%>/resources/images/'+filepath+'">';
+   
+    oEditors.getById["textAreaContent"].exec("PASTE_HTML", [sHTML]);
+}
+
 function submitPost(){
 	oEditors.getById["postContents"].exec("UPDATE_CONTENTS_FIELD",[])
 	let content = document.getElementById("postContents").value;

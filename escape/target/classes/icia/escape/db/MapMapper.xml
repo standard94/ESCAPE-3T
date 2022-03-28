@@ -8,9 +8,11 @@
 	<select id="getCampingList"
 		parameterType="icia.escape.beans.Camping"
 		resultType="icia.escape.beans.Camping">
-		SELECT CPIMAGE, CPNAME, CPNUMBER, HANAME, THNAME, MAADDRESS
-		FROM CAMPINGLIST
-		WHERE CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode}
+		SELECT ROWNUM AS ROWNUMBER, CPMAMMCODE, CPMACFCODE, CPCACODE, CPCODE, CPHACODE, CPTHCODE, CPMAPOST, CPNAME, CPNUMBER,
+                     CPCONTENTS, CPFACILITY, CFNAME, HANAME, THNAME, MAADDRESS, CPIMAGE
+        FROM CAMPINGLIST 
+        WHERE HANAME = #{haName} AND CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode}
+
 	</select>
 
 	<!-- 캠핑 : 캠핑장 지도 리스트 10개 단위로 쪼개기 -->
@@ -70,4 +72,17 @@
 		FP_MACFCODE = #{fpMaCfCode} AND FP_CACODE = #{fpCaCode} AND FP_CODE =
 		#{fpCode}
 	</update>
+	<!-- 업체리스트 호출 -->
+   <select id="getStoreList"
+      parameterType="icia.escape.beans.Stores"
+      resultType="icia.escape.beans.Stores">
+      SELECT SR_CFCODE AS SRCFCODE, SR_ID AS SRID, SR_PASSWORD AS SRPASSWORD, SR_POST AS SRPOST, SR_CODE AS SRCODE, SR_NAME AS SRNAME, SR_NUMBER AS SRNUMBER, SR_DETAILS AS SRDETAIL, SR_EMAIL AS SREMAIL, SR_ADDRESS AS SRADDRESS, SR_IMAGE AS SRIMAGE FROM SR WHERE SR_CFCODE= #{srCfCode}
+   </select>
+   
+   <!-- 업체상세정보 출력 -->
+   <select id="getStoreDetail"
+      parameterType="icia.escape.beans.Stores"
+      resultType="icia.escape.beans.Stores">
+      SELECT SR_CFCODE AS SRCFCODE, SR_ID AS SRID, SR_PASSWORD AS SRPASSWORD, SR_POST AS SRPOST, SR_CODE AS SRCODE, SR_NAME AS SRNAME, SR_NUMBER AS SRNUMBER, SR_DETAILS AS SRDETAIL, SR_EMAIL AS SREMAIL, SR_ADDRESS AS SRADDRESS, SR_IMAGE AS SRIMAGE FROM SR WHERE SR_CFCODE= #{srCfCode} AND SR_CODE= #{srCode}
+   </select>
 </mapper>

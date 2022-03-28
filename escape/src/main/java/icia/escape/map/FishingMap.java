@@ -74,7 +74,7 @@ public class FishingMap {
 				if(this.convertToBoolean(this.mm.insFishing((Fishing)model.getAttribute("fishing")))) {
 					check = true;
 
-					model.addAttribute("fishingList", (Fishing)model.getAttribute("fishing"));
+					this.mav.addObject("fishingList", (Fishing)model.getAttribute("fishing"));
 					
 
 				}

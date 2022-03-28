@@ -166,31 +166,6 @@ function init(objName) {
 		}
 	}
 	
-/*JsonData 가져오기*/
-function getAjaxJson(action, clientData, fn, method) {
-   let ajax = new XMLHttpRequest();
-   ajax.onreadystatechange = function() {
-      if (ajax.readyState == 4 && ajax.status == 200) {
-         window[fn](JSON.parse(ajax.responseText));
-      }
-
-   };
-    
-   if(method == "GET"){
-	  action = (clientData != "")? (action + "?" + clientData) : action; 
-  
-	  ajax.open("get", action, true);
-      ajax.send();
-   }else{
-	  ajax.open("post", action, true);
-      ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
-      ajax.send(clientData);
-   }
-
-   /*send 하기 전엔 state값 2, status 값은 없음*/
-   /*send 누르면 state가 3으로 변함*/
-   
-}
 
 /* Modal Dialog*/
 function openModal(obj){
