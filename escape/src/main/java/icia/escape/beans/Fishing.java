@@ -18,7 +18,6 @@ public class Fishing {
 	private int fpView;
 	private String fpImage;
 	private String maAddress;
-	private String content;
 }
 
 

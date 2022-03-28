@@ -844,8 +844,7 @@
          title.innerHTML = detail[0].srName
          title.style.cssText = 'font-size: 26px; font-weight: bold; letter-spacing: -1px;padding: 0; width:90%; margin: 3% 1% 0% 5%; color: #25a5f0;height: 5%;line-height: 40px;border-bottom: 2px #25a5f0 solid;'
         title.onclick = function(){
-            console.log("승현이 한 번 돌려봐");
-            /* getNewPage(); */
+            getNewPage('chooseStoreInfoPage');
          }
          
          var category = document.createElement("div")

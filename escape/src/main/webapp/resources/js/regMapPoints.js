@@ -114,110 +114,108 @@ function addEvent() {
 
 //map table 주소저장 후 낚시터 등록
 function insFishing(pMmCode){
-	const pMaMmCode = pMmCode;
-	const pFpMaPost = document.getElementById('maPost').value;
+   const pMaMmCode = pMmCode;
+   const pFpMaPost = document.getElementById('maPost').value;
     const pMaAddress = document.getElementById('maAddress').value;
     const pFpMaCfCode = document.getElementsByName("bigType")[0].value;
 
-	oEditors.getById["postContents"].exec("UPDATE_CONTENTS_FIELD",[])
-	const content = document.getElementById("postContents").value;
-	const pFpTitle = document.getElementById("title").value;
-	
+   const content = document.getElementById("content").value;
+   const pFpTitle = document.getElementById("title").value;
+   const pFpImage = document.getElementsByName("files")[0].value;
     const pFpCaCode = document.getElementsByName("smallType")[0].value;
-	const pFpThCode = document.getElementsByClassName('select_btn_themespan _value')[0].value;
-	let pFpGeCode1 = document.getElementsByClassName('select_btn_genrespan _value');
-	let pFpGeCode = "";
-	for(i=0; i<pFpGeCode1.length; i++){
-		if(i==0){
-			pFpGeCode = pFpGeCode1[i].value;
-		}else{ 
-			pFpGeCode += "&" + pFpGeCode1[i].value;
-		}
-	}
-	
-	let pFpFiCode1 = document.getElementsByClassName('select_btn_fishspan _value');
-	let pFpFiCode = "";
-	for(j=0; j<pFpFiCode1.length; j++){
-		if(j==0){
-			pFpFiCode = pFpFiCode1[j].value;
-		}else{
-			pFpFiCode += "&" + pFpFiCode1[j].value;
-		}
-	}
-	
-	//게시물 제목을 입력했는지 확인
-	if(pFpTitle != ''){
-		//분류를 선택했는지 확인
-		if(pFpMaCfCode != ''){
-			//카테고리를 선택했는지 확인
-			if(pFpCaCode != ''){
-				//테마를 선택했는지 확인
-				if(pFpThCode != ''){
-					//장르를 선택했는지 확인
-					if(pFpGeCode != ''){
-						//어종을 선택했는지 확인
-						if(pFpFiCode != ''){
-							//지도를 선택했는지 확인 (우편번호)
-							if(pFpMaPost != ''){
-								//지도를 선택했는지 확인 (주소)
-								if(pMaAddress != ''){
-									if(content != ''){
-										let jsonData = [];
-										jsonData.push({fpMaMmCode:pMaMmCode,fpMaPost:pFpMaPost,maAddress:pMaAddress,fpMaCfCode:pFpMaCfCode,fpCaCode:pFpCaCode,fpThCode:pFpThCode,fpGeCode:pFpGeCode,fpFiCode:pFpFiCode,fpTitle:pFpTitle,content:content});
-										const clientData = JSON.stringify(jsonData);
-
-										getAjaxJson("InsFishing", clientData, "checkFpPosting");
-									}							
-								}else{
-									 alert("내용을 입력해주세요");
-     								 oEditors.getById("postContents").exec("FOCUS");
-								}
-							}else{
-								alert("지도에 위치를 찍어주세요");
-							}
-						}else{
-							alert("FISHTYPE을 선택하여 주세요");
-						}
-					}else{
-						alert("GENRE를 선택하여 주세요");
-					}
-				}else{
-					alert("CATEGORY를 선택하여 주세요");
-				}
-			}else{
-				alert("포인트를 선택하여 주세요");
-			}
-		}else{
-			alert("낚시를 선택하여 주세요");
-		}
-	}else{
-		alert("게시물 제목을 입력하여 주세요");
-	}
-	
+   const pFpThCode = document.getElementsByClassName('select_btn_themespan _value')[0].value;
+   let pFpGeCode1 = document.getElementsByClassName('select_btn_genrespan _value');
+   let pFpGeCode = "";
+   for(i=0; i<pFpGeCode1.length; i++){
+      if(i==0){
+         pFpGeCode = pFpGeCode1[i].value;
+      }else{ 
+         pFpGeCode += "&" + pFpGeCode1[i].value;
+      }
+   }
+   
+   let pFpFiCode1 = document.getElementsByClassName('select_btn_fishspan _value');
+   let pFpFiCode = "";
+   for(j=0; j<pFpFiCode1.length; j++){
+      if(j==0){
+         pFpFiCode = pFpFiCode1[j].value;
+      }else{
+         pFpFiCode += "&" + pFpFiCode1[j].value;
+      }
+   }
+   
+   //게시물 제목을 입력했는지 확인
+   if(pFpTitle != ''){
+      //분류를 선택했는지 확인
+      if(pFpMaCfCode != ''){
+         //카테고리를 선택했는지 확인
+         if(pFpCaCode != ''){
+            //테마를 선택했는지 확인
+            if(pFpThCode != ''){
+               //장르를 선택했는지 확인
+               if(pFpGeCode != ''){
+                  //어종을 선택했는지 확인
+                  if(pFpFiCode != ''){
+                     //지도를 선택했는지 확인 (우편번호)
+                     if(pFpMaPost != ''){
+                        //지도를 선택했는지 확인 (주소)
+                        if(pMaAddress != ''){
+                           if(content != ''){
+                              let jsonData = [];
+                              jsonData.push({fpMaMmCode:pMaMmCode,fpMaPost:pFpMaPost,maAddress:pMaAddress,fpMaCfCode:pFpMaCfCode,fpCaCode:pFpCaCode,fpThCode:pFpThCode,fpGeCode:pFpGeCode,fpFiCode:pFpFiCode,fpTitle:pFpTitle,fpContents:content,fpImage:pFpImage});
+                              const clientData = JSON.stringify(jsonData);
+                              alert(clientData);
+                              getAjaxJson("InsFishing", clientData, "checkFpPosting");
+                           }                  
+                        }else{
+                            alert("내용을 입력해주세요");
+                        }
+                     }else{
+                        alert("지도에 위치를 찍어주세요");
+                     }
+                  }else{
+                     alert("FISHTYPE을 선택하여 주세요");
+                  }
+               }else{
+                  alert("GENRE를 선택하여 주세요");
+               }
+            }else{
+               alert("CATEGORY를 선택하여 주세요");
+            }
+         }else{
+            alert("포인트를 선택하여 주세요");
+         }
+      }else{
+         alert("낚시를 선택하여 주세요");
+      }
+   }else{
+      alert("게시물 제목을 입력하여 주세요");
+   }
+   
 }
 
 function checkFpPosting(fishingList){
-	
-	alert(fishingList.fpMaMmCode);
+   
+   alert(fishingList.fpMaMmCode);
 }
 
 function getAjaxJson(action, data, fn) {
-	const ajax = new XMLHttpRequest();
-	
-	ajax.onreadystatechange = function() {
-		if (ajax.readyState == 4 && ajax.status == 200) {
-			if(ajax.responseText !=""){
-				if(ajax.responseText.indexOf(":")>0){
-					window[fn](JSON.parse(ajax.responseText));
-				}else{
-					window[fn](ajax.responseText);
-				}
-			}
-		}
-	};
-	ajax.open("post", action, true);
-	ajax.setRequestHeader("Content-type","application/json;charset=utf-8");
-	ajax.send(data);
+   const ajax = new XMLHttpRequest();
+   
+   ajax.onreadystatechange = function() {
+      if (ajax.readyState == 4 && ajax.status == 200) {
+         if(ajax.responseText !=""){
+            if(ajax.responseText.indexOf(":")>0){
+               window[fn](JSON.parse(ajax.responseText));
+            }else{
+               window[fn](ajax.responseText);
+            }
+         }
+      }
+   };
+   ajax.open("post", action, true);
+   ajax.setRequestHeader("Content-type","application/json;charset=utf-8");
+   ajax.send(data);
 }
 
 function fromJsonToJson(action, clientData, fn, content) {
@@ -230,13 +228,47 @@ function fromJsonToJson(action, clientData, fn, content) {
       }
 
    };
-	  ajax.open("post", action, true);
+     ajax.open("post", action, true);
       ajax.setRequestHeader("Content-Type", content? "application/x-www-form-urlencoded; charset=utf-8" : "application/json; charset=utf-8");
-		console.log(clientData)
+      console.log(clientData)
       ajax.send(clientData);
    
 
    /*send 하기 전엔 state값 2, status 값은 없음*/
    /*send 누르면 state가 3으로 변함*/
+   
+}
+
+//파일 등록    
+function ajaxUploadFile(formName){
+   
+    const form = document.getElementsByName(formName)[0];
+    /*파일의 유효성 검사*/
+    let formData = new FormData(form); 
+    
+   ajaxFormData("MultiPart2",formData,"ajaxCallBack","POST");
+   
+   
+}
+
+function ajaxFormData(action, clientData, fn, method) {
+      const ajax = new XMLHttpRequest();
+      
+      ajax.onreadystatechange = function() {
+         if (ajax.readyState == 4 && ajax.status == 200) {
+            window[fn]();
+         }
+      }
+      
+    ajax.open(method, action, true);
+    //ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+    ajax.send(clientData);
+      
+    /*send 하기 전엔 state값 2, status 값은 없음*/
+    /*send 누르면 state가 3으로 변함*/
+      
+   }
+function ajaxCallBack(){
+   alert("Ajax File Transfer");
    
 }
