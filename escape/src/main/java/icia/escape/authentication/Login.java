@@ -110,36 +110,41 @@ public class Login {
 		
 		String pwd = null;
 		
+		
 		if((pwd = ((Members)this.am.isMember(mem)).getMmPassword()) != "") {
-			if(enc.matches(mem.getMmPassword(), pwd)) {
-			/*로그인 상태코드 : 1111*/
-			mem.setStCode("1111");
-			mem.setMmCode((((Members)this.am.isMember(mem)).getMmCode()));
-							
-							if(this.convertToBoolean(this.am.insMembersAccessHistory(mem))) {
-								isAccessCheck =  true;
-								page = "basic";
-								message = "정상적으로 로그인하였습니다.";
-							}else {
-								message = "로그인 실패";
-							}
-						}else {message = "잘못된 비밀번호 입니다";}
-					}else {message = "잘못된 비밀번호 입니다";}
-
-					if(isAccessCheck) {
-						try {
-							/*사용자 정보 저장*/
-							System.out.println(this.am.getMemberAccessInfo(mem));
-							this.mav.addObject("accessInfo", this.am.getMemberAccessInfo(mem));
-							pu.setAttribute("sessionInfo", mav.getModel().get("accessInfo"));
-							page = "memberMain";
-
-						} catch (Exception e) {
-							e.printStackTrace();
+				if(enc.matches(mem.getMmPassword(), pwd)) {
+					/*로그인 상태코드 : 1111*/
+					mem.setStCode("1111");
+					if((Members)this.am.isMember(mem)!=null) {
+						mem.setMmCode((((Members)this.am.isMember(mem)).getMmCode()));
+				
+						if(this.convertToBoolean(this.am.insMembersAccessHistory(mem))) {
+							isAccessCheck =  true;
+							page = "basic";
+							message = "정상적으로 로그인하였습니다.";
+						}else {
+							message = "로그인 실패";
 						}
+					}else {message = "잘못된 아이디 입니다";}
+				}else {message = "잘못된 비밀번호 입니다";}
+		}else {message = "잘못된 비밀번호 입니다";}
+
+				if(isAccessCheck) {
+					try {
+					/*사용자 정보 저장*/
+					System.out.println(this.am.getMemberAccessInfo(mem));
+				    this.mav.addObject("accessInfo", this.am.getMemberAccessInfo(mem));
+					pu.setAttribute("sessionInfo", mav.getModel().get("accessInfo"));
+					page = "memberMain";
+
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-					this.mav.addObject("msg",message);
-					mav.setViewName(page);
+				}
+		
+	
+			this.mav.addObject("msg",message);
+			mav.setViewName(page);
 		}
 		
 
