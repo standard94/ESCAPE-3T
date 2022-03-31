@@ -56,6 +56,12 @@ public class CampingMap {
 	    case "S1":
 	         getStoreDetail(model);
 	         break;
+	    case "S2":
+	         getStorePage(model);
+	         break;
+	    case "S3":
+	    	chooseStoreList(model);
+	         break;
 		case "C0":
 			getCampingList(model);
 			break;	
@@ -68,7 +74,6 @@ public class CampingMap {
 		case "C3":
 	         findCampingDetail(model);
 	         break;
-			
 		}
 		return mav;
 	}
@@ -86,9 +91,54 @@ public class CampingMap {
 	   public void getStoreDetail(Model model) {
 	      model.addAttribute("storeDetail", mm.getStoreDetail((Stores)model.getAttribute("Stores")));
 	   }
+	/*캠핑장 페이지 개수 불러오기*/
+		public void getStorePage(Model model) {
+			
+			/* 시작 페이지 */
+		    int startPage; 
+		    /* 끝 페이지 */
+		    int endPage;
+		    /* 이전 페이지, 다음 페이지 존재유무 */
+		    boolean prev, next;
+		    
+		    /*전체 게시물 수*/
+		    int total = this.mm.countStoreList((Stores)model.getAttribute("Stores"));
+		  
+		    
+			/* 마지막 페이지 */
+	        endPage = (int)(Math.ceil(((Stores)model.getAttribute("Stores")).getPageNumber()/10.0))*10;
+	      
+	        /* 시작 페이지 */
+	        startPage = endPage - 9;
+	        
+	        /* 전체 마지막 페이지 */
+	        int realEnd = (int)(Math.ceil(total * 1.0/((Stores)model.getAttribute("Stores")).getAmount()));
+	       
+	        /* 전체 마지막 페이지(realend)가 화면에 보이는 마지막페이지(endPage)보다 작은 경우, 보이는 페이지(endPage) 값 조정 */
+	        if(realEnd < endPage) {
+	        	endPage = realEnd;
+	        }
+	        
+	        /* 시작 페이지(startPage)값이 1보다 큰 경우 true */
+	        prev = startPage > 1;
+	        
+	        /* 마지막 페이지(endPage)값이 1보다 큰 경우 true */
+	        next = endPage < realEnd;
+	        ((Stores)model.getAttribute("Stores")).setEndPage(endPage);
+	        ((Stores)model.getAttribute("Stores")).setStartPage(startPage);
+	        ((Stores)model.getAttribute("Stores")).setRealEnd(realEnd);
+	        ((Stores)model.getAttribute("Stores")).setPrev(prev);
+	        ((Stores)model.getAttribute("Stores")).setNext(next);
+	        model.addAttribute("storePage", (Stores)model.getAttribute("Stores"));
+	        
+		} 
 	   
 	public void chooseCampingList(Model model) {
 		model.addAttribute("campingList",this.mm.getCampingRecord((Camping)model.getAttribute("camping")));
+	}
+	   
+	public void chooseStoreList(Model model) {
+		model.addAttribute("storeList",this.mm.getStoreRecord((Stores)model.getAttribute("Stores")));
 	}
 	/*캠핑장 페이지 개수 불러오기*/
 	public void getCampingPage(Model model) {

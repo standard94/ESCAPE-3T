@@ -33,24 +33,21 @@ public class FishGoods {
 			case "R2":
 				getAllStorePage(model);
 				break;
+			case "R3":
+				getThatStoreThatGoods(model);
+				break;
 			
 			}
 		}return mav;
 	}
-	public ModelAndView backController1(String serviceCode, Goods... go) {
-		if(go.length == 0) {
-
-		}else {
-			switch(serviceCode) {
-			case "R3":
-				
-				break;
-			case "R4":
-			
-				break;
-			
-			}
-		}return mav;
+	
+	/*특정 업체의 특정 상품 불러오기*/
+	private void getThatStoreThatGoods(Model model) {
+		
+	 if(this.rm.countGoods((Goods)model.getAttribute("goods")) != 0) {
+		 model.addAttribute("goodsInfo", this.rm.getThatStoreThatGoods((Goods)model.getAttribute("goods")));
+		 
+	 }
 	}
 	/*모든 업체의 분류,카테고리 별 상품 불러오기*/
 	private void getAllStoreGoods(Model model) {
@@ -58,7 +55,7 @@ public class FishGoods {
 	}
 	
 	/*상품 페이지 개수 불러오기*/
-	public void getAllStorePage(Model model) {
+	private void getAllStorePage(Model model) {
 		/* 시작 페이지 */
 	    int startPage; 
 	    /* 끝 페이지 */

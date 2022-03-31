@@ -44,25 +44,52 @@ public class RentalStores {
 
 		}else {
 			switch(serviceCode) {
-			case "S0":
-				clickStoreInfo(model);
-				break;
+//			case "S0":
+//				clickStoreInfo(model);
+//				break;
 			case "S1":
 				getFishingStoreList(model);
 				break;
 			case "S2":
 				getFishingStorePage(model);
 				break;
-			
+			case "S4":
+				findStoreInfo(model);
+				break;
 			}
 		}return mav;
 	}
 	
-	/*캠핑장 리스트 불러오기*/
-	public void clickStoreInfo(Model model) {
-		model.addAttribute("storeList", rm.getRentalStores((Stores)model.getAttribute("store")));
-	
+	public ModelAndView backController(String serviceCode, Stores...sr) {
+		if(sr[0]== null) {
+			
+		}else {
+			switch(serviceCode) {
+			case "S3":
+				storeInfo(sr[0]);
+			}
+		}return mav;
 	}
+	
+	/*렌탈업체 상세정보 가져오기*/
+	public void findStoreInfo(Model model) {
+		model.addAttribute("rentalStoreInfo", rm.chooseStoreInfo((Stores)model.getAttribute("rentalStore")));
+	}
+	
+	
+	/*렌탈업체 상세정보 페이지 이동*/
+	public void storeInfo(Stores sr) {
+	
+		String page = "chooseStoreInfoPage";
+		mav.setViewName(page);
+	}
+	
+	
+//	/*캠핑장 리스트 불러오기*/
+//	public void clickStoreInfo(Model model) {
+//		model.addAttribute("storeList", rm.getRentalStores((Stores)model.getAttribute("store")));
+//	
+//	}
 	
 	/*낚시*/
 	public void getFishingStoreList(Model model) {

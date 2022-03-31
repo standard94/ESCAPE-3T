@@ -7,28 +7,29 @@
     font-style: normal;
 }
 
-/* ---------------------------------Top------------------------------------*/
+/*---------------------------------basic---------------------------*/
 
 #basic {
 	position:absolute; 
 	height:110%;
 	width:97.8%;
 	}
-	
+
+   
+/*---------------------------------top---------------------------*/
 #top {
-	font-family: 'Pretendard-Regular';
-	height:4.8%;
-	width:99.6%;
-	background-color:#292929;
-	}
-	
+   font-family: 'Pretendard-Regular';
+   height:5.4%;
+   width:102.5%;
+   background-color:#292929;
+   }
 
 #logo {
-	margin: 1% 0% 2% 2%;
-	width:12.5%;
-	height:3%;
-	position:absolute;
-	color : #EAEAEA;
+   margin: 0.7% 0% 0% 2%;
+   width:12.5%;
+   height:2.4%;
+   position:absolute;
+   color : #EAEAEA;
 	font-size:18pt;
 	font-weight : bolder;
 	cursor:pointer;
@@ -37,46 +38,46 @@
   color:#FFFFB4;
   }
 #search {
-	width:44.5%;
-	height:2.3%;
-	position:absolute; top:0.7%;
-	left:26%;
-	}
-	
+   width:44.5%;
+   height:2.3%;
+   position:absolute; top:0.7%;
+   left:26%;
+   }
+   
 #searchFont{
-	border:2px solid #FFCD36;
-	font-size:20pt;
-	padding: 1.2% 20% 0% 15%;
-	margin-left:1%;
-	}
+   border:2px solid #FFCD36;
+   font-size:20pt;
+   padding: 1.2% 20% 0% 15%;
+   margin-left:1%;
+   }
 
 #searchZoom{
-	padding: 0% 1% 1% 1%;
-	font-size:15pt;
-	position:absolute; top:36%; left:62%; 
-	border:0 solid black;
-	background-color:white;
-	color:#767F86;
-	
-	}
+  
+   font-size:15pt;
+   position:absolute; top:29%; left:62%; 
+   border:0 solid black;
+   background-color:white;
+   color:#767F86;
+   
+   }
 #searchZoom.divButton{
-	cursor :pointer;
-}	
+   cursor :pointer;
+}   
 #searchZoom.divButton:hover{
-	cursor :pointer;
-	font-weight: bold;
-}	
+   cursor :pointer;
+   font-weight: bold;
+}   
 #box1 {
-	width:35.5%;
+	width:45%;
 	height:3.4%;
 	position:absolute; top:1.7%;
 	left:57.5%;
 	}
 		
 #login1 {
-	width:28.3%;
+	width:30%;
 	height:43%;
-	margin-left:22%;
+	margin-left:10%;
 	float: left;
 	color:#ebedec;
 	font-size:10pt;
@@ -85,7 +86,7 @@
 #notice {
 	width:15%;
 	height:43%;
-	margin-left:5%;
+	margin-left:3%;
 	float: left;
 	color:#ebedec;
 	font-size:10pt;
@@ -98,349 +99,351 @@
 	color:#ebedec;	
 	font-size:10pt;
 	}
-
 .top_menu {
-	margin-top : 3%;
-	font-family: 'Pretendard-Regular';
-	font-size: 15pt;
-	cursor : pointer;
-	}
-	
+
+   font-family: 'Pretendard-Regular';
+   font-size: 13pt;
+   cursor : pointer;
+   }
+   
 #list {
-	width:4.4%;
-	height:4.8%;
-	position:absolute;
-	left:93.5%;
-	background-color:#a2a9af;
-	cursor : pointer;
-	}
-	
-/*------------------------------------mid-----------------------------------*/
-
-#mid{
-	font-family: 'Pretendard-Regular';
-	width : 74%;
-	height: 92%;
-	margin : 0% 0% 0% 13%;
-}
-
-#leftLine{
-	width : 20.4%;
-	height : 99.5%;
-	float : left;
-}
-
-#titleDiv{
-	width : 99.9%;
-	height : 10%;
-	background-color : #292929;
-}
-
-#title{
-	font-weight : bold;
-	font-size : 34pt;
-	text-align : center;
-	color : #FFFFFF;
-	margin : 7% 0% 0% 0%;
-	padding : 4% 0% 0% 0%;
-}
-
-#titleEng{
-	font-weight : bold;
-	font-size : 13pt;
-	text-align : center;
-	color : #FFFFFF;
-	
-}
-
-#leftMenu{
-	width : 99.9%;
-	height : 50%;
-}
-
-#myRentalGps{
-	font-weight : bold;
-	border-bottom :1px solid #292929;
-	width : 99.9%;
-	height : 7%;
-	margin : 3% 0% 0% 0%;
-	font-size : 15pt;
-	cursor : pointer;
-}
-
-#fishingRental{
-	font-weight : bold;
-	border-bottom : 1px solid #292929;
-	width : 99.9%;
-	height : 7%;
-	margin : 3% 0% 0% 0%;
-	font-size : 15pt;
-	cursor : pointer;
-}
-
-#campingRental{
-	font-weight : bold;
-	border-bottom :1px solid #292929;
-	width : 99.9%;
-	height : 7%;
-	margin : 3% 0% 0% 0%;
-	font-size : 15pt;
-	cursor : pointer;
-}
-
-#rightLine{
-	width : 70.2%;
-	height : 99.5%;
-	margin : 0% 0% 0% 20.4%;
-}
-
-#job {
-	margin : 0.5% 0 0 40%;
-	width: 25%;
-	height: 80%;
-	background: url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png') calc(100% - 5px) center no-repeat;
-	background-size: 20px;
-	padding: 5px 30px 5px 10px;
-	border-radius: 2px;
-	outline: 0 none;
-	float:left;
-}
-#job option {
-	padding: 3px 0;
-}
-
+   margin-top : 0.3%;
+   width:3%;
+   height:4.3%;
+   position:absolute;
+   left:93.5%;
+   background-color:#a2a9af;
+   cursor : pointer;
+   }
+   
+/*----------------------------mid------------------------------------*/
 
 #list2{
-	width : 99.5%;
-	height : 94%;
-	margin : 3% 0% 0% 0%;
+	border : solid red; 
+	width : 80%;
+	height : 90%;
+	margin : 5% 0% 0% 8%;
 	overflow: auto;
 }
 
-#storeList{
-	width : 99%;
-	height : 20%;
-	border-top : 1px solid #292929;
+#mid{
+   font-family: 'Pretendard-Regular';
+   width:99.3%;
+   height:95%;
+}
+#regForm{
+	float:left;
+	width : 70%;
+	height:99.8%;
+	border : 1px solid #000000;	
 }
 
-#srImage {
-	width : 30%;
-	height : 80%;
-	float : left;
-	margin : 2% 0% 0% 0%;
+#topForm{
+	width:100%;
+	height : 5%;
 }
+#leftTitle{
+	float:left;
+	width:30%;
+	height:80%;
+}
+#subTitle{
+	width:50%;
+	height:30%;
+}
+.txt{
+	font-size: 15pt;
+}
+#storeName2{
+	margin : 7% 0 0 20%;
+	color:#8C8C8C;
+	font-weight:bold;
+
+}
+#arrow1,#category{
+	margin : 7% 0 0 2%;
+	color:#BDBDBD;
+}
+
+#rentalGoods{
+	margin : 15% 0 4% 20%;
+	width:99.8;
+	font-size: 20pt;
+	color :#292929;
+	font-weight:bold;
+	text-decoration-line : solid;
+	text-decoration-color: #292929;
+	text-decoration: underline;
+	text-underline-position: under;
+}
+/******오른쪽 검색*****/
+
+#rightTitle{
+	float:left;
+	margin-left:10%;
+	width:60%;
+	height:100%;
 	
-#image{
-	width : 99%;
-	height : 99%;
-	float : left;
 }
 
-#srName{
-	font-weight : bold;
-	text-align : right;
-	font-size : 22pt;
-	padding : 0% 2% 0% 0%;
+#rightTop{
+	float:left;
+	width:100%;
+	height:50%;
 }
 
-#srAddress{
-	text-align : right;
-	font-size : 17pt;
-	padding : 0% 2% 0% 0%;
-	margin : 1% 0% 0% 0%;
+/*---------------등록,필터-------------------- */
+
+
+#job {
+	float:left;
+  margin: 6% 0 2% 22%;
+  width: 15%;
+  height: 80%;
+  background: url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png') calc(100% - 5px) center no-repeat;
+  background-size: 20px;
+  border-radius: 2px;
+  outline: 0 none;
+  color:#000000;
+}
+#job option {
+  padding: 3px 0;
 }
 
-#srDetails{
-	text-align : right;
-	font-size : 13pt;
-	width : 50%;
-	height : 20%;
-	padding : 0% 2% 0% 0%;
-	margin : 1% 0% 0% 48%;
+#searchText{
+	margin : 6% 2% 0 2%;
+	float:left;
+	width:30%;
+	height:70%;
+	 
+}
+#searchClick{
+	margin-top:6%;
+	float:left;
+	width:10%;
+	height:80%;
+	
+	
+}
+#middleForm{
+	float:left;
+	width:100%;
+	height : 67%;
+}
+#bottomForm{
+	float:left;
+	width:100%;
+	height : 25%;
+	margin-top:5%;
+	background-color:green;
+}
+#sideBar{
+	float: left;
+	width : 19%;
+	height: 99.8%;
 }
 
-#srNumber{
-	text-align : right;
-	font-size : 13pt;
-	padding : 0% 2% 0% 0%;
-	margin : 1% 0% 0% 0%;
+#sideContents{
+	width : 70%;
+	height: 100%;
 }
 
-#storeInfo{
-	border: solid 3px red;
-	width : 99%;
+#sideTitle{
+	text-decoration-line : solid;
+	text-decoration-color: #8C8C8C;
+	text-decoration: overline underline;
+	text-underline-position: under;
+	margin : 11% 0% 3% 0%;
+	text-align:center;
+	width : 100%;
+	height: 3.3%;
+	font-size: 18pt;
+}
+#inTitle{
+	margin-top : 8%;
+	
+}
+
+#listDiv{
+	width:99.8%;
 	height : 80%;
 }
 
-#sideStore{
-	border: solid 3px green;
-	width : 99%;
-	height : 17%;
+
+#goodsList{
+	margin : 5% 1% 0% 2%;
+	width: 90%;
+	height : 90%;
+	overflow: auto;
+}
+#goodsList::-webkit-scrollbar {
+    width: 15px;
+  }
+#goodsList::-webkit-scrollbar-thumb {
+   height: 30%;
+    background-color: #F2CB61;
+    border-radius: 8px;
+    background-clip: padding-box;
+    border: 2px solid ;
+  }
+#goodsList::-webkit-scrollbar-track {
+    background-color: #8C8C8C;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+#pageDiv{
+	width: 50%;
+	height : 10%;
+	margin-left : 30%;
+}
+.menuTop{
+	margin :6% 0 0 2%;
+	width:98%;
+	height:4.2%;
+	text-align:left;
+	font-size:15pt;
+	color:#FFFFFF;	
+	border-top : 2px solid #8C8C8C;
+	background-color:#8C8C8C;
+	cursor : pointer;
+	box-shadow : 5px 5px 5px #292929 ;
 }
 
-/*--------------업체 정보--------------*/	
+.textLocation{
+	margin : 4% 0 4% 0;
+	cursor: pointer;
+}
+
+.text1{
+	width:87%;
+	margin : 4% 0 0 8%;
+	text-size : 12pt;
+}
+#postContents{
+	display:none;
+
+}
+
+.textLocation._value{
+	background-color:#FFCD36;
+}
+
+/*----------------업체 정보----------------*/
+
+#storeTitle{
+	border : solid 2px blue;
+	width : 98%;
+	height : 8%;
+}
+
 #line1{
-	width : 75%;
+	border : solid 2px red;
+	width : 98%;
 	height : 4%;
-	margin : 3% 0% 1% 1%;
 }
 
-#storeName{
-	border: solid 1px green;
-	width : 42%;
-	height : 88%;
+#storeAddress{
+	border : solid 2px blue;
+	width : 30%;
+	height : 97%;
 	float : left;
 }
 
 #storeNumber{
-	border: solid 1px green;
-	width : 35%;
-	height : 88%;
+	border : solid 2px blue;
+	width : 30%;
+	height : 97%;
+	float : left;
+	margin-left : 3%;
+}
+
+#storeEmail{
+	border : solid 2px blue;
+	width : 30%;
+	height : 97%;
+	float : left;
+	margin-left : 3%;
+}
+
+#line2{
+	border : solid 2px red;
+	width : 98%;
+	height : 20%;
+}
+
+#storeMap{
+	border : solid 2px blue;
+	width : 40%;
+	height : 97%;
+	float : left;
+	
+}
+
+#storeImage{
+	border : solid 2px blue;
+	width : 40%;
+	height : 97%;
+	float : left;
+	margin-left : 3%;
+}
+	
+#storeDetail{
+	border : solid 2px blue;
+	width : 80%;
+	height : 20%;
+}
+
+#line3{
+	border : solid 2px red;
+	width : 98%;
+	height : 30%;
+}
+
+#storeGoods1{
+	border : solid 2px blue;
+	width : 30%;
+	height : 98%;
 	float : left;
 	margin-left : 2%;
 }
 
-#line2{
-	width : 99%;
-	height : 37%;
-	margin : 2% 0% 0% 1%;
-}
 
-#storeMap{
-	border: solid 1px green;
-	width : 50%;
-	height : 98%;
-	float : left;
-	margin : 0% 1.4% 0% 0%;
-}
 
-#storeImage{
-	border: solid 1px green;
-	width : 45%;
-	height : 98%;
-	float : left;
-}
+/*-----------------------------bottom---------------------------------*/
 
-#storeAddress{
-	border: solid 1px green;
-	width : 60%;
-	height : 4%;
-	margin : 1% 0% 2% 1%;
-}
-
-#clickGoods{
-	border: solid 2px red;
-	width : 27%;
-	height : 4%;
-	margin : 0% 3% 1% 0%;
-	float : right;
-	font-size : 20pt;
-	cursor : pointer;
-	text-align: right;
-	color : red;
-	font-weight : bold;
-}
-
-#storeContent{
-	border: solid 1px green;
-	width : 95.8%;
-	height : 35%;
-	margin : 1% 0% 1% 1%;
-	float : left;
-}
-
-/*-----------------bottom----------------*/
-	
-#bottom1 {
-	font-size:15pt;
-	font-family: 'Pretendard-Regular';
-	width:99.6%;
-	height:13%;
-	background-color:#595959;
-	color:#FFFFFF;
-	position:absolute; left:0.2%;
-}
-	
 #bottom {
-    font-size:10pt;
-	font-family: 'Pretendard-Regular';
-	width:99.6%;
-	height:5%;
-	background-color:#595959;
-	color:#FFFFFF;
-	position:absolute; left:0.2%;
-	}
-
-.end{
-	margin : 2% 0 0 0;
-	
-}	
-
-/*------------------button----------------*/
-#button{
-	margin : 0% 0% 5% 36%;
-	text-align : center;
-	
-}
-
-li{
-   list-style:none;
-}
-ul{
-   list-style:none;
-   padding-left:0px;
-   text-align:center;
-}
-
-/*이전 버튼*/
-.pageInfo_btn_prev{
-   float:left;
-   padding : 1% 1% 1% 1%;
+	float: left;
+   font-family: 'Pretendard-Regular';
+   width:100.5%;
+   height:3.8%;
+   background-color:#595959;
+   color:#FFFFFF;
+   padding:0.05% 1%;
+   }
    
-   background-color:#FFCD36;
+#bottom_store {
+   float:left;
+   font-size:18pt;
+   width:170px;
+   height:80%;
+   margin: 0% 1% 0% 0%;
    
 }
-.pageInfo_btn_prev:hover{
-   font-weight: bold;
-   background-color:#CCA63D;
-   color:#050099;
+
+#bottom_store2 {
+   float:left;
+   font-size:10pt;
+   height:75%;
+   width:680px;
+   padding:0.1%;
+   margin: 0.2% 1% 0% 0%;
 }
 
-#pageInfo_btn_prev_hold{
+#bottom_store3 {
    float:left;
-   padding : 1% 1% 1% 1%;
-   background-color:#FFCD36;
-}
-/*선택한 페이지 버튼*/
-.pageInfo_btn_selected{
-   float:left;
-   padding : 1% 1% 1% 1%;
-   background-color:#BDBDBD;
-}
-.pageInfo_btn_selected:hover{
-   color:#050099;
-}
-/*페이지 버튼*/
-.pageInfo_btn{
-   float:left;
-   padding : 1% 1% 1% 1%;
-   
-}
-.pageInfo_btn:hover{
-   background-color:#D5D5D5;
-   color:#050099;
-}
-/*다음 버튼*/
-.pageInfo_btn_next{
-   float:left;
-   padding : 1% 1% 1% 1%;
-   
-   background-color:#FFCD36;
-}
-.pageInfo_btn_next:hover{
-font-weight: bold;
-   background-color:#CCA63D;
-   color:#050099;
-}
-
-
+   font-size:10pt;
+   height:72%;
+   padding:0.15%;
+   width:200px;
+   margin: 0.2% 0% 0% 0%;
+}   

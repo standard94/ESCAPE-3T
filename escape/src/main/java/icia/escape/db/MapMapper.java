@@ -22,8 +22,15 @@ public interface MapMapper {
 	public int insFishing(Fishing fs);
 	public String checkFishingCode(Fishing fs);
 	public int insMap(Fishing fs);
+	public List<Fishing> getFishingPoint(Fishing fs);
+	public int countFishingPage(Fishing fs);
+	public List<Fishing> getFishingLeft(Fishing fs);
+	public List<Fishing> findFishingRight(Fishing fs);
+	public List<Fishing> getFishingRecord(Fishing fs);
 	
 	/*Store*/
 	public List<Stores> getStoreList(Stores sr);
 	public List<Stores> getStoreDetail(Stores sr);
+	public int countStoreList(Stores sr);
+	public List<Stores> getStoreRecord(Stores sr);
 }

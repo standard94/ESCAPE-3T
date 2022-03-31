@@ -3,41 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="icia.escape.db.MapMapper">
-
-	<!-- 캠핑 : 캠핑장 지도 리스트 -->
-	<select id="getCampingList"
-		parameterType="icia.escape.beans.Camping"
-		resultType="icia.escape.beans.Camping">
-		SELECT ROWNUM AS ROWNUMBER, CPMAMMCODE, CPMACFCODE, CPCACODE, CPCODE, CPHACODE, CPTHCODE, CPMAPOST, CPNAME, CPNUMBER,
-                     CPCONTENTS, CPFACILITY, CFNAME, HANAME, THNAME, MAADDRESS, CPIMAGE
-        FROM CAMPINGLIST 
-        WHERE HANAME = #{haName} AND CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode}
-
-	</select>
-
-	<!-- 캠핑 : 캠핑장 지도 리스트 10개 단위로 쪼개기 -->
-	<select id="getCampingRecord"
-		parameterType="icia.escape.beans.Camping"
-		resultType="icia.escape.beans.Camping">
-   <![CDATA[
-	SELECT ROWNUMBER, CPMAMMCODE, CPMACFCODE, CPCACODE, CPCODE, CPHACODE, CPTHCODE, CPMAPOST, CPNAME, CPNUMBER,
-                        CPCONTENTS, CPFACILITY, CFNAME, HANAME, THNAME, MAADDRESS, CPIMAGE
-    FROM(SELECT ROWNUM AS ROWNUMBER, CPMAMMCODE, CPMACFCODE, CPCACODE, CPCODE, CPHACODE, CPTHCODE, CPMAPOST, CPNAME, CPNUMBER,
-                        CPCONTENTS, CPFACILITY, CFNAME, HANAME, THNAME, MAADDRESS, CPIMAGE
-                  
-                FROM CAMPINGLIST WHERE ROWNUM <= #{pageNumber} * #{amount} AND CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode}) 
-                
-    WHERE ROWNUMBER > (#{pageNumber}-1) * #{amount}
-    ]]>
-	</select>
-
-	<!-- 캠핑 : 전체 게시물 수 카운트 -->
-	<select id="countCampingList" resultType="int">
-		SELECT COUNT(*)
-		FROM CAMPINGLIST
-		WHERE CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode}
-	</select>
-
+	
 	<!-- 캠핑 : 특정캠핑장 상세정보값불러오기 -->
 	<select id="findCampingDetail"
 		parameterType="icia.escape.beans.Camping"
@@ -47,6 +13,81 @@
 		MAADDRESS, CPIMAGE
 		FROM CAMPINGLIST
 		WHERE CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode} AND CPCODE = #{cpCode}
+	</select>
+   
+   <!-- 렌탈 : 랜털 지도 리스트 10개 단위로 쪼개기 -->
+	<select id="getStoreRecord"
+		parameterType="icia.escape.beans.Stores"
+		resultType="icia.escape.beans.Stores">
+   <![CDATA[
+   SELECT ROWNUMBER, SRCFCODE, SRID, SRPASSWORD, SRPOST, SRCODE, SRNAME, SRNUMBER, SRDETAILS, SREMAIL, SRIMAGE, SRADDRESS
+    FROM(SELECT ROWNUMBER,SRCFCODE, SRID, SRPASSWORD, SRPOST, SRCODE, SRNAME, SRNUMBER, SRDETAILS, SREMAIL, SRIMAGE, SRADDRESS
+                  
+        FROM (SELECT ROWNUM AS ROWNUMBER, SR_CFCODE AS SRCFCODE, SR_ID AS SRID, SR_PASSWORD AS SRPASSWORD, SR_POST AS SRPOST, SR_CODE AS SRCODE, SR_NAME AS SRNAME, SR_NUMBER AS SRNUMBER, SR_DETAILS AS SRDETAILS, SR_EMAIL AS SREMAIL, SR_IMAGE AS SRIMAGE, SR_ADDRESS AS SRADDRESS
+              FROM (SELECT *
+                    FROM SR
+                    WHERE SR_CFCODE= #{srCfCode})
+                WHERE SUBSTR(SR_ADDRESS,0,2) = #{haName} OR CONCAT(SUBSTR(SR_ADDRESS,0,1),SUBSTR(SR_ADDRESS,2,1)) = #{haName})
+        WHERE ROWNUM <= #{pageNumber} * #{amount} )
+                
+    WHERE ROWNUMBER > (#{pageNumber}-1) * #{amount}
+    ]]>
+	</select>
+	
+	<!-- 낚시 : 전체 게시물 수 카운트 -->
+	<select id="countFishingPage" resultType="int">
+		SELECT COUNT(*)
+		FROM (SELECT * FROM FPLIST WHERE CACODE = #{fpCaCode} AND CFCODE = #{fpMaCfCode})
+		WHERE SUBSTR(MAADDRESS,0,2) = #{haName} OR CONCAT(SUBSTR(MAADDRESS,0,1),SUBSTR(MAADDRESS,2,1)) = #{haName}
+	</select>
+	
+	<!-- 캠핑 : 전체 게시물 수 카운트 -->
+	<select id="countCampingList" resultType="int">
+		SELECT COUNT(*)
+		FROM CAMPINGLIST
+		WHERE CPCACODE = #{cpCaCode} AND HANAME = #{haName}
+	</select>
+	
+	<!-- 렌탈: 전체 게시물 수 카운트 -->
+	<select id="countStoreList" resultType="int">
+		SELECT COUNT(*)
+		FROM (SELECT *FROM SR WHERE SR_CFCODE= #{srCfCode})
+		WHERE SUBSTR(SR_ADDRESS,0,2) = #{haName} OR CONCAT(SUBSTR(SR_ADDRESS,0,1),SUBSTR(SR_ADDRESS,2,1)) = #{haName}
+	</select>
+	
+	<!-- 캠핑 : 캠핑장 지도 리스트 -->
+	<select id="getCampingList" parameterType="icia.escape.beans.Camping" resultType="icia.escape.beans.Camping">
+		   <![CDATA[
+		SELECT ROWNUM AS ROWNUMBER, CPMAMMCODE, CPMACFCODE, CPCACODE, CPCODE, CPHACODE, CPTHCODE, CPMAPOST, CPNAME, CPNUMBER,
+                     CPCONTENTS, CPFACILITY, CFNAME, HANAME, THNAME, MAADDRESS, CPIMAGE
+        FROM CAMPINGLIST 
+        WHERE HANAME = #{haName} AND CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode}
+  ]]>
+	</select>
+
+	<!-- 캠핑 : 캠핑장 지도 리스트 10개 단위로 쪼개기 -->
+	<select id="getCampingRecord" parameterType="icia.escape.beans.Camping" resultType="icia.escape.beans.Camping">
+   <![CDATA[
+	SELECT ROWNUMBER, CPMAMMCODE, CPMACFCODE, CPCACODE, CPCODE, CPHACODE, CPTHCODE, CPMAPOST, CPNAME, CPNUMBER,
+                        CPCONTENTS, CPFACILITY, CFNAME, HANAME, THNAME, MAADDRESS, CPIMAGE
+    FROM(SELECT ROWNUM AS ROWNUMBER, CPMAMMCODE, CPMACFCODE, CPCACODE, CPCODE, CPHACODE, CPTHCODE, CPMAPOST, CPNAME, CPNUMBER,
+                        CPCONTENTS, CPFACILITY, CFNAME, HANAME, THNAME, MAADDRESS, CPIMAGE
+                  
+                FROM CAMPINGLIST WHERE ROWNUM <= #{pageNumber} * #{amount} AND CPCACODE = #{cpCaCode} AND CPMACFCODE = #{cpMaCfCode} AND HANAME = #{haName}) 
+                
+    WHERE ROWNUMBER > (#{pageNumber}-1) * #{amount}
+    ]]>
+	</select>
+
+	<!-- 낚시 : 특정캠핑장 상세정보값불러오기 -->
+	<select id="findFishingRight"
+		parameterType="icia.escape.beans.Fishing"
+		resultType="icia.escape.beans.Fishing">
+		 <![CDATA[
+		SELECT ROWNUM AS ROWNUMBER, MMCODE AS FPMAMMCODE, CFCODE AS FPMACFCODE, CACODE AS FPCACODE, THECODE AS FPTHCODE, GECODE AS GPGECODE, FICODE AS FPFICODE, FPCODE AS FPCODE, FPTITLE AS FPTITLE, FPCONTENTS AS FPCONTENTS, FPVIEW AS FPVIEW, FPDATE AS FPDATE, FPMAPOST AS FPMAPOST, FPIMAGE AS FPIMAGE, CANAME AS FPCANAME, MAADDRESS AS MAADDRESS, THNAME AS FPTHNAME, GENAME AS FPGENAME, FINAME AS FPFINAME, MMID AS MMID
+		FROM FPLIST
+		WHERE CACODE = #{fpCaCode} AND CFCODE = #{fpMaCfCode} AND FPCODE = #{fpCode}
+		]]>
 	</select>
 
 	<!-- map table 주소저장 -->
@@ -65,6 +106,51 @@
    <select resultType="String" parameterType="icia.escape.beans.Fishing" id="checkFishingCode">
       SELECT MAX(FP_CODE)AS FPCODE FROM FP
    </select>
+
+  <!-- 낚시 : 낚시 포인트 리스트 -->
+	<select id="getFishingPoint"
+		parameterType="icia.escape.beans.Fishing"
+		resultType="icia.escape.beans.Fishing">
+	 <![CDATA[
+		SELECT ROWNUM AS ROWNUMBER, MMCODE AS FPMAMMCODE, CFCODE AS FPMACFCODE, CACODE AS FPCACODE, THECODE AS FPTHCODE, GECODE AS GPGECODE, FICODE AS FPFICODE, FPCODE AS FPCODE, FPTITLE AS FPTITLE, FPCONTENTS AS FPCONTENTS, FPVIEW AS FPVIEW, FPDATE AS FPDATE, FPMAPOST AS FPMAPOST, FPIMAGE AS FPIMAGE, CANAME AS FPCANAME, MAADDRESS AS MAADDRESS, THNAME AS FPTHNAME, GENAME AS FPGENAME, FINAME AS FPFINAME, MMID AS MMID
+        FROM (SELECT * FROM FPLIST WHERE CACODE = #{fpCaCode} AND CFCODE = #{fpMaCfCode})
+        WHERE SUBSTR(MAADDRESS,0,2) = #{haName} OR CONCAT(SUBSTR(MAADDRESS,0,1),SUBSTR(MAADDRESS,2,1)) = #{haName}
+        
+         ]]>
+	</select>
+   
+   <!-- 낚시포인트 : 낚시포인트 리스트 10개 단위로 쪼개기 -->
+	<select id="getFishingRecord" parameterType="icia.escape.beans.Camping" resultType="icia.escape.beans.Camping">
+   <![CDATA[
+	  SELECT ROWNUMBER, MMCODE, CFCODE, CACODE, THECODE, GECODE, FICODE, FPCODE, FPTITLE, FPCONTENTS, FPVIEW, FPDATE, FPMAPOST,
+          FPIMAGE, CANAME, MAADDRESS, THNAME, GENAME, FINAME
+    FROM(SELECT ROWNUMBER, MMCODE, CFCODE, CACODE, THECODE, GECODE, FICODE, FPCODE, FPTITLE, FPCONTENTS, FPVIEW, FPDATE, FPMAPOST,
+          FPIMAGE, CANAME, MAADDRESS, THNAME, GENAME, FINAME
+    
+    FROM FPLIST WHERE ROWNUM <= #{pageNumber} * #{amount} AND CACODE = #{fpCaCode} AND CFCODE = #{fpMaCfCode}) 
+                
+    WHERE ROWNUMBER > (#{pageNumber}-1) * #{amount}
+    ]]>
+    
+	</select>
+	
+	<!-- 낚시 : 낚시 지도 리스트 10개 단위로 쪼개기 -->
+	<select id="getFishingLeft"
+		parameterType="icia.escape.beans.Fishing"
+		resultType="icia.escape.beans.Fishing">
+   <![CDATA[
+	SELECT ROWNUM AS ROWNUMBER, MMCODE AS FPMAMMCODE, CFCODE AS FPMACFCODE, CACODE AS FPCACODE, THECODE AS FPTHCODE, GECODE AS GPGECODE, FICODE AS FPFICODE, FPCODE AS FPCODE, FPTITLE AS FPTITLE, FPCONTENTS AS FPCONTENTS, FPVIEW AS FPVIEW, FPDATE AS FPDATE, FPMAPOST AS FPMAPOST, FPIMAGE AS FPIMAGE, CANAME AS FPCANAME, MAADDRESS AS MAADDRESS, THNAME AS FPTHNAME, GENAME AS FPGENAME, FINAME AS FPFINAME, MMID AS MMID
+    FROM(SELECT *                  
+        FROM (SELECT *
+              FROM (SELECT *
+                    FROM FPLIST
+                    WHERE CFCODE = #{fpMaCfCode} AND CACODE = #{fpCaCode})
+                WHERE SUBSTR(MAADDRESS,0,2) = #{haName} OR CONCAT(SUBSTR(MAADDRESS,0,1),SUBSTR(MAADDRESS,2,1)) = #{haName})
+        WHERE ROWNUM <= #{pageNumber} * #{amount} )
+                
+    WHERE ROWNUMBER > (#{pageNumber}-1) * #{amount}
+    ]]>
+	</select>
 
    <!-- 게시물 수정 -->
    <update parameterType="icia.escape.beans.Fishing" id="updFishing">

@@ -9,6 +9,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
+import icia.escape.beans.Camping;
 import icia.escape.beans.Fishing;
 
 import icia.escape.db.MapMapper;
@@ -37,15 +38,29 @@ public class FishingMap {
 
 		}else {
 			switch(serviceCode) {
-
+			case "F0":
+				getFishingList(model);
+				break;
 			case "F1":
 				insFishing(model);
 				break;
-
+			case "F2":
+				getFishingPage(model);
+				break;	
+			case "F3":
+				chooseFishingList(model);
+				break;
+			case "F4":
+		         findFishingDetail(model);
+		         break;
 			}
 		}return mav;
 	}
 
+	/*낚시 리스트 불러오기*/
+	public void getFishingList(Model model) {
+		model.addAttribute("fishingPoints", mm.getFishingPoint((Fishing)model.getAttribute("fishingPoint")));
+	}
 
 
 	private void insFishing(Model model) {
@@ -90,6 +105,58 @@ public class FishingMap {
 		this.setTransationEnd(check);
 
 	}
+	
+	/*낚시포인트 페이지 개수 불러오기*/
+	public void getFishingPage(Model model) {
+		
+		/* 시작 페이지 */
+	    int startPage; 
+	    /* 끝 페이지 */
+	    int endPage;
+	    /* 이전 페이지, 다음 페이지 존재유무 */
+	    boolean prev, next;
+	    
+	    /*전체 게시물 수*/
+	    int total = this.mm.countFishingPage((Fishing)model.getAttribute("fishingPage"));
+	    
+	    
+		/* 마지막 페이지 */
+        endPage = (int)(Math.ceil(((Fishing)model.getAttribute("fishingPage")).getPageNumber()/10.0))*10;
+        
+        /* 시작 페이지 */
+        startPage = endPage - 9;
+        
+        /* 전체 마지막 페이지 */
+        int realEnd = (int)(Math.ceil(total * 1.0/((Fishing)model.getAttribute("fishingPage")).getAmount()));
+        
+        /* 전체 마지막 페이지(realend)가 화면에 보이는 마지막페이지(endPage)보다 작은 경우, 보이는 페이지(endPage) 값 조정 */
+        if(realEnd < endPage) {
+        	endPage = realEnd;
+        }
+        
+        /* 시작 페이지(startPage)값이 1보다 큰 경우 true */
+        prev = startPage > 1;
+        
+        /* 마지막 페이지(endPage)값이 1보다 큰 경우 true */
+        next = endPage < realEnd;
+        ((Fishing)model.getAttribute("fishingPage")).setEndPage(endPage);
+        ((Fishing)model.getAttribute("fishingPage")).setStartPage(startPage);
+        ((Fishing)model.getAttribute("fishingPage")).setRealEnd(realEnd);
+        ((Fishing)model.getAttribute("fishingPage")).setPrev(prev);
+        ((Fishing)model.getAttribute("fishingPage")).setNext(next);
+        model.addAttribute("fishingPages", (Fishing)model.getAttribute("fishingPage"));
+        
+	}
+	
+	/*낚시포인트 좌측 리스트 불러오기*/
+	public void chooseFishingList(Model model) {
+		model.addAttribute("fishingLefts",this.mm.getFishingLeft((Fishing)model.getAttribute("fishingLeft")));
+}
+	
+	/*낚시포인트 상세정보 불러오기*/
+	public void findFishingDetail(Model model) {
+	      model.addAttribute("fishingRights",this.mm.findFishingRight((Fishing)model.getAttribute("fishingRight")));
+	   }
 
 
 
