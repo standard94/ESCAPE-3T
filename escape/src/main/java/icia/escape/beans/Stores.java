@@ -21,6 +21,8 @@ public class Stores {
 	String authCode;
 	String pageName;
     
+	String haName;
+	int rowNumber;
 	int pageNumber;
 	int amount;
 	int startPage;

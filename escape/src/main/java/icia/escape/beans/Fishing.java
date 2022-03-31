@@ -4,20 +4,35 @@ import lombok.Data;
 
 @Data
 public class Fishing {
-	private String fpMaMmCode;
-	private String fpMaCfCode;
-	private String fpCaCode;
-	private String fpMaPost;
-	private String fpThCode;
-	private String fpGeCode;
-	private String fpFiCode;
-	private String fpCode;
-	private String fpTitle;
-	private String fpContents;
-	private String fpDate;
-	private int fpView;
-	private String fpImage;
-	private String maAddress;
+	String fpMaMmCode;
+	String fpMaCfCode;
+	String fpCaCode;
+	String fpCaName;
+	String fpMaPost;
+	String fpThCode;
+	String fpThName;
+	String fpGeCode;
+	String fpGeName;
+	String fpFiCode;
+	String fpFiName;
+	String fpCode;
+	String fpTitle;
+	String fpContents;
+	String fpDate;
+	int fpView;
+	String fpImage;
+	String mmId;
+	String maAddress;
+	
+	String haName;
+	int rowNumber;
+	int pageNumber;
+	int amount;
+	int startPage;
+	int endPage;
+	boolean prev;
+	boolean next;
+	int realEnd;
 }
 
 

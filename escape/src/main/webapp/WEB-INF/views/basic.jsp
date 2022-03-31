@@ -8,7 +8,9 @@
 </head>
 <script src="resources/js/resource.js"></script>
 
-<link rel="stylesheet" type="text/css" href="resources/css/topBottom.css" />
+
+
+<link rel="stylesheet" type="text/css" href="resources/css/topBottom1.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/medium.css" />
 
 <body onLoad = "getPublic(),initPage('${msg}')">
@@ -27,27 +29,32 @@
 			</div>
 		   
 			<div id="mid">
+			
+			<div id="remocon" style="z-index: 3; padding:1% 1%;  height: 50%;  width: 9%; border: 1px solid #999966; background-color: white; position : absolute; right:1%; top:10%; box-shadow: 3px 3px 10px #566270; border-radius: 10px;">
+                  <button id="rmcHome" onClick="getNewPage('basic')" style=" height: 15%;  width: 50%; border: 1px solid #999966; font-size: 15pt; font-weight: bold; background-color: #292929; color: white; border-radius: 10px; margin: 4% 25%;">HOME</button>
+                  <button id="rmcMap" onClick="getNewPage('campingMap')" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">지도</button>
+                  <button id="rmcRental" onClick="getNewPage('campingRental')" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">렌탈</button>
+                  <button id="rmcMyPage" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">마이페이지</button>
+                  <button id="rmcRtStore" onClick="getNewPage('storeInfoPage')" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">렌탈 업체</button>
+                  <button id="rmcTwoMore" style=" height: 15%;  width: 100%; border: 1px solid #999966;  background-color: white; border-radius: 10px; margin: 1%;">두개더</button>   
+               </div>
+               
 				<div id="line1"></div>
 				<div id="box2">
-					<div id="fishing"><span onClick=""><img id="fishing1" src='resources/images/map.png' onMouseOver="this.src='resources/images/fishingPoint1.png'" onmouseout="this.src='resources/images/map.png'"/></span></div>
-					<div id="fishingtip"><span onClick=""><img id="fishingtip1" src='resources/images/fishing.png' onMouseOver="this.src='resources/images/fishingKnowHowTip.png'" onmouseout="this.src='resources/images/fishing.png'"/></span></div>
-					<div id="camping" ><span onClick="getNewPage('mapPoints')" ><img id="camping1" src='resources/images/tent.png' onMouseOver="this.src='resources/images/camping1.png'" onmouseout="this.src='resources/images/tent.png'"/></span></div>
-					<div id="camping_rental"><span onClick="getNewPage('campingRental')"><img id="camping_rental1" src='resources/images/sleeping-bag.png' onMouseOver="this.src='resources/images/campingEquipment1.png'" onmouseout="this.src='resources/images/sleeping-bag.png'"/></span></div>
-					<div id="fishing_rental"><span onClick=""><img id="fishing_rental1" src='resources/images/fishing-baits.png' onMouseOver="this.src='resources/images/fishingEquipment1.png'" onmouseout="this.src='resources/images/fishing-baits.png'"/></span></div>
-					<div id="fishing_community"><span onClick=""><img id="fishing_community1" src='resources/images/big-fish.png' onMouseOver="this.src='resources/images/bigFishing1.png'" onmouseout="this.src='resources/images/big-fish.png'"/></span></div>
-					<div id="rental"><span onClick="getNewPage('storeInfoPage')"><img id="rental1" src='resources/images/location.png' onMouseOver="this.src='resources/images/rentalPlace1.png'" onmouseout="this.src='resources/images/location.png'"/></span></div>
-					<div id="camping_community"><span onClick=""><img id="camping_community1" src='resources/images/fire.png' onMouseOver="this.src='resources/images/campingKnowHowTip1.png'" onmouseout="this.src='resources/images/fire.png'"/></span></div>
+					
+					<div id="campingMap"><span onClick="getNewPage('campingMap')"><img id="campingMap1" src='resources/images/tent.png' onMouseOver="this.src='resources/images/campingPoint.jpg'" onmouseout="this.src='resources/images/tent.png'"/></span></div>
+					<div id="fishingMap"><span onClick="getNewPage('fishingMap')"><img id="fishingMap1" src='resources/images/fishing.png' onMouseOver="this.src='resources/images/fishingPoint.jpg'" onmouseout="this.src='resources/images/fishing.png'"/></span></div>
+					<div id="rentalEquipment"><span onClick="getNewPage('campingRental')"><img id="rentalEquipment1" src='resources/images/sleeping-bag.png' onMouseOver="this.src='resources/images/rentalEquipment.jpg'" onmouseout="this.src='resources/images/sleeping-bag.png'"/></span></div>
+					<div id="rentalStore"><span onClick="getNewPage('storeInfoPage')"><img id="rentalStore1" src='resources/images/location.png' onMouseOver="this.src='resources/images/rentalStore.jpg'" onmouseout="this.src='resources/images/location.png'"/></span></div>
+					<div id="buy"><span onClick="getNewPage('chooseStoreInfoPage')"><img id="buy1" src='resources/images/changeBuy.png' onMouseOver="this.src='resources/images/buy.jpg'" onmouseout="this.src='resources/images/changeBuy.png'"/></span></div>
+					
 				</div>
-				<div id="line2"></div>
-				<div id="pop">
-					<div id="pop_notice">공지사항</div>
-					<div id="pop_community">커뮤니티</div>
-				</div>
-				<div id="rank"><span>주간랭킹TOP5</span></div>
+				
+			
+				<div id="rank"><span>핫 딜!</span></div>
 				<div id="rank_list">
-					<div ></div>
-					<div></div>
-					<div></div>
+			
+  
 				</div>
 			</div>
 			
@@ -74,5 +81,20 @@
 			</div>
 		</div>
 	
+	<script>
+   		document.addEventListener('scroll', function() {
+        var currentScrollValue = document.documentElement.scrollTop;
+        console.log('currentScrollValue is ' + currentScrollValue);
+        if(currentScrollValue>350){
+           document.getElementById("remocon").style.top = '38%'
+        }else if(currentScrollValue<350 && currentScrollValue>250){
+           document.getElementById("remocon").style.top = '25%'
+        }else{
+           document.getElementById("remocon").style.top = '10%'
+        }
+   		});
+
+</script>
+
 </body>
 </html>

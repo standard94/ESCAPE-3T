@@ -1,0 +1,465 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/*---------------------------------basic---------------------------*/
+
+#basic {
+   position:absolute; 
+   height:98%;
+   width:99.6%;
+   margin: -0.5% 0% 0% -0%
+   }
+   
+/*---------------------------------right view---------------------------*/
+
+#rightview {
+   position:fixed;
+   top:0;
+   right:-33%;
+   bottom:0;
+   height:100%;
+   width:33%;
+   background:#fff;
+   z-index:999;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   transition-property:right;
+   transition-duration:0.3s;
+   }
+   
+   #rightview:hover {
+   position:fixed;
+   top:0;
+   right:0%;
+   bottom:0;
+   height:100%;
+   width:33%;
+   background:#fff;
+   z-index:999;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   }
+   
+#rightview.shadow {
+   box-shadow:-2px 0px 35px rgba(0,0,0,.65);
+   }
+   
+/*---------------------------------top---------------------------*/
+#top {
+   font-family: 'Pretendard-Regular';
+   height:5.6%;
+   width:99.6%;
+   background-color:#292929;
+   }
+
+#logo {
+   margin: 1% 0% 2% 2%;
+   width:12.5%;
+   height:3%;
+   position:absolute;
+   color : #EAEAEA;
+	font-size:18pt;
+	font-weight : bolder;
+	cursor:pointer;
+   }
+  #logo:hover{
+  color:#FFFFB4;
+  }
+#search {
+   width:44.5%;
+   height:2.3%;
+   position:absolute; top:0.7%;
+   left:26%;
+   }
+   
+#searchFont{
+   border:2px solid #FFCD36;
+   font-size:20pt;
+   padding: 1.2% 20% 0% 15%;
+   margin-left:1%;
+   }
+
+#searchZoom{
+   padding: 0% 1% 1% 1%;
+   font-size:15pt;
+   position:absolute; top:36%; left:62%; 
+   border:0 solid black;
+   background-color:white;
+   color:#767F86;
+   
+   }
+#searchZoom.divButton{
+   cursor :pointer;
+}   
+#searchZoom.divButton:hover{
+   cursor :pointer;
+   font-weight: bold;
+}   
+#box1 {
+   width:35.5%;
+   height:3.4%;
+   position:absolute; top:2.2%;
+   left:57.5%;
+   }
+      
+#login1 {
+   width:28.3%;
+   height:43%;
+   margin-left:22%;
+   float: left;
+   color:#ebedec;
+   font-size:10pt;
+   }
+
+#notice {
+   width:15%;
+   height:43%;
+   margin-left:5%;
+   float: left;
+   color:#ebedec;
+   font-size:10pt;
+   }
+#shop {
+   width:15%;
+   height:43%;
+   margin-left:5.8%;
+   float: left;
+   color:#ebedec;   
+   font-size:10pt;
+   }
+
+.top_menu {
+	margin-top : 3%;
+   font-family: 'Pretendard-Regular';
+   font-size: 13pt;
+   cursor : pointer;
+   }
+   
+#list {
+   width:4%;
+   height:4.8%;
+   position:absolute;
+   left:93.5%;
+   top:1%;
+   background-color:#a2a9af;
+   cursor : pointer;
+   }
+   
+/*----------------------------mid------------------------------------*/
+
+#mid{
+   font-family: 'Pretendard-Regular';
+   border:3px solid #292929;
+   width:99.3%;
+   height:92%;
+}
+
+#leftList{
+   font-family: 'Pretendard-Regular';
+   width:30%;
+   height:99.7%;
+   float:left;
+   
+}
+
+#insert{
+	margin : 0.2%;
+	width:18%;
+	height:90%;
+	background-color:#ffffff;
+	border : 1px solid;
+	}
+#insert:hover{
+	background-color: #292929;
+	font-weight: bold;	
+	color : #ffffff;
+	}
+
+
+#listButton{
+   margin :0 0 4% 11%;
+   width:100%;
+   height:3%;
+}
+
+#image{
+   width:97%;
+   height:97%;
+}
+
+.cpList{
+   width:98%;
+   height:22%;
+   
+}
+.cpList .cpImage{
+	width:50%;
+	height:99%;
+	float:left;
+}
+
+
+.cpList .cpName{
+	padding-top: 1%;
+	border-top: 1px solid #EAEAEA;
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:1% 0% 0% 50%;
+	font-size: 15pt;
+	font-weight : bolder;
+}
+
+.cpList .cpNumber{
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:1% 0% 0% 50%;
+	font-size: 10pt;
+	border-bottom: 1px solid #EAEAEA;
+}
+
+.cpList .haName{
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:1% 0% 0% 50%;
+	
+}
+
+.cpList .thName{
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:1% 0% 0% 50%;
+	color:#3163C9;
+	text-decoration : underline;
+}
+
+.cpList .maAddress{
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:2% 0% 0% 50%;
+	font-size:10pt;
+	
+}
+
+.container {
+        overflow: auto;
+      }
+/*------------------button----------------*/
+li{
+   list-style:none;
+}
+ul{
+   list-style:none;
+   padding-left:0px;
+   text-align:center;
+}
+
+/*이전 버튼*/
+.pageInfo_btn_prev{
+   float:left;
+   padding : 1% 1% 1% 1%;
+   
+   background-color:#FFCD36;
+   
+}
+.pageInfo_btn_prev:hover{
+   font-weight: bold;
+   background-color:#CCA63D;
+   color:#050099;
+}
+
+#pageInfo_btn_prev_hold{
+   float:left;
+   padding : 1% 1% 1% 1%;
+   background-color:#FFCD36;
+}
+/*선택한 페이지 버튼*/
+.pageInfo_btn_selected{
+   float:left;
+   padding : 1% 1% 1% 1%;
+   background-color:#BDBDBD;
+}
+.pageInfo_btn_selected:hover{
+   color:#050099;
+}
+/*페이지 버튼*/
+.pageInfo_btn{
+   float:left;
+   padding : 1% 1% 1% 1%;
+   
+}
+.pageInfo_btn:hover{
+   background-color:#D5D5D5;
+   color:#050099;
+}
+/*다음 버튼*/
+.pageInfo_btn_next{
+   float:left;
+   padding : 1% 1% 1% 1%;
+   
+   background-color:#FFCD36;
+}
+.pageInfo_btn_next:hover{
+font-weight: bold;
+   background-color:#CCA63D;
+   color:#050099;
+}
+
+
+
+
+
+
+/*---------------등록,필터-------------------- */
+
+
+#job {
+  margin : 0.5% 0 0 55%;
+  width: 25%;
+  height: 80%;
+  background: url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png') calc(100% - 5px) center no-repeat;
+  background-size: 20px;
+  padding: 5px 30px 5px 10px;
+  border-radius: 2px;
+  outline: 0 none;
+}
+#job option {
+  padding: 3px 0;
+}
+
+
+/*------------------filterling-----------------*/
+
+#listFilter{
+	width:99.6%;
+	height:4%;
+}
+
+#listPoints{
+	border:1px solid #292929;
+	font-family: 'Pretendard-Regular';
+	width:99.68%;
+	height:8%;
+	background-color: #EAEAEA;
+}
+
+#mySideStore{
+	font-family: 'Pretendard-Regular';
+	width:18.3%;
+	height:63%;
+	text-align:center;
+	font-size:14pt;
+	padding:4.7% 0% 0% 0%;
+	float:right;
+	margin : 0 1% 0 0;
+}
+
+#fishingPoint{
+	font-family: 'Pretendard-Regular';
+	width:16%;
+	height:63%;
+	text-align:center;
+	font-size:14pt;
+	padding:4.7% 0% 0% 0%;
+	float:right;
+}
+
+#camping{
+	font-family: 'Pretendard-Regular';
+	width:18%;
+	height:63%;
+	text-align:center;
+	font-size:14pt;
+	padding:4.7% 0% 0% 0%;
+	float:right;
+}
+
+#glamping{
+	font-family: 'Pretendard-Regular';
+	width:18.8%;
+	height:60%;
+	text-align:center;
+	font-size:14pt;
+	padding:4.7% 0% 0% 0%;
+	float:right;
+	margin : 0 0 0 1.6%;
+}
+
+
+#caravan{
+	font-family: 'Pretendard-Regular';
+	width:18.8%;
+	height:60%;
+	text-align:right;
+	font-size:14pt;
+	padding:4.7% 0% 0% 0%;
+	margin : 0 0 0 3%;
+}
+
+#campingList{
+	width:99.6%;
+	height:80%;
+}
+
+/*-----------------------------campingList---------------------------------*/
+
+
+#map{
+	font-family: 'Pretendard-Regular';
+	border:3px solid #292929;
+	width:69.3%;
+	height:91.5%;
+	position:absolute; left:30%;
+}
+
+/*-----------------------------bottom---------------------------------*/
+
+#bottom {
+   font-family: 'Pretendard-Regular';
+   width:97.6%;
+   height:3%;
+   background-color:#595959;
+   color:#FFFFFF;
+   padding:0.05% 1%;
+   }
+   
+#bottom_store {
+   float:left;
+   font-size:18pt;
+   width:170px;
+   height:80%;
+   margin: 0% 1% 0% 0%;
+   
+}
+
+#bottom_store2 {
+   float:left;
+   font-size:10pt;
+   height:75%;
+   width:680px;
+   padding:0.1%;
+   margin: 0.2% 1% 0% 0%;
+}
+
+#bottom_store3 {
+   float:left;
+   font-size:10pt;
+   height:72%;
+   padding:0.15%;
+   width:200px;
+   margin: 0.2% 0% 0% 0%;
+}   
+   
+   

@@ -77,19 +77,60 @@ public class MapController {
 	         cm.backController("S0", model.addAttribute("Store", sr.get(0)));
 	         return (List<Stores>)model.getAttribute("storeList");
 	   }
-	 /*업체 상세정보*/
+	/*업체 상세정보*/
 	@PostMapping(value="/findStoreDetail", produces="application/json; charset=UTF-8")
 	   public List<Stores> findStoreDetail(Model model, @RequestBody List<Stores> sr) {
 	         cm.backController("S1", model.addAttribute("Stores", sr.get(0)));
 	         return (List<Stores>)model.getAttribute("storeDetail");
 	   }
-	/*낚시포인트 등록*/
-	   @PostMapping(value="/InsFishing", produces="application/json; charset=UTF-8")
-	   public Fishing insFishing(Model model, @RequestBody List<Fishing> fs) {
-	       fsm.backController("F1",model.addAttribute("fishing", fs.get(0)));
-	       System.out.println((Fishing)model.getAttribute("fishingList"));
-	      return (Fishing)model.getAttribute("fishingList");
+	
+	/*업체 페이지 수량 가져오기*/
+	@PostMapping(value="/GetStorePage", produces="application/json; charset=UTF-8")
+	   public Stores GetStorePage(Model model, @RequestBody List<Stores> sr) {
+	         cm.backController("S2", model.addAttribute("Stores", sr.get(0)));
+	         return (Stores)model.getAttribute("storePage");
 	   }
+	
+	/*캠핑장 페이지 개수*/
+	@PostMapping(value="/ChooseStoreList", produces="application/json; charset=UTF-8")
+	public List<Stores> chooseStoreList(Model model, @RequestBody List<Stores> sr) {
+		cm.backController("S3",model.addAttribute("Stores", sr.get(0)));
+		return (List<Stores>)model.getAttribute("storeList");
+			
+	}
+	 /*낚시포인트 리스트*/
+	@PostMapping(value= "/GetFishingList", produces="application/json; charset=UTF-8")
+	public List<Fishing> getFishingList(Model model, @RequestBody List<Fishing> fs) {
+		fsm.backController("F0", model.addAttribute("fishingPoint", fs.get(0)));
+	    return (List<Fishing>)model.getAttribute("fishingPoints");
+	}
+	/*낚시포인트 등록*/
+	@PostMapping(value="/InsFishing", produces="application/json; charset=UTF-8")
+	public Fishing insFishing(Model model, @RequestBody List<Fishing> fs) {
+	    fsm.backController("F1",model.addAttribute("fishing", fs.get(0)));
+	    return (Fishing)model.getAttribute("fishingList");
+	}
+	/*캠핑장 페이지 개수*/
+	@PostMapping(value="/GetFishingPage", produces="application/json; charset=UTF-8")
+	public Fishing getFishingPage(Model model, @RequestBody List<Fishing> fs) {
+		fsm.backController("F2",model.addAttribute("fishingPage", fs.get(0)));
+		return (Fishing)model.getAttribute("fishingPages");
+		
+	}
+	/*캠핑장 페이지 리스트*/
+	@PostMapping(value="/ChooseFishingList", produces="application/json; charset=UTF-8")
+	public List<Fishing> chooseFishingList(Model model, @RequestBody List<Fishing> fs) {
+		fsm.backController("F3",model.addAttribute("fishingLeft", fs.get(0)));
+		return (List<Fishing>)model.getAttribute("fishingLefts");
+	}
+	
+	/*RightView 캠핑 정보 추출*/
+	@PostMapping(value= "/findFishingDetail", produces="application/json; charset=UTF-8")
+	public List<Fishing> findFishingList(Model model, @RequestBody List<Fishing> fs) {
+		fsm.backController("F4", model.addAttribute("fishingRight", fs.get(0)));     
+	    return (List<Fishing>)model.getAttribute("fishingRights");
+	}
+	
 	/* 낚시포인트 사진 업로드 */
 	   @PostMapping("/MultiPart2")
 	   @ResponseBody
@@ -101,6 +142,5 @@ public class MapController {
 	            file.transferTo(saveFile);
 	         } catch (Exception e) {e.printStackTrace();}
 	      }
-	      
 	   }
 }

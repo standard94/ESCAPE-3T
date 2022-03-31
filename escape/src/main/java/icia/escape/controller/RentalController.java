@@ -48,8 +48,11 @@ public class RentalController {
 	public Stores getCampingPage(Model model, @RequestBody List<Stores> sr) {
 		rs.backController("S2",model.addAttribute("FishingStorePage", sr.get(0)));
 		return (Stores)model.getAttribute("FishingStorePage");
-		
 	}
+	
+	
+	
+	
 	/*******************렌탈 ***********************/
 	
 	/*모든 업체의 상품 리스트 */
@@ -63,12 +66,25 @@ public class RentalController {
 	@PostMapping(value= "/GetAllStoresPage", produces="application/json; charset=UTF-8")
 	   public Goods getAllStoresPage(Model model, @RequestBody List<Goods> go) {
 	      fg.backController("R2", model.addAttribute("goods", go.get(0)));
-	      return(Goods)model.getAttribute("goodsPage");
+	      return(Goods)model.getAttribute("goods");
 	   }
 	
 	/*특정 상품 상세정보 불러오기*/
-	@PostMapping("/GetThatStoreThatGoods")
-	public ModelAndView getNewPage(@ModelAttribute Goods go) {
-		return fg.backController1("R3", go);
+	@PostMapping(value= "/GetThatStoreThatGoods", produces="application/json; charset=UTF-8")
+	   public Goods getThatStoreThatGoods(Model model, @RequestBody List<Goods> go) {
+	      fg.backController("R3", model.addAttribute("goods", go.get(0)));
+	      return(Goods)model.getAttribute("goodsInfo");
+	   }
+	/*특정 렌탈 업체 상세정보 페이지 이동 */
+	@PostMapping("/StoreInfo")
+	public ModelAndView storeInfo(@ModelAttribute Stores sr) {
+		return rs.backController("S3", sr);
 	}
+	/*특정 렌탈 업체 상세정보 불로오기 */
+	@PostMapping(value= "/findStoreInfo", produces="application/json; charset=UTF-8")
+	public List<Stores> findStoreInfo(Model model, @RequestBody List<Stores> sr) {
+		rs.backController("S4", model.addAttribute("rentalStore", sr.get(0)));
+		return (List<Stores>)model.getAttribute("rentalStoreInfo");
+	}
+	
 }

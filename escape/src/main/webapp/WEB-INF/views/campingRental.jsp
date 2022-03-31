@@ -10,6 +10,7 @@
 </head>
 
 <link rel="stylesheet" type="text/css" href="resources/css/campingRental.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="resources/js/rentalGoods.js"></script>
 <script src="resources/js/resource.js"></script>
 
@@ -102,7 +103,7 @@
 							
 							<span id="storeName" class = "txt">업체별</span>
 							<span id="arrow1" class = "txt">></span>
-							<span id="category" class = "txt" >캠핑용품</span>
+							<span id="category" class = "txt" ></span>
 							</div>
 						</div>
 						<div id="rightTitle">
@@ -125,7 +126,13 @@
      			<div id="bottomForm"></div>
      		</div>
      		
-     		
+     	<div id="openCart" style="display:none;">
+     		<div id=""></div>
+     		<div>상세정보</div>
+     		<div>담으면 생김</div>
+     		<button id='btnCart'class='twoBtn' onClick='openCart()'>장바구니</button>" + "<button  id='btnBuy'class='twoBtn'>바로구매</button>
+     	</div>
+     	
 		</div>
 				
 		<div id="bottom">
