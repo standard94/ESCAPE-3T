@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id='rentPrice'>
+		대여기간&가격<select id='price' class='sel' onchange='changeSel()'><option
+				value='' selected='selected' />-- [필수] 대여기간 선택 --
+			</option>
+			<option id='' value='2박3일 / 159000'>2박3일 / 159000</option>
+			<option id='' value='3박4일 / 184000'>3박4일 / 184000</option>
+			<option id='' value='4박5일 / 209000'>4박5일 / 209000</option>
+			<option id='' value='5박6일 / 234000'>5박6일 / 234000</option></select>
+	</div>
+	<div id='goCart'></div>
+	<div id='total'>
+		<span>총 상품 금액(수량) : </span><span id='totPrice' class='pr'>0</span><span
+			class='pr'>원</span><span class='qty'>(</span><span id='totQty'
+			class='qty'>0</span><span class='qty'>개</span><span class='qty'>)</span>
+	</div>
+	<button id='btn1'>바로구매</button>
+	<button id='btn2' onClick="saveInfo('1000','G001','S005','G006')">장바구니</button>
+	</div>
+</body>
+</html>

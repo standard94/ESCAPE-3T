@@ -28,4 +28,9 @@ public class Camping {
 	private boolean prev;
 	private boolean next;
 	private int realEnd;
+	private String bkCode;
+	private String bkRentday;
+	private String bkRentRoom;
+	private int bkPeople;
+	private int bkPrice;
 }

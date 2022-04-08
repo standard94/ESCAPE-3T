@@ -8,7 +8,8 @@
 </head>
 <script src="resources/js/resource.js"></script>
 <script src="resources/js/signUp.js"></script>
-<link rel="stylesheet" type="text/css" href="resources/css/topBottom.css" />
+<link rel="stylesheet" type="text/css"
+	href="resources/css/topBottom.css" />
 <style type="text/css">
 div.container {
 	
@@ -129,35 +130,29 @@ p {
 .num {
 	color: red;
 }
-#checkIdMessage{
-font-size : 5pt;
-color : red;
+
+#checkIdMessage {
+	font-size: 5pt;
+	color: red;
 }
 </style>
-<style>
-</style>
-<body onLoad = "initPage('${msg}')">
+<body onLoad="initPage('${msg}')">
 	<div id="basic">
 		<div id="top">
-			<div id="logo" onClick="getNewPage('basic')">여기가 좋을 지도¿</div>
+			<div id="logo" onClick="getNewPage('basic')">여기가 좋을 지도</div>
 			<div id="search">
-				<input id="searchFont" type="text" name="" placeholder="" /><input
-					id="searchZoom" class="divButton" type="button" value="SEARCH" />
+				<input id="searchFont" type="text" name="" placeholder="" />
+				<input id="searchZoom" class="divButton" type="button" value="SEARCH" onMouseOver="changeColor1(this)" onMouseOut="changeColor2(this)" />
 			</div>
-
 			<div id="box1">
 				<div id="login1">
-					<span class="top_menu" onClick="getNewPage('memberLogIn')">로그인/</span><span
-						class="top_menu" onClick="getNewPage('signUp')">회원가입</span>
-				</div>
-				<div id="notice">
-					<span class="top_menu" onClick="">공지사항</span>
+					<span class="top_menu" onClick="getNewPage('memberLogIn')">로그인/</span>
+					<span class="top_menu" onClick="getNewPage('signUp')">회원가입</span>
 				</div>
 				<div id="shop">
-					<span class="top_menu" onClick="">장바구니</span>
+					<span class="top_menu" onClick="notMember()">장바구니</span>
 				</div>
 			</div>
-			<img id="list" src='resources/images/list.png' />
 		</div>
 
 
@@ -171,26 +166,23 @@ color : red;
 						<tr>
 							<td class="col1">아이디</td>
 							<td class="col2"><input type="text" name="id" maxlength="15">
-								<input class='but1' type="button" value="중복확인" onclick="checkMemberId()">
-								<span id="checkIdMessage">${msg}</span>
+								<input class='but1' type="button" value="중복확인"
+								onclick="checkMemberId()"> <span id="checkIdMessage">${msg}</span>
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">비밀번호</td>
-							<td class="col2"><input type="password" id="pwd" name="pwd"
-								maxlength="16">
-								<p>
-									※비밀번호는 <span class="num">10
-										~ 16자리</span>로 입력이 가능합니다.
-								</p></td>
+							<td class="col2">
+							<input type="password" id="pwd" name="pwd"maxlength="16">
+								<p>※비밀번호는 <span class="num">10 ~ 16자리</span>로 입력이 가능합니다.</p>
+							</td>
 						</tr>
 						<tr>
-							<td class="col1" >비밀번호 확인</td>
-							<td class="col2">
-							<input type="password" id="pwdCheck" name="pwdCheck" maxlength="16" onchange="comparePassword()">
-							<span id="checkResult" style="font-size: 7pt;" ></span>
-							</td>
-								
+							<td class="col1">비밀번호 확인</td>
+							<td class="col2"><input type="password" id="pwdCheck"
+								name="pwdCheck" maxlength="16" onchange="comparePassword()">
+								<span id="checkResult" style="font-size: 7pt;"></span></td>
+
 						</tr>
 						<tr>
 							<td class="col1">이름</td>
@@ -211,20 +203,26 @@ color : red;
 
 				<div class="create">
 
-					<input class="but3" type="button" value="가입취소" onclick="getNewPage('basic')">
-					<input class="but4" type="button" value="회원가입"
-						onclick="memberSignUp()">
+					<input class="but3" type="button" value="가입취소"
+						onclick="getNewPage('basic')"> <input class="but4"
+						type="button" value="회원가입" onclick="memberSignUp()">
 
 				</div>
 			</div>
 		</form>
 
 		<div id="bottom">
-				<div id="store_info"><span class="end">여기가 좋을 지도¿ CS NUMBER : 1644 - 3681</span></div>
-				<div id="nate2"><span class="nate">사업자 등록번호: 123-81-21968｜통신판매업신고: 연수 1655호｜개인정보 보호책임자 : NATE</span></div>
-				<div id="nate3"><span class="nate">문의 : handaeng1220@gmail.com</span></div>
+			<div id="store_info">
+				<span class="end">여기가 좋을 지도¿ CS NUMBER : 1644 - 3681</span>
 			</div>
+			<div id="nate2">
+				<span class="nate">사업자 등록번호: 123-81-21968｜통신판매업신고: 연수
+					1655호｜개인정보 보호책임자 : NATE</span>
+			</div>
+			<div id="nate3">
+				<span class="nate">문의 : handaeng1220@gmail.com</span>
+			</div>
+		</div>
 	</div>
-	
 </body>
 </html>

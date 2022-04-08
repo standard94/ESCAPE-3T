@@ -3,14 +3,13 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="icia.escape.db.RentalMapper">
 
-	<!-- 낚시 렌탈업체 리스트 카운트 -->
-	<select resultType="int" parameterType="icia.escape.beans.Stores" id="getFishingStoreListCount">
-		SELECT COUNT(*) FROM NATECHILDREN.STORES WHERE SR_CFCODE = #{srCfCode} 
-	</select>
+<!-- 낚시 렌탈업체 리스트 카운트 -->
+<select resultType="int" parameterType="icia.escape.beans.Stores" id="getFishingStoreListCount">
+SELECT COUNT(*) FROM NATECHILDREN.STORES WHERE SR_CFCODE = #{srCfCode} 
+</select>
 
-	<!-- 낚시 렌탈업체 리스트 10개 불러오기 -->
-	<select resultType="icia.escape.beans.Stores"
-		parameterType="icia.escape.beans.Stores" id="getFishingStoreList">
+<!-- 낚시 렌탈업체 리스트 10개 불러오기 -->
+<select resultType="icia.escape.beans.Stores" parameterType="icia.escape.beans.Stores" id="getFishingStoreList">
 <![CDATA[
 	SELECT ROWNUMBER, SRCFCODE, SRCODE, SRNAME, SRNUMBER, SRDETAILS, SRIMAGE, SRADDRESS
 	FROM   (SELECT ROWNUMBER, SRCFCODE, SRCODE, SRNAME, SRNUMBER, SRDETAILS, SRIMAGE, SRADDRESS
@@ -22,39 +21,40 @@
                 
 	WHERE ROWNUMBER > (#{pageNumber}-1) *  #{amount}
 	]]>
-	</select>
+</select>
+<!-- 특정 렌탈업체 상세정보 -->
 
-	<!-- 특정 렌탈업체 상세정보 -->
-	<select id="chooseStoreInfo"
-		parameterType="icia.escape.beans.Stores"
-		resultType="icia.escape.beans.Stores">
-		SELECT SRPOST, SRCODE, SRNAME, SRNUMBER, SRDETAILS, SREMAIL, SRIMAGE,
-		SRADDRESS, GONAME, GDIMAGE, CFNAME
+<select id="chooseStoreInfo" parameterType="icia.escape.beans.Stores" resultType="icia.escape.beans.Stores">
+		SELECT SRPOST, SRCODE, SRNAME, SRNUMBER, SRDETAILS, SREMAIL, SRIMAGE, SRADDRESS, GONAME, GDIMAGE, CFNAME, CACODE, CFCODE
 		FROM SRLIST
 		WHERE SRCODE = #{srCode}
-	</select>
-
-	<!-- 모든 업체 : 분류,카테고리별 상품 수 카운트 -->
-	<select id="countGoodsList" resultType="int">
+</select>
+	
+<!-- basic goodsList -->
+<select id="getThatStoreThatGoodsList" parameterType="icia.escape.beans.Goods" resultType="icia.escape.beans.Goods">
+		SELECT SRCODE, CACODE, SRNAME, GOCODE, GONAME, DISCOUNT, IMAGE, CFCODE
+		FROM GOODSLIST
+		WHERE DISCOUNT = #{discount}
+</select>
+	
+<!-- 여기까지 대현오빠꺼임///////////////////////////////////////////////////////////////////// -->
+	
+<!-- 모든 업체 : 분류,카테고리별 상품 수 카운트 -->
+<select id="countGoodsList" resultType="int">
 		SELECT COUNT(*)
-		FROM
-		GOODSLIST
+		FROM GOODSLIST
 		WHERE CFCODE = #{cfCode} AND CACODE = #{caCode}
-	</select>
+</select>
 
-	<!-- 특정 업체 : 분류,카테고리별 상품 수 카운트 -->
-	<select id="countStoreGoodsList" resultType="int">
+<!-- 특정 업체 : 분류,카테고리별 상품 수 카운트 -->
+<select id="countStoreGoodsList" resultType="int">
 		SELECT COUNT(*)
-		FROM
-		GOODSLIST
-		WHERE CFCODE = #{cfCode} AND CACODE = #{caCode} AND SRCODE =
-		#{srCode}
-	</select>
+		FROM GOODSLIST
+		WHERE CFCODE = #{cfCode} AND CACODE = #{caCode} AND SRCODE = #{srCode}
+</select>
 
-	<!-- 모든 업체의 상품 리스트 불러오기 -->
-	<select id="getAllStoreGoods"
-		parameterType="icia.escape.beans.Goods"
-		resultType="icia.escape.beans.Goods">
+<!-- 모든 업체의 상품 리스트 불러오기 -->
+<select id="getAllStoreGoods" parameterType = "icia.escape.beans.Goods" resultType = "icia.escape.beans.Goods">
  <![CDATA[
 SELECT ROWNUMBER, CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
 FROM	(SELECT ROWNUMBER ,CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
@@ -66,12 +66,10 @@ FROM	(SELECT ROWNUMBER ,CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT
                 
 WHERE ROWNUMBER > (#{pageNumber}-1) *  #{amount}
 ]]>
-	</select>
+</select>
 
-	<!-- 특정 업체의 상품 리스트 불러오기 -->
-	<select id="getStoreGoods"
-		parameterType="icia.escape.beans.Goods"
-		resultType="icia.escape.beans.Goods">
+<!-- 특정 업체의 상품 리스트 불러오기 -->
+<select id="getStoreGoods" parameterType = "icia.escape.beans.Goods" resultType = "icia.escape.beans.Goods">
 <![CDATA[
 SELECT ROWNUMBER, CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
 FROM	(SELECT ROWNUMBER ,CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
@@ -83,12 +81,10 @@ FROM	(SELECT ROWNUMBER ,CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT
                 
 WHERE ROWNUMBER > (#{pageNumber}-1) *  #{amount}
 ]]>
-	</select>
+</select>
 
-	<!-- 같은 분류,카테고리의 다른 업체 상품 리스트 -->
-	<select id="getSameTypeGoods"
-		parameterType="icia.escape.beans.Goods"
-		resultType="icia.escape.beans.Goods">
+<!-- 같은 분류,카테고리의 다른 업체 상품 리스트 -->
+<select id="getSameTypeGoods" parameterType = "icia.escape.beans.Goods" resultType = "icia.escape.beans.Goods">
 <![CDATA[
 SELECT ROWNUMBER, CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
 FROM	(SELECT ROWNUMBER ,CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT, RENTPRICE, IMAGE, STCODE
@@ -100,33 +96,68 @@ FROM	(SELECT ROWNUMBER ,CFCODE, CACODE, SRCODE, SRNAME, GOCODE, GONAME, DISCOUNT
                 
 WHERE ROWNUMBER > (#{pageNumber}-1) *  #{amount}
     ]]>
-	</select>
+</select>
 
-	<!-- 특정 업체의 특정 상품 -->
-	<select id="getThatStoreThatGoods"
-		parameterType="icia.escape.beans.Goods"
-		resultType="icia.escape.beans.Goods">
-		SELECT CFCODE, CACODE, SRCODE,SRNAME, GOCODE, GONAME, MONTH, DAY,DISCOUNT,
-		RENTPRICE, IMAGE, CONTENTS, NOTICE, STCODE
-		FROM GOODSLIST
-		WHERE CFCODE = #{cfCode} AND SRCODE = #{srCode} AND CACODE = #{caCode} AND
-		GOCODE = #{goCode}
-	</select>
+<!-- 특정 업체의 특정 상품 -->
+<select id="getThatStoreThatGoods" parameterType = "icia.escape.beans.Goods" resultType = "icia.escape.beans.Goods">
+SELECT CFCODE, CACODE, SRCODE,SRNAME, GOCODE, GONAME, MONTH, DAY,DISCOUNT, RENTPRICE, IMAGE, CONTENTS, NOTICE, STCODE
+FROM GOODSLIST
+WHERE CFCODE = #{cfCode} AND SRCODE = #{srCode} AND CACODE = #{caCode} AND GOCODE = #{goCode}
+</select>
 
-	<!-- 이 업체의 다른 상품들 -->
-	<select id="getThatStoreOtherGoods"
-		parameterType="icia.escape.beans.Goods"
-		resultType="icia.escape.beans.Goods">
-		SELECT CFCODE, CACODE, SRCODE,SRNAME, GOCODE,GONAME, MONTH, DAY, DISCOUNT,
-		RENTPRICE, IMAGE, CONTENTS, NOTICE, STCODE
-		FROM GOODSLIST
-		WHERE SRCODE = #{srCode} AND GOCODE != #{goCode}
-	</select>
-	<!-- 상품 유효성 체크 -->
-	<select id="countGoods" parameterType="icia.escape.beans.Goods"
-		resultType="int">
-		SELECT COUNT(*)
-		FROM GOODSLIST
-		WHERE SRCODE=#{srCode} AND GOCODE = #{goCode}
-	</select>
+<!-- 이 업체의 다른 상품들 -->
+<select id="getThatStoreOtherGoods" parameterType = "icia.escape.beans.Goods" resultType = "icia.escape.beans.Goods">
+SELECT CFCODE, CACODE, SRCODE,SRNAME, GOCODE,GONAME, MONTH, DAY, DISCOUNT, RENTPRICE, IMAGE, CONTENTS, NOTICE, STCODE
+FROM GOODSLIST
+WHERE SRCODE =  #{srCode} AND GOCODE !=  #{goCode}
+</select>
+<!-- 상품 유효성 체크 -->
+<select id="countGoods" parameterType = "icia.escape.beans.Goods" resultType = "int">
+SELECT COUNT(*)
+FROM GOODSLIST
+WHERE SRCODE=#{srCode} AND GOCODE = #{goCode}
+</select>
+
+<!--                   장바구니                       -->
+
+<!-- 멤버 코드 가져오기 : 멤버 아이디로 가져오기 -->
+<select id ="getMemberCode" parameterType = "icia.escape.beans.Goods" resultType = "String">
+	SELECT MM_CODE AS MMCODE FROM MM WHERE MM_ID = #{mmId}
+</select>
+
+<!-- 장바구니 코드 MAX값 가져오기 -->
+<select id="getMaxCtCode" parameterType="java.util.List" resultType = "String">
+SELECT MAX(CT_CODE)
+FROM CT
+</select>
+
+<!-- 장바구니에 고른 상품 입력 -->
+<insert id="insCart" parameterType = "icia.escape.beans.Goods">
+	INSERT INTO CT(CT_MMCODE,CT_GOSRCFCODE,CT_GOCACODE,CT_GOSRCODE ,CT_CODE,CT_GOCODE,CT_QUANTITY,CT_RENT,CT_PRICE) 
+	VALUES(#{mmCode}, #{cfCode},#{caCode},#{srCode},#{ctCode},#{goCode},#{qty},#{rentDay},#{rentPrice}) 
+</insert>
+
+<!-- 사용자 로그인 : 회원 로그기록 가져오기 -->
+ <select id="getMemberAccessInfo" parameterType = "icia.escape.beans.Goods" resultType = "icia.escape.beans.Goods">
+      SELECT PUBLICIP,MMID,MMCODE FROM ACCESSINFO WHERE MMCODE = #{mmCode} AND STCODE = #{stCode}
+ </select>
+ 
+ <!-- 사용자 장바구니 불러오기 -->
+ <select id="getCartInfo"  parameterType = "icia.escape.beans.Goods" resultType = "icia.escape.beans.Goods">
+ SELECT ROWNUM, MMCODE, CFCODE,SRCODE,CACODE,GOCODE, QTY,RENTDAY, CTCODE, RENTPRICE, SRNAME, GONAME, IMAGE, DISCOUNT 
+	FROM CARTLIST 
+	WHERE MMCODE =#{mmCode}
+ </select>
+<!-- 장바구니 정보 업데이트 하기 -->
+<update id="updCartInfo" parameterType="icia.escape.beans.Goods" >
+UPDATE CT
+SET CT_QUANTITY = #{modQty}
+WHERE CT_MMCODE = #{mmCode} AND CT_GOSRCFCODE = #{cfCode} AND CT_GOCACODE = #{caCode} AND CT_GOSRCODE = #{srCode} AND CT_CODE = #{ctCode}
+</update>
+
+<!-- 장바구니 삭제 -->
+<delete id="delCart" parameterType="icia.escape.beans.Goods">
+DELETE CT
+WHERE CT_MMCODE = #{mmCode} AND CT_GOSRCFCODE = #{cfCode} AND CT_GOCACODE = #{caCode} AND CT_GOSRCODE = #{srCode} AND CT_CODE = #{ctCode}
+</delete>
 </mapper>

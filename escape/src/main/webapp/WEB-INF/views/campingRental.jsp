@@ -22,13 +22,13 @@
 			<div id="logo" onClick="getNewPage('basic')">여기가 좋을 지도¿</div>
 				<div id="search"><input id="searchFont" type="text"  name="" placeholder="" /><input id="searchZoom" class="divButton" type="button" value="SEARCH" onMouseOver="changeColor1(this)" onMouseOut="changeColor2(this)"/></div>
 				<div id="box1">
-		 			<div id="login1"><span class="top_menu" >${sessionInfo.mmId}님</span>
-		 			<input id="logOutButton" type = "button" value= "로그아웃" onClick="logOutMember('${sessionInfo.mmId}','${sessionInfo.publicIp}','${sessionInfo.mmCode}')"/></div>
+		 			<div id="login1"><span class="top_menu" onClick="getNewPage('memberLogIn')" >로그인/</span><span class="top_menu"  onClick="getNewPage('signUp')">회원가입</span>
+		 			</div>
 		 			
 		 			<div id="notice"><span class="top_menu" onClick="">공지사항</span></div>
-		 			<div id="shop"><span class="top_menu" onClick="">장바구니</span></div>
+		 			<div id="shop"><span class="top_menu" onClick="notMember()">장바구니</span></div>
 				</div>
-			<img id="list" src='resources/images/list.png'/>
+			
 		</div>
 		
 		<div id="mid">
@@ -37,11 +37,16 @@
      				<div id="sideTitle">
      					<div id = "inTitle">RENTAL</div>
      				</div>
-     				<div id="campingBar" class="menuTop" onClick ="openCloseMenu('a')">
-     					<div class="text1" >캠핑 장비
-     						<div class="triangle" ></div>
+     				
+     				<div id ="bar">
+     					<div id="campingBar" class="menuTop" onClick ="openCloseMenu('a')">
+     						<div id = "bt">
+     							<div class="text1" >캠핑 장비
+     								<div class="triangle" ></div>
+     							</div>
+     						</div>
      					</div>
-     				</div>
+     				<div id ="inBar">
      				<div id="campingItem" style="display:block">
 	     				<div id="cpMenu1" class="cpMenu" >
 	     					<div class="textLocation _value" onClick="delrecord();getGoodsList('1','9','1000','G001');getGoodsPage('1','9','1000','G001');" >캠핑 패키지</div>
@@ -65,7 +70,7 @@
 	     					<div class="textLocation" onClick="delrecord();getGoodsList('1','9','1000','G007');getGoodsPage('1','9','1000','G007');">기타용품</div>
 	     				</div>
      				</div>
-     				
+     				</div>
      				<div id="fishingBar" class="menuTop" onClick ="openCloseMenu('b')">
      					<div class="text1">낚시 장비
      						<div class="triangle"></div>
@@ -91,6 +96,7 @@
 	     					<div class="textLocation" onClick="delrecord();getGoodsList('1','9','2000','G013');getGoodsPage('1','9','2000','G013');">기타용품</div>
 	     				</div>
      				</div>
+     				</div>
      			</div>
      		</div>
      		
@@ -115,7 +121,7 @@
 								<option value="업체명">업체명</option>
 								</select>
 								<input id="searchText" type="text" value="" placeholder="검색어 입력"/>
-								<button id="searchClick" >검색</button>
+								<input id="searchClick" type="button" value="검색">
 							</div>
 						</div>
 				</div>
@@ -123,14 +129,10 @@
      				<div id="listDiv"><div id="goodsList"></div></div>
      				<div id="pageDiv" ><div id="goodsPage"></div></div>
      			</div>
-     			<div id="bottomForm"></div>
      		</div>
      		
-     	<div id="openCart" style="display:none;">
-     		<div id=""></div>
-     		<div>상세정보</div>
-     		<div>담으면 생김</div>
-     		<button id='btnCart'class='twoBtn' onClick='openCart()'>장바구니</button>" + "<button  id='btnBuy'class='twoBtn'>바로구매</button>
+     	<div id="notMember" tabindex="-1" style="display:none;">
+     		
      	</div>
      	
 		</div>

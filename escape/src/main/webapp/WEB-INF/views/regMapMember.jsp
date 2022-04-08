@@ -246,7 +246,7 @@
               
               
               <div id="buttonDiv">
-                 <button type="button" id="regFp" onClick="ajaxUploadFile('ajaxUploadForm');insFishing('${sessionInfo.mmCode}');" >등록</button>
+                 <button type="button" id="regFp" onClick="ajaxUploadFile('ajaxUploadForm');insFishing1('${sessionInfo.mmCode}');" >등록</button>
                  <button type="button" id="cancel" onClick="getNewPageMember('${sessionInfo.mmId}','mapPoints_member','${sessionInfo.publicIp}','${sessionInfo.mmCode}')">취소</button>
               </div>
            </div>

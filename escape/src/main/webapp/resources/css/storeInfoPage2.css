@@ -10,23 +10,22 @@
 /*---------------------------------basic---------------------------*/
 
 #basic {
-   position:absolute; 
-   height:200%;
-   width:97%;
-   margin: -0.5% 0% 0% -0%
-   }
+	position:absolute; 
+	height:110%;
+	width:97.8%;
+	}
 
    
 /*---------------------------------top---------------------------*/
 #top {
    font-family: 'Pretendard-Regular';
-   height:3.4%;
+   height:5.4%;
    width:102.5%;
    background-color:#292929;
    }
 
 #logo {
-   margin: 1% 0% 2% 2%;
+   margin: 0.7% 0% 0% 2%;
    width:12.5%;
    height:2.4%;
    position:absolute;
@@ -71,14 +70,14 @@
 #box1 {
 	width:45%;
 	height:3.4%;
-	position:absolute; top:1.2%;
+	position:absolute; top:1.7%;
 	left:57.5%;
 	}
 		
 #login1 {
 	width:30%;
 	height:43%;
-	margin-left:10%;
+	margin-left:17%;
 	float: left;
 	color:#ebedec;
 	font-size:10pt;
@@ -108,16 +107,24 @@
    }
    
 #list {
+   margin-top : 0.3%;
    width:3%;
-   height:2.3%;
+   height:4.3%;
    position:absolute;
    left:93.5%;
-   top:0.5%;
    background-color:#a2a9af;
    cursor : pointer;
    }
    
 /*----------------------------mid------------------------------------*/
+
+#list2{
+	width : 80%;
+	height : 94%;
+	margin : 0% 0% 0% 10%;
+	overflow: auto;
+	margin-top : 3%;
+}
 
 #mid{
    font-family: 'Pretendard-Regular';
@@ -145,179 +152,9 @@
 	height:30%;
 }
 .txt{
-	font-size: 15pt;
+	font-size: 13pt;
 }
-#storeName{
-	margin : 7% 0 0 20%;
-	color:#8C8C8C;
-	font-weight:bold;
-
-}
-#arrow1,#category{
-	margin : 7% 0 0 2%;
-	color:#BDBDBD;
-}
-
-#rentalGoods{
-	margin : 15% 0 4% 20%;
-	width:99.8;
-	font-size: 20pt;
-	color :#292929;
-	font-weight:bold;
-	text-decoration-line : solid;
-	text-decoration-color: #292929;
-	text-decoration: underline;
-	text-underline-position: under;
-}
-
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-
-/*---------------------------------basic---------------------------*/
-
-#basic {
-   position:absolute; 
-   height:200%;
-   width:97%;
-   margin: -0.5% 0% 0% -0%
-   }
-
-   
-/*---------------------------------top---------------------------*/
-#top {
-   font-family: 'Pretendard-Regular';
-   height:3.4%;
-   width:102.5%;
-   background-color:#292929;
-   }
-
-#logo {
-   margin: 1% 0% 2% 2%;
-   width:12.5%;
-   height:2.4%;
-   position:absolute;
-   color : #EAEAEA;
-	font-size:18pt;
-	font-weight : bolder;
-	cursor:pointer;
-   }
-  #logo:hover{
-  color:#FFFFB4;
-  }
-#search {
-   width:44.5%;
-   height:2.3%;
-   position:absolute; top:0.7%;
-   left:26%;
-   }
-   
-#searchFont{
-   border:2px solid #FFCD36;
-   font-size:20pt;
-   padding: 1.2% 20% 0% 15%;
-   margin-left:1%;
-   }
-
-#searchZoom{
-  
-   font-size:15pt;
-   position:absolute; top:29%; left:62%; 
-   border:0 solid black;
-   background-color:white;
-   color:#767F86;
-   
-   }
-#searchZoom.divButton{
-   cursor :pointer;
-}   
-#searchZoom.divButton:hover{
-   cursor :pointer;
-   font-weight: bold;
-}   
-#box1 {
-	width:45%;
-	height:3.4%;
-	position:absolute; top:1.2%;
-	left:57.5%;
-	}
-		
-#login1 {
-	width:30%;
-	height:43%;
-	margin-left:10%;
-	float: left;
-	color:#ebedec;
-	font-size:10pt;
-	}
-
-#notice {
-	width:15%;
-	height:43%;
-	margin-left:3%;
-	float: left;
-	color:#ebedec;
-	font-size:10pt;
-	}
-#shop {
-	width:15%;
-	height:43%;
-	margin-left:5.8%;
-	float: left;
-	color:#ebedec;	
-	font-size:10pt;
-	}
-.top_menu {
-
-   font-family: 'Pretendard-Regular';
-   font-size: 13pt;
-   cursor : pointer;
-   }
-   
-#list {
-   width:3%;
-   height:2.3%;
-   position:absolute;
-   left:93.5%;
-   top:0.5%;
-   background-color:#a2a9af;
-   cursor : pointer;
-   }
-   
-/*----------------------------mid------------------------------------*/
-
-#mid{
-   font-family: 'Pretendard-Regular';
-   width:99.3%;
-   height:95%;
-}
-#regForm{
-	float:left;
-	width : 70%;
-	height:99.8%;
-	border : 1px solid #000000;	
-}
-
-#topForm{
-	width:100%;
-	height : 5%;
-}
-#leftTitle{
-	float:left;
-	width:30%;
-	height:80%;
-}
-#subTitle{
-	width:50%;
-	height:30%;
-}
-.txt{
-	font-size: 15pt;
-}
-#storeName{
+#storeName2{
 	margin : 7% 0 0 20%;
 	color:#8C8C8C;
 	font-weight:bold;
@@ -360,7 +197,7 @@
 
 #job {
 	float:left;
-  margin: 8% 0 2% 22%;
+  margin: 6% 0 2% 22%;
   width: 15%;
   height: 80%;
   background: url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png') calc(100% - 5px) center no-repeat;
@@ -374,14 +211,14 @@
 }
 
 #searchText{
-	margin : 8% 2% 0 2%;
+	margin : 6% 2% 0 2%;
 	float:left;
 	width:30%;
 	height:70%;
 	 
 }
 #searchClick{
-	margin-top:8%;
+	margin-top:6%;
 	float:left;
 	width:10%;
 	height:80%;
@@ -402,12 +239,12 @@
 }
 #sideBar{
 	float: left;
-	width : 17%;
+	width : 19%;
 	height: 99.8%;
 }
 
 #sideContents{
-	width : 63%;
+	width : 70%;
 	height: 100%;
 }
 
@@ -416,7 +253,7 @@
 	text-decoration-color: #8C8C8C;
 	text-decoration: overline underline;
 	text-underline-position: under;
-	margin-top : 11%;
+	margin : 11% 0% 3% 0%;
 	text-align:center;
 	width : 100%;
 	height: 3.3%;
@@ -460,36 +297,27 @@
 	margin-left : 30%;
 }
 .menuTop{
-	margin :0 0 0 2%;
-	width:95%;
-	height:2.2%;
-	text-align:center;
+	margin :6% 0 0 2%;
+	width:98%;
+	height:4.2%;
+	text-align:left;
 	font-size:15pt;
 	color:#FFFFFF;	
 	border-top : 2px solid #8C8C8C;
 	background-color:#8C8C8C;
-	
+	cursor : pointer;
+	box-shadow : 5px 5px 5px #292929 ;
 }
 
-
-.triangle {
-	margin : 5% 7%   0 2%;
-	float: right;
-	width: 0px;
-	height: 0px;
-  	border-left: 10px solid transparent;
- 	border-right: 10px solid transparent;
-  	border-top: 10px solid ;
-}
 .textLocation{
 	margin : 4% 0 4% 0;
-	cursor : pointer;
+	cursor: pointer;
 }
 
-
 .text1{
-	width:74%;
-	margin : 4% 0 0 17%;
+	width:87%;
+	margin : 4% 0 0 8%;
+	font-size : 12pt;
 }
 #postContents{
 	display:none;
@@ -507,35 +335,31 @@
 }
 
 #srImage {
-	width : 30%;
-	height : 50%;
-	float : left;
-	margin : 2% 0% 0% 0%;
+	width : 300px;
+	height : 150px;
+	margin : 1.5% 0% 0% 0%;
 }
 	
-#image{
-	width : 99%;
-	height : 99%;
+.storeListsrImage{
+	width : 59%;
+	height : 59%;
 	float : left;
 }
-
-#srName{
+.storeListsrName{
 	font-weight : bold;
 	text-align : right;
-	font-size : 25pt;
-	padding : 0% 2% 0% 0%;
-	color:#8C8C8C;
-	
+	font-size : 22pt;
+	margin : 1.5% 2% 0% 0%;
 }
 
-#srAddress{
+.storeListsrAddress{
 	text-align : right;
 	font-size : 17pt;
 	padding : 0% 2% 0% 0%;
 	margin : 1% 0% 0% 0%;
 }
 
-#srDetails{
+.storeListsrDetails{
 	text-align : right;
 	font-size : 13pt;
 	width : 50%;
@@ -544,13 +368,37 @@
 	margin : 1% 0% 0% 48%;
 }
 
-#srNumber{
+.storeListsrNumber{
 	text-align : right;
 	font-size : 13pt;
 	padding : 0% 2% 0% 0%;
 	margin : 1% 0% 0% 0%;
 }
+
+.storeListsrCfCode{
+	display : none;
+}
+
+.storeListsrCode{
+	display : none;
+}
+.storeListgdImage{
+	display : none;
+}
+.ddiv{
+	cursor : pointer;
+}
+
+.ddiv:hover{
+	color : #1C658C;
+}
 /*------------------button----------------*/
+#button{
+	margin : 0% 0% 5% 36%;
+	text-align : center;
+	
+}
+
 li{
    list-style:none;
 }
@@ -559,14 +407,9 @@ ul{
    padding-left:0px;
    text-align:center;
 }
-#goodsPage{
 
-	width:90%;
-	text-align:center;
-}
 /*이전 버튼*/
 .pageInfo_btn_prev{
-	margin-top : 5%;
    float:left;
    padding : 1% 1% 1% 1%;
    
@@ -580,14 +423,12 @@ ul{
 }
 
 #pageInfo_btn_prev_hold{
-	margin-top : 7%;
    float:left;
    padding : 1% 1% 1% 1%;
    background-color:#FFCD36;
 }
 /*선택한 페이지 버튼*/
 .pageInfo_btn_selected{
-	margin-top : 7%;
    float:left;
    padding : 1% 1% 1% 1%;
    background-color:#BDBDBD;
@@ -597,7 +438,6 @@ ul{
 }
 /*페이지 버튼*/
 .pageInfo_btn{
-	margin-top : 7%;
    float:left;
    padding : 1% 1% 1% 1%;
    
@@ -608,7 +448,6 @@ ul{
 }
 /*다음 버튼*/
 .pageInfo_btn_next{
-	margin-top : 7%;
    float:left;
    padding : 1% 1% 1% 1%;
    
@@ -626,7 +465,7 @@ font-weight: bold;
 	float: left;
    font-family: 'Pretendard-Regular';
    width:100.5%;
-   height:1.8%;
+   height:3.8%;
    background-color:#595959;
    color:#FFFFFF;
    padding:0.05% 1%;
@@ -659,6 +498,100 @@ font-weight: bold;
    margin: 0.2% 0% 0% 0%;
 }   
    
+/*--------------업체 정보--------------*/	
+
+#storeInfo{
+	width : 98%;
+	height : 90%;
+}
+
+
+#line1{
+	width : 50%;
+	height : 98%;
+	margin : 3% 0% 5% 3%;
+	float : left;
+}
+
+#storeName{
+	width : 99%;
+	height : 7%;
+	float : left;
+	font-size : 25pt;
+	font-weight : bold;
+	text-align : right;
+}
+
+#storeNumber{
+	width : 99%;
+	height : 8%;
+	font-size : 21pt;
+	text-align : right;
+	float : left;
+	margin-top : 5%;
+}
+
+#line2{
+	width : 40%;
+	height : 98%;
+	float : left;
+	margin : 3% 0% 5% 3%;
+	
+}
+
+#storeMap{
+	width : 97.5%;
+	height : 40%;
+	float : left;
+	margin : 7% 0% 0% 0%;
+	border: solid 2px #E1D248;
+}
+
+#srInfoImage{
+	width : 98%;
+	height : 98%;
+	border: solid 2px #E1D248;
+}
+	
+#storeImage{
+	width : 99.8%;
+	height : 40%;
+	float : left;
+}
+
+#storeAddress{
+	width : 90%;
+	height : 6%;
+	font-size : 15pt;
+	text-align : rigth;
+	font-weight : bold;
+}
+
+#clickGoods{
+	width : 87%;
+	height : 4%;
+	margin : 5% 0% 0% 0%;
+	float : right;
+	font-size : 17pt;
+	cursor : pointer;
+	text-align: right;
+	color : red;
+	font-weight : bold;
+	text-decoration : underline;
+}
+
+#storeContent{
+	border: solid 1px #292929;
+	width : 80%;
+	height : 66%;
+	margin : 1% 0% 1% 20%;
+	float : left;
+	font-size : 14pt;
+	text-align : right;
+	
+}
+
+
 /************상품 상세정보 **********/
 #thumbNail{
 	float:left;
@@ -769,273 +702,72 @@ text-align:center;
 .goInfo.cfCode,.goInfo.srCode,.goInfo.caCode,.goInfo.goCode{
 	display:none;
 }
-/*******************업체 리스트css**************************/
-#storeList{
-	width : 99%;
-	height : 20%;
-	border-top : 1px solid #292929;
+#rmcHome {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 15pt;
+	font-weight: bold;
+	background-color: #292929;
+	color: white;
+	border-radius: 10px;
+	margin: 15% 1%;
+	cursor: pointer;
 }
 
-#srImage {
-	width : 30%;
-	height : 50%;
-	float : left;
-	margin : 2% 0% 0% 0%;
-}
-	
-#image{
-	width : 99%;
-	height : 99%;
-	float : left;
-}
-
-#srName{
-	font-weight : bold;
-	text-align : right;
-	font-size : 25pt;
-	padding : 0% 2% 0% 0%;
-	color:#8C8C8C;
-	
+#rmcMap {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 9% 1% 1% 1%;
+	cursor: pointer;
+	font-weight: bold;
 }
 
-#srAddress{
-	text-align : right;
-	font-size : 17pt;
-	padding : 0% 2% 0% 0%;
-	margin : 1% 0% 0% 0%;
+#rmcRental {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 1%;
+	cursor: pointer;
+	font-weight: bold;
 }
 
-#srDetails{
-	text-align : right;
-	font-size : 13pt;
-	width : 50%;
-	height : 20%;
-	padding : 0% 2% 0% 0%;
-	margin : 1% 0% 0% 48%;
+#rmcMyPage {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 1%;
+	cursor: pointer;
+	font-weight: bold;
 }
 
-#srNumber{
-	text-align : right;
-	font-size : 13pt;
-	padding : 0% 2% 0% 0%;
-	margin : 1% 0% 0% 0%;
+#rmcRtStore {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 1%;
+	cursor: pointer;
+	font-weight: bold;
 }
-/*------------------button----------------*/
-li{
-   list-style:none;
-}
-ul{
-   list-style:none;
-   padding-left:0px;
-   text-align:center;
-}
-#goodsPage{
-
-	width:90%;
-	text-align:center;
-}
-/*이전 버튼*/
-.pageInfo_btn_prev{
-	margin-top : 5%;
-   float:left;
-   padding : 1% 1% 1% 1%;
-   
-   background-color:#FFCD36;
-   
-}
-.pageInfo_btn_prev:hover{
-   font-weight: bold;
-   background-color:#CCA63D;
-   color:#050099;
+/*리모컨 색깔*/
+#rmcHome:hover {
+	background-color: #FFBB00;
 }
 
-#pageInfo_btn_prev_hold{
-	margin-top : 7%;
-   float:left;
-   padding : 1% 1% 1% 1%;
-   background-color:#FFCD36;
-}
-/*선택한 페이지 버튼*/
-.pageInfo_btn_selected{
-	margin-top : 7%;
-   float:left;
-   padding : 1% 1% 1% 1%;
-   background-color:#BDBDBD;
-}
-.pageInfo_btn_selected:hover{
-   color:#050099;
-}
-/*페이지 버튼*/
-.pageInfo_btn{
-	margin-top : 7%;
-   float:left;
-   padding : 1% 1% 1% 1%;
-   
-}
-.pageInfo_btn:hover{
-   background-color:#D5D5D5;
-   color:#050099;
-}
-/*다음 버튼*/
-.pageInfo_btn_next{
-	margin-top : 7%;
-   float:left;
-   padding : 1% 1% 1% 1%;
-   
-   background-color:#FFCD36;
-}
-.pageInfo_btn_next:hover{
-font-weight: bold;
-   background-color:#CCA63D;
-   color:#050099;
-}
-
-/*-----------------------------bottom---------------------------------*/
-
-#bottom {
-	float: left;
-   font-family: 'Pretendard-Regular';
-   width:100.5%;
-   height:1.8%;
-   background-color:#595959;
-   color:#FFFFFF;
-   padding:0.05% 1%;
-   }
-   
-#bottom_store {
-   float:left;
-   font-size:18pt;
-   width:170px;
-   height:80%;
-   margin: 0% 1% 0% 0%;
-   
-}
-
-#bottom_store2 {
-   float:left;
-   font-size:10pt;
-   height:75%;
-   width:680px;
-   padding:0.1%;
-   margin: 0.2% 1% 0% 0%;
-}
-
-#bottom_store3 {
-   float:left;
-   font-size:10pt;
-   height:72%;
-   padding:0.15%;
-   width:200px;
-   margin: 0.2% 0% 0% 0%;
-}   
-   
-/************상품 상세정보 **********/
-#thumbNail{
-	float:left;
-	margin : 5% 2% 3% 5%;
-	width:35%;
-	height:30%;
-	border : 2px solid;
-}
-.goInfo.srName{
-margin : 5% 1% 0% 5%;
-float:left;
-width:40%;
-font-size: 20pt;
-font-weight:bolder;
-}
-.goInfo.goName{
-margin : 1% 2% 1% 5%;
-float: left;
-width:50%;
-font-size: 17pt;
-}
-
-.goInfo.contents{
-	width:80%;
-	clear:both;
-	
-}
-#contents{
-	margin:10% 0 0 40%;
-	width:50%;
-
-}
-.goInfo.stCode{
-float:left;
-margin : 1% 2% 0% 5%;
-width:8%;
-height:5%;
-font-size: 20pt;
-background-color:#BDBDBD;
-border-radius : 4px;
-text-align:center;
-}
-.goInfo.discount{
-	margin : 1.3% 2% 1% 0%;
-	float:left;
-	width:40%;
-	font-size:15pt;
-}
-#cal1{
-	margin: 1% 0 0 5% ;
-	float:left;
-	width:40%;
-	font-size:15pt;
-	text-align:left;
-}
-#month{
-	margin: 1% 0 0 8% ;
-	width:40%;
-	font-size:14pt;
-}
-#cal2{
-	margin: 1% 0 0 5% ;
-	float:left;
-	width:40%;
-	font-size:15pt;
-	text-align:left;
-}
-
-#day{
-	margin: 1% 0 0 8% ;
-	width:40%;
-	font-size:14pt;
-}
-
-#rentPrice{
-	margin: 1% 0 0 5%;
-	float:left;
-	width:40%;
-	font-size:15pt;
-	text-align:left;
-}
-#price{
-	margin: 1% 0 0 3% ;
-	width:40%;
-	font-size:14pt;
-}
-
-.btn{
-	margin: 10% 0 0 5%;
-	width:12%;
-	font-size:15pt;
-}
-#goInfo{
-	margin: 5% 0 0 20%;
-	width:20%;
-	font-size:20pt;
-	text-align:center;
-	background-color:green;
-}
-#warn{
-	margin: 5% 0 0 25%;
-	width:20%;
-	font-size:20pt;
-	text-align:center;
-	background-color:green;
-}
-
-.goInfo.cfCode,.goInfo.srCode,.goInfo.caCode,.goInfo.goCode{
-	display:none;
+#rmcMap:hover, #rmcRental:hover, #rmcMyPage:hover, #rmcRtStore:hover {
+	background-color: #747474;
+	color:white;
 }

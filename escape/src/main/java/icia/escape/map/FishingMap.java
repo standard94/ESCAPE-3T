@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import icia.escape.beans.Camping;
 import icia.escape.beans.Fishing;
-
+import icia.escape.beans.Goods;
 import icia.escape.db.MapMapper;
 import icia.escape.utils.ProjectUtils;
 
@@ -30,7 +30,7 @@ public class FishingMap {
 
 
 	public FishingMap() {
-
+		this.mav = new ModelAndView();
 	}
 
 	public ModelAndView backController(String serviceCode, Model model) {
@@ -53,10 +53,24 @@ public class FishingMap {
 			case "F4":
 		         findFishingDetail(model);
 		         break;
+		         
 			}
 		}return mav;
 	}
+	public ModelAndView backController1(String serviceCode, Fishing... fi) {
+		if(fi[0]== null) {
 
+		}else {
+			switch(serviceCode) {
+			
+			case "F5":
+				insFishing1(fi[0]);
+				break;
+			
+		         
+			}
+		}return mav;
+	}
 	/*낚시 리스트 불러오기*/
 	public void getFishingList(Model model) {
 		model.addAttribute("fishingPoints", mm.getFishingPoint((Fishing)model.getAttribute("fishingPoint")));
@@ -83,7 +97,7 @@ public class FishingMap {
 				}else {
 					fpCode = "F" + codeNumber;
 				}
-
+				
 				((Fishing)model.getAttribute("fishing")).setFpCode(fpCode);
 
 				if(this.convertToBoolean(this.mm.insFishing((Fishing)model.getAttribute("fishing")))) {
@@ -97,9 +111,53 @@ public class FishingMap {
 			}
 
 		}
+	}
+		private void insFishing1(Fishing fi) {
+
+			boolean check = false;
+			String fpCode = "";
+			int i = 1;
+			this.setTransactionConf(TransactionDefinition.PROPAGATION_REQUIRED, TransactionDefinition.ISOLATION_READ_COMMITTED, false);
 
 
+			if(this.convertToBoolean(mm.insMap(fi))) {
 
+				if((fpCode = this.mm.checkFishingCode(fi)) != null) {
+
+					String codeNumber = Integer.toString(Integer.parseInt(fpCode.substring(2, 4)) + i);
+					if(codeNumber.length() == 1) {
+						fpCode = "F" + "00" + codeNumber;
+					}else if(codeNumber.length() == 2){
+						fpCode = "F" + "0" + codeNumber;
+					}else {
+						fpCode = "F" + codeNumber;
+					}
+					
+					fi.setFpCode(fpCode);
+
+					if(this.convertToBoolean(this.mm.insFishing(fi))) {
+						check = true;
+						try {
+							fi.setStCode("1111");
+							if(((Fishing)pu.getAttribute("accessInfo")) != null) {
+								this.mav.addObject("sessionInfo", this.mm.getMemberAccessInfo(fi));
+								
+							}
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						
+						
+
+					}
+
+				}
+
+			}
+
+		this.mav.setViewName("fishingMap_member");
 
 		//Transation End
 		this.setTransationEnd(check);

@@ -28,20 +28,27 @@
 }
 </style>
 
-<link rel="stylesheet" type="text/css" href="resources/css/mapPoints.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/mapPoints2.css" />
 <body onLoad="checkCa('C004'), init('${objName}')"/>
 
    <div id="basic">
       <div id="top">
-         <div id="logo" onClick="getNewPage('basic')">여기가 좋을 지도¿</div>
-            <div id="search"><input id="searchFont" type="text"  name="" placeholder="" /><input id="searchZoom" class="divButton" type="button" value="SEARCH"/></div>
-            <div id="box1">
-                <div id="login1"><span class="top_menu" onClick="getNewPage('memberLogIn')" >로그인/</span><span class="top_menu" onClick="getNewPage('commonSignUp')">회원가입</span></div>
-                <div id="notice"><span class="top_menu" onClick="">공지사항</span></div>
-                <div id="shop"><span class="top_menu" onClick="">장바구니</span></div>
-            </div>
-         <img id="list" src='resources/images/list.png'/>
-      </div>
+			<div id="logo" onClick="getNewPage('basic')">여기가 좋을 지도</div>
+			<div id="search">
+				<input id="searchFont" type="text" name="" placeholder="" /><input
+					id="searchZoom" class="divButton" type="button" value="SEARCH"
+					onMouseOver="changeColor1(this)" onMouseOut="changeColor2(this)" />
+			</div>
+			<div id="box1">
+				<div id="login1">
+					<span class="top_menu" onClick="getNewPage('memberLogIn')">로그인/</span><span
+						class="top_menu" onClick="getNewPage('signUp')">회원가입</span>
+				</div>
+				<div id="shop">
+					<span class="top_menu" onClick="notMember()">장바구니</span>
+				</div>
+			</div>
+		</div>
       
       <div id="mid">
          <div id="leftList">
@@ -70,10 +77,10 @@
             <div id="fishingList" class="container">   
             </div>
          </div>
-          <form name="storeInfo" action="StoreInfo" method="post">
+          
          <div id="rightview" class="shadow">
          </div>
-         </form>
+         
          	<div id="remocon" style="z-index: 3; padding:1% 1%;  height: 30%;  width: 9%; border: 1px solid #999966; background-color: white; position : absolute; right:1%; bottom:3%; box-shadow: 3px 3px 10px #566270; border-radius: 10px;">
          		<button id="rmcHome" onClick="getNewPage('basic')" style=" height: 15%;  width: 50%; border: 1px solid #999966; font-size: 15pt; font-weight: bold; background-color: #292929; color: white; border-radius: 10px; margin: 4% 25%;">HOME</button>
          		<button id="rmcMap" onClick="getNewPage('campingMap')" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">지도</button>
@@ -723,16 +730,9 @@
 
          var cacode = detail[0].fpCaCode
 
-         if (cacode = "C001") {
-            cacode = "유료캠핑장"
-         } else if (cacode = "C002") {
-            cacode = "글램핑"
-         } else if (cacode = "C003") {
-            cacode = "카라반"
-         } else if (cacode = "C004") {
+
+         if (cacode = "C004") {
             cacode = "낚시터"
-         } else if (cacode = "C005") {
-            cacode = "대어자랑"
          } else {
             cacode = "분류설정이필요합니다."
          }
@@ -767,16 +767,10 @@
          category.innerHTML = detail[0].fpCaName;
          category.style.cssText = 'position: absolute; right: 7.5%; top: 5.5%; font-size: 15px; font-weight: bold;'
 
-         var locIcon = document.createElement("div")
-         locIcon.className = "LocIcon"
-         locIcon.id = "LocIconBox"
-         locIcon.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
-         locIcon.style.cssText = 'background: url(resources/images/ico_addr.png) no-repeat; position: absolute; left:6%; top:10%;'
-
          var division = document.createElement("div")
          division.className = "Division"
          division.id = "DivisionBox"
-         division.innerHTML = detail[0].fpFiName;
+         division.innerHTML = "주소";
          division.style.cssText = 'position: absolute; left:9.5%; top:10%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
 
          var address = document.createElement("div")
@@ -788,7 +782,7 @@
          var postbox = document.createElement("div")
          postbox.className = "PostBox"
          postbox.id = "PostBox"
-         postbox.innerHTML = "우편번호"
+         postbox.innerHTML = "등록아이디"
          postbox.style.cssText = 'position: absolute; left:9.5%; top:13%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
 
          var post = document.createElement("div")
@@ -800,31 +794,20 @@
          var numberbox = document.createElement("div")
          numberbox.className = "NumberBox"
          numberbox.id = "NumberBox"
-         numberbox.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
-         numberbox.style.cssText = 'background: url(resources/images/ico_tel.png) no-repeat; position: absolute; left:6%; top:18%;'
+         numberbox.innerHTML = '▶'
+         numberbox.style.cssText = 'position: absolute; left:6%; top:18%;'
 
          var number = document.createElement("div")
          number.className = "Number"
          number.id = "Number"
          number.innerHTML = detail[0].fpDate
          number.style.cssText = 'position: absolute; left:10%; top:17.9%; width:60%'
-   
-         var explanation = document.createElement("div")
-         explanation.className = "explanationBox"
-         explanation.id = "explanationBox"
-         explanation.style.cssText = 'border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:left;border-right:none;border-left:none; position: absolute; left:5%; top:25.9%; width:55%; height:35%; padding:17px 20px 17px 10px; display:inline-block;text-align:left;vertical-align:top;margin:15px 0 10px 0;'
 
-         var explanationList = document.createElement("div")
-         explanationList.className = "explanationList"
-         explanationList.id = "explanationList"
-         explanationList.innerHTML = detail[0].fpContents;
-         explanationList.style.cssText = 'position: relative; top:3%; display:inline-block; float:center;'
+        	         rightViewInfo.append(head, content)
+        	         head.append(title, category)
+        	         content.append(division, address, postbox, post, numberbox, number)
+        	         panel.append(rightViewInfo)
 
-         rightViewInfo.append(head, content)
-         head.append(title, category)
-         content.append(locIcon, division, address, postbox, post, numberbox, number, explanation)
-         explanation.append(explanationList)
-         panel.append(rightViewInfo)
       }
        
    
@@ -864,11 +847,7 @@
          title.id = "TitleBox"
          title.innerHTML = detail[0].srName
          title.style.cssText = 'font-size: 26px; font-weight: bold; letter-spacing: -1px;padding: 0; width:90%; margin: 3% 1% 0% 5%; color: #25a5f0;height: 5%;line-height: 40px;border-bottom: 2px #25a5f0 solid;'
-         /* 특정렌탈업체 이동*/
-         title.onclick = function moveStore() {
-            moveStoreInfo(detail)
-         }
-         
+        
          var category = document.createElement("div")
          category.className = "Category"
          category.id = "CategoryBox"
@@ -1152,12 +1131,12 @@
 	      const div = document.getElementById("fishingList");
 	      
 	  
-	      let cpList = createDiv("cpList", "cpList");
-	      for (let i = 0; i < 6; i++) {
-	         column = createDiv(columnName[i], "cpList " + columnName[i]);
+	      let fpList = createDiv("fpList", "fpList");
+	      for (let i = 0; i < 5; i++) {
+	         column = createDiv(columnName[i], "fpList " + columnName[i]);
 	         column.innerHTML = (i == 0) ? "<img id='image' src=resources/images/camping/"+srI+"/>"
 	               : (i == 1) ? srN : (i == 2) ? srA : (i == 3) ? haN	: "☎" + srNb;
-	         cpList.appendChild(column);
+	         fpList.appendChild(column);
 			
 	         var overlay2 = new kakao.maps.CustomOverlay({
 	            yAnchor : 1.2,
@@ -1166,7 +1145,7 @@
 	         
 
 	         makeOverlay(srN, srI, srNb, srA, overlay2);
-	         cpList.onclick = function() {
+	         fpList.onclick = function() {
 	        	getStoreList('2000');
 	        	findStoreDetail(srCf, srCd)
 	            if (clickedoverlay) {
@@ -1183,7 +1162,7 @@
 	            map.setLevel(9);
 	         };
 	      }
-	      div.appendChild(cpList);
+	      div.appendChild(fpList);
 	   }
    
    function delLeftList(){
@@ -1206,13 +1185,6 @@
 		      }
 	  }
    
-   function moveStoreInfo(detail){
-
-	   const form = document.getElementsByName("storeInfo")[0];
-	   const srcode = detail[0].srCode;
-	   form.append(srcode);
-	   form.submit();
-   }
 </script>
 
 </body>

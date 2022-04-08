@@ -20,7 +20,11 @@ public class Stores {
 	String srAddress;
 	String authCode;
 	String pageName;
-    
+	String gdImage;
+	String cfCode;
+	String caCode;
+	String cfName;
+	
 	String haName;
 	int rowNumber;
 	int pageNumber;

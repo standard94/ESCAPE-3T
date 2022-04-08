@@ -195,6 +195,11 @@
    height:97%;
 }
 
+#fImage{
+   width:97%;
+   height:97%;
+}
+
 .cpList{
    width:98%;
    height:22%;
@@ -253,9 +258,74 @@
 	
 }
 
-.container {
-        overflow: auto;
-      }
+.fpList{
+   width:98%;
+   height:22%;
+   
+}
+.fpList .fpImage{
+	width:20%;
+	height:99%;
+	float:left;
+}
+
+
+.fpList .fpName{
+	padding-top: 1%;
+	border-top: 1px solid #EAEAEA;
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:1% 0% 0% 50%;
+	font-size: 15pt;
+	font-weight : bolder;
+}
+
+.fpList .fpNumber{
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:1% 0% 0% 50%;
+	font-size: 10pt;
+	border-bottom: 1px solid #EAEAEA;
+}
+
+.fpList .haName{
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:1% 0% 0% 50%;
+	
+}
+
+.fpList .thName{
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:1% 0% 0% 50%;
+	color:#3163C9;
+	text-decoration : underline;
+}
+
+.fpList .maAddress{
+	text-align:right;
+	width:50%;
+	height:15%;
+	margin:2% 0% 0% 50%;
+	font-size:10pt;
+	
+}
+
+#fishingList{
+	width:99%;
+	height:80%;
+	overflow: auto;
+}
+
+#campingList{
+	overflow: auto;
+}
+
 /*------------------button----------------*/
 li{
    list-style:none;
@@ -366,6 +436,18 @@ font-weight: bold;
 	margin : 0 1% 0 0;
 }
 
+#mySideStore:hover{
+	font-family: 'Pretendard-Regular';
+	width:18.3%;
+	height:63%;
+	text-align:center;
+	font-size:14pt;
+	padding:4.7% 0% 0% 0%;
+	float:right;
+	margin : 0 1% 0 0;
+	color:#FFCD36;
+}
+
 #fishingPoint{
 	font-family: 'Pretendard-Regular';
 	width:16%;
@@ -376,6 +458,17 @@ font-weight: bold;
 	float:right;
 }
 
+#fishingPoint:hover{
+	font-family: 'Pretendard-Regular';
+	width:16%;
+	height:63%;
+	text-align:center;
+	font-size:14pt;
+	padding:4.7% 0% 0% 0%;
+	float:right;
+	color:#FFCD36;
+}
+
 #camping{
 	font-family: 'Pretendard-Regular';
 	width:18%;
@@ -384,6 +477,17 @@ font-weight: bold;
 	font-size:14pt;
 	padding:4.7% 0% 0% 0%;
 	float:right;
+}
+
+#camping:hover{
+	font-family: 'Pretendard-Regular';
+	width:18%;
+	height:63%;
+	text-align:center;
+	font-size:14pt;
+	padding:4.7% 0% 0% 0%;
+	float:right;
+	color:#FFCD36;
 }
 
 #glamping{
@@ -397,6 +501,18 @@ font-weight: bold;
 	margin : 0 0 0 1.6%;
 }
 
+#glamping:hover{
+	font-family: 'Pretendard-Regular';
+	width:18.8%;
+	height:60%;
+	text-align:center;
+	font-size:14pt;
+	padding:4.7% 0% 0% 0%;
+	float:right;
+	margin : 0 0 0 1.6%;
+	color:#FFCD36;
+}
+
 
 #caravan{
 	font-family: 'Pretendard-Regular';
@@ -406,6 +522,17 @@ font-weight: bold;
 	font-size:14pt;
 	padding:4.7% 0% 0% 0%;
 	margin : 0 0 0 3%;
+}
+
+#caravan:hover{
+	font-family: 'Pretendard-Regular';
+	width:18.8%;
+	height:60%;
+	text-align:right;
+	font-size:14pt;
+	padding:4.7% 0% 0% 0%;
+	margin : 0 0 0 3%;
+	color:#FFCD36;
 }
 
 #campingList{
@@ -461,5 +588,84 @@ font-weight: bold;
    width:200px;
    margin: 0.2% 0% 0% 0%;
 }   
-   
+
+#rmcHome {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 15pt;
+	font-weight: bold;
+	background-color: #292929;
+	color: white;
+	border-radius: 10px;
+	margin: 15% 1%;
+	cursor: pointer;
+}
+
+#rmcHome:hover {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 15pt;
+	font-weight: bold;
+	background-color: #FFBB00;
+	color: white;
+	border-radius: 10px;
+	margin: 15% 1%;
+	cursor: pointer;
+}
+
+#rmcMap {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 9% 1% 1% 1%;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#rmcRental {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 1%;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#rmcMyPage {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 1%;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#rmcRtStore {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 1%;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+/*리모컨 색깔*/
+#rmcMap:hover, #rmcRental:hover, #rmcMyPage:hover, #rmcRtStore:hover {
+	background-color: #747474;
+	color:white;
+}
    

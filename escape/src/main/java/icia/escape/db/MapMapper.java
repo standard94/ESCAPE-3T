@@ -27,7 +27,7 @@ public interface MapMapper {
 	public List<Fishing> getFishingLeft(Fishing fs);
 	public List<Fishing> findFishingRight(Fishing fs);
 	public List<Fishing> getFishingRecord(Fishing fs);
-	
+	public Fishing getMemberAccessInfo(Fishing fs);
 	/*Store*/
 	public List<Stores> getStoreList(Stores sr);
 	public List<Stores> getStoreDetail(Stores sr);

@@ -10,101 +10,95 @@
 
 
 #basic {
-	position:absolute; 
-	height:150%;
-	width:97.8%;
-	}
-	
+	position: absolute;
+	height: 99%;
+	width: 99%;
+}
+
 #top {
 	font-family: 'Pretendard-Regular';
-	height:4.8%;
-	width:99.6%;
-	background-color:#292929;
-	}
-	
+	height: 6.8%;
+	background-color: #292929;
+	padding:0.1%;
+}
 
 #logo {
-	margin: 1% 0% 2% 2%;
-	width:12.5%;
-	height:3%;
-	position:absolute;
-	color : #EAEAEA;
-	font-size:18pt;
-	font-weight : bolder;
-	cursor:pointer;
-   }
-  #logo:hover{
-  color:#FFFFB4;
-  }
+	float:left;
+	margin : 0.7%;
+	width: 12%;
+	height: 60%;
+	color: #EAEAEA;
+	font-size: 25pt;
+	font-weight: bolder;
+	cursor: pointer;
+}
+
+#logo:hover {
+	color: #FFFFB4;
+}
+
 #search {
-	width:44.5%;
-	height:2.3%;
-	position:absolute; top:0.7%;
-	left:26%;
-	}
-	
-#searchFont{
-	border:2px solid #FFCD36;
-	font-size:20pt;
-	padding: 1.2% 20% 0% 15%;
-	margin-left:1%;
-	}
+	margin:0.7% 0% 0.7% 42%;
+	width: 28%;
+	height: 60%;
+	float:left;
+}
 
-#searchZoom{
-	padding: 0% 1% 1% 1%;
-	font-size:15pt;
-	position:absolute; top:36%; left:62%; 
-	border:0 solid black;
-	background-color:white;
-	color:#767F86;
-	
-	}
-#searchZoom.divButton{
-	cursor :pointer;
-}	
-#searchZoom.divButton:hover{
-	cursor :pointer;
+#searchFont {
+	border: 2px solid #FFCD36;
+	font-size: 20pt;
+}
+
+#searchZoom {
+	margin:0% 0% 0% 3%;
+	font-size: 15pt;
+	border: 0 solid black;
+	background-color: white;
+	color: #767F86;
+}
+
+#searchZoom.divButton {
+	cursor: pointer;
+}
+
+#searchZoom.divButton:hover {
+	cursor: pointer;
 	font-weight: bold;
-}	
-#box1 {
-	width:35.5%;
-	height:3.4%;
-	position:absolute; top:1.7%;
-	left:57.5%;
-	}
-		
-#login1 {
-	width:28.3%;
-	height:43%;
-	margin-left:22%;
-	float: left;
-	color:#ebedec;
-	font-size:10pt;
-	}
+}
 
-#notice {
-	width:15%;
-	height:43%;
-	margin-left:5%;
+#box1 {
+	margin:1% 0.5%;
+	width: 15%;
+	height: 50%;
+	float:left;
+}
+
+#login1 {
+	margin: 0% 5% 0% 0%;
+	width: 46%;
 	float: left;
-	color:#ebedec;
-	font-size:10pt;
-	}
+	color: #ebedec;
+}
+
 #shop {
-	width:15%;
-	height:43%;
-	margin-left:5.8%;
+	margin: 0% 5%;
+	width: 25%;
 	float: left;
-	color:#ebedec;	
-	font-size:10pt;
-	}
+	color: #ebedec;
+}
 
 .top_menu {
-	margin-top : 3%;
 	font-family: 'Pretendard-Regular';
-	font-size: 15pt;
-	cursor : pointer;
-	}
+	font-size: 13pt;
+	cursor: pointer;
+}
+
+.top_menu:hover {
+	font-family: 'Pretendard-Regular';
+	font-size: 13pt;
+	cursor: pointer;
+	color: #FFFFB4;
+}
 	
 #list {
 	width:4.4%;
@@ -130,14 +124,55 @@
 #bottom {
     font-size:10pt;
 	font-family: 'Pretendard-Regular';
-	width:99.6%;
-	height:5%;
+	width:97.8%;
+	height:6%;
 	background-color:#595959;
 	color:#FFFFFF;
-	position:absolute; left:0.2%;
+	padding: 1%;
 	}
 
 .end{
 	margin : 2% 0 0 0;
 	
-}	
+}
+#notMember{
+	width:20%;
+	height:30%;
+	position:absolute;
+	top:20%;
+	left:40%;
+	background-color:#FFFFFF;
+	border: 1px solid;
+}
+#ring{
+	background-color:#D5D5D5;
+}
+#question{
+	margin-top: 10%;
+	text-align:center;
+}
+#goLogIn{
+	float:left;
+	margin: 10% 10% 0 26%;
+	width:13%;
+	background-color:#F2CB61;
+	padding: 2% 2% 2% 2%;
+	cursor:pointer;
+	font-size:10pt;
+	text-align:center;
+}
+#noLogIn{
+	float:left;
+	margin-top: 10%;
+	width:13%;
+	cursor:pointer;
+	background-color:#F2CB61;
+	padding: 2% 2% 2% 2%;
+	font-size:10pt;
+	text-align:center;
+}
+#goLogIn:hover, #noLogIn:hover{
+	background-color:#A6A6A6;
+	color:#F2CB61;
+}
+	
