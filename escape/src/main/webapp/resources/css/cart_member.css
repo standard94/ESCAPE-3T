@@ -1,0 +1,791 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'Pretendard-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+		format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+
+/*---------------------------------basic---------------------------*/
+#basic {
+	position: absolute;
+	height: 200%;
+	width: 97%;
+	margin: -0.5% 0% 0% -0%
+}
+
+/*---------------------------------top---------------------------*/
+#top {
+	font-family: 'Pretendard-Regular';
+	height: 3.4%;
+	width: 102.5%;
+	background-color: #292929;
+}
+
+#logo {
+	margin: 1% 0% 2% 2%;
+	width: 12.5%;
+	height: 2.4%;
+	position: absolute;
+	color: #EAEAEA;
+	font-size: 18pt;
+	font-weight: bolder;
+	cursor: pointer;
+}
+
+#logo:hover {
+	color: #FFFFB4;
+}
+
+#search {
+	width: 44.5%;
+	height: 2.3%;
+	position: absolute;
+	top: 0.7%;
+	left: 26%;
+}
+
+#searchFont {
+	border: 2px solid #FFCD36;
+	font-size: 20pt;
+	padding: 1.2% 20% 0% 15%;
+	margin-left: 1%;
+}
+
+#searchZoom {
+	font-size: 15pt;
+	position: absolute;
+	top: 29%;
+	left: 62%;
+	border: 0 solid black;
+	background-color: white;
+	color: #767F86;
+}
+
+#searchZoom.divButton {
+	cursor: pointer;
+}
+
+#searchZoom.divButton:hover {
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#box1 {
+	width: 45%;
+	height: 3.4%;
+	position: absolute;
+	top: 1.2%;
+	left: 57.5%;
+}
+
+#login1 {
+	width: 30%;
+	height: 43%;
+	margin-left: 17%;
+	float: left;
+	color: #ebedec;
+	font-size: 10pt;
+}
+#notice {
+	width: 15%;
+	margin-left: 5.8%;
+	float: left;
+	color: #ebedec;
+	font-size: 10pt;
+}
+
+#shop {
+	width: 15%;
+	height: 43%;
+	margin-left: 5.8%;
+	float: left;
+	color: #ebedec;
+	font-size: 10pt;
+}
+#notice:hover,#shop:hover{
+	font-weight: bold;
+	color: #FFBB00;
+}
+
+.top_menu {
+	font-family: 'Pretendard-Regular';
+	font-size: 13pt;
+	cursor: pointer;
+}
+#logOutButton{
+cursor: pointer;
+background-color:#A6A6A6;
+color:#FFFFFF;
+
+}
+#logOutButton:hover{
+background-color:#FFBB00;
+}
+
+/*----------------------------mid------------------------------------*/
+#mid {
+	font-family: 'Pretendard-Regular';
+	width: 99.3%;
+	height: 95%;
+}
+
+#regForm {
+	float: left;
+	width: 70%;
+	height: 99.8%;
+	border: 1px solid #000000;
+}
+
+#topForm {
+	width: 100%;
+	height: 5%;
+}
+
+#leftTitle {
+	float: left;
+	width: 40%;
+	height: 80%;
+}
+
+#subTitle {
+	width: 50%;
+	height: 30%;
+}
+
+.txt {
+	font-size: 15pt;
+}
+
+#storeName {
+	margin: 7% 0 0 20%;
+	color: #8C8C8C;
+	font-weight: bold;
+}
+
+#arrow1, #category {
+	margin: 7% 0 0 2%;
+	color: #BDBDBD;
+}
+
+#rentalGoods {
+	margin: 15% 0 4% 20%;
+	width: 99.8;
+	font-size: 20pt;
+	color: #292929;
+	font-weight: bold;
+	text-decoration-line: solid;
+	text-decoration-color: #292929;
+	text-decoration: underline;
+	text-underline-position: under;
+}
+
+
+/*---------------등록,필터-------------------- */
+#job {
+	float: left;
+	margin: 8% 0 2% 22%;
+	width: 15%;
+	height: 80%;
+	background:
+		url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png')
+		calc(100% - 5px) center no-repeat;
+	background-size: 20px;
+	border-radius: 2px;
+	outline: 0 none;
+	color: #000000;
+}
+
+#job option {
+	padding: 3px 0;
+}
+
+#searchText {
+	margin: 8% 2% 0 2%;
+	float: left;
+	width: 30%;
+	height: 70%;
+}
+
+#searchClick {
+	margin-top: 8%;
+	float: left;
+	width: 10%;
+	height: 80%;
+}
+
+#middleForm {
+	float: left;
+	width: 100%;
+	height: 67%;
+}
+
+#bottomForm {
+	float: left;
+	width: 100%;
+	height: 10%;
+	margin-top: 10%;
+	background-color: green;
+}
+
+#sideBar {
+	float: left;
+	width: 15%;
+	height: 99.8%;
+	padding: 2% 1%;
+}
+
+#sideContents {
+	width: 100%;
+	height: 100%;
+}
+
+#sideTitle {
+	text-decoration-line: solid;
+	text-decoration-color: #8C8C8C;
+	text-decoration: overline underline;
+	text-underline-position: under;
+	text-align: center;
+	width: 100%;
+	height: 3.3%;
+	font-size: 50pt;
+}
+
+
+
+#listDiv {
+	width: 99.8%;
+	height: 95%;
+}
+
+#goodsList {
+	width: 100%;
+	height: 90%;
+	overflow : auto;
+	overflow-x: hidden;
+}
+
+/****************************************************장바구니*****************************************************************************/
+#wholeCartList{
+	width:95%;
+	margin : 5% 0 0 2.5%;
+	min-height:50%;
+}
+#goodsList::-webkit-scrollbar {
+	width: 15px;
+}
+
+#goodsList::-webkit-scrollbar-thumb {
+	height: 30%;
+	background-color: #F2CB61;
+	border-radius: 8px;
+	background-clip: padding-box;
+	border: 2px solid;
+}
+
+#goodsList::-webkit-scrollbar-track {
+	background-color: #8C8C8C;
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 5px white;
+}
+#checkBox{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	padding : 0.95% 0.95% 0.95% 0.95%;
+	float:left;
+	width:2.1%;
+	background-color:#EAEAEA;
+}
+#image{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	font-size:12pt;
+	text-align:center;
+	padding : 1% 1% 1% 1%;
+	float:left;
+	width:9%;
+	background-color:#EAEAEA;
+}
+
+#goodsInfo{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	text-align:center;
+	padding : 1% 1% 1% 1%;
+	float:left;
+	width:19%;
+	background-color:#EAEAEA;
+}
+
+#rentPrice{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	text-align:center;
+	padding : 1% 1% 1% 1%;
+	float:left;
+	width:10%;
+	background-color:#EAEAEA;
+}
+#qty{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	text-align:center;
+	padding : 1% 1% 1% 1%;
+	float:left;
+	width:10%;
+	background-color:#EAEAEA;
+}
+#discount{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	text-align:center;
+	padding : 1% 1% 1% 1%;
+	float:left;
+	width:8%;
+	background-color:#EAEAEA;
+}
+#sum{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	text-align:center;
+	padding : 1% 1% 1% 1%;
+	float:left;
+	width:10%;
+	background-color:#EAEAEA;
+}
+#choose{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	text-align:center;
+	padding : 1% 1% 1% 1%;
+	float:left;
+	width:15%;
+	background-color:#EAEAEA;
+}
+/************ 장바구니 리스트 출력***************/
+#cartList{
+	height:50%;
+	background-color:white;
+}
+/******총 금액***************/
+#price{
+	margin-top : 10%;
+	background-color:yellow;
+}
+#tot1{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	padding : 2.5% 1% 2.5% 1%;
+	float:left;
+	width:25%;
+	text-align:center;
+	background-color:#EAEAEA;
+}
+
+#tot2{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	padding : 2.5% 1% 2.5% 1%;
+	float:left;
+	width:25%;
+	text-align:center;
+	background-color:#EAEAEA;
+}
+
+#tot3{
+	border-style: solid solid solid solid;
+	border-width: 1px 1px 1px 1px;
+    border-color: #D5D5D5;
+	padding : 2.5% 1% 2.5% 1%;
+	float:left;
+	width:43.55%;
+	text-align:center;
+	background-color:#EAEAEA;
+}
+#totPrice{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	padding : 2.5% 1% 2.5% 1%;
+	float:left;
+	width:25%;
+	text-align:center;
+	background-color:#F6F6F6;
+	font-size:14pt;
+}
+
+#totDiscount{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	padding : 2.5% 1% 2.5% 1%;
+	float:left;
+	width:25%;
+	text-align:center;
+	background-color:#F6F6F6;
+	font-size:14pt;
+}
+#payPrice{
+	border-style: solid solid solid solid;
+	border-width: 1px 1px 1px 1px;
+    border-color: #D5D5D5;
+	padding :2.5% 1% 2.5% 1%;
+	float:left;
+	width:43.55%;
+	text-align:center;
+	background-color:#F6F6F6;
+	font-size:14pt;
+	color:#DF4D4D;
+}
+
+/************장바구니 버튼********************/
+#orderBtn{
+	margin-top : 15%;
+}
+button {
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	border: none;
+	
+	
+}
+#orderWhole{
+	width: 17%;
+	padding: 1% 2%;
+	margin : 5% 2% 0 32%;
+	background-color:#FFBB00;
+	border : 1px solid #FFBB00;
+	color:#FFFFFF;
+	font-weight:bolder;
+	cursor:pointer;
+}
+#orderSelect{
+	width: 17%;
+	padding: 1% 2%;
+	margin : 5%  14.2% 0  0;
+	background-color:#8C8C8C;
+	border : 1px solid #8C8C8C;
+	color:#FFFFFF;
+	font-weight:bolder;
+	cursor:pointer;
+}
+#goOnShopping{
+	width: 17%;
+	padding: 1% 2%;
+	margin : 5% 0 0 0;
+	background-color:#F6F6F6;
+	border : 1px solid;
+	font-weight:bolder;
+	cursor:pointer;
+}
+/**********************************장바구니 list 안*********************/
+.cart.hidden{
+	display:none;
+}
+.cart.checkBox{
+	height:50%;
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	padding : 3.6% 0.95% 3.6% 0.95%;
+	float:left;
+	width:2.1%;
+	background-color:#EAEAEA;
+	
+}
+.cart.image{
+	height:50%;
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	text-align:center;
+	padding : 0.63% 1% 0.63% 1%;
+	float:left;
+	width:9%;
+	background-color:#F6F6F6;
+}
+#ctImage{
+	width:81%;
+	height:78%;
+}
+.cart.goInfo{
+	font-size:9.8pt;
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	padding : 1.95% 1% 1.95% 1%;
+	float:left;
+	width:19%;
+	background-color:#F6F6F6;
+}
+
+.cart.price{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	text-align:center;
+	padding : 3.7% 1% 3.7% 1%;
+	float:left;
+	width:10%;
+	background-color:#F6F6F6;
+}
+.cart.qty{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	text-align:center;
+	padding : 1.1% 1% 1.1% 1%;
+	float:left;
+	width:10%;
+	background-color:#F6F6F6;
+}
+.modQty {
+	margin:14% 0 0 10%;
+	float:left;
+	width: 30%;
+	height: 60%;
+	border:1px solid;
+}
+
+.inc {
+	margin: 2% 0 0 0%;
+	cursor: pointer;
+	width: 50%;
+	height: 20%;
+	border: 1px solid #A6A6A6;
+	text-align: center;
+}
+
+.dec {
+	margin: 0.5% 0 0 0.7%;
+	float: left;
+	cursor: pointer;
+	width: 50%;
+	height: 20%;
+	border: 1px solid #A6A6A6;
+	text-align: center;
+}
+.upd {
+	margin: 10% 0 0 0;
+	cursor: pointer;
+	width: 50%;
+	height: 10%;
+	border: 1px solid #A6A6A6;
+	text-align: center;
+}
+.cart.discount{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	text-align:center;
+	padding : 3.7% 1% 3.7% 1%;
+	float:left;
+	width:8%;
+	background-color:#F6F6F6;
+}
+.cart.total{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	text-align:center;
+	padding : 3.7% 1% 3.7% 1%;
+	float:left;
+	width:10%;
+	background-color:#F6F6F6;
+}
+.cart.btn{
+	border-style: solid solid solid solid;
+	border-width: 1px 0px 1px 1px;
+    border-color: #D5D5D5;
+	text-align:center;
+	padding :2% 1% 2% 1%;
+	float:left;
+	width:15%;
+	background-color:#F6F6F6;
+}
+#orderOne{
+	width:60%;
+	background-color:#A6A6A6;
+	cursor:pointer;
+	color:#FFFFFF;
+	border-color: #D5D5D5;
+	border-radius: 2px;
+	font-weight:bold;
+	padding: 2.1%;
+}
+#delOne{
+	margin-top :5%;
+	width:60%;
+	background-color:#A6A6A6;
+	cursor:pointer;
+	color:#FFFFFF;
+	border-color: #D5D5D5;
+	border-radius: 2px;
+	font-weight:bold;
+	padding: 2.1%;
+}
+#orderOne:hover,#delOne:hover{
+	background-color:#F2CB61;
+}
+/********************************************************회원 아닐때 띄우는 modal****************************************************************/
+#notMember{
+	width:20%;
+	height:8%;
+	position:absolute;
+	top:20%;
+	left:40%;
+	background-color:#FFFFFF;
+	border: 1px solid;
+}
+#ring{
+	background-color:#D5D5D5;
+}
+#question{
+	margin-top: 10%;
+	text-align:center;
+}
+#goLogIn{
+	float:left;
+	margin: 10% 10% 0 27%;
+	width:15%;
+	background-color:#F2CB61;
+	padding: 2% 2% 2% 2%;
+	cursor:pointer;
+	font-size:10pt;
+	text-align:center;
+}
+#noLogIn{
+	float:left;
+	margin-top: 10%;
+	width:15%;
+	cursor:pointer;
+	background-color:#F2CB61;
+	padding: 2% 2% 2% 2%;
+	font-size:10pt;
+	text-align:center;
+}
+#goLogIn:hover, #noLogIn:hover{
+	background-color:#A6A6A6;
+	color:#F2CB61;
+}
+
+/*-----------------------------bottom---------------------------------*/
+#bottom {
+	float: left;
+	font-family: 'Pretendard-Regular';
+	width: 100.5%;
+	height: 1.8%;
+	background-color: #595959;
+	color: #FFFFFF;
+	padding: 0.05% 1%;
+}
+
+#bottom_store {
+	float: left;
+	font-size: 18pt;
+	width: 170px;
+	height: 80%;
+	margin: 0% 1% 0% 0%;
+}
+
+#bottom_store2 {
+	float: left;
+	font-size: 10pt;
+	height: 75%;
+	width: 680px;
+	padding: 0.1%;
+	margin: 0.2% 1% 0% 0%;
+}
+
+#bottom_store3 {
+	float: left;
+	font-size: 10pt;
+	height: 72%;
+	padding: 0.15%;
+	width: 200px;
+	margin: 0.2% 0% 0% 0%;
+}
+
+#rmcHome {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 15pt;
+	font-weight: bold;
+	background-color: #292929;
+	color: white;
+	border-radius: 10px;
+	margin: 15% 1%;
+	cursor: pointer;
+}
+
+#rmcMap {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 9% 1% 1% 1%;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#rmcRental {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 1%;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#rmcMyPage {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 1%;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#rmcRtStore {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 1%;
+	cursor: pointer;
+	font-weight: bold;
+}
+/*리모컨 색깔*/
+#rmcHome:hover {
+	background-color: #FFBB00;
+}
+
+#rmcMap:hover, #rmcRental:hover, #rmcMyPage:hover, #rmcRtStore:hover {
+	background-color: #747474;
+	color:white;
+}
