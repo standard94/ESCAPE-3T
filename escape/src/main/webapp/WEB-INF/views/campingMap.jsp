@@ -32,15 +32,21 @@
 
    <div id="basic">
       <div id="top">
-         <div id="logo" onClick="getNewPage('basic')">여기가 좋을 지도¿</div>
-            <div id="search"><input id="searchFont" type="text"  name="" placeholder="" /><input id="searchZoom" class="divButton" type="button" value="SEARCH"/></div>
-            <div id="box1">
-                <div id="login1"><span class="top_menu" onClick="getNewPage('memberLogIn')" >로그인/</span><span class="top_menu" onClick="getNewPage('commonSignUp')">회원가입</span></div>
-                <div id="notice"><span class="top_menu" onClick="">공지사항</span></div>
-                <div id="shop"><span class="top_menu" onClick="">장바구니</span></div>
-            </div>
-         <img id="list" src='resources/images/list.png'/>
-      </div>
+			<div id="logo" onClick="getNewPage('basic')">여기가 좋을 지도</div>
+			<div id="search">
+				<input id="searchFont" type="text" name="" placeholder="" />
+				<input id="searchZoom" class="divButton" type="button" value="SEARCH" onMouseOver="changeColor1(this)" onMouseOut="changeColor2(this)" />
+			</div>
+			<div id="box1">
+				<div id="login1">
+					<span class="top_menu" onClick="getNewPage('memberLogIn')">로그인/</span>
+					<span class="top_menu" onClick="getNewPage('signUp')">회원가입</span>
+				</div>
+				<div id="shop">
+					<span class="top_menu" onClick="notMember()">장바구니</span>
+				</div>
+			</div>
+		</div>
       
       <div id="mid">
          <div id="leftList">
@@ -73,13 +79,12 @@
          <div id="rightview" class="shadow">
          </div>
          </form>
-         	<div id="remocon" style="z-index: 3; padding:1% 1%;  height: 30%;  width: 9%; border: 1px solid #999966; background-color: white; position : absolute; right:1%; bottom:3%; box-shadow: 3px 3px 10px #566270; border-radius: 10px;">
+         	<div id="remocon" style="z-index: 3; padding:1% 1%;  height: 30%;  width: 9%; border: 1px solid #999966; opacity : 0.8; background-color: white; position : absolute; right:1%; bottom:2.5%; box-shadow: 3px 3px 10px #566270; border-radius: 10px;">
          		<button id="rmcHome" onClick="getNewPage('basic')" style=" height: 15%;  width: 50%; border: 1px solid #999966; font-size: 15pt; font-weight: bold; background-color: #292929; color: white; border-radius: 10px; margin: 4% 25%;">HOME</button>
          		<button id="rmcMap" onClick="getNewPage('campingMap');" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">지도</button>
          		<button id="rmcRental" onClick="getNewPage('campingRental')" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">렌탈</button>
          		<button id="rmcMyPage" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">마이페이지</button>
          		<button id="rmcRtStore" onClick="getNewPage('storeInfoPage')" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">렌탈 업체</button>
-         		<button id="rmcTwoMore" style=" height: 15%;  width: 100%; border: 1px solid #999966;  background-color: white; border-radius: 10px; margin: 1%;">두개더</button>	
          	</div>
          
           <div id="map"></div>
@@ -467,7 +472,7 @@
       var changeMyPoint = document.createElement("div")
       changeMyPoint.id = "cmp"
       changeMyPoint.innerHTML = "내 위치 변경"
-      changeMyPoint.style.cssText = 'z-index:2; color:white; position : absolute; background: #292929; width:6%; height:2.5%; padding:0.2% 1%;'
+      changeMyPoint.style.cssText = 'z-index:2; color:white; position : absolute; background: #FFCD36; width:6%; height:2.5%; padding:0.2% 1%;'
       changeMyPoint.onclick = function() {
 
          //다음 주소 찾기 창 생성
@@ -715,14 +720,6 @@
 
          if (cacode = "C001") {
             cacode = "유료캠핑장"
-         } else if (cacode = "C002") {
-            cacode = "글램핑"
-         } else if (cacode = "C003") {
-            cacode = "카라반"
-         } else if (cacode = "C004") {
-            cacode = "낚시터"
-         } else if (cacode = "C005") {
-            cacode = "대어자랑"
          } else {
             cacode = "분류설정이필요합니다."
          }
@@ -805,31 +802,51 @@
          number.innerHTML = admobile
          number.style.cssText = 'position: absolute; left:10%; top:17.9%; width:60%'
 
+         
+	var conveinence = document.createElement("div")
+    conveinence.id = "facilityBoxName"
+    conveinence.innerHTML = "편의시설"
+    conveinence.style.cssText = 'position: absolute; left:5%; top:52%; width:28%; height:3%; font-size:20pt; font-weght:bold;'
+        	    
          var facilities = document.createElement("div")
          facilities.className = "facilityBox"
          facilities.id = "facilityBox"
-         facilities.style.cssText = 'border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:center;border-right:none;border-left:none; position: absolute; right:5%; top:25.9%; width:25%; height:35%; padding:17px 20px 17px 10px; display:inline-block;text-align:center;vertical-align:top;margin:15px 0 10px 0;'
+         facilities.style.cssText = 'border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:center;border-right:none;border-left:none; position: absolute; left:5%; top:54%; width:85%; height:17%; padding:17px 20px 17px 10px; display:inline-block;text-align:center;vertical-align:top;margin:15px 0 10px 0;'
 
-         var facilityList = document.createElement("div")
-         facilityList.className = "facilityList"
-         facilityList.id = "facilityList"
+	var facilityList = document.createElement("div")
+    facilityList.className = "facilityList"
+    facilityList.id = "facilityList"
 
-         var list = detail[0].cpFacility;
-         var listArr = list.split(",");
+    var list = detail[0].cpFacility;
+    var listArr = list.split(",");
 
-         for (i = 0; i < listArr.length; i++) {
-            facilityList.innerHTML += "<div id=facilityList" + i
-                  + " style='float:left; position: relative; top:2%;'>"
-                  + listArr[i] + "</div><br>";
+    for (i = 0; i < listArr.length; i++) {
+		facilityList.innerHTML += "<div id=facilityList" + i + " style='float:left; font-size: 15pt; margin:1% 0%;'>" + listArr[i] + "</div>";
+			if(i==5){
+				facilityList.innerHTML +="<br><br>";
+			} else if(i==10){
+				facilityList.innerHTML +="<br><br>";
+			} else if(i==15){
+				facilityList.innerHTML +="<br><br>";
+			}else if(i==20){
+				facilityList.innerHTML +="<br><br>";
+			} else{
+				if(i!=listArr.length-1){
+					facilityList.innerHTML +="<div style='float:left; margin:1% 0%;' >&nbsp&nbsp/&nbsp&nbsp</div>";
+					}
+			}
+	}
+	facilityList.style.cssText = 'position: relative; top:3%; display:inline-block;'
 
-         }
-
-         facilityList.style.cssText = 'position: relative; top:3%; display:inline-block;'
-
+	var detailInfo = document.createElement("div")
+    detailInfo.id = "explanationBoxName"
+    detailInfo.innerHTML = "상세설명"
+    detailInfo.style.cssText = 'position: absolute; left:5%; top:23%; width:28%; height:3%; font-size:20pt; font-weght:bold;'
+         
          var explanation = document.createElement("div")
          explanation.className = "explanationBox"
          explanation.id = "explanationBox"
-         explanation.style.cssText = 'border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:left;border-right:none;border-left:none; position: absolute; left:5%; top:25.9%; width:55%; height:35%; padding:17px 20px 17px 10px; display:inline-block;text-align:left;vertical-align:top;margin:15px 0 10px 0;'
+         explanation.style.cssText = 'border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:left;border-right:none;border-left:none; position: absolute; left:5%; top:25%; width:85%; height:20%; padding:6px 20px 17px 10px; display:inline-block;text-align:left;vertical-align:top;margin:15px 0 10px 0;font-size:13pt;'
 
          var explanationList = document.createElement("div")
          explanationList.className = "explanationList"
@@ -839,7 +856,7 @@
 
          rightViewInfo.append(head, content)
          head.append(title, category)
-         content.append(locIcon, division, address, postbox, post, numberbox, number, facilities, explanation)
+         content.append(locIcon, division, address, postbox, post, numberbox, number, conveinence, facilities, detailInfo, explanation)
          facilities.append(facilityList)
          explanation.append(explanationList)
          panel.append(rightViewInfo)
@@ -881,11 +898,7 @@
          title.id = "TitleBox"
          title.innerHTML = detail[0].srName
          title.style.cssText = 'font-size: 26px; font-weight: bold; letter-spacing: -1px;padding: 0; width:90%; margin: 3% 1% 0% 5%; color: #25a5f0;height: 5%;line-height: 40px;border-bottom: 2px #25a5f0 solid;'
-         /* 특정렌탈업체 이동*/
-         title.onclick = function moveStore() {
-           moveStoreInfo(detail)
-         }
-         
+        
          var category = document.createElement("div")
          category.className = "Category"
          category.id = "CategoryBox"
@@ -933,10 +946,20 @@
          number.id = "Number"
          number.innerHTML = admobile
          number.style.cssText = 'position: absolute; left:10%; top:17.9%; width:60%;'
-
+		
+         var srcode = document.createElement("div")
+         srcode.className = "srcodeBox"
+         srcode.id = "srcodeBox"
+         srcode.innerHTML = "업체상세정보 페이지 이동"
+         srcode.style.cssText = 'position: absolute; left:10%; bottom:20%; width:30%; border:solid 2px #bcbcbc; cursor: pointer; text-align:center; background: #eee;'
+         srcode.onclick = function(){
+            moveStoreInfo(detail[0].srCode);
+             }
+     
+         
          rightViewInfo.append(head, content)
          head.append(title, category)
-         content.append(locIcon, division, address, postbox, post, numberbox, number)
+         content.append(locIcon, division, address, postbox, post, numberbox, number, srcode)
          panel.append(rightViewInfo)
      
    }
@@ -1204,11 +1227,30 @@
 	      div.appendChild(cpList);
 	   }
    
-   function moveStoreInfo(detail){
+   function makeForm(fname, faction, fmethod) {
+	   const form = document.createElement("form");
+	   if (fname != "") { form.setAttribute("name", fname); }
+	   form.setAttribute("action", faction);
+	   form.setAttribute("method", fmethod);
+	   return form;
+	}
 
-	   const form = document.getElementsByName("storeInfo")[0];
-	   const srcode = detail[0].srCode;
-	   form.append(srcode);
+	function makeInputElement(type, name, value, placeholder) {
+	   const input = document.createElement("input");
+	   input.setAttribute("type", type);
+	   input.setAttribute("name", name);
+	   if (value != "") { input.setAttribute("value", value); }
+	   if (placeholder != "") { input.setAttribute("placeholder", placeholder); }
+
+	   return input;
+	}
+   
+   function moveStoreInfo(pSrCode){
+	   const form = makeForm("storeInfo", "StoreInfo", "Post");
+	   const srCode = makeInputElement("hidden", "srCode", pSrCode, "");
+	   form.appendChild(srCode);
+	   console.log(form);
+	   document.body.appendChild(form);
 	   form.submit();
    }
 </script>

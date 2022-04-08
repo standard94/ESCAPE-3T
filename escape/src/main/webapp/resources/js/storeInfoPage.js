@@ -21,16 +21,16 @@ function getAjaxJson(action, data, fn) {
 
 
 /*낚시 렌탈업체 리스트 불러오기*/
-const columnName = ["srImage", "srName", "srAddress", "srDetails", "srNumber", "srCfCode", "srCode", "srPost"];
+const columnName = ["srImage", "srName", "srAddress", "srDetails", "srNumber", "srCfCode", "srCode", "srPost", "gdImage"];
 function aaa(jsonData){
+   console.log(jsonData);
    const caName = document.getElementById("category");
    caName.innerHTML = (jsonData[0].srCfCode=="2000")? "낚시용품" : "캠핑용품";
    const div = document.getElementById("list2");
    const storeList = createDiv("storeList","StoreList");
-   
    for(let i=0; i<jsonData.length; i++){
       const ddiv = createDiv("ddiv", "ddiv");
-      for(let j=0; j<8; j++){
+      for(let j=0; j<9; j++){
          const column = createDiv(columnName[j], "storeList" + columnName[j]);
          column.innerHTML =
             (j==0)? "<img id='srImage' src='resources/images/store/"+jsonData[i].srImage+"' />" : 
@@ -39,11 +39,12 @@ function aaa(jsonData){
                      (j==3)? jsonData[i].srDetails :
                         (j==4)? jsonData[i].srNumber : 
                            (j==5)? jsonData[i].srCfCode : 
-                              (j==6)? jsonData[i].srCode : jsonData[i].srPost;
+                              (j==6)? jsonData[i].srCode : 
+                           (j==7)?jsonData[i].srPost : jsonData[i].gdImage; 
       ddiv.onclick = function(){
          
-         chooseStoreInfo(jsonData[i].srCode, jsonData[i].srCfCode);
-         
+         chooseStoreInfo(jsonData[i].srCode);
+      
       }
       ddiv.appendChild(column);         
       }
@@ -127,15 +128,12 @@ function chooseFishingStoreList(pPageNumber, pAmount, pSrCfCode) {
 
 /* 특정업체 정보 불러오기 */
 function chooseStoreInfo(pSrCode, pSrCfCode, pSrPost){
-   let jsonData = [];
-   jsonData.push({
-      srCfCode : pSrCfCode,
-      srCode : pSrCode,
-      srPost : pSrPost
-      
-   });
-   const clientData = JSON.stringify(jsonData);
-   getAjaxJson("ChooseStoreInfo", clientData, "storeInfo");
+   console.log(pSrCode, pSrCfCode, pSrPost);
+   const form = makeForm("storeInfo", "StoreInfo", "Post");
+      const srCode = makeInputElement("hidden", "srCode", pSrCode, "");
+      form.appendChild(srCode);
+      document.body.appendChild(form);
+      form.submit();
 }
 
 function storeInfo(jsonData){
@@ -182,7 +180,6 @@ function storeInfo(jsonData){
       
 }
 function addSrMarker(position,pMap){
-         console.log(position,pMap);
        // 마커를 생성합니다
          var marker = new kakao.maps.Marker({
           map : pMap,

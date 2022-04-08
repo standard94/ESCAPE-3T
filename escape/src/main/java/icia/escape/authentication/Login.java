@@ -106,7 +106,7 @@ public class Login {
 	private void logInMember(Members mem) {
 		boolean isAccessCheck = false;
 		String page  = "basic";
-		String message = "로그인 정보를 확인해주세요";
+		String message = "";
 		
 		String pwd = null;
 		
@@ -121,13 +121,13 @@ public class Login {
 						if(this.convertToBoolean(this.am.insMembersAccessHistory(mem))) {
 							isAccessCheck =  true;
 							page = "basic";
-							message = "정상적으로 로그인하였습니다.";
+							
 						}else {
 							message = "로그인 실패";
 						}
-					}else {message = "잘못된 아이디 입니다";}
-				}else {message = "잘못된 비밀번호 입니다";}
-		}else {message = "잘못된 비밀번호 입니다";}
+					}else {  message = "잘못된 아이디 입니다";}
+				}else { message = "잘못된 비밀번호 입니다";}
+		}else { message = "잘못된 비밀번호 입니다";}
 
 				if(isAccessCheck) {
 					try {

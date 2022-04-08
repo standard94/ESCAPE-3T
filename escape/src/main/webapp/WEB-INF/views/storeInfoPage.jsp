@@ -21,7 +21,7 @@
 		 			<div id="notice"><span class="top_menu" onClick="">공지사항</span></div>
 		 			<div id="shop"><span class="top_menu" onClick="">장바구니</span></div>
 				</div>
-				<img id="list" src='resources/images/list.png'/>
+				
 			</div>
 			
 			

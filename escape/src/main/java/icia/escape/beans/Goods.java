@@ -6,9 +6,12 @@ import lombok.Data;
 
 public class Goods {
 	private String srCode;
+	private String mmId;
+	private String mmCode;
 	private String srName;
 	private String cfCode;
 	private String caCode;
+	private String ctCode;
 	private String goCode;
 	private String goName;
 	private String month;
@@ -25,4 +28,10 @@ public class Goods {
 	private boolean prev;
 	private boolean next;
 	private int realEnd;
+	private String notice;
+	private String btnType;
+	private int qty;
+	private String rentDay;
+	private String publicIp;
+	private String modQty;
 }

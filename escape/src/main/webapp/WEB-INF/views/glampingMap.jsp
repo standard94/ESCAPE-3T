@@ -32,15 +32,21 @@
 
    <div id="basic">
       <div id="top">
-         <div id="logo" onClick="getNewPage('basic')">여기가 좋을 지도¿</div>
-            <div id="search"><input id="searchFont" type="text"  name="" placeholder="" /><input id="searchZoom" class="divButton" type="button" value="SEARCH"/></div>
-            <div id="box1">
-                <div id="login1"><span class="top_menu" onClick="getNewPage('memberLogIn')" >로그인/</span><span class="top_menu" onClick="getNewPage('commonSignUp')">회원가입</span></div>
-                <div id="notice"><span class="top_menu" onClick="">공지사항</span></div>
-                <div id="shop"><span class="top_menu" onClick="">장바구니</span></div>
-            </div>
-         <img id="list" src='resources/images/list.png'/>
-      </div>
+			<div id="logo" onClick="getNewPage('basic')">여기가 좋을 지도</div>
+			<div id="search">
+				<input id="searchFont" type="text" name="" placeholder="" />
+				<input id="searchZoom" class="divButton" type="button" value="SEARCH" onMouseOver="changeColor1(this)" onMouseOut="changeColor2(this)" />
+			</div>
+			<div id="box1">
+				<div id="login1">
+					<span class="top_menu" onClick="getNewPage('memberLogIn')">로그인/</span>
+					<span class="top_menu" onClick="getNewPage('signUp')">회원가입</span>
+				</div>
+				<div id="shop">
+					<span class="top_menu" onClick="notMember()">장바구니</span>
+				</div>
+			</div>
+		</div>
       
       <div id="mid">
          <div id="leftList">
@@ -69,17 +75,16 @@
             <div id="campingList" class="container">   
             </div>
          </div>
-          <form name="storeInfo" action="StoreInfo" method="post">
+         
          <div id="rightview" class="shadow">
          </div>
-         </form>
-         	<div id="remocon" style="z-index: 3; padding:1% 1%;  height: 30%;  width: 9%; border: 1px solid #999966; background-color: white; position : absolute; right:1%; bottom:3%; box-shadow: 3px 3px 10px #566270; border-radius: 10px;">
+       
+         	<div id="remocon" style="z-index: 3; padding:1% 1%;  height: 30%;  width: 9%; border: 1px solid #999966; opacity : 0.8; background-color: white; position : absolute; right:1%; bottom:3%; box-shadow: 3px 3px 10px #566270; border-radius: 10px;">
          		<button id="rmcHome" onClick="getNewPage('basic')" style=" height: 15%;  width: 50%; border: 1px solid #999966; font-size: 15pt; font-weight: bold; background-color: #292929; color: white; border-radius: 10px; margin: 4% 25%;">HOME</button>
          		<button id="rmcMap" onClick="getNewPage('campingMap');" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">지도</button>
          		<button id="rmcRental" onClick="getNewPage('campingRental')" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">렌탈</button>
          		<button id="rmcMyPage" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">마이페이지</button>
-         		<button id="rmcRtStore" onClick="getNewPage('storeInfoPage')" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">렌탈 업체</button>
-         		<button id="rmcTwoMore" style=" height: 15%;  width: 100%; border: 1px solid #999966;  background-color: white; border-radius: 10px; margin: 1%;">두개더</button>	
+         		<button id="rmcRtStore" onClick="getNewPage('storeInfoPage')" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">렌탈 업체</button>	
          	</div>
          
           <div id="map"></div>
@@ -466,7 +471,7 @@
       var changeMyPoint = document.createElement("div")
       changeMyPoint.id = "cmp"
       changeMyPoint.innerHTML = "내 위치 변경"
-      changeMyPoint.style.cssText = 'z-index:2; color:white; position : absolute; background: #292929; width:6%; height:2.5%; padding:0.2% 1%;'
+      changeMyPoint.style.cssText = 'z-index:2; color:white; position : absolute; background:#FFCD36; width:6%; height:2.5%; padding:0.2% 1%;'
       changeMyPoint.onclick = function() {
 
          //다음 주소 찾기 창 생성
@@ -706,143 +711,155 @@
    }
 
    function getCampingDetail(detail) {
-         var panel = document.getElementById('rightview');
+       var panel = document.getElementById('rightview');
 
-         var cacode = detail[0].cpCaCode
-         var mobile = detail[0].cpNumber
-         var admobile = null;
+       var cacode = detail[0].cpCaCode
+       var mobile = detail[0].cpNumber
+       var admobile = null;
 
-         if (cacode = "C001") {
-            cacode = "유료캠핑장"
-         } else if (cacode = "C002") {
-            cacode = "글램핑"
-         } else if (cacode = "C003") {
-            cacode = "카라반"
-         } else if (cacode = "C004") {
-            cacode = "낚시터"
-         } else if (cacode = "C005") {
-            cacode = "대어자랑"
-         } else {
-            cacode = "분류설정이필요합니다."
-         }
+       if (cacode = "C002") {
+          cacode = "글램핑"
+       } else {
+          cacode = "분류설정이필요합니다."
+       }
 
-         if (mobile != null) {
-            var admobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 7) + "-" + mobile.substring(7)
-         } else {
-            var admobile = "번호정보 업데이트중"
-         }
+       if (mobile != null) {
+          var admobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 7) + "-" + mobile.substring(7)
+       } else {
+          var admobile = "번호정보 업데이트중"
+       }
 
-         if (panel.hasChildNodes()) {
-            panel.removeChild(panel.lastChild);
-         }
+       if (panel.hasChildNodes()) {
+          panel.removeChild(panel.lastChild);
+       }
 
-         var rightViewInfo = document.createElement("div")
-         rightViewInfo.className = "Info"
-         rightViewInfo.id = "InfoBox"
-         rightViewInfo.style.cssText = 'border: 4px dashed #bcbcbc; width:95.5%; height:97%; margin: 10px ;'
+       var rightViewInfo = document.createElement("div")
+       rightViewInfo.className = "Info"
+       rightViewInfo.id = "InfoBox"
+       rightViewInfo.style.cssText = 'border: 4px dashed #bcbcbc; width:95.5%; height:97%; margin: 10px ;'
 
-         var head = document.createElement("div")
-         head.className = "Head"
-         head.id = "HeadBox"
+       var head = document.createElement("div")
+       head.className = "Head"
+       head.id = "HeadBox"
 
-         var content = document.createElement("div")
-         content.className = "Content"
-         content.id = "ContentBox"
-         content.style.csstext = 'font-size: 12px; font-family: roboto,Noto Sans KR,malgun gothic,dotum,gothic; font-weight: 400; -webkit-font-smoothing: antialiased; word-break: break-all;height: 97%;overflow: hidden;letter-spacing: -0.01em;'
+       var content = document.createElement("div")
+       content.className = "Content"
+       content.id = "ContentBox"
+       content.style.csstext = 'font-size: 12px; font-family: roboto,Noto Sans KR,malgun gothic,dotum,gothic; font-weight: 400; -webkit-font-smoothing: antialiased; word-break: break-all;height: 97%;overflow: hidden;letter-spacing: -0.01em;'
 
-         var title = document.createElement("div")
-         title.className = "Title"
-         title.id = "TitleBox"
-         title.innerHTML = detail[0].cpName
-         title.style.cssText = 'font-size: 26px; font-weight: bold; letter-spacing: -1px;padding: 0; width:90%; margin: 3% 1% 0% 5%; color: #25a5f0;height: 5%;line-height: 40px;border-bottom: 2px #25a5f0 solid;'
+       var title = document.createElement("div")
+       title.className = "Title"
+       title.id = "TitleBox"
+       title.innerHTML = detail[0].cpName
+       title.style.cssText = 'font-size: 26px; font-weight: bold; letter-spacing: -1px;padding: 0; width:90%; margin: 3% 1% 0% 5%; color: #25a5f0;height: 5%;line-height: 40px;border-bottom: 2px #25a5f0 solid;'
 
-         var category = document.createElement("div")
-         category.className = "Category"
-         category.id = "CategoryBox"
-         category.innerHTML = cacode
-         category.style.cssText = 'position: absolute; right: 7.5%; top: 5.5%; font-size: 15px; font-weight: bold;'
+       var category = document.createElement("div")
+       category.className = "Category"
+       category.id = "CategoryBox"
+       category.innerHTML = cacode
+       category.style.cssText = 'position: absolute; right: 7.5%; top: 5.5%; font-size: 15px; font-weight: bold;'
 
-         var locIcon = document.createElement("div")
-         locIcon.className = "LocIcon"
-         locIcon.id = "LocIconBox"
-         locIcon.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
-         locIcon.style.cssText = 'background: url(resources/images/ico_addr.png) no-repeat; position: absolute; left:6%; top:10%;'
+       var locIcon = document.createElement("div")
+       locIcon.className = "LocIcon"
+       locIcon.id = "LocIconBox"
+       locIcon.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
+       locIcon.style.cssText = 'background: url(resources/images/ico_addr.png) no-repeat; position: absolute; left:6%; top:10%;'
 
-         var division = document.createElement("div")
-         division.className = "Division"
-         division.id = "DivisionBox"
-         division.innerHTML = detail[0].haName
-         division.style.cssText = 'position: absolute; left:9.5%; top:10%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
+       var division = document.createElement("div")
+       division.className = "Division"
+       division.id = "DivisionBox"
+       division.innerHTML = detail[0].haName
+       division.style.cssText = 'position: absolute; left:9.5%; top:10%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
 
-         var address = document.createElement("div")
-         address.className = "Address"
-         address.id = "AddressBox"
-         address.innerHTML = " > " + detail[0].maAddress
-         address.style.cssText = 'position: absolute; left:17%; top:10.2%; width:65%'
+       var address = document.createElement("div")
+       address.className = "Address"
+       address.id = "AddressBox"
+       address.innerHTML = " > " + detail[0].maAddress
+       address.style.cssText = 'position: absolute; left:17%; top:10.2%; width:65%'
 
-         var postbox = document.createElement("div")
-         postbox.className = "PostBox"
-         postbox.id = "PostBox"
-         postbox.innerHTML = "우편번호"
-         postbox.style.cssText = 'position: absolute; left:9.5%; top:13%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
+       var postbox = document.createElement("div")
+       postbox.className = "PostBox"
+       postbox.id = "PostBox"
+       postbox.innerHTML = "우편번호"
+       postbox.style.cssText = 'position: absolute; left:9.5%; top:13%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
 
-         var post = document.createElement("div")
-         post.className = "Post"
-         post.id = "Post"
-         post.innerHTML = " - " + detail[0].cpMaPost
-         post.style.cssText = 'position: absolute; left:22%; top:13%; width:40%'
+       var post = document.createElement("div")
+       post.className = "Post"
+       post.id = "Post"
+       post.innerHTML = " - " + detail[0].cpMaPost
+       post.style.cssText = 'position: absolute; left:22%; top:13%; width:40%'
 
-         var numberbox = document.createElement("div")
-         numberbox.className = "NumberBox"
-         numberbox.id = "NumberBox"
-         numberbox.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
-         numberbox.style.cssText = 'background: url(resources/images/ico_tel.png) no-repeat; position: absolute; left:6%; top:18%;'
+       var numberbox = document.createElement("div")
+       numberbox.className = "NumberBox"
+       numberbox.id = "NumberBox"
+       numberbox.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
+       numberbox.style.cssText = 'background: url(resources/images/ico_tel.png) no-repeat; position: absolute; left:6%; top:18%;'
 
-         var number = document.createElement("div")
-         number.className = "Number"
-         number.id = "Number"
-         number.innerHTML = admobile
-         number.style.cssText = 'position: absolute; left:10%; top:17.9%; width:60%'
+       var number = document.createElement("div")
+       number.className = "Number"
+       number.id = "Number"
+       number.innerHTML = admobile
+       number.style.cssText = 'position: absolute; left:10%; top:17.9%; width:60%'
 
-         var facilities = document.createElement("div")
-         facilities.className = "facilityBox"
-         facilities.id = "facilityBox"
-         facilities.style.cssText = 'border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:center;border-right:none;border-left:none; position: absolute; right:5%; top:25.9%; width:25%; height:35%; padding:17px 20px 17px 10px; display:inline-block;text-align:center;vertical-align:top;margin:15px 0 10px 0;'
+       
+	var conveinence = document.createElement("div")
+  conveinence.id = "facilityBoxName"
+  conveinence.innerHTML = "편의시설"
+  conveinence.style.cssText = 'position: absolute; left:5%; top:52%; width:28%; height:3%; font-size:20pt; font-weght:bold;'
+      	    
+       var facilities = document.createElement("div")
+       facilities.className = "facilityBox"
+       facilities.id = "facilityBox"
+       facilities.style.cssText = 'border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:center;border-right:none;border-left:none; position: absolute; left:5%; top:54%; width:85%; height:17%; padding:17px 20px 17px 10px; display:inline-block;text-align:center;vertical-align:top;margin:15px 0 10px 0;'
 
-         var facilityList = document.createElement("div")
-         facilityList.className = "facilityList"
-         facilityList.id = "facilityList"
+	var facilityList = document.createElement("div")
+  facilityList.className = "facilityList"
+  facilityList.id = "facilityList"
 
-         var list = detail[0].cpFacility;
-         var listArr = list.split(",");
+  var list = detail[0].cpFacility;
+  var listArr = list.split(",");
 
-         for (i = 0; i < listArr.length; i++) {
-            facilityList.innerHTML += "<div id=facilityList" + i
-                  + " style='float:left; position: relative; top:2%;'>"
-                  + listArr[i] + "</div><br>";
+  for (i = 0; i < listArr.length; i++) {
+		facilityList.innerHTML += "<div id=facilityList" + i + " style='float:left; font-size: 15pt; margin:1% 0%;'>" + listArr[i] + "</div>";
+			if(i==5){
+				facilityList.innerHTML +="<br><br>";
+			} else if(i==10){
+				facilityList.innerHTML +="<br><br>";
+			} else if(i==15){
+				facilityList.innerHTML +="<br><br>";
+			}else if(i==20){
+				facilityList.innerHTML +="<br><br>";
+			} else{
+				if(i!=listArr.length-1){
+					facilityList.innerHTML +="<div style='float:left; margin:1% 0%;' >&nbsp&nbsp/&nbsp&nbsp</div>";
+					}
+			}
+	}
+	facilityList.style.cssText = 'position: relative; top:3%; display:inline-block;'
 
-         }
+	var detailInfo = document.createElement("div")
+  detailInfo.id = "explanationBoxName"
+  detailInfo.innerHTML = "상세설명"
+  detailInfo.style.cssText = 'position: absolute; left:5%; top:23%; width:28%; height:3%; font-size:20pt; font-weght:bold;'
+       
+       var explanation = document.createElement("div")
+       explanation.className = "explanationBox"
+       explanation.id = "explanationBox"
+       explanation.style.cssText = 'border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:left;border-right:none;border-left:none; position: absolute; left:5%; top:25%; width:85%; height:20%; padding:6px 20px 17px 10px; display:inline-block;text-align:left;vertical-align:top;margin:15px 0 10px 0;font-size:13pt;'
 
-         facilityList.style.cssText = 'position: relative; top:3%; display:inline-block;'
+       var explanationList = document.createElement("div")
+       explanationList.className = "explanationList"
+       explanationList.id = "explanationList"
+       explanationList.innerHTML = detail[0].cpContents
+       explanationList.style.cssText = 'position: relative; top:3%; display:inline-block; float:center;'
 
-         var explanation = document.createElement("div")
-         explanation.className = "explanationBox"
-         explanation.id = "explanationBox"
-         explanation.style.cssText = 'border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:left;border-right:none;border-left:none; position: absolute; left:5%; top:25.9%; width:55%; height:35%; padding:17px 20px 17px 10px; display:inline-block;text-align:left;vertical-align:top;margin:15px 0 10px 0;'
-
-         var explanationList = document.createElement("div")
-         explanationList.className = "explanationList"
-         explanationList.id = "explanationList"
-         explanationList.innerHTML = detail[0].cpContents
-         explanationList.style.cssText = 'position: relative; top:3%; display:inline-block; float:center;'
-
-         rightViewInfo.append(head, content)
-         head.append(title, category)
-         content.append(locIcon, division, address, postbox, post, numberbox, number, facilities, explanation)
-         facilities.append(facilityList)
-         explanation.append(explanationList)
-         panel.append(rightViewInfo)
-      }
+       rightViewInfo.append(head, content)
+       head.append(title, category)
+       content.append(locIcon, division, address, postbox, post, numberbox, number, conveinence, facilities, detailInfo, explanation)
+       facilities.append(facilityList)
+       explanation.append(explanationList)
+       panel.append(rightViewInfo)
+    }
    
    function getStoreDetail(detail) {
        var panel = document.getElementById('rightview');
@@ -881,9 +898,7 @@
          title.innerHTML = detail[0].srName
          title.style.cssText = 'font-size: 26px; font-weight: bold; letter-spacing: -1px;padding: 0; width:90%; margin: 3% 1% 0% 5%; color: #25a5f0;height: 5%;line-height: 40px;border-bottom: 2px #25a5f0 solid;'
          /* 특정렌탈업체 이동*/
-         title.onclick = function moveStore() {
-            moveStoreInfo(detail)
-         }
+        
          
          var category = document.createElement("div")
          category.className = "Category"
@@ -1202,14 +1217,6 @@
 	      }
 	      div.appendChild(cpList);
 	   }
-   
-   function moveStoreInfo(detail){
-
-	   const form = document.getElementsByName("storeInfo")[0];
-	   const srcode = detail[0].srCode;
-	   form.append(srcode);
-	   form.submit();
-   }
    
 </script>
 

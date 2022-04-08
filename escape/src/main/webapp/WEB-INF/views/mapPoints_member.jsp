@@ -40,9 +40,9 @@
 		 			<input id="logOutButton" type = "button" value= "로그아웃" onClick="logOutMember('${sessionInfo.mmId}','${sessionInfo.publicIp}','${sessionInfo.mmCode}')"/></div>
 		 			
 		 			<div id="notice"><span class="top_menu" onClick="">공지사항</span></div>
-		 			<div id="shop"><span class="top_menu" onClick="">장바구니</span></div>
+		 			<div id="shop"><span class="top_menu" onClick="getNewPageMember('${sessionInfo.mmId}','cart_member','${sessionInfo.publicIp}','${sessionInfo.mmCode}')">장바구니</span></div>
 				</div>
-			<img id="list" src='resources/images/list.png'/>
+			
 		</div>
 		
 		<div id="mid">

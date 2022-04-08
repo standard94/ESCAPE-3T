@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta charset="utf-8">
 <title>낚시 포인트</title>
 
 </head>
@@ -33,15 +32,21 @@
 
    <div id="basic">
       <div id="top">
-         <div id="logo" onClick="getNewPage('basic')">여기가 좋을 지도¿</div>
-            <div id="search"><input id="searchFont" type="text"  name="" placeholder="" /><input id="searchZoom" class="divButton" type="button" value="SEARCH"/></div>
-            <div id="box1">
-                <div id="login1"><span class="top_menu" onClick="getNewPage('memberLogIn')" >로그인/</span><span class="top_menu" onClick="getNewPage('commonSignUp')">회원가입</span></div>
-                <div id="notice"><span class="top_menu" onClick="">공지사항</span></div>
-                <div id="shop"><span class="top_menu" onClick="">장바구니</span></div>
-            </div>
-         <img id="list" src='resources/images/list.png'/>
-      </div>
+			<div id="logo" onClick="getNewPage('basic')">여기가 좋을 지도</div>
+			<div id="search">
+				<input id="searchFont" type="text" name="" placeholder="" />
+				<input id="searchZoom" class="divButton" type="button" value="SEARCH" onMouseOver="changeColor1(this)" onMouseOut="changeColor2(this)" />
+			</div>
+			<div id="box1">
+				<div id="login1">
+					<span class="top_menu" onClick="getNewPage('memberLogIn')">로그인/</span>
+					<span class="top_menu" onClick="getNewPage('signUp')">회원가입</span>
+				</div>
+				<div id="shop">
+					<span class="top_menu" onClick="notMember()">장바구니</span>
+				</div>
+			</div>
+		</div>
       
       <div id="mid">
          <div id="leftList">
@@ -70,17 +75,16 @@
             <div id="campingList" class="container">   
             </div>
          </div>
-         <form name="storeInfo" action="StoreInfo" method="post">
+         
          <div id="rightview" class="shadow">
          </div>
-         </form>
-         	<div id="remocon" style="z-index: 3; padding:1% 1%;  height: 30%;  width: 9%; border: 1px solid #999966; background-color: white; position : absolute; right:1%; bottom:3%; box-shadow: 3px 3px 10px #566270; border-radius: 10px;">
+         
+         	<div id="remocon" style="z-index: 3; padding:1% 1%;  height: 30%;  width: 9%; border: 1px solid #999966; opacity : 0.8; background-color: white; position : absolute; right:1%; bottom:3%; box-shadow: 3px 3px 10px #566270; border-radius: 10px;">
          		<button id="rmcHome" onClick="getNewPage('basic')" style=" height: 15%;  width: 50%; border: 1px solid #999966; font-size: 15pt; font-weight: bold; background-color: #292929; color: white; border-radius: 10px; margin: 4% 25%;">HOME</button>
          		<button id="rmcMap" onClick="getNewPage('campingMap');" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">지도</button>
          		<button id="rmcRental" onClick="getNewPage('campingRental')" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">렌탈</button>
          		<button id="rmcMyPage" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">마이페이지</button>
-         		<button id="rmcRtStore" onClick="getNewPage('storeInfoPage')" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">렌탈 업체</button>
-         		<button id="rmcTwoMore" style=" height: 15%;  width: 100%; border: 1px solid #999966;  background-color: white; border-radius: 10px; margin: 1%;">두개더</button>	
+         		<button id="rmcRtStore" onClick="getNewPage('storeInfoPage')" style=" height: 15%;  width: 100%; border: 1px solid #999966; font-size: 12pt; background-color: white; border-radius: 10px; margin: 1%;">렌탈 업체</button>	
          	</div>
          
           <div id="map"></div>
@@ -467,7 +471,7 @@
       var changeMyPoint = document.createElement("div")
       changeMyPoint.id = "cmp"
       changeMyPoint.innerHTML = "내 위치 변경"
-      changeMyPoint.style.cssText = 'z-index:2; color:white; position : absolute; background: #292929; width:6%; height:2.5%; padding:0.2% 1%;'
+      changeMyPoint.style.cssText = 'z-index:2; color:white; position : absolute; background: #FFCD36; width:6%; height:2.5%; padding:0.2% 1%;'
       changeMyPoint.onclick = function() {
 
          //다음 주소 찾기 창 생성
@@ -707,510 +711,533 @@
    }
 
    function getCampingDetail(detail) {
-         var panel = document.getElementById('rightview');
-
-         var cacode = detail[0].cpCaCode
-         var mobile = detail[0].cpNumber
-         var admobile = null;
-
-         if (cacode = "C001") {
-            cacode = "유료캠핑장"
-         } else if (cacode = "C002") {
-            cacode = "글램핑"
-         } else if (cacode = "C003") {
-            cacode = "카라반"
-         } else if (cacode = "C004") {
-            cacode = "낚시터"
-         } else if (cacode = "C005") {
-            cacode = "대어자랑"
-         } else {
-            cacode = "분류설정이필요합니다."
-         }
-
-         if (mobile != null) {
-            var admobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 7) + "-" + mobile.substring(7)
-         } else {
-            var admobile = "번호정보 업데이트중"
-         }
-
-         if (panel.hasChildNodes()) {
-            panel.removeChild(panel.lastChild);
-         }
-
-         var rightViewInfo = document.createElement("div")
-         rightViewInfo.className = "Info"
-         rightViewInfo.id = "InfoBox"
-         rightViewInfo.style.cssText = 'border: 4px dashed #bcbcbc; width:95.5%; height:97%; margin: 10px ;'
-
-         var head = document.createElement("div")
-         head.className = "Head"
-         head.id = "HeadBox"
-
-         var content = document.createElement("div")
-         content.className = "Content"
-         content.id = "ContentBox"
-         content.style.csstext = 'font-size: 12px; font-family: roboto,Noto Sans KR,malgun gothic,dotum,gothic; font-weight: 400; -webkit-font-smoothing: antialiased; word-break: break-all;height: 97%;overflow: hidden;letter-spacing: -0.01em;'
-
-         var title = document.createElement("div")
-         title.className = "Title"
-         title.id = "TitleBox"
-         title.innerHTML = detail[0].cpName
-         title.style.cssText = 'font-size: 26px; font-weight: bold; letter-spacing: -1px;padding: 0; width:90%; margin: 3% 1% 0% 5%; color: #25a5f0;height: 5%;line-height: 40px;border-bottom: 2px #25a5f0 solid;'
-
-         var category = document.createElement("div")
-         category.className = "Category"
-         category.id = "CategoryBox"
-         category.innerHTML = cacode
-         category.style.cssText = 'position: absolute; right: 7.5%; top: 5.5%; font-size: 15px; font-weight: bold;'
-
-         var locIcon = document.createElement("div")
-         locIcon.className = "LocIcon"
-         locIcon.id = "LocIconBox"
-         locIcon.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
-         locIcon.style.cssText = 'background: url(resources/images/ico_addr.png) no-repeat; position: absolute; left:6%; top:10%;'
-
-         var division = document.createElement("div")
-         division.className = "Division"
-         division.id = "DivisionBox"
-         division.innerHTML = detail[0].haName
-         division.style.cssText = 'position: absolute; left:9.5%; top:10%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
-
-         var address = document.createElement("div")
-         address.className = "Address"
-         address.id = "AddressBox"
-         address.innerHTML = " > " + detail[0].maAddress
-         address.style.cssText = 'position: absolute; left:17%; top:10.2%; width:65%'
-
-         var postbox = document.createElement("div")
-         postbox.className = "PostBox"
-         postbox.id = "PostBox"
-         postbox.innerHTML = "우편번호"
-         postbox.style.cssText = 'position: absolute; left:9.5%; top:13%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
-
-         var post = document.createElement("div")
-         post.className = "Post"
-         post.id = "Post"
-         post.innerHTML = " - " + detail[0].cpMaPost
-         post.style.cssText = 'position: absolute; left:22%; top:13%; width:40%'
-
-         var numberbox = document.createElement("div")
-         numberbox.className = "NumberBox"
-         numberbox.id = "NumberBox"
-         numberbox.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
-         numberbox.style.cssText = 'background: url(resources/images/ico_tel.png) no-repeat; position: absolute; left:6%; top:18%;'
-
-         var number = document.createElement("div")
-         number.className = "Number"
-         number.id = "Number"
-         number.innerHTML = admobile
-         number.style.cssText = 'position: absolute; left:10%; top:17.9%; width:60%'
-
-         var facilities = document.createElement("div")
-         facilities.className = "facilityBox"
-         facilities.id = "facilityBox"
-         facilities.style.cssText = 'border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:center;border-right:none;border-left:none; position: absolute; right:5%; top:25.9%; width:25%; height:35%; padding:17px 20px 17px 10px; display:inline-block;text-align:center;vertical-align:top;margin:15px 0 10px 0;'
-
-         var facilityList = document.createElement("div")
-         facilityList.className = "facilityList"
-         facilityList.id = "facilityList"
-
-         var list = detail[0].cpFacility;
-         var listArr = list.split(",");
-
-         for (i = 0; i < listArr.length; i++) {
-            facilityList.innerHTML += "<div id=facilityList" + i
-                  + " style='float:left; position: relative; top:2%;'>"
-                  + listArr[i] + "</div><br>";
-
-         }
-
-         facilityList.style.cssText = 'position: relative; top:3%; display:inline-block;'
-
-         var explanation = document.createElement("div")
-         explanation.className = "explanationBox"
-         explanation.id = "explanationBox"
-         explanation.style.cssText = 'border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:left;border-right:none;border-left:none; position: absolute; left:5%; top:25.9%; width:55%; height:35%; padding:17px 20px 17px 10px; display:inline-block;text-align:left;vertical-align:top;margin:15px 0 10px 0;'
-
-         var explanationList = document.createElement("div")
-         explanationList.className = "explanationList"
-         explanationList.id = "explanationList"
-         explanationList.innerHTML = detail[0].cpContents
-         explanationList.style.cssText = 'position: relative; top:3%; display:inline-block; float:center;'
-
-         rightViewInfo.append(head, content)
-         head.append(title, category)
-         content.append(locIcon, division, address, postbox, post, numberbox, number, facilities, explanation)
-         facilities.append(facilityList)
-         explanation.append(explanationList)
-         panel.append(rightViewInfo)
-      }
-   
-   function getStoreDetail(detail) {
        var panel = document.getElementById('rightview');
 
-         var cacode = detail[0].srCaCode
-         var mobile = detail[0].srNumber
-         var admobile = null;
+       var cacode = detail[0].cpCaCode
+       var mobile = detail[0].cpNumber
+       var admobile = null;
 
-         if (mobile != null) {
-            var admobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 7) + "-" + mobile.substring(7)
-         } else {
-            var admobile = "번호정보 업데이트중"
-         }
+       if (cacode = "C003") {
+          cacode = "카라반"
+       } else {
+          cacode = "분류설정이필요합니다."
+       }
 
-         if (panel.hasChildNodes()) {
-            panel.removeChild(panel.lastChild);
-         }
+       if (mobile != null) {
+          var admobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 7) + "-" + mobile.substring(7)
+       } else {
+          var admobile = "번호정보 업데이트중"
+       }
 
-         var rightViewInfo = document.createElement("div")
-         rightViewInfo.className = "Info"
-         rightViewInfo.id = "InfoBox"
-         rightViewInfo.style.cssText = 'border: 4px dashed #bcbcbc; width:95.5%; height:97%; margin: 10px ;'
+       if (panel.hasChildNodes()) {
+          panel.removeChild(panel.lastChild);
+       }
 
-         var head = document.createElement("div")
-         head.className = "Head"
-         head.id = "HeadBox"
+       var rightViewInfo = document.createElement("div")
+       rightViewInfo.className = "Info"
+       rightViewInfo.id = "InfoBox"
+       rightViewInfo.style.cssText = 'border: 4px dashed #bcbcbc; width:95.5%; height:97%; margin: 10px ;'
 
-         var content = document.createElement("div")
-         content.className = "Content"
-         content.id = "ContentBox"
-         content.style.csstext = 'font-size: 12px; font-family: roboto,Noto Sans KR,malgun gothic,dotum,gothic; font-weight: 400; -webkit-font-smoothing: antialiased; word-break: break-all;height: 97%;overflow: hidden;letter-spacing: -0.01em;'
+       var head = document.createElement("div")
+       head.className = "Head"
+       head.id = "HeadBox"
 
-         var title = document.createElement("div")
-         title.className = "Title"
-         title.id = "TitleBox"
-         title.innerHTML = detail[0].srName
-         title.style.cssText = 'font-size: 26px; font-weight: bold; letter-spacing: -1px;padding: 0; width:90%; margin: 3% 1% 0% 5%; color: #25a5f0;height: 5%;line-height: 40px;border-bottom: 2px #25a5f0 solid;'
-          /* 특정렌탈업체 이동*/
-         title.onclick = function moveStore() {
-            moveStoreInfo(detail)
-         }
-         
-         var category = document.createElement("div")
-         category.className = "Category"
-         category.id = "CategoryBox"
-         category.innerHTML = cacode
-         category.style.cssText = 'position: absolute; right: 7.5%; top: 5.5%; font-size: 15px; font-weight: bold;'
+       var content = document.createElement("div")
+       content.className = "Content"
+       content.id = "ContentBox"
+       content.style.csstext = 'font-size: 12px; font-family: roboto,Noto Sans KR,malgun gothic,dotum,gothic; font-weight: 400; -webkit-font-smoothing: antialiased; word-break: break-all;height: 97%;overflow: hidden;letter-spacing: -0.01em;'
 
-         var locIcon = document.createElement("div")
-         locIcon.className = "LocIcon"
-         locIcon.id = "LocIconBox"
-         locIcon.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
-         locIcon.style.cssText = 'background: url(resources/images/ico_addr.png) no-repeat; position: absolute; left:6%; top:10%;'
+       var title = document.createElement("div")
+       title.className = "Title"
+       title.id = "TitleBox"
+       title.innerHTML = detail[0].cpName
+       title.style.cssText = 'font-size: 26px; font-weight: bold; letter-spacing: -1px;padding: 0; width:90%; margin: 3% 1% 0% 5%; color: #25a5f0;height: 5%;line-height: 40px;border-bottom: 2px #25a5f0 solid;'
 
-         var division = document.createElement("div")
-         division.className = "Division"
-         division.id = "DivisionBox"
-         division.innerHTML = detail[0].haName
-         division.style.cssText = 'position: absolute; left:9.5%; top:10%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
+       var category = document.createElement("div")
+       category.className = "Category"
+       category.id = "CategoryBox"
+       category.innerHTML = cacode
+       category.style.cssText = 'position: absolute; right: 7.5%; top: 5.5%; font-size: 15px; font-weight: bold;'
 
-         var address = document.createElement("div")
-         address.className = "Address"
-         address.id = "AddressBox"
-         address.innerHTML = " > " + detail[0].srAddress
-         address.style.cssText = 'position: absolute; left:17%; top:10.2%; width:65%'
+       var locIcon = document.createElement("div")
+       locIcon.className = "LocIcon"
+       locIcon.id = "LocIconBox"
+       locIcon.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
+       locIcon.style.cssText = 'background: url(resources/images/ico_addr.png) no-repeat; position: absolute; left:6%; top:10%;'
 
-         var postbox = document.createElement("div")
-         postbox.className = "PostBox"
-         postbox.id = "PostBox"
-         postbox.innerHTML = "우편번호"
-         postbox.style.cssText = 'position: absolute; left:9.5%; top:13%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
+       var division = document.createElement("div")
+       division.className = "Division"
+       division.id = "DivisionBox"
+       division.innerHTML = detail[0].haName
+       division.style.cssText = 'position: absolute; left:9.5%; top:10%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
 
-         var post = document.createElement("div")
-         post.className = "Post"
-         post.id = "Post"
-         post.innerHTML = " - " + detail[0].srMaPost
-         post.style.cssText = 'position: absolute; left:22%; top:13%; width:40%'
+       var address = document.createElement("div")
+       address.className = "Address"
+       address.id = "AddressBox"
+       address.innerHTML = " > " + detail[0].maAddress
+       address.style.cssText = 'position: absolute; left:17%; top:10.2%; width:65%'
 
-         var numberbox = document.createElement("div")
-         numberbox.className = "NumberBox"
-         numberbox.id = "NumberBox"
-         numberbox.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
-         numberbox.style.cssText = 'background: url(resources/images/ico_tel.png) no-repeat; position: absolute; left:6%; top:18%;'
+       var postbox = document.createElement("div")
+       postbox.className = "PostBox"
+       postbox.id = "PostBox"
+       postbox.innerHTML = "우편번호"
+       postbox.style.cssText = 'position: absolute; left:9.5%; top:13%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
 
-         var number = document.createElement("div")
-         number.className = "Number"
-         number.id = "Number"
-         number.innerHTML = admobile
-         number.style.cssText = 'position: absolute; left:10%; top:17.9%; width:60%;'
+       var post = document.createElement("div")
+       post.className = "Post"
+       post.id = "Post"
+       post.innerHTML = " - " + detail[0].cpMaPost
+       post.style.cssText = 'position: absolute; left:22%; top:13%; width:40%'
 
-         rightViewInfo.append(head, content)
-         head.append(title, category)
-         content.append(locIcon, division, address, postbox, post, numberbox, number)
-         panel.append(rightViewInfo)
-     
-   }
+       var numberbox = document.createElement("div")
+       numberbox.className = "NumberBox"
+       numberbox.id = "NumberBox"
+       numberbox.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
+       numberbox.style.cssText = 'background: url(resources/images/ico_tel.png) no-repeat; position: absolute; left:6%; top:18%;'
 
-   function createDiv(name, className) {
-      const div = document.createElement("div"); // <div></div>
-      div.setAttribute("name", name); // <div name=""></div>
-      div.setAttribute("class", className);
-      return div;
-   }
+       var number = document.createElement("div")
+       number.className = "Number"
+       number.id = "Number"
+       number.innerHTML = admobile
+       number.style.cssText = 'position: absolute; left:10%; top:17.9%; width:60%'
 
-   function makeOverlay(name, img, phone, address, overlay) {
-      var placeContent = document.createElement("div")
-      placeContent.className = "place-content"
-      placeContent.id = "place-content"
-      placeContent.style.cssText = 'background: white; width:100%; height:20%; box-shadow: 3px 3px 10px #566270; border-radius: 5px;';
+       
+	var conveinence = document.createElement("div")
+  conveinence.id = "facilityBoxName"
+  conveinence.innerHTML = "편의시설"
+  conveinence.style.cssText = 'position: absolute; left:5%; top:52%; width:28%; height:3%; font-size:20pt; font-weght:bold;'
+      	    
+       var facilities = document.createElement("div")
+       facilities.className = "facilityBox"
+       facilities.id = "facilityBox"
+       facilities.style.cssText = 'border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:center;border-right:none;border-left:none; position: absolute; left:5%; top:54%; width:85%; height:17%; padding:17px 20px 17px 10px; display:inline-block;text-align:center;vertical-align:top;margin:15px 0 10px 0;'
 
-      var placeHead = document.createElement("div")
-      placeHead.className = "place-head"
-      placeHead.style.cssText = 'height:20px; background: black; color:white; border: 1px solid black; border-radius: 5px 5px 0px 0px; padding : 10px 10px';
+	var facilityList = document.createElement("div")
+  facilityList.className = "facilityList"
+  facilityList.id = "facilityList"
 
-      var placeBody = document.createElement("div")
-      placeBody.className = "place-body"
-      placeBody.style.cssText = 'width:450px; height:180px; background: white; border: 1px solid white; border-radius: 0px 0px 5px 5px;';
+  var list = detail[0].cpFacility;
+  var listArr = list.split(",");
 
-      var placeInfo = document.createElement("div")
-      placeInfo.className = "place-info"
-      placeInfo.style.cssText = 'background: white; width:300px; height:110px; float:left; margin:10px 0px';
+  for (i = 0; i < listArr.length; i++) {
+		facilityList.innerHTML += "<div id=facilityList" + i + " style='float:left; font-size: 15pt; margin:1% 0%;'>" + listArr[i] + "</div>";
+			if(i==5){
+				facilityList.innerHTML +="<br><br>";
+			} else if(i==10){
+				facilityList.innerHTML +="<br><br>";
+			} else if(i==15){
+				facilityList.innerHTML +="<br><br>";
+			}else if(i==20){
+				facilityList.innerHTML +="<br><br>";
+			} else{
+				if(i!=listArr.length-1){
+					facilityList.innerHTML +="<div style='float:left; margin:1% 0%;' >&nbsp&nbsp/&nbsp&nbsp</div>";
+					}
+			}
+	}
+	facilityList.style.cssText = 'position: relative; top:3%; display:inline-block;'
 
-      var placeFooter = document.createElement("div")
-      placeFooter.className = "place-footer"
-      placeFooter.style.cssText = 'background: white; width:420px; height:30px; float:left; margin:5px 0px 0px 0px; padding:5px 15px'
+	var detailInfo = document.createElement("div")
+  detailInfo.id = "explanationBoxName"
+  detailInfo.innerHTML = "상세설명"
+  detailInfo.style.cssText = 'position: absolute; left:5%; top:23%; width:28%; height:3%; font-size:20pt; font-weght:bold;'
+       
+       var explanation = document.createElement("div")
+       explanation.className = "explanationBox"
+       explanation.id = "explanationBox"
+       explanation.style.cssText = 'border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:left;border-right:none;border-left:none; position: absolute; left:5%; top:25%; width:85%; height:20%; padding:6px 20px 17px 10px; display:inline-block;text-align:left;vertical-align:top;margin:15px 0 10px 0;font-size:13pt;'
 
-      var placeName = document.createElement("div")
-      placeName.innerHTML = name
-      placeName.style.cssText = 'float:left;font-weight:bold;';
+       var explanationList = document.createElement("div")
+       explanationList.className = "explanationList"
+       explanationList.id = "explanationList"
+       explanationList.innerHTML = detail[0].cpContents
+       explanationList.style.cssText = 'position: relative; top:3%; display:inline-block; float:center;'
 
-      var placeAddImg = document.createElement("img")
-      placeAddImg.style.cssText = 'width:110px; height:110px; background: red; float:left; margin:10px';
-      placeAddImg.src = "resources/images/camping/" + img
+       rightViewInfo.append(head, content)
+       head.append(title, category)
+       content.append(locIcon, division, address, postbox, post, numberbox, number, conveinence, facilities, detailInfo, explanation)
+       facilities.append(facilityList)
+       explanation.append(explanationList)
+       panel.append(rightViewInfo)
+    }
 
-      var placePhone = document.createElement("div")
-      placePhone.className = "place-phone"
-      placePhone.innerHTML = "☎ " + phone
-      placePhone.style.cssText = 'color:blue; font-size:10pt;';
+	function getStoreDetail(detail) {
+		var panel = document.getElementById('rightview');
 
-      var placeAddress = document.createElement("div")
-      placeAddress.className = "place-address"
-      placeAddress.innerHTML = address
-      placeAddress.style.cssText = ' font-weight:bold;font-size:11pt';
+		var cacode = detail[0].srCaCode
+		var mobile = detail[0].srNumber
+		var admobile = null;
 
-      var placeDetail = document.createElement("div")
-      placeDetail.innerHTML = "상세정보 열기 >"
-      placeDetail.className = "place-desc"
-      placeDetail.id = "place1"
-      placeDetail.style.cssText = 'float:right; background: white; color:black; width:120px; height:24px; border: 1px solid black; font-size:12pt; padding:3px 10px; dispaly:block;'
-      placeDetail.onclick = function openPanel() {
-         const element = document.getElementById('rightview');
-         element.style.right = '0%';
-         const deplace = document.getElementById('deplace1');
-         deplace.style.display = "block";
-         const place = document.getElementById('place1');
-         place.style.display = "none";
-      }
+		if (mobile != null) {
+			var admobile = mobile.substring(0, 3) + "-"
+					+ mobile.substring(3, 7) + "-" + mobile.substring(7)
+		} else {
+			var admobile = "번호정보 업데이트중"
+		}
 
-      var deplaceDetail = document.createElement("div")
-      deplaceDetail.innerHTML = "상세정보 닫기 <"
-      deplaceDetail.className = "deplace-desc"
-      deplaceDetail.id = "deplace1"
-      deplaceDetail.style.cssText = 'float:right; background: white; color:black; width:120px; height:24px; border: 1px solid black; font-size:12pt; padding:3px 10px; display:none;'
-      deplaceDetail.onclick = function closePanel() {
-         const element = document.getElementById('rightview');
-         element.style.right = '-33%';
-         const place = document.getElementById('place1');
-         place.style.display = "block";
-         const deplace = document.getElementById('deplace1');
-         deplace.style.display = "none";
-      }
+		if (panel.hasChildNodes()) {
+			panel.removeChild(panel.lastChild);
+		}
 
-      var closeBtn = document.createElement('div');
-      closeBtn.innerHTML = 'X';
-      closeBtn.style.cssText = 'float:right; background: black; color:white;'
-      closeBtn.onclick = function() {
-         overlay.setMap(null);
-      };
+		var rightViewInfo = document.createElement("div")
+		rightViewInfo.className = "Info"
+		rightViewInfo.id = "InfoBox"
+		rightViewInfo.style.cssText = 'border: 4px dashed #bcbcbc; width:95.5%; height:97%; margin: 10px ;'
 
-      placeContent.append(placeHead, placeBody)
-      placeHead.append(placeName, closeBtn)
-      placeBody.append(placeAddImg, placeInfo, placeFooter)
-      placeInfo.append(placeAddress, placePhone)
-      placeFooter.append(placeDetail, deplaceDetail)
-      overlay.setContent(placeContent)
-   }
-   
-   function nearStore(){
-	   
-	   var nS = document.getElementById('mp').innerText;
-	   var haName;
-	   const div = document.getElementById("campingList");
-	   while(div.hasChildNodes()){
-	    	  div.removeChild(div.firstChild);
-	      }
-	   
-	   if(nS.substring(0,1)=="충" || nS.substring(0,1)=="전"){
-   		haName = nS.substring(0,1)+nS.substring(2,3);
-   	}else if(nS.substring(0,1)=="경"){
-   		if(nS.substring(1,2)=="기"){
-   			haName = nS.substring(0,2);
-   		}else{
-   			haName = nS.substring(0,1)+nS.substring(2,3);
-   		}
-   	}else{
-   		haName = nS.substring(0,2);
-   	}
-	   getStoreList('1000');
-	   getStorePage('1','10', '1000', haName);
-	   chooseStoreList('1','10', '1000', haName);
-   }
-   
-   function getStorePage(pPageNumber, pAmount, pSrMaCfCode, pHaName) {
-	      let jsonData = [];
-	      jsonData.push({
-	         pageNumber : pPageNumber,
-	         amount : pAmount,
-	         srCfCode : pSrMaCfCode,
-	         haName : pHaName
-	      });
-	      const clientData = JSON.stringify(jsonData);
-	      getAjaxJson("GetStorePage", clientData, "settingPage");
-	   }
-   
-   function settingPage(jsonData) {
-	      let page = document.getElementById("campingPage");
-	      let pageInfo = "";
-	      let startPage = jsonData.startPage - 1;
-	      let endPage = jsonData.endPage + 1;      
-	      
-	      makeSrPage(jsonData.haName, page, pageInfo, startPage, endPage, jsonData.srCfCode, jsonData.pageNumber, jsonData.next, jsonData.prev);
-	    
-	   }
-   
-   function makeSrPage(address, page, pageInfo, startPage, endPage, jsonSrCfCode, jsonPageNumber, jsonNext, jsonPrev){
-	   var haName = address.substring(0,2);
-	   
- 	  if (jsonPrev != false) {
+		var head = document.createElement("div")
+		head.className = "Head"
+		head.id = "HeadBox"
 
- 	         pageInfo = "<div class='pageInfo_btn_prev'><li onClick =\"delrecord();getStorePage('"
- 	               + startPage
- 	               + "','10','"
- 	               + jsonSrCfCode
- 	               + "','"+haName+"');chooseStoreList('"
- 	               + startPage
- 	               + "','10','"
- 	               + jsonSrCfCode + "','"+haName+"');\" >이전</li></div>";
+		var content = document.createElement("div")
+		content.className = "Content"
+		content.id = "ContentBox"
+		content.style.csstext = 'font-size: 12px; font-family: roboto,Noto Sans KR,malgun gothic,dotum,gothic; font-weight: 400; -webkit-font-smoothing: antialiased; word-break: break-all;height: 97%;overflow: hidden;letter-spacing: -0.01em;'
 
- 	      } else {
- 	         pageInfo = "<div id='pageInfo_btn_prev_hold'><li>이전</li></div>"
- 	      }
+		var title = document.createElement("div")
+		title.className = "Title"
+		title.id = "TitleBox"
+		title.innerHTML = detail[0].srName
+		title.style.cssText = 'font-size: 26px; font-weight: bold; letter-spacing: -1px;padding: 0; width:90%; margin: 3% 1% 0% 5%; color: #25a5f0;height: 5%;line-height: 40px;border-bottom: 2px #25a5f0 solid;'
 
- 	      for (i = startPage+1; i < endPage; i++) {
- 	         if (i == jsonPageNumber) {
- 	            pageInfo += "<div class='pageInfo_btn_selected' style='width:4%;' ><li onClick =\"delrecord();getStorePage('"
- 	                  + i
- 	                  + "','10','"
- 	                  + jsonSrCfCode
- 	                  + "','"+haName+"');chooseStoreList('"
- 	                  + i
- 	                  + "','10','"
- 	                  + jsonSrCfCode + "','"+haName+"');\">" + i + "</li></div>";
- 	         } else if (i !== jsonPageNumber) {
- 	            pageInfo += "<div class='pageInfo_btn' style='width:4%;'><li onClick =\"delrecord();getStorePage('"
- 	                  + i
- 	                  + "','10','"
- 	                  + jsonSrCfCode
- 	                  + "','"+haName+"');chooseStoreList('"
- 	                  + i
- 	                  + "','10','"
- 	                  + jsonSrCfCode + "','"+haName+"');\">" + i + "</li></div>";
- 	         }
- 	      }
- 	      if (jsonNext != false) {
- 	         pageInfo += "<div class='pageInfo_btn_next'><li onClick =\"delrecord();getStorePage('"
- 	               + i
- 	               + "','10','"
- 	               + jsonSrCfCode
- 	               + "','"+haName+"');chooseStoreList('"
- 	               + i
- 	               + "','10','"
- 	               + jsonSrCfCode + "','"+haName+"');\" );'>다음</li></div>";
- 	      }
- 	      page.innerHTML = pageInfo;
-   }
-   
-   function chooseStoreList(pPageNumber, pAmount, pSrMaCfCode, pHaName) {
-	      let jsonData = [];
-	      jsonData.push({
-	         pageNumber : pPageNumber,
-	         amount : pAmount,
-	         srCfCode : pSrMaCfCode,
-	         haName : pHaName
-	      });
-	      const clientData = JSON.stringify(jsonData);
-	      getAjaxJson("ChooseStoreList", clientData, "settingPoint");
-	   }
-   
-   function settingPoint(list) {
-	   if(list[0].srAddress!=null){
-		   for (let x = 0; x < list.length; x++) {
-		         geocoder.addressSearch(list[x].srAddress, function(result, status) {
-		            // 정상적으로 검색이 완료됐으면 
-		            if (status === kakao.maps.services.Status.OK) {
-		               // 마커 하나를 지도위에 표시합니다 
-		               getLeftStoreList(new kakao.maps.LatLng(result[0].y,
-		                     result[0].x), list[x].srImage, list[x].srName,
-		                     list[x].srAddress, list[x].haName,
-		                     list[x].srNumber,
-		                     list[x].srCfCode, list[x].srCode,
-		                     new kakao.maps.LatLng(
-		                           parseFloat(result[0].y) + 0.11,
-		                           parseFloat(result[0].x) + 0.23));
-		            }
-		         });
-		      }
-	   }
-	      
-	   }
-   
-   function getLeftStoreList(mPos, srI, srN, srA, haN, srNb,
-	         srCf, srCd, wishPos) {
-	     
-	      const div = document.getElementById("campingList");
-	      
-	  
-	      let cpList = createDiv("cpList", "cpList");
-	      for (let i = 0; i < 6; i++) {
-	         column = createDiv(columnName[i], "cpList " + columnName[i]);
-	         column.innerHTML = (i == 0) ? "<img id='image' src=resources/images/camping/"+srI+"/>"
-	               : (i == 1) ? srN : (i == 2) ? srA : (i == 3) ? haN	: "☎" + srNb;
-	         cpList.appendChild(column);
-			
-	         var overlay2 = new kakao.maps.CustomOverlay({
-	            yAnchor : 1.2,
-	            position : mPos
-	         });
-	         
+		var category = document.createElement("div")
+		category.className = "Category"
+		category.id = "CategoryBox"
+		category.innerHTML = cacode
+		category.style.cssText = 'position: absolute; right: 7.5%; top: 5.5%; font-size: 15px; font-weight: bold;'
 
-	         makeOverlay(srN, srI, srNb, srA, overlay2);
-	         cpList.onclick = function() {
-	        	getStoreList('1000');
-	        	findStoreDetail(srCf, srCd)
-	            if (clickedoverlay) {
-	               clickedoverlay.setMap(null);
-	            }
-	            overlay2.setMap(map);
-	            clickedoverlay = overlay2;
-	            map.setCenter(wishPos);
+		var locIcon = document.createElement("div")
+		locIcon.className = "LocIcon"
+		locIcon.id = "LocIconBox"
+		locIcon.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
+		locIcon.style.cssText = 'background: url(resources/images/ico_addr.png) no-repeat; position: absolute; left:6%; top:10%;'
 
-	            // 현재 지도의 레벨을 얻어옵니다
-	            var level = map.getLevel();
+		var division = document.createElement("div")
+		division.className = "Division"
+		division.id = "DivisionBox"
+		division.innerHTML = detail[0].haName
+		division.style.cssText = 'position: absolute; left:9.5%; top:10%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
 
-	            // 지도를 1레벨 올립니다 (지도가 축소됩니다)
-	            map.setLevel(9);
-	         };
-	      }
-	      div.appendChild(cpList);
-	   }
-   
-   function moveStoreInfo(detail){
+		var address = document.createElement("div")
+		address.className = "Address"
+		address.id = "AddressBox"
+		address.innerHTML = " > " + detail[0].srAddress
+		address.style.cssText = 'position: absolute; left:17%; top:10.2%; width:65%'
 
-	   const form = document.getElementsByName("storeInfo")[0];
-	   const srcode = detail[0].srCode;
-	   form.append(srcode);
-	   form.submit();
-   }
+		var postbox = document.createElement("div")
+		postbox.className = "PostBox"
+		postbox.id = "PostBox"
+		postbox.innerHTML = "우편번호"
+		postbox.style.cssText = 'position: absolute; left:9.5%; top:13%; display: inline-block; height: 18px;line-height: 19px;padding: 0 7px;background: #eee;margin-right: 5px;color: #000;border-radius: 3px;border: 1px #ccc solid;'
+
+		var post = document.createElement("div")
+		post.className = "Post"
+		post.id = "Post"
+		post.innerHTML = " - " + detail[0].srMaPost
+		post.style.cssText = 'position: absolute; left:22%; top:13%; width:40%'
+
+		var numberbox = document.createElement("div")
+		numberbox.className = "NumberBox"
+		numberbox.id = "NumberBox"
+		numberbox.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp'
+		numberbox.style.cssText = 'background: url(resources/images/ico_tel.png) no-repeat; position: absolute; left:6%; top:18%;'
+
+		var number = document.createElement("div")
+		number.className = "Number"
+		number.id = "Number"
+		number.innerHTML = admobile
+		number.style.cssText = 'position: absolute; left:10%; top:17.9%; width:60%;'
+
+		rightViewInfo.append(head, content)
+		head.append(title, category)
+		content.append(locIcon, division, address, postbox, post, numberbox,
+				number)
+		panel.append(rightViewInfo)
+
+	}
+
+	function createDiv(name, className) {
+		const div = document.createElement("div"); // <div></div>
+		div.setAttribute("name", name); // <div name=""></div>
+		div.setAttribute("class", className);
+		return div;
+	}
+
+	function makeOverlay(name, img, phone, address, overlay) {
+		var placeContent = document.createElement("div")
+		placeContent.className = "place-content"
+		placeContent.id = "place-content"
+		placeContent.style.cssText = 'background: white; width:100%; height:20%; box-shadow: 3px 3px 10px #566270; border-radius: 5px;';
+
+		var placeHead = document.createElement("div")
+		placeHead.className = "place-head"
+		placeHead.style.cssText = 'height:20px; background: black; color:white; border: 1px solid black; border-radius: 5px 5px 0px 0px; padding : 10px 10px';
+
+		var placeBody = document.createElement("div")
+		placeBody.className = "place-body"
+		placeBody.style.cssText = 'width:450px; height:180px; background: white; border: 1px solid white; border-radius: 0px 0px 5px 5px;';
+
+		var placeInfo = document.createElement("div")
+		placeInfo.className = "place-info"
+		placeInfo.style.cssText = 'background: white; width:300px; height:110px; float:left; margin:10px 0px';
+
+		var placeFooter = document.createElement("div")
+		placeFooter.className = "place-footer"
+		placeFooter.style.cssText = 'background: white; width:420px; height:30px; float:left; margin:5px 0px 0px 0px; padding:5px 15px'
+
+		var placeName = document.createElement("div")
+		placeName.innerHTML = name
+		placeName.style.cssText = 'float:left;font-weight:bold;';
+
+		var placeAddImg = document.createElement("img")
+		placeAddImg.style.cssText = 'width:110px; height:110px; background: red; float:left; margin:10px';
+		placeAddImg.src = "resources/images/camping/" + img
+
+		var placePhone = document.createElement("div")
+		placePhone.className = "place-phone"
+		placePhone.innerHTML = "☎ " + phone
+		placePhone.style.cssText = 'color:blue; font-size:10pt;';
+
+		var placeAddress = document.createElement("div")
+		placeAddress.className = "place-address"
+		placeAddress.innerHTML = address
+		placeAddress.style.cssText = ' font-weight:bold;font-size:11pt';
+
+		var placeDetail = document.createElement("div")
+		placeDetail.innerHTML = "상세정보 열기 >"
+		placeDetail.className = "place-desc"
+		placeDetail.id = "place1"
+		placeDetail.style.cssText = 'float:right; background: white; color:black; width:120px; height:24px; border: 1px solid black; font-size:12pt; padding:3px 10px; dispaly:block;'
+		placeDetail.onclick = function openPanel() {
+			const element = document.getElementById('rightview');
+			element.style.right = '0%';
+			const deplace = document.getElementById('deplace1');
+			deplace.style.display = "block";
+			const place = document.getElementById('place1');
+			place.style.display = "none";
+		}
+
+		var deplaceDetail = document.createElement("div")
+		deplaceDetail.innerHTML = "상세정보 닫기 <"
+		deplaceDetail.className = "deplace-desc"
+		deplaceDetail.id = "deplace1"
+		deplaceDetail.style.cssText = 'float:right; background: white; color:black; width:120px; height:24px; border: 1px solid black; font-size:12pt; padding:3px 10px; display:none;'
+		deplaceDetail.onclick = function closePanel() {
+			const element = document.getElementById('rightview');
+			element.style.right = '-33%';
+			const place = document.getElementById('place1');
+			place.style.display = "block";
+			const deplace = document.getElementById('deplace1');
+			deplace.style.display = "none";
+		}
+
+		var closeBtn = document.createElement('div');
+		closeBtn.innerHTML = 'X';
+		closeBtn.style.cssText = 'float:right; background: black; color:white;'
+		closeBtn.onclick = function() {
+			overlay.setMap(null);
+		};
+
+		placeContent.append(placeHead, placeBody)
+		placeHead.append(placeName, closeBtn)
+		placeBody.append(placeAddImg, placeInfo, placeFooter)
+		placeInfo.append(placeAddress, placePhone)
+		placeFooter.append(placeDetail, deplaceDetail)
+		overlay.setContent(placeContent)
+	}
+
+	function nearStore() {
+
+		var nS = document.getElementById('mp').innerText;
+		var haName;
+		const div = document.getElementById("campingList");
+		while (div.hasChildNodes()) {
+			div.removeChild(div.firstChild);
+		}
+
+		if (nS.substring(0, 1) == "충" || nS.substring(0, 1) == "전") {
+			haName = nS.substring(0, 1) + nS.substring(2, 3);
+		} else if (nS.substring(0, 1) == "경") {
+			if (nS.substring(1, 2) == "기") {
+				haName = nS.substring(0, 2);
+			} else {
+				haName = nS.substring(0, 1) + nS.substring(2, 3);
+			}
+		} else {
+			haName = nS.substring(0, 2);
+		}
+		getStoreList('1000');
+		getStorePage('1', '10', '1000', haName);
+		chooseStoreList('1', '10', '1000', haName);
+	}
+
+	function getStorePage(pPageNumber, pAmount, pSrMaCfCode, pHaName) {
+		let jsonData = [];
+		jsonData.push({
+			pageNumber : pPageNumber,
+			amount : pAmount,
+			srCfCode : pSrMaCfCode,
+			haName : pHaName
+		});
+		const clientData = JSON.stringify(jsonData);
+		getAjaxJson("GetStorePage", clientData, "settingPage");
+	}
+
+	function settingPage(jsonData) {
+		let page = document.getElementById("campingPage");
+		let pageInfo = "";
+		let startPage = jsonData.startPage - 1;
+		let endPage = jsonData.endPage + 1;
+
+		makeSrPage(jsonData.haName, page, pageInfo, startPage, endPage,
+				jsonData.srCfCode, jsonData.pageNumber, jsonData.next,
+				jsonData.prev);
+
+	}
+
+	function makeSrPage(address, page, pageInfo, startPage, endPage,
+			jsonSrCfCode, jsonPageNumber, jsonNext, jsonPrev) {
+		var haName = address.substring(0, 2);
+
+		if (jsonPrev != false) {
+
+			pageInfo = "<div class='pageInfo_btn_prev'><li onClick =\"delrecord();getStorePage('"
+					+ startPage
+					+ "','10','"
+					+ jsonSrCfCode
+					+ "','"
+					+ haName
+					+ "');chooseStoreList('"
+					+ startPage
+					+ "','10','"
+					+ jsonSrCfCode + "','" + haName + "');\" >이전</li></div>";
+
+		} else {
+			pageInfo = "<div id='pageInfo_btn_prev_hold'><li>이전</li></div>"
+		}
+
+		for (i = startPage + 1; i < endPage; i++) {
+			if (i == jsonPageNumber) {
+				pageInfo += "<div class='pageInfo_btn_selected' style='width:4%;' ><li onClick =\"delrecord();getStorePage('"
+						+ i
+						+ "','10','"
+						+ jsonSrCfCode
+						+ "','"
+						+ haName
+						+ "');chooseStoreList('"
+						+ i
+						+ "','10','"
+						+ jsonSrCfCode
+						+ "','"
+						+ haName
+						+ "');\">"
+						+ i
+						+ "</li></div>";
+			} else if (i !== jsonPageNumber) {
+				pageInfo += "<div class='pageInfo_btn' style='width:4%;'><li onClick =\"delrecord();getStorePage('"
+						+ i
+						+ "','10','"
+						+ jsonSrCfCode
+						+ "','"
+						+ haName
+						+ "');chooseStoreList('"
+						+ i
+						+ "','10','"
+						+ jsonSrCfCode
+						+ "','"
+						+ haName
+						+ "');\">"
+						+ i
+						+ "</li></div>";
+			}
+		}
+		if (jsonNext != false) {
+			pageInfo += "<div class='pageInfo_btn_next'><li onClick =\"delrecord();getStorePage('"
+					+ i
+					+ "','10','"
+					+ jsonSrCfCode
+					+ "','"
+					+ haName
+					+ "');chooseStoreList('"
+					+ i
+					+ "','10','"
+					+ jsonSrCfCode
+					+ "','" + haName + "');\" );'>다음</li></div>";
+		}
+		page.innerHTML = pageInfo;
+	}
+
+	function chooseStoreList(pPageNumber, pAmount, pSrMaCfCode, pHaName) {
+		let jsonData = [];
+		jsonData.push({
+			pageNumber : pPageNumber,
+			amount : pAmount,
+			srCfCode : pSrMaCfCode,
+			haName : pHaName
+		});
+		const clientData = JSON.stringify(jsonData);
+		getAjaxJson("ChooseStoreList", clientData, "settingPoint");
+	}
+
+	function settingPoint(list) {
+		if (list[0].srAddress != null) {
+			for (let x = 0; x < list.length; x++) {
+				geocoder.addressSearch(list[x].srAddress, function(result,
+						status) {
+					// 정상적으로 검색이 완료됐으면 
+					if (status === kakao.maps.services.Status.OK) {
+						// 마커 하나를 지도위에 표시합니다 
+						getLeftStoreList(new kakao.maps.LatLng(result[0].y,
+								result[0].x), list[x].srImage, list[x].srName,
+								list[x].srAddress, list[x].haName,
+								list[x].srNumber, list[x].srCfCode,
+								list[x].srCode, new kakao.maps.LatLng(
+										parseFloat(result[0].y) + 0.11,
+										parseFloat(result[0].x) + 0.23));
+					}
+				});
+			}
+		}
+
+	}
+
+	function getLeftStoreList(mPos, srI, srN, srA, haN, srNb, srCf, srCd,
+			wishPos) {
+
+		const div = document.getElementById("campingList");
+
+		let cpList = createDiv("cpList", "cpList");
+		for (let i = 0; i < 6; i++) {
+			column = createDiv(columnName[i], "cpList " + columnName[i]);
+			column.innerHTML = (i == 0) ? "<img id='image' src=resources/images/camping/"+srI+"/>"
+					: (i == 1) ? srN : (i == 2) ? srA : (i == 3) ? haN : "☎"
+							+ srNb;
+			cpList.appendChild(column);
+
+			var overlay2 = new kakao.maps.CustomOverlay({
+				yAnchor : 1.2,
+				position : mPos
+			});
+
+			makeOverlay(srN, srI, srNb, srA, overlay2);
+			cpList.onclick = function() {
+				getStoreList('1000');
+				findStoreDetail(srCf, srCd)
+				if (clickedoverlay) {
+					clickedoverlay.setMap(null);
+				}
+				overlay2.setMap(map);
+				clickedoverlay = overlay2;
+				map.setCenter(wishPos);
+
+				// 현재 지도의 레벨을 얻어옵니다
+				var level = map.getLevel();
+
+				// 지도를 1레벨 올립니다 (지도가 축소됩니다)
+				map.setLevel(9);
+			};
+		}
+		div.appendChild(cpList);
+	}
 </script>
 
 </body>

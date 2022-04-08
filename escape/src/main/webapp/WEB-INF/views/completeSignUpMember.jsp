@@ -332,7 +332,7 @@ button {
 		 			<div id="login1"><span class="top_menu" onClick="getNewPage('memberLogIn')">로그인/</span><span
 						class="top_menu" onClick="getNewPage('signUp')">회원가입</span></div>
 		 			<div id="notice"><span class="top_menu" onClick="">공지사항</span></div>
-		 			<div id="shop"><span class="top_menu" onClick="">장바구니</span></div>
+		 			<div id="shop"><span class="top_menu"  onClick="notMember()">장바구니</span></div>
 				</div>
 				<img id="list" src='resources/images/list.png'/>
 			</div>
@@ -340,7 +340,7 @@ button {
 			<div id="mid1">
 				<div id="line1"></div>
 				<div id="login2"><span class="login2">회원가입 (SIGNUP)</span></div>
-				<div id="home"><span class="home" onClick="">홈</span></div>
+				<div id="home"><span class="home" onClick="getNewPage('basic')">홈</span></div>
 				<div id="arrow"><span class="home">></span></div>
 				<div id="login2-1"><span class="login2-1">회원가입</span></div>
 				<div id="line2"></div>

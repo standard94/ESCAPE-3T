@@ -1,0 +1,606 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/*---------------------------------basic---------------------------*/
+
+#basic {
+	position:absolute; 
+	height:130%;
+	width:97.8%;
+	}
+
+   
+/*---------------------------------top---------------------------*/
+#top {
+   font-family: 'Pretendard-Regular';
+   height:5.4%;
+   width:102.5%;
+   background-color:#292929;
+   }
+
+#logo {
+   margin: 0.7% 0% 0% 2%;
+   width:12.5%;
+   height:2.4%;
+   position:absolute;
+   color : #EAEAEA;
+	font-size:18pt;
+	font-weight : bolder;
+	cursor:pointer;
+   }
+  #logo:hover{
+  color:#FFFFB4;
+  }
+#search {
+   width:44.5%;
+   height:2.3%;
+   position:absolute; top:0.7%;
+   left:26%;
+   }
+   
+#searchFont{
+   border:2px solid #FFCD36;
+   font-size:20pt;
+   padding: 1.2% 20% 0% 15%;
+   margin-left:1%;
+   }
+
+#searchZoom{
+  
+   font-size:15pt;
+   position:absolute; top:29%; left:62%; 
+   border:0 solid black;
+   background-color:white;
+   color:#767F86;
+   
+   }
+#searchZoom.divButton{
+   cursor :pointer;
+}   
+#searchZoom.divButton:hover{
+   cursor :pointer;
+   font-weight: bold;
+}   
+#box1 {
+	width:45%;
+	height:3.4%;
+	position:absolute; top:2.2%;
+	left:57.5%;
+	}
+		
+#login1 {
+	width:30%;
+	height:43%;
+	margin-left:17%;
+	float: left;
+	color:#ebedec;
+	font-size:10pt;
+	}
+
+#notice {
+	width:15%;
+	height:43%;
+	margin-left:5.8%;
+	float: left;
+	color:#ebedec;
+	font-size:10pt;
+	}
+#shop {
+	width:15%;
+	height:43%;
+	margin-left:5.8%;
+	float: left;
+	color:#ebedec;	
+	font-size:10pt;
+	}
+
+.top_menu {
+
+   font-family: 'Pretendard-Regular';
+   font-size: 13pt;
+   cursor : pointer;
+   }
+   
+#list {
+   margin-top : 0.3%;
+   width:3%;
+   height:4.3%;
+   position:absolute;
+   left:93.5%;
+   background-color:#a2a9af;
+   cursor : pointer;
+   }
+   
+/*----------------------------mid------------------------------------*/
+
+#list2{
+	width : 70%;
+	height : 90%;
+	margin : 5% 0% 0% 8%;
+	overflow: auto;
+}
+
+#mid{
+   font-family: 'Pretendard-Regular';
+   width:99.3%;
+   height:95%;
+}
+#regForm{
+	float:left;
+	width : 70%;
+	height:99.8%;
+	border : 1px solid #000000;	
+}
+
+#topForm{
+	width:100%;
+	height : 5%;
+}
+#leftTitle{
+	float:left;
+	width:30%;
+	height:80%;
+}
+#subTitle{
+	width:50%;
+	height:30%;
+}
+.txt{
+	font-size: 13pt;
+}
+#storeName2{
+	margin : 7% 0 0 20%;
+	color:#8C8C8C;
+	font-weight:bold;
+
+}
+#arrow1,#category{
+	margin : 7% 0 0 2%;
+	color:#BDBDBD;
+}
+
+#rentalGoods{
+	margin : 15% 0 4% 20%;
+	width:99.8;
+	font-size: 20pt;
+	color :#292929;
+	font-weight:bold;
+	text-decoration-line : solid;
+	text-decoration-color: #292929;
+	text-decoration: underline;
+	text-underline-position: under;
+}
+/******오른쪽 검색*****/
+
+#rightTitle{
+	float:left;
+	margin-left:10%;
+	width:60%;
+	height:100%;
+	
+}
+
+#rightTop{
+	float:left;
+	width:100%;
+	height:50%;
+}
+
+/*---------------등록,필터-------------------- */
+
+
+#job {
+	float:left;
+  margin: 6% 0 2% 22%;
+  width: 15%;
+  height: 80%;
+  background: url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png') calc(100% - 5px) center no-repeat;
+  background-size: 20px;
+  border-radius: 2px;
+  outline: 0 none;
+  color:#000000;
+}
+#job option {
+  padding: 3px 0;
+}
+
+#searchText{
+	margin : 6% 2% 0 2%;
+	float:left;
+	width:30%;
+	height:70%;
+	 
+}
+#searchClick{
+	margin-top:6%;
+	float:left;
+	width:10%;
+	height:80%;
+	
+	
+}
+#middleForm{
+	float:left;
+	width:100%;
+	height : 67%;
+}
+#bottomForm{
+	float:left;
+	width:100%;
+	height : 25%;
+	margin-top:5%;
+	background-color:green;
+}
+#sideBar{
+	float: left;
+	width : 19%;
+	height: 99.8%;
+}
+
+#sideContents{
+	width : 70%;
+	height: 100%;
+}
+
+#sideTitle{
+	text-decoration-line : solid;
+	text-decoration-color: #8C8C8C;
+	text-decoration: overline underline;
+	text-underline-position: under;
+	margin : 11% 0% 3% 0%;
+	text-align:center;
+	width : 100%;
+	height: 3.3%;
+	font-size: 18pt;
+}
+#inTitle{
+	margin-top : 8%;
+	
+}
+
+#listDiv{
+	width:99.8%;
+	height : 80%;
+}
+
+
+#goodsList{
+	margin : 5% 1% 0% 2%;
+	width: 90%;
+	height : 90%;
+	overflow: auto;
+}
+#goodsList::-webkit-scrollbar {
+    width: 15px;
+}
+	
+#goodsList::-webkit-scrollbar-thumb {
+   height: 30%;
+    background-color: #F2CB61;
+    border-radius: 8px;
+    background-clip: padding-box;
+    border: 2px solid ;
+  }
+#goodsList::-webkit-scrollbar-track {
+    background-color: #8C8C8C;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+#pageDiv{
+	width: 50%;
+	height : 10%;
+	margin-left : 30%;
+}
+.menuTop{
+	margin :6% 0 0 2%;
+	width:98%;
+	height:4.2%;
+	text-align:left;
+	font-size:15pt;
+	color:#FFFFFF;	
+	border-top : 2px solid #8C8C8C;
+	background-color:#8C8C8C;
+	cursor : pointer;
+	box-shadow : 5px 5px 5px #292929 ;
+}
+
+.textLocation{
+	margin : 4% 0 4% 0;
+	cursor: pointer;
+}
+
+.text1{
+	width:87%;
+	margin : 7% 0 0 8%;
+	font-size : 12pt;
+}
+#postContents{
+	display:none;
+
+}
+
+.textLocation._value{
+	background-color:#FFCD36;
+}
+
+/*----------------업체 정보----------------*/
+
+#storeTitle{
+	border-bottom: dashed #292929;
+	width : 98%;
+	height : 6%;
+	font-size : 32pt;
+	font-weight: bold;
+	margin-bottom : 1%;
+}
+
+#line0{
+	margin-top : 2%;
+	width : 98%;
+	height :3%;
+}
+
+#line1{
+	width : 98%;
+	height : 4%;
+	
+	font-weight: bold;
+}
+
+#address{
+	width : 30%;
+	height : 4%;
+	font-size : 16pt;
+	color : #0000DB;
+}
+
+#storeAddress{
+	width : 40%;
+	height : 97%;
+	float : left;
+	font-size : 16pt;
+	color : #909090;
+}
+
+#storeNumber{
+	width : 15%;
+	height : 97%;
+	float : left;
+	margin-left : 5%;
+	font-size : 16pt;
+	color : #909090;
+}
+
+#storeEmail{
+	width : 30%;
+	height : 97%;
+	float : left;
+	margin-left : 5%;
+	color : #909090;
+	font-size : 16pt;
+}
+
+#line2{
+	width : 98%;
+	height : 25%;
+}
+
+#storeMap{
+	border : solid 2px #DBC000;
+	width : 40%;
+	height : 97%;
+	float : left;
+	
+}
+
+#storeImage{
+	border : solid 2px #DBC000;
+	width : 40%;
+	height : 97%;
+	float : left;
+	margin-left : 3%;
+}
+
+#storeImage1{
+	width : 99.9%;
+	height : 99.9%;
+}	
+	
+#storeDetail{
+	width : 70%;
+	height : 10%;
+	font-size : 16pt;
+	margin-top : 2%;
+}
+
+#line3{
+	margin-top : 4%;
+	width : 98%;
+	height : 30%;
+	float : right;
+}
+
+
+
+#storeGoods2{
+	width : 250px;
+	height : 250px;
+}
+
+#clickStore{
+	width : 30%;
+	height : 4%;
+	text-decoration: underline;
+	cursor : pointer;
+	font-size : 19pt;
+	text-align : right;
+	float : right;
+	margin-right : 1%;
+}
+
+/*-----------------------------bottom---------------------------------*/
+
+#bottom {
+	float: left;
+   font-family: 'Pretendard-Regular';
+   width:100.5%;
+   height:3.8%;
+   background-color:#595959;
+   color:#FFFFFF;
+   padding:0.05% 1%;
+   }
+   
+#bottom_store {
+   float:left;
+   font-size:18pt;
+   width:170px;
+   height:80%;
+   margin: 0% 1% 0% 0%;
+   
+}
+
+#bottom_store2 {
+   float:left;
+   font-size:10pt;
+   height:75%;
+   width:680px;
+   padding:0.1%;
+   margin: 0.2% 1% 0% 0%;
+}
+
+#bottom_store3 {
+   float:left;
+   font-size:10pt;
+   height:72%;
+   padding:0.15%;
+   width:200px;
+   margin: 0.2% 0% 0% 0%;
+}   
+
+
+
+.marquee {
+  overflow:hidden;
+  position:relative;
+}
+.marquee p:hover {
+-moz-animation-play-state: paused;
+-webkit-animation-play-state: paused;
+animation-play-state: paused;
+}
+.marquee p:after {
+  content:"";
+  white-space:nowrap;
+  padding-right:50px;
+}
+
+.marquee p {
+  margin:0;
+  padding-left:100%;
+  display:inline-block;
+  white-space:nowrap;
+    -webkit-animation-name:marquee;
+    -webkit-animation-timing-function:linear;
+    -webkit-animation-duration:20s;
+    -webkit-animation-iteration-count:infinite;
+    -moz-animation-name:marquee;
+    -moz-animation-timing-function:linear;
+    -moz-animation-duration:20s;
+    -moz-animation-iteration-count:infinite;
+    -ms-animation-name:marquee;
+    -ms-animation-timing-function:linear;
+    -ms-animation-duration:20s;
+    -ms-animation-iteration-count:infinite;
+    -o-animation-name:marquee;
+    -o-animation-timing-function:linear;
+    -o-animation-duration:20s;
+    -o-animation-iteration-count:infinite;
+    animation-name:marquee;
+    animation-timing-function:linear;
+    animation-duration:35s;
+    animation-iteration-count:infinite;
+}
+@-webkit-keyframes marquee {
+  from   { -webkit-transform: translate(0%);}
+  99%,to { -webkit-transform: translate(-100%);}
+}
+@-moz-keyframes marquee {
+  from   { -moz-transform: translate(0%);}
+  99%,to { -moz-transform: translate(-100%);}
+}
+
+#rmcHome {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 15pt;
+	font-weight: bold;
+	background-color: #292929;
+	color: white;
+	border-radius: 10px;
+	margin: 15% 1%;
+	cursor: pointer;
+}
+
+#rmcMap {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 9% 1% 1% 1%;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#rmcRental {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 1%;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#rmcMyPage {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 1%;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#rmcRtStore {
+	height: 15%;
+	width: 100%;
+	border: 1px solid #999966;
+	font-size: 12pt;
+	background-color: white;
+	border-radius: 10px;
+	margin: 1%;
+	cursor: pointer;
+	font-weight: bold;
+}
+/*리모컨 색깔*/
+#rmcHome:hover {
+	background-color: #FFBB00;
+}
+
+#rmcMap:hover, #rmcRental:hover, #rmcMyPage:hover, #rmcRtStore:hover {
+	background-color: #747474;
+	color:white;
+}

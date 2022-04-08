@@ -171,4 +171,8 @@
       resultType="icia.escape.beans.Stores">
       SELECT SR_CFCODE AS SRCFCODE, SR_ID AS SRID, SR_PASSWORD AS SRPASSWORD, SR_POST AS SRPOST, SR_CODE AS SRCODE, SR_NAME AS SRNAME, SR_NUMBER AS SRNUMBER, SR_DETAILS AS SRDETAIL, SR_EMAIL AS SREMAIL, SR_ADDRESS AS SRADDRESS, SR_IMAGE AS SRIMAGE FROM SR WHERE SR_CFCODE= #{srCfCode} AND SR_CODE= #{srCode}
    </select>
+   <!-- 세션 저장하기 -->
+    <select id="getMemberAccessInfo" parameterType = "icia.escape.beans.Fishing" resultType = "icia.escape.beans.Fishing">
+      SELECT PUBLICIP,MMID,MMCODE FROM ACCESSINFO WHERE MMCODE = #{mmCode} AND STCODE = #{stCode}
+ </select>
 </mapper>

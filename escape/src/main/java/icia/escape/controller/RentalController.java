@@ -17,6 +17,7 @@ import icia.escape.beans.Camping;
 import icia.escape.beans.Goods;
 import icia.escape.beans.Members;
 import icia.escape.beans.Stores;
+import icia.escape.mypage.Cart;
 import icia.escape.rental.FishGoods;
 import icia.escape.rental.RentalStores;
 
@@ -28,6 +29,8 @@ public class RentalController {
 	RentalStores rs;
 	@Autowired
 	FishGoods fg;
+	@Autowired
+	Cart ca;
 	private static final Logger logger = LoggerFactory.getLogger(RentalController.class);
 	
 	/****업체****/
@@ -48,11 +51,21 @@ public class RentalController {
 	public Stores getCampingPage(Model model, @RequestBody List<Stores> sr) {
 		rs.backController("S2",model.addAttribute("FishingStorePage", sr.get(0)));
 		return (Stores)model.getAttribute("FishingStorePage");
+		
 	}
 	
-	
-	
-	
+	/*특정 렌탈 업체 상세정보 페이지 이동 */
+	@PostMapping("/StoreInfo")
+	public ModelAndView storeInfo(@ModelAttribute Stores sr) {
+		return rs.backController("S3", sr);
+	}
+	/*********************basic hot deal****************************/	
+	/*모든 업체의 상품 리스트 */
+	@PostMapping(value= "/StoreList" , produces="application/json; charset=UTF-8")
+	   public List<Goods> storeList(Model model, @RequestBody List<Goods> go) {
+	      fg.backController("B0", model.addAttribute("basicGoods", go.get(0)));
+	      return (List<Goods>)model.getAttribute("basicGoodsList");
+	   }
 	/*******************렌탈 ***********************/
 	
 	/*모든 업체의 상품 리스트 */
@@ -75,16 +88,26 @@ public class RentalController {
 	      fg.backController("R3", model.addAttribute("goods", go.get(0)));
 	      return(Goods)model.getAttribute("goodsInfo");
 	   }
-	/*특정 렌탈 업체 상세정보 페이지 이동 */
-	@PostMapping("/StoreInfo")
-	public ModelAndView storeInfo(@ModelAttribute Stores sr) {
-		return rs.backController("S3", sr);
-	}
-	/*특정 렌탈 업체 상세정보 불로오기 */
-	@PostMapping(value= "/findStoreInfo", produces="application/json; charset=UTF-8")
-	public List<Stores> findStoreInfo(Model model, @RequestBody List<Stores> sr) {
-		rs.backController("S4", model.addAttribute("rentalStore", sr.get(0)));
-		return (List<Stores>)model.getAttribute("rentalStoreInfo");
-	}
+	/*특정 업체의 다른 상품 정보 불러오기*/
+	@PostMapping(value= "/GetThatStoreOtherGoods", produces="application/json; charset=UTF-8")
+	   public Goods getThatStoreOtherGoods(Model model, @RequestBody List<Goods> go) {
+	      fg.backController("R4", model.addAttribute("goods", go.get(0)));
+	      return(Goods)model.getAttribute("otherGoods");
+	   }
+	
+	
+	/*특정 업체의 상품들 불러오기*/
+	@PostMapping(value= "/GetStoreGoods", produces="application/json; charset=UTF-8")
+	   public Goods getStoreGoods(Model model, @RequestBody List<Goods> go) {
+	      fg.backController("R5", model.addAttribute("store", go.get(0)));
+	      return(Goods)model.getAttribute("goodsInfo");
+	   }
+	/*같은 카테고리의 상품 불러오기*/
+	@PostMapping(value= "/GetStorePage1", produces="application/json; charset=UTF-8")
+	   public Goods getStorePage(Model model, @RequestBody List<Goods> go) {
+	      fg.backController("R6", model.addAttribute("goods", go.get(0)));
+	      return(Goods)model.getAttribute("goodsPage");
+	   }
+	
 	
 }

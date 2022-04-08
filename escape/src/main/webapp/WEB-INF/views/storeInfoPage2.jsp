@@ -18,14 +18,14 @@
 
 	<div id="basic">
 		<div id="top">
-			<div id="logo" onClick="getNewPage('memberMain')">여기가 좋을 지도¿</div>
+			<div id="logo" onClick="getNewPageMember('${sessionInfo.mmId}','memberMain','${sessionInfo.publicIp}','${sessionInfo.mmCode}')">여기가 좋을 지도¿</div>
 				<div id="search"><input id="searchFont" type="text"  name="" placeholder="" /><input id="searchZoom" class="divButton" type="button" value="SEARCH" onMouseOver="changeColor1(this)" onMouseOut="changeColor2(this)"/></div>
 				<div id="box1">
 		 			<div id="login1"><span class="top_menu" >${sessionInfo.mmId}님</span>
 		 			<input id="logOutButton" type = "button" value= "로그아웃" onClick="logOutMember('${sessionInfo.mmId}','${sessionInfo.publicIp}','${sessionInfo.mmCode}')"/></div>
 		 			
 		 			<div id="notice"><span class="top_menu" onClick="">공지사항</span></div>
-		 			<div id="shop"><span class="top_menu" onClick="">장바구니</span></div>
+		 			<div id="shop"><span class="top_menu" onClick="getNewPageMember('${sessionInfo.mmId}','cart_member','${sessionInfo.publicIp}','${sessionInfo.mmCode}')">장바구니</span></div>
 				</div>
 			<img id="list" src='resources/images/list.png'/>
 		</div>

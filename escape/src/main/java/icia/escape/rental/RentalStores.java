@@ -53,9 +53,10 @@ public class RentalStores {
 			case "S2":
 				getFishingStorePage(model);
 				break;
-			case "S4":
-				findStoreInfo(model);
-				break;
+//			case "S4":
+//				findStoreInfo(model);
+//				break;
+			
 			}
 		}return mav;
 	}
@@ -68,20 +69,27 @@ public class RentalStores {
 			case "S3":
 				storeInfo(sr[0]);
 			}
+			
 		}return mav;
 	}
 	
-	/*렌탈업체 상세정보 가져오기*/
-	public void findStoreInfo(Model model) {
-		model.addAttribute("rentalStoreInfo", rm.chooseStoreInfo((Stores)model.getAttribute("rentalStore")));
-	}
-	
-	
+//	/*렌탈업체 상세정보 가져오기*/
+//	public void findStoreInfo(Model model) {
+//		model.addAttribute("rentalStoreInfo", rm.chooseStoreInfo((Stores)model.getAttribute("rentalStore")));
+//	}
+//	
 	/*렌탈업체 상세정보 페이지 이동*/
 	public void storeInfo(Stores sr) {
-	
-		String page = "chooseStoreInfoPage";
-		mav.setViewName(page);
+		 String page = "chooseStoreInfoPage";
+		 this.mav.addObject("rentalStoreInfo", this.rm.chooseStoreInfo(sr));
+		 try {
+			this.pu.setAttribute("storeInfo", this.mav.getModel().get("rentalStoreInfo"));
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		 this.mav.setViewName(page);
 	}
 	
 	
@@ -94,7 +102,6 @@ public class RentalStores {
 	/*낚시*/
 	public void getFishingStoreList(Model model) {
 		model.addAttribute("fishingStoreList", rm.getFishingStoreList((Stores)model.getAttribute("fishingStore")));
-	
 	}
 	
 	/*낚시 렌탈업체 페이지 개수 불러오기*/
